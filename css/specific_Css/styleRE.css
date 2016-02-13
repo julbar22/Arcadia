@@ -1,0 +1,27 @@
+
+
+header{
+	background-color: brown;
+}	
+.dividir{
+	height: 20px;
+}
+
+
+
+
+
+#avatar{
+border-radius: 50px;}
+
+.form-registro{
+	
+	border: 1px solid #e5e5e5;
+	border-radius: 5px;
+	margin-top: 3%;
+	padding-top: 1%;
+	margin-bottom:2%;
+	padding-bottom: 1%; 
+
+
+}

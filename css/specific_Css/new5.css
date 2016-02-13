@@ -1,0 +1,269 @@
+body{
+background: #999;	
+}
+
+
+#titulo {
+background-image: url('http://localhost/Arcadia/imagenes/arcadialogo.png')!important;
+background-position: left center!important;
+background-repeat: no-repeat!important;
+}
+#titulo{
+border-width: 1px 1px 0px 1px;
+border-style: solid;
+border-color: #A7706D;
+
+}
+
+.dividir{
+	height: 30px;
+}
+#completo{
+
+	width: 65%;
+	margin: 0 auto;
+	background: #E7E4C4;
+}
+
+#contenido{
+	width: 99%;
+	margin: 0 auto;
+	padding: 5px;
+
+}
+
+#cabecera {
+background: #EDEADB repeat-x;
+border-width: 1px 1px 0 1px;
+
+}
+
+table{
+	width: 100%;
+
+}
+
+
+.td1{
+	width: 50%;
+}
+.td2{
+	
+width: 15%;	
+padding: 0px 0 10px 5px;
+margin: 10px 0;
+border-right: 1px solid #D9D4B9;
+}
+
+#td2div{
+	position: absolute;
+	top: 200px;
+	width: 8%;
+}
+}
+#txtbuscar{
+	float: left;
+	height: 27px;
+	font-size: 13px!important;
+	margin-right: 20px;
+
+}
+
+#seccion {
+
+background-color: #C7BF9B;
+}
+
+.buscar{
+	position: relative;
+	width: 320px;
+	margin-left: 60px;
+}
+.bienvenido{
+	padding-left: 10px;
+}
+#articulo {
+border: 1px solid #A7706D;
+background: #FFF;
+}
+
+.articulo1 {
+width: 100%;
+table-layout: fixed;
+}
+#ini{
+	color: #a52a2a;
+	font-weight:bold;
+}
+.menu,.conten{
+	list-style: none;
+	padding-left: 0px;
+	
+}
+.conten{	
+	padding-left: 2px;
+}
+
+.liestados{
+	border-bottom: 1px dashed;
+}
+
+#centro{
+	margin: 10px;
+	border: 1px solid;
+}
+h4{
+	border-bottom: 5px double #a52a2a;
+}
+a{
+	color: #a52a2a;
+}
+
+.td2 div ul li a,h4{
+	color: #a52a2a;
+	text-decoration: none;
+
+
+}
+.td2 div ul li{  transition: all 0.5s linear;
+	-webkit-transition: all 0.5s linear;
+	-moz-transition: all 0.5s linear;
+	-o-transition: all 0.5s linear;
+}
+.td2 div ul li :hover{
+	background: #d1d1d1;
+}
+#footer{
+	height: 20px;
+	background: #FFF;
+	border-bottom: 1px solid #A7706D;
+	border-left: 1px solid #A7706D;
+	border-right: 1px solid #A7706D;
+}
+
+.pueblos{
+	text-align: center;
+}
+ #espacio{
+ 	height: 105px;
+ }
+ #entradaestudiante{
+ 	height: 420px;
+ }
+ #seleccion{
+ 	top: 200px;
+right: 330px;
+position: absolute;
+ }
+ #mapa{
+ 	width: 90%;
+ }
+ .separacion{
+ 	height: 20px;
+ }
+#rios{text-align: center;
+   padding-bottom: 120px;}
+
+ #mapas{
+ 	
+ 	padding-left:15px;
+ 	padding-bottom:15px;
+ 	padding-right:15px;
+ }
+ #creditos{
+ 	text-align: center;
+ }
+ /* PUEBLOS */
+ .estadisticas{
+ 	background: #E5E4CF;
+ 	border-bottom: 1px solid #C6BE99;
+ 	padding: 5px;
+ 	margin-top: 0px;
+ }
+ #divest{
+ 	border: 1px solid #C6BE99;
+   float: left;
+   width: 45%;
+   height: 270px;
+   margin-right: 20px;
+
+ }
+ #est{
+ 	width: 45%;
+ 	float: left;
+ }
+ #ciudadanos{
+ 	padding-top: 20px;
+ }
+
+ .granja{
+ 	float: left;
+ }
+ #pueblo4{
+ 	padding-left: 55%;
+ }
+
+ #sesion{
+ 	margin-left: 19%;
+ 	width: 50%;
+ }
+ #tablaReinos{
+ 	width:50%;
+ 	margin: auto;
+ }
+ .video{
+ 	padding-top: 2%;
+ 	padding-left: 10% 	
+ }
+ .separador{
+ 	height: 20px;
+ }
+ .video b {
+ 	 
+ 	 color: #783f04;
+ }
+ #entradagaleria{
+ 	padding: 10px;
+ 
+ }
+ #doble{
+ 	width: 65%;
+ 	float: left;
+ }
+ #sencillo{
+ 	width: 50%;
+ 	float: left;
+ }
+ #entradagaleria img{
+ 	padding: 5px;
+ }
+
+ td .galeria  {
+ 	text-align: center;
+ 	
+ }
+ td .galeria b{
+ 	color: #783f04;
+ 
+ }
+ td #tit{
+ 	padding-top: 20px;
+ 	padding-bottom: 40px;
+ }
+
+ #maps{
+ 	width: 50%;
+ 	margin: 0 auto;
+ 	padding-top: 50px;
+ }
+ #maps div{
+ 	background: #e5e4cf;
+ 	border-bottom: 1px solid #c6be99;
+ 	color: #935300;
+ 	font: bold 1.2em "Trebuchet MS",arial,sans-serif;
+ 	font-size: 13px;
+
+ }
+ #maps div b{
+ 	padding-left: 5%;
+ }

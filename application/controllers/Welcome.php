@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ingreso extends CI_Controller {
+class welcome extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,6 +20,24 @@ class Ingreso extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('Apoyo_Alimentario/login');
+		$this->load->view('ArcadiaLogin.html');
+	}
+
+	public function registro()
+	{
+		$this->load->model('Datos/dao_estudiante_model');
+		$data['avatares']=$this->dao_estudiante_model->avatarEst();
+		$this->load->view('Registro_Estudiante',$data);
+	}
+
+	public function loginProfesor(){
+		$this->load->view('loginProfesor.html');
+	}
+
+	public function registroProfesor()
+	{
+		$this->load->model('Datos/dao_estudiante_model');
+		$data['avatares']=$this->dao_estudiante_model->avatarEst();
+		$this->load->view('Registro_Profesores',$data);
 	}
 }

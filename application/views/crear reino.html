@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lan="es">
+<head>
+	  <title>arcadia</title>
+      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+      <meta charset ='utf-8'>
+
+           	<link rel="stylesheet" type="text/css" href="crearReino.css">
+	     <meta charset ='utf-8'>
+	     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	     <script src="footer2.js"></script>
+	     <link href='http://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' >
+</head>
+<body>
+		     <div id='contenido'>
+		     <header>
+		 	
+			 <img src="Imagenes/arcadialogo.png" alt="logo">	 
+		
+			 </header>
+			 <section>
+			     <div id='textoPr'>
+			         <hgroup>
+			         	 <h1>CREA TU REINO</h1>
+			         </hgroup>	
+			         <form>
+                        <div class="izq">
+                        <label for='nombre' >Nombre:</label>
+                        <input type='text' id='nombre'  required>
+                        </div>
+                        <div>
+                        <label for='codigo'>Codigo:</label>
+                        <input type='text' id='codigo'  required>
+                        </div>
+                        <div class="izq">
+                        <label for='descripcion'>Descripcion:</label>
+                        <textarea id='descripcion' required></textarea>  
+                        </div>
+                        <div>
+                        <label for='historia'>Historia:</label>
+                        <textarea id='historia' required></textarea> 
+                        </div>
+                        <div class="izq">
+                        <label for='fecha'>Fecha Expiracion:</label>
+                        <input type='date' id='fecha'>
+                        </div>
+                        <input type="submit" value="Enviar Datos" id="btnSubmit" >
+                        
+
+			         </form>
+			     </div>
+			 </section>
+			
+		 </div>
+		 		 <footer>
+		 	<canvas id='miCanvas'>
+		 	</canvas></footer>
+	
+</body>
+</html>
