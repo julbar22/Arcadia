@@ -66,16 +66,27 @@
                 
            $conn_string = "host=localhost dbname=arcadiav1 user=admin_arcadia password=arcadia";
              $dbconn4 = pg_connect($conn_string)
-             or die('No se ha podido conectar: ' . pg_last_error());     
-             $query = "CREATE USER ".$valores['codigo']." IN GROUP profesores PASSWORD '".$valores['pass']."'";
-             $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
-             pg_close($dbconn4);
-             if($result)
+             or die('No se ha podido conectar: ' . pg_last_error());    
+             $consult="SELECT * FROM PROFESOR WHERE O_NICKNAME='".$valores['codigo']."' OR K_CEDULA=".$profesor['documento'];
+             $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());             
+             $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);            
+             
+             if ($line['o_nickname']==null) {
+              
+               $insert ="INSERT INTO PROFESOR (K_CEDULA,N_NOMBRE,N_APELLIDO,O_CORREO,O_NICKNAME,N_COLEGIO,O_NUM_TEL) 
+                         VALUES (".$profesor['documento'].", '".$profesor['nombreE']."', '".$profesor['ApellidoE']."', '".$profesor['correoE']."',
+                         '".$profesor['UsuarioE']."', '".$profesor['InsEduE']."',".$profesor['TelE']." )";
+               $resultInser= pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
+               $query = "CREATE USER ".$valores['codigo']." IN GROUP profesores PASSWORD '".$valores['pass']."'";
+               $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
+               pg_close($dbconn4);    
+               return true;
 
-              return true;
-            else 
-              return false;
-            
+             }
+             else{
+              return $profesor;
+             
+             }           
                    
           } 
 
@@ -83,7 +94,7 @@
             $conn_string = "host=localhost dbname=arcadiav1 user=admin_arcadia password=arcadia";
             $dbconn4 = pg_connect($conn_string)
              or die('No se ha podido conectar: ' . pg_last_error()); 
-             $query = "SELECT *FROM AVATAR";
+             $query = "SELECT * FROM AVATAR";
              $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
              $avatares = array();
              $i=0;

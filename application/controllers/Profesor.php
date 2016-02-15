@@ -28,18 +28,19 @@ function ingresarProfesor(){
 
 function registrarProfesor(){
    $data = array(
-        'codigo' => $_POST['inputCodigo'],
-        'pass' =>   $_POST['contra']
+        'codigo' => $_POST['UsuarioE'],
+        'pass' =>   $_POST['ContrE']
     );
 
    $this->load->model('Datos/dao_estudiante_model');  
-   $validar=$this->dao_estudiante_model->profesorReg($data,$_POST);
-  if ($validar) {
-    $this->load->view('ArcadiaLogin.html');
+   $validar['profesor']=$this->dao_estudiante_model->profesorReg($data,$_POST);
+   if (count($validar['profesor'])<2) {
+    $this->load->view('loginProfesor.html');
     echo '<script>alert (" Se ha registrado exitosamente");</script>'; 
 
-   }else{  $this->load->view('ArcadiaLogin');
-   echo '<script>alert ("No es un estudiante");</script>'; 
+   }else{  
+   $this->load->view('Registro_Profesores',$validar);
+   echo '<script>alert ("El estudiante ya tiene usuario registrado");</script>'; 
 
    }
 

@@ -3,8 +3,8 @@
 	<head>
 		<title>Registro Estudiantes
 		</title>
-		<link rel="stylesheet" type="text/css" href="./../../css/specific_Css/styleRE.css" />
-			<link rel="stylesheet" type="text/css" href="./../../css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="http://localhost/Arcadia/css/specific_Css/styleRE.css" />
+			<link rel="stylesheet" type="text/css" href="http://localhost/Arcadia/css/bootstrap.css">
 		<script language="javascript">
 			<!--
 			function cambiarimagen(){		
@@ -36,9 +36,9 @@
     </div>
 	<div class="col-md-4 col-md-offset-1 form-registro">
 	
-		<form method="post" action="./../../index.php/Estudiante/registrarEstudiante" name="form1">
+		<form method="post" action="http://localhost/Arcadia/index.php/Estudiante/registrarEstudiante" name="form1">
 		<div class="form-group">
-			<IMG id="avatar" name="avatar" src="./../../Imagenes/granjero1.jpg"> <br>
+			<IMG id="avatar" name="avatar" src="http://localhost/Arcadia/Imagenes/granjero1.jpg"> <br>
 			<select id="Icono" name="Icono" onchange="cambiarimagen()">
 			<?php
 
