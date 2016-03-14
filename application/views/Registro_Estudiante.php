@@ -5,20 +5,34 @@
 		</title>
 		<link rel="stylesheet" type="text/css" href="http://localhost/Arcadia/css/specific_Css/styleRE.css" />
 			<link rel="stylesheet" type="text/css" href="http://localhost/Arcadia/css/bootstrap.css">
-		<script language="javascript">
-			<!--
-			function cambiarimagen(){		
-		    
-					
-			var a=document.form1.Icono.value;		
-			
-			document.images['avatar'].src=a;
-			
-			
-			
-		}
-			
-			//-->
+		<script src="http://localhost/Arcadia/js/jsfuntions/server.js" type="text/javascript" charset="utf-8" async defer></script>	
+		<script type="text/javascript" charset="utf-8" async defer>
+		function loquesea(json){
+		
+         var result = [];
+		 var keys = Object.keys(json);
+		 keys.forEach(function(key){
+		 result.push(json[key]);
+		});
+		 alert(result);
+		   document.getElementById('Iconovalue').value=result[0];
+		   document.getElementById('avatar').src=result[0];
+	       document.getElementById('UsuarioE').value=result[1];
+	       document.getElementById('nombreE').value=result[2];
+	       document.getElementById('ApellidoE').value=result[3];
+	       document.getElementById('InsEduE').value=result[4];
+	       document.getElementById('GradActE').value=result[5];
+	       document.getElementById('TelE').value=result[6];
+	       document.getElementById('correoE').value=result[7];
+	       document.getElementById('SexoE').value=result[8];
+	       document.getElementById('f_nacimiento').value=result[9];
+	       document.getElementById('ContrE').value=result[10];
+	       document.getElementById('ConfContE').value=result[11];
+	       
+	      
+	       //arreglo['documento'];
+
+}
 		</script>
 	</head>
 	<body>	
@@ -44,67 +58,62 @@
 
 	if (isset($avatares)) {
 		foreach ($avatares as $k){
-			echo "<option value=".$k['o_imagen'].">".$k['name']."</option>";
-			
+			echo "<option value=".$k['o_imagen'].">".$k['name']."</option>";		
 				
-			}
-			
-		}
-		
-	
-
+			}			
+		}	
 	?>
-			
+			<option  id="Iconovalue" value=""></option>
 				
 			</select>
 		</div>
 		<div class="form-group">	
 			
-			<input type="text"class="form-control" name="UsuarioE" size="30" placeholder="DIGITE SU NICKNAME" required>
+			<input type="text"class="form-control" id="UsuarioE" name="UsuarioE"  placeholder="DIGITE SU NICKNAME" required>
 
 
 		</div>
 		<div class="form-group">	
 			
-			<input type="text" name="nombreE" size="30" placeholder="DIGITE SU NOMBRE" class="form-control" required >
+			<input type="text" id="nombreE" name="nombreE" placeholder="DIGITE SU NOMBRE" class="form-control" required >
 		</div>
 		<div class="form-group">	
 			
-			<input type="text" name="ApellidoE" size="30" placeholder="DIGITE SU APELLIDO" class="form-control" required>
+			<input type="text" id="ApellidoE" name="ApellidoE"  placeholder="DIGITE SU APELLIDO" class="form-control" required>
 		</div>
 		<div class="form-group">	
-			<input type="text" name="InsEduE" size="30" placeholder="DIGITE SU INSTITUCION" class="form-control" required>
-		</div>
-		<div class="form-group">	
-			
-			<input type="text" name="GradActE" size="30" placeholder="DIGITE SU GRADO ACTUAL" class="form-control" required>
+			<input type="text" id="InsEduE" name="InsEduE"  placeholder="DIGITE SU INSTITUCION" class="form-control" required>
 		</div>
 		<div class="form-group">	
 			
-			<input type="tel" name="TelE" size="30" maxlength="10" placeholder="DIGITE SU TELEFONO"  class="form-control" required>
+			<input type="number" id="GradActE" name="GradActE" placeholder="DIGITE SU GRADO ACTUAL" class="form-control" required>
+		</div>
+		<div class="form-group">	
+			
+			<input type="tel" id="TelE" name="TelE"  placeholder="DIGITE SU TELEFONO"  class="form-control" required>
 		</div>
 		<div class="form-group">	
 	
-			<input type="email" name="TelE" size="30" maxlength="10" placeholder="EJEMPLO@DOMINIO.COM"  class="form-control" required>
+			<input type="email" id="correoE" name="correoE"  placeholder="EJEMPLO@DOMINIO.COM"  class="form-control" required>
 		</div>
 		<div class="form-group">	
 			
-			<select name="SexoE" class="form-control">
-				<option value="1">Masculino</option>
-				<option value="2">Femenino</option>
+			<select id="SexoE"  name="SexoE" class="form-control">
+				<option value="M">M</option>
+				<option value="F">F</option>
 			</select>
 		</div>
 		<div class="form-group">	
 			
-			<input type="date" id="f_nacimiento"  class="form-control"name="f_nacimiento">
+			<input type="date" id="f_nacimiento"  class="form-control" name="f_nacimiento">
 		</div>
 		<div class="form-group">			
 			
-			<input type="password" name="ContrE" size="30" class="form-control" required placeholder="DIGITE SU CONTRASE&Ntilde;A">
+			<input type="password" id="ContrE"  name="ContrE"  class="form-control" required placeholder="DIGITE SU CONTRASE&Ntilde;A">
 		</div>
 		<div class="form-group">	
 			
-			<input type="password" name="ConfContE" size="30"  class="form-control" placeholder="DIGITE SU CONTRASE&Ntilde;A" required>
+			<input type="password" id="ConfContE" name="ConfContE"   class="form-control" placeholder="DIGITE SU CONTRASE&Ntilde;A" required>
 		</div>	
       
       
@@ -119,3 +128,11 @@
 
 	</body>		
 </html> 
+
+<?php
+	         if (isset($estudiante)) {				
+				echo "<script>loquesea(".json_encode($estudiante).");</script>";		
+               // echo "<script>profesor();</script>";	
+				
+			}
+	         ?>

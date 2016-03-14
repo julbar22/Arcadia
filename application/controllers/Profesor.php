@@ -18,11 +18,13 @@ function ingresarProfesor(){
    
 
    $this->load->model('Datos/dao_estudiante_model');
-   $validar=$this->dao_estudiante_model->estudianteLogin($data);
+   $validar=$this->dao_estudiante_model->profesorLogin($data);
    if ($validar) {
-    $this->load->view('inicioEstudiante.html');
+    $this->load->view('inicioProfesor.html');
 
-   }else  $this->load->view('ArcadiaLogin.html');
+   }else{  $this->load->view('loginProfesor.html');
+   echo '<script>alert ("El usuario o contraseña son incorrectas");</script>'; 
+ }
 
 }
 
@@ -31,7 +33,7 @@ function registrarProfesor(){
         'codigo' => $_POST['UsuarioE'],
         'pass' =>   $_POST['ContrE']
     );
-
+     print_r($_POST);
    $this->load->model('Datos/dao_estudiante_model');  
    $validar['profesor']=$this->dao_estudiante_model->profesorReg($data,$_POST);
    if (count($validar['profesor'])<2) {
@@ -40,7 +42,7 @@ function registrarProfesor(){
 
    }else{  
    $this->load->view('Registro_Profesores',$validar);
-   echo '<script>alert ("El estudiante ya tiene usuario registrado");</script>'; 
+   echo '<script>alert ("El profesor ya tiene usuario registrado");</script>'; 
 
    }
 

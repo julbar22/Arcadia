@@ -15,7 +15,7 @@
 		 result.push(json[key]);
 		});
 		 alert(result);
-		   document.getElementById('Icono').value=result[0];
+		   document.getElementById('Iconovalue').value=result[0];
 		   document.getElementById('avatar').src=result[0];
 	       document.getElementById('documento').value=result[1];
 	       document.getElementById('UsuarioE').value=result[2];
@@ -62,6 +62,8 @@
 				
 				}		
 	         ?>
+	         <option  id="Iconovalue" value=""></option>
+	         
 	         
 			
 				
@@ -70,35 +72,35 @@
 		
 		<div class="form-group">	
 			
-			<input type="text"class="form-control" id="documento" name="documento" size="30" placeholder="DIGITE SU DOCUMENTO" required >
+			<input type="text"class="form-control" id="documento" name="documento"  placeholder="DIGITE SU DOCUMENTO" required >
 
 
 		</div>
 		<div class="form-group">	
 			
-			<input type="text"class="form-control" id="UsuarioE" name="UsuarioE" size="30" placeholder="DIGITE SU NICKNAME" required>
+			<input type="text"class="form-control" id="UsuarioE" name="UsuarioE"  placeholder="DIGITE SU NICKNAME" required>
 
 
 		</div>
 		<div class="form-group">	
 			
-			<input type="text" id="nombreE" name="nombreE" size="30" placeholder="DIGITE SU NOMBRE" class="form-control" required >
+			<input type="text" id="nombreE" name="nombreE" placeholder="DIGITE SU NOMBRE" class="form-control" required >
 		</div>
 		<div class="form-group">	
 			
-			<input type="text" id="ApellidoE" name="ApellidoE" size="30" placeholder="DIGITE SU APELLIDO" class="form-control" required>
+			<input type="text" id="ApellidoE" name="ApellidoE"  placeholder="DIGITE SU APELLIDO" class="form-control" required>
 		</div>
 		<div class="form-group">	
-			<input type="text" id="InsEduE" name="InsEduE" size="30" placeholder="DIGITE SU INSTITUCION" class="form-control" required>
+			<input type="text" id="InsEduE" name="InsEduE"  placeholder="DIGITE SU INSTITUCION" class="form-control" required>
 		</div>
 		
 		<div class="form-group">	
 			
-			<input type="tel" id="TelE" name="TelE" size="30" maxlength="10" placeholder="DIGITE SU TELEFONO"  class="form-control" required>
+			<input type="tel" id="TelE" name="TelE"  placeholder="DIGITE SU TELEFONO"  class="form-control" required>
 		</div>
 		<div class="form-group">	
 	
-			<input type="email" id="correoE" name="correoE" size="30" maxlength="10" placeholder="EJEMPLO@DOMINIO.COM"  class="form-control" required>
+			<input type="email" id="correoE" name="correoE"  placeholder="EJEMPLO@DOMINIO.COM"  class="form-control" required>
 		</div>
 		<div class="form-group">	
 			
@@ -113,11 +115,11 @@
 		</div>
 		<div class="form-group">			
 			
-			<input type="password" id="ContrE" name="ContrE" size="30" class="form-control" required placeholder="DIGITE SU CONTRASE&Ntilde;A">
+			<input type="password" id="ContrE" name="ContrE" class="form-control" required placeholder="DIGITE SU CONTRASE&Ntilde;A">
 		</div>
 		<div class="form-group">	
 			
-			<input type="password" id="ConfContE" name="ConfContE" size="30"  class="form-control" placeholder="DIGITE SU CONTRASE&Ntilde;A" required>
+			<input type="password" id="ConfContE" name="ConfContE"  class="form-control" placeholder="DIGITE SU CONTRASE&Ntilde;A" required>
 		</div>	
       
       

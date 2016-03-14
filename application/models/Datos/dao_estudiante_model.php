@@ -26,12 +26,13 @@
           
           function estudianteLogin($valores) 
           {
+            error_reporting(0);
             $_SESSION['codigo']=$valores['codigo'];
             $_SESSION['pass']=$valores['pass']; 
 
-             $conn_string = "host=localhost dbname=arcadiav1 user=".$valores['codigo']." password=".$valores['pass'];
-             $dbconn4 = pg_connect($conn_string)
-             or die('No se ha podido conectar: ' . pg_last_error());
+             $conn_string = "host=localhost dbname=arcadiav1 user= e".$valores['codigo']." password=".$valores['pass'];
+             $dbconn4 = pg_connect($conn_string);
+           
                          
                    
              if ($dbconn4){ 
@@ -49,25 +50,64 @@
                 
            $conn_string = "host=localhost dbname=arcadiav1 user=admin_arcadia password=arcadia";
              $dbconn4 = pg_connect($conn_string)
-             or die('No se ha podido conectar: ' . pg_last_error());     
-             $query = "CREATE USER ".$valores['codigo']." IN GROUP estudiantes PASSWORD '".$valores['pass']."'";
-             $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
-             pg_close($dbconn4);
-             if($result)
+             or die('No se ha podido conectar: ' . pg_last_error());  
+             $consult="SELECT * FROM ESTUDIANTE WHERE K_NICKNAME='e".$valores['codigo']."'";
+             $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());             
+             $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);     
 
-              return true;
-            else 
-              return false;
-            
+             if ($line['k_nickname']==null) {
+              
+               $insert ="INSERT INTO ESTUDIANTE (K_NICKNAME,N_NOMBRE,N_APELLIDO,O_CORREO,F_NACIMIENTO,O_SEXO,O_NUM_TEL,N_COLEGIO,O_GRADO_ACTUAL) 
+                         VALUES ('e".$estudiante['UsuarioE']."', '".$estudiante['nombreE']."','".$estudiante['ApellidoE']."', '".$estudiante['correoE']."',
+                         '".$estudiante['f_nacimiento']."', '".$estudiante['SexoE']."',".$estudiante['TelE'].",'".$estudiante['InsEduE']."',".$estudiante['GradActE']." )";
+                         
+                $resultInser= pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
+                $selectIdAvatar = "SELECT K_AVATAR FROM AVATAR WHERE O_IMAGEN= '".$estudiante['Icono']."'";
+                $queryAvatar=pg_query($selectIdAvatar) or die('La consulta fallo: ' . pg_last_error());
+                $line2 = pg_fetch_array($queryAvatar,null, PGSQL_ASSOC);
+                $createAvatar = "INSERT INTO AVATAR_ESTUDIANTE(K_AVATAR,K_NICKNAME) VALUES (".$line2['k_avatar'].",'e".$estudiante['UsuarioE']."')";
+                $queryCreate = pg_query($createAvatar) or die('La consulta fallo: ' . pg_last_error());
+                $query = "CREATE USER e".$valores['codigo']." IN GROUP estudiantes PASSWORD '".$valores['pass']."'";
+                $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
+                pg_close($dbconn4);    
+                return true;
+
+             }
+             else 
+              {
+                return $estudiante;
+
+              }             
                    
           } 
+
+          function profesorLogin($valores) 
+          {
+            error_reporting(0);
+            $_SESSION['codigo']=$valores['codigo'];
+            $_SESSION['pass']=$valores['pass']; 
+
+             $conn_string = "host=localhost dbname=arcadiav1 user=p".$valores['codigo']." password=".$valores['pass'];
+             $dbconn4 = pg_connect($conn_string);
+           
+                         
+                   
+             if ($dbconn4){ 
+              pg_close($dbconn4);
+              return true;
+            }
+            else {
+              pg_close($dbconn4);
+              return false;
+                    }
+              }
 
           function profesorReg($valores,$profesor){
                 
            $conn_string = "host=localhost dbname=arcadiav1 user=admin_arcadia password=arcadia";
              $dbconn4 = pg_connect($conn_string)
              or die('No se ha podido conectar: ' . pg_last_error());    
-             $consult="SELECT * FROM PROFESOR WHERE O_NICKNAME='".$valores['codigo']."' OR K_CEDULA=".$profesor['documento'];
+             $consult="SELECT * FROM PROFESOR WHERE O_NICKNAME='p".$valores['codigo']."' OR K_CEDULA=".$profesor['documento'];
              $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());             
              $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);            
              
@@ -75,9 +115,14 @@
               
                $insert ="INSERT INTO PROFESOR (K_CEDULA,N_NOMBRE,N_APELLIDO,O_CORREO,O_NICKNAME,N_COLEGIO,O_NUM_TEL) 
                          VALUES (".$profesor['documento'].", '".$profesor['nombreE']."', '".$profesor['ApellidoE']."', '".$profesor['correoE']."',
-                         '".$profesor['UsuarioE']."', '".$profesor['InsEduE']."',".$profesor['TelE']." )";
+                         'p".$profesor['UsuarioE']."', '".$profesor['InsEduE']."',".$profesor['TelE']." )";
                $resultInser= pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
-               $query = "CREATE USER ".$valores['codigo']." IN GROUP profesores PASSWORD '".$valores['pass']."'";
+               $selectIdAvatar = "SELECT K_AVATAR FROM AVATAR WHERE O_IMAGEN= '".$profesor['Icono']."'";
+               $queryAvatar=pg_query($selectIdAvatar) or die('La consulta fallo: ' . pg_last_error());
+               $line2 = pg_fetch_array($queryAvatar,null, PGSQL_ASSOC);
+               $createAvatar = "INSERT INTO AVATAR_PROFESOR (K_AVATAR,K_CEDULA) VALUES (".$line2['k_avatar'].",".$profesor['documento'].")";
+               $queryCreate = pg_query($createAvatar) or die('La consulta fallo: ' . pg_last_error());
+               $query = "CREATE USER p".$valores['codigo']." IN GROUP profesores PASSWORD '".$valores['pass']."'";
                $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
                pg_close($dbconn4);    
                return true;
