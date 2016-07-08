@@ -1,8 +1,7 @@
 <?php
 
-    require_once 'Reino_model.php';
-    require_once 'Solicitud_model.php';
-    require "phpmailer/class.phpmailer.php";
+    require_once 'Reino_model.php';  
+   // require "phpmailer/class.phpmailer.php";
 
 	class Profesor_model extends CI_Model{
 
@@ -13,8 +12,8 @@
 		protected $nickname;
 		protected $colegio;
 		protected $numTel;
-		protected $reino[];
-		protected $avatar[];
+		protected $reino = array();
+		protected $avatar = array();
 
 
 		public function __construct(){

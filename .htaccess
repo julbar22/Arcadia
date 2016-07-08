@@ -1,0 +1,6 @@
+# Use PHP5.5 as default
+AddHandler application/x-httpd-php55 .php
+# Lineas para evitar mostrar los errores...
+php_flag display_startup_errors off
+php_flag display_errors off
+php_flag html_errors off

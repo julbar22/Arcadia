@@ -1,6 +1,6 @@
 body {
 	
-	background: url("http://localhost/Arcadia/imagenes/edadMedia.jpg") no-repeat center center fixed;
+	background: url("/Arcadia/assets/imagenes/edadMedia.jpg") no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;

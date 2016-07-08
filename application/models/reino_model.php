@@ -11,10 +11,10 @@
 		protected $vision;
 		protected $fechaCreacion;
 		protected $imagen;
-		protected $profesor = new Profesor_model();
-
+		protected $profesor;
 		public function __construct(){
-		
+		  $profesor = new Profesor_model();
+
 		}
 
 		public function getReino(){	return $this->idReino;}

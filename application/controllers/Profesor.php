@@ -17,8 +17,8 @@ function ingresarProfesor(){
     );
    
 
-   $this->load->model('Datos/dao_estudiante_model');
-   $validar=$this->dao_estudiante_model->profesorLogin($data);
+   $this->load->model('Datos/dao_profesor_model');
+   $validar=$this->dao_profesor_model->profesorLogin($data);
    if ($validar) {
     $this->load->view('inicioProfesor.html');
 
@@ -34,8 +34,8 @@ function registrarProfesor(){
         'pass' =>   $_POST['ContrE']
     );
      print_r($_POST);
-   $this->load->model('Datos/dao_estudiante_model');  
-   $validar['profesor']=$this->dao_estudiante_model->profesorReg($data,$_POST);
+   $this->load->model('Datos/dao_profesor_model');  
+   $validar['profesor']=$this->dao_profesor_model->profesorReg($data,$_POST);
    if (count($validar['profesor'])<2) {
     $this->load->view('loginProfesor.html');
     echo '<script>alert (" Se ha registrado exitosamente");</script>'; 

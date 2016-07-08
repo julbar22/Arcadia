@@ -3,9 +3,9 @@
 	<head>
 		<title>Registro Estudiantes
 		</title>
-	    <link rel="stylesheet" type="text/css" href="http://localhost/Arcadia/css/specific_Css/styleRE.css" />
-		<link rel="stylesheet" type="text/css" href="http://localhost/Arcadia/css/bootstrap.css">
-		<script src="http://localhost/Arcadia/js/jsfuntions/server.js" type="text/javascript" charset="utf-8" async defer></script>		
+	    <link rel="stylesheet" type="text/css" href="/Arcadia/assets/css/specific_Css/styleRE.css" />
+		<link rel="stylesheet" type="text/css" href="/Arcadia/assets/css/bootstrap.css">
+		<script src="/Arcadia/assets/js/jsfuntions/server.js" type="text/javascript" charset="utf-8" async defer></script>		
 		<script type="text/javascript" charset="utf-8" async defer>
 		function loquesea(json){
 		
@@ -39,7 +39,7 @@
 
 
 	<header >
-	  <img src="http://localhost/Arcadia/Imagenes/arcadialogo.png" class="img-responsive col-md-offset-4 " alt="Responsive image">	
+	  <img src="/Arcadia/assets/Imagenes/arcadialogo.png" class="img-responsive col-md-offset-4 " alt="Responsive image">	
 		
 	</header>	
     <div class="col-md-3">
@@ -49,7 +49,7 @@
 	
 		<form method="post" action="http://localhost/Arcadia/index.php/Profesor/registrarProfesor" name="form1">
 		<div class="form-group">
-			<IMG id="avatar" name="avatar" src="http://localhost/Arcadia/Imagenes/granjero1.jpg"> <br>
+			<IMG id="avatar" name="avatar" src="/Arcadia/assets/Imagenes/granjero1.jpg"> <br>
 			<select id="Icono" name="Icono" onchange="cambiarimagen()">
 			<?php
 				

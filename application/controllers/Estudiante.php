@@ -21,7 +21,7 @@ function ingresarEstudiante(){
    $validar=$this->dao_estudiante_model->estudianteLogin($data);
 
    if ($validar) {
-    $this->load->view('inicioEstudiante.html');
+    $this->load->view('index.html');
 
    }else{  
 
