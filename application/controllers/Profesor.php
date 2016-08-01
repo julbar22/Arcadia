@@ -20,9 +20,9 @@ function ingresarProfesor(){
    $this->load->model('Datos/dao_profesor_model');
    $validar=$this->dao_profesor_model->profesorLogin($data);
    if ($validar) {
-    $this->load->view('inicioProfesor.html');
+    $this->load->view('inicioProfesor');
 
-   }else{  $this->load->view('loginProfesor.html');
+   }else{  $this->load->view('loginProfesor');
    echo '<script>alert ("El usuario o contraseña son incorrectas");</script>'; 
  }
 

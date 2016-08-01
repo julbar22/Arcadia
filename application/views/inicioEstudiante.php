@@ -49,9 +49,9 @@
 
 					<div class="3u">
 						<section>
-							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/pics02.jpg" alt=""></a>
+							<a href="/Arcadia/index.php/reino/vincularReinoC" class="image full"><img src="/Arcadia/assets/imagenes/reino.jpg" alt=""></a>
 							<header>
-								<h2>Etiam posuere</h2>
+								<h2>Escoge tu Reino</h2>
 							</header>
 							<p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante. Sed vel tellus.</p>				
 						</section>
@@ -59,9 +59,9 @@
 
 					<div class="3u">
 						<section>
-							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/pics03.jpg" alt=""></a>
+							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/HISTORIA.jpg" alt=""></a>
 							<header>
-								<h2>Fusce ultrices</h2>
+								<h2>Historia</h2>
 							</header>
 							<p>Pellentesque tristique ante. Sed vel tellus. Curabitur sem urna, consequat suscipit mattis placerat, nulla.</p>				
 						</section>
@@ -69,9 +69,9 @@
 
 					<div class="3u">
 						<section>
-							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/pics04.jpg" alt=""></a>
+							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/mision.png" alt=""></a>
 							<header>
-								<h2>Donec dictum</h2>
+								<h2>Mision</h2>
 							</header>
 							<p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Curabitur sem urna, consequat mattis placerat, nulla.</p>				
 						</section>
@@ -79,9 +79,9 @@
 
 					<div class="3u">
 						<section>
-							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/pics05.jpg" alt=""></a>
+							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/vision.jpg" alt=""></a>
 							<header>
-								<h2>Maecenas luctus</h2>
+								<h2>Vision</h2>
 							</header>
 							<p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Curabitur sem urna, consequat mattis placerat, nulla.</p>				
 						</section>
@@ -91,65 +91,53 @@
 			</div>
 		</div>
 		<div id="marketing">
+		<h2 id="Creditos">Creditos</h2>
 			<div class="container">
 				<div class="row">
 					<div class="3u">
 						<section>
 							<header>
-								<h2>Praesent eleifend</h2>
+								<h2></h2>
 							</header>
 							<ul class="style1">
 								<li class="first"><img src="/Arcadia/assets/imagenes/pics06.jpg" width="80" height="80" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
+									<p>- El logo de Arcadia fue diseñado basándose en el tutorial del usuario whtb760 en YouTube 
+                                    http://www.youtube.com/watch?v=UnuiQyP-_8I. </p>
 								</li>
 								<li><img src="/Arcadia/assets/imagenes/pics07.jpg" width="80" height="80" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-								</li>
-								<li><img src="/Arcadia/assets/imagenes/pics08.jpg" width="80" height="80" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-								</li>
+									<p>- El mapa de Arcadia fue diseñado utilizando el tutorial y el archivo realizado por el usuario ILoveMyMatty que se puede encontrar en: http://www.youtube.com/watch?v=ZpTWObGSKD0. </p>
+								</li>								
 							</ul>
 						</section>
 					</div>
 					<div class="3u">
 						<section>
 							<header>
-								<h2>Maecenas lectus</h2>
+								<h2></h2>
 							</header>
 							<ul class="style1">
 								<li class="first"><img src="/Arcadia/assets/imagenes/pics09.jpg" width="80" height="80" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
+									<p>- Los dragones de los logos de Arcadia y de los nombres de las ciudades fueron diseñados utilizando la fuente de Jonathan S. Harris: Tribal Dragon Tattoo Designs http://www.dafont.com/es/tribal-dragons-tattoo-designs.font. </p>
 								</li>
 								<li><img src="/Arcadia/assets/imagenes/pics10.jpg" width="80" height="80" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-								</li>
-								<li><img src="/Arcadia/assets/imagenes/pics11.jpg" width="80" height="80" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-								</li>
+									<p>- Las imágenes de los edificios de los pueblos fueron tomadas del sitio web Open Clip Art del usuario nicubunu: http://openclipart.org/user-detail/nicubunu. </p>
+								</li>								
 							</ul>
 						</section>
 					</div>
 					<div class="6u">
 						<section>
 							<header>
-								<h2>Aenean elementum facilisis ligula</h2>
+								<h2></h2>
 							</header>
 							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/pics12.jpg" alt=""></a>
-							<p>Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit nulla suscipit interdum. Aenean lectus lorem, imperdiet. Donec mattis libero eget urna. Duis pretium velit ac mauris.</p>
+							<p>- Como homenaje, algunos nombres de los lugares de Arcadia fueron tomados de:El el libro El Señor de los Anillos de J. R. R Tolkien: El Bosque Negro.<br>Los videojuegos:World of Warcraft: Azeroth, Bosque de Sargeras, Montañas Ragnaros.League of Legends: Montañas Freljord, Lago Zaun, Isla de las Sombras.
+                            Diablo III: Río y Lago Auriel, Río Tyrael, Río Imperius, Ruinas de Tristram.Starcraft: Río Kerrigan.
+.</p>
 						</section>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		
-
-		<!-- Copyright -->
-		<div id="copyright">
-			<div class="container">
-				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-			</div>
-		</div>
-
 	</body>
 </html>

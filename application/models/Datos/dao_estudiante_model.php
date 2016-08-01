@@ -27,7 +27,7 @@
             $_SESSION['codigo']=$valores['codigo'];
             $_SESSION['pass']=$valores['pass']; 
 
-             $conn_string = "host=localhost dbname=arcadiav1 user= e".$valores['codigo']." password=".$valores['pass'];
+             $conn_string = "host=localhost dbname=arcadiav2 user= e".$valores['codigo']." password=".$valores['pass'];
              $dbconn4 = pg_connect($conn_string);
            
                          
@@ -45,7 +45,7 @@
 
           function estudianteReg($valores,$estudiante){
                 
-           $conn_string = "host=localhost dbname=arcadiav1 user=admin_arcadia password=arcadia";
+           $conn_string = "host=localhost dbname=arcadiav2 user=admin_arcadia password=arcadia";
              $dbconn4 = pg_connect($conn_string)
              or die('No se ha podido conectar: ' . pg_last_error());  
              $consult="SELECT * FROM ESTUDIANTE WHERE K_NICKNAME='e".$valores['codigo']."'";
@@ -80,7 +80,7 @@
 
 
           function avatarEst(){
-            $conn_string = "host=localhost dbname=arcadiav1 user=admin_arcadia password=arcadia";
+            $conn_string = "host=localhost dbname=arcadiav2 user=admin_arcadia password=arcadia";
             $dbconn4 = pg_connect($conn_string)
              or die('No se ha podido conectar: ' . pg_last_error()); 
              $query = "SELECT * FROM AVATAR";

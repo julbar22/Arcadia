@@ -17,6 +17,12 @@
 		letter-spacing: -1px;
 		font-size: 1.8em;
 	}
+	#Creditos{
+    text-align: Center;
+    font-weight: 700;
+    font-size: 40px;
+
+	}
 
 	p, ol, ul {
 		margin-top: 0px;
@@ -214,7 +220,7 @@
 	#banner
 	{
 		position: relative;
-		background: #333 url(/Arcadia/assets/imagenes/banner1.jpg) no-repeat center;
+		background: #333 url(/Arcadia/assets/imagenes/banner4.jpg);
 		background-size: cover;
 	}
 	

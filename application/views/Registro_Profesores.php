@@ -55,7 +55,7 @@
 				
 				if (isset($avatares)) {
 				foreach ($avatares as $k){
-				echo "<option value=".$k['o_imagen'].">".$k['name']."</option>";
+				echo "<option value=".$k['o_imagen'].">".$k['n_nombre']."</option>";
 				
 				
 				}
