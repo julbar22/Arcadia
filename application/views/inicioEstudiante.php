@@ -49,7 +49,7 @@
 
 					<div class="3u">
 						<section>
-							<a href="/Arcadia/index.php/reino/vincularReinoC" class="image full"><img src="/Arcadia/assets/imagenes/reino.jpg" alt=""></a>
+							<a href="/Arcadia/index.php/reino/obtenerReinosC" class="image full"><img src="/Arcadia/assets/imagenes/reino.jpg" alt=""></a>
 							<header>
 								<h2>Escoge tu Reino</h2>
 							</header>

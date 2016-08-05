@@ -27,7 +27,7 @@
             $_SESSION['codigo']=$valores['codigo'];
             $_SESSION['pass']=$valores['pass']; 
 
-             $conn_string = "host=localhost dbname=arcadiav2 user= e".$valores['codigo']." password=".$valores['pass'];
+             $conn_string = "host=localhost dbname=arcadiav2 user= e".strtolower($valores['codigo'])." password=".$valores['pass'];
              $dbconn4 = pg_connect($conn_string);
            
                          
@@ -55,7 +55,7 @@
              if ($line['k_nickname']==null) {
               
                $insert ="INSERT INTO ESTUDIANTE (K_NICKNAME,N_NOMBRE,N_APELLIDO,O_CORREO,F_NACIMIENTO,O_SEXO,O_NUM_TEL,N_COLEGIO,O_GRADO_ACTUAL) 
-                         VALUES ('e".$estudiante['UsuarioE']."', '".$estudiante['nombreE']."','".$estudiante['ApellidoE']."', '".$estudiante['correoE']."',
+                         VALUES ('".$estudiante['UsuarioE']."', '".$estudiante['nombreE']."','".$estudiante['ApellidoE']."', '".$estudiante['correoE']."',
                          '".$estudiante['f_nacimiento']."', '".$estudiante['SexoE']."',".$estudiante['TelE'].",'".$estudiante['InsEduE']."',".$estudiante['GradActE']." )";
                          
                 $resultInser= pg_query($insert) or die('La consulta fallo: ' . pg_last_error());

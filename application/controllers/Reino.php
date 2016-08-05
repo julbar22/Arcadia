@@ -3,9 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Reino extends CI_Controller {
 	function __construct(){
-	     parent::__construct();
-	   
-
+	     parent::__construct();   
 
 	 }
 
@@ -13,7 +11,20 @@ class Reino extends CI_Controller {
 
 function vincularReinoC(){
   $this->load->model('Datos/dao_reino_model');  
-   $this->load->view('vincularReino');
+  $data = array(
+      'k_reino'=> $_POST['reinoIdModal'],
+      'codigo'=> $_POST['codigo'],
+    );
+  $validar=$this->dao_reino_model->vincularReino($data);
+  if ($validar==true) {
+      echo '<script>alert ("se ha vinculado al Reino");</script>';
+       $this->load->view('inicioEstudiante');
+  }else{
+
+    echo '<script>alert ("No se ha podido vincular al Reino");</script>';
+     $this->load->view('inicioEstudiante');
+  }
+  
  
 }
 
@@ -28,16 +39,21 @@ function crearReinoC(){
       );
    $this->load->model('Datos/dao_reino_model');  
   $validar =$this->dao_reino_model->crearReino($data);
+  if ($validar==true) {
+      echo '<script>alert ("se ha registrado su Reino");</script>';
+       $this->load->view('inicioProfesor');
+  }else{
 
-    echo '<script>alert ("se ha registrado su Reino");</script>';
- 
-  
+    echo '<script>alert ("No se ha podido registrar su Reino");</script>';
+     $this->load->view('inicioProfesor');
+  }
 
 }
 
 function obtenerReinosC(){
   $this->load->model('Datos/dao_reino_model');  
   $validar['reinos']=$this->dao_reino_model->obtenerReinosCreados();
+   $this->load->view('vincularReino',$validar);
 }
 
 function obtenerImagenReinosC(){

@@ -11,12 +11,23 @@
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
-		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+	    <link rel="stylesheet" href="/Arcadia/assets/css/bootstrap.css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
+		<script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+						
+			function modalWindows(reinoId) {			          
+			        $('#myModal').modal('show');
+			        document.getElementById("reinoIdModal").value=reinoId;			     
+			    
+			}
+		</script>
 		
 			<link rel="stylesheet" href="/Arcadia/assets/css/skel-noscript.css" />
 			<link rel="stylesheet" href="/Arcadia/assets/css/style.css" />
 			<link rel="stylesheet" href="/Arcadia/assets/css/style-desktop.css" />
+			<link rel="stylesheet" type="text/css" href="/Arcadia/assets/css/specific_Css/style.css">
+
 
 	</head>
 	<body>
@@ -45,53 +56,66 @@
 
 		<div id="featured">
 			<div class="container">
-				<div class="row">
+				<?php
+					if (isset($reinos)) {
+						$j=0;						
+                        for($i=0; $i<count($reinos)/4;$i++){
+                        	echo "<div class='row'>";
+                             for($h=0;$h<4;$h++){
+                             	if($j<count($reinos)){
+                             		$a=$reinos[$j]['k_reino'];
+	                                echo "<div class='3u'>";
+									echo "<section>";
+									echo "<a class='image full'><img src=".$reinos[$j]['o_imagen']." alt=''  onClick=\"modalWindows(".$a.")\" ></a>";
+									echo "<header>";
+									echo "<h2>".$reinos[$j]['n_nombre']."</h2>";
+									echo "<strong>Profesor: ".$reinos[$j]['o_nickname']."</strong>";
+									echo "</header>";
+									echo "<p>".$reinos[$j]['n_historia']."</p>";		
+									echo "</section>";
+								    echo "</div>";	
+								    $j++;
+                             	}
+                                
+                             }
+                             echo "</div>";
 
-					<div class="3u">
-						<section>
-							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/reino.jpg" alt=""></a>
-							<header>
-								<h2>Escoge tu Reino</h2>
-							</header>
-							<p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante. Sed vel tellus.</p>				
-						</section>
-					</div>
+                        }
 
-					<div class="3u">
-						<section>
-							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/HISTORIA.jpg" alt=""></a>
-							<header>
-								<h2>Historia</h2>
-							</header>
-							<p>Pellentesque tristique ante. Sed vel tellus. Curabitur sem urna, consequat suscipit mattis placerat, nulla.</p>				
-						</section>
-					</div>
 
-					<div class="3u">
-						<section>
-							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/mision.png" alt=""></a>
-							<header>
-								<h2>Mision</h2>
-							</header>
-							<p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Curabitur sem urna, consequat mattis placerat, nulla.</p>				
-						</section>
-					</div>
-
-					<div class="3u">
-						<section>
-							<a href="#" class="image full"><img src="/Arcadia/assets/imagenes/vision.jpg" alt=""></a>
-							<header>
-								<h2>Vision</h2>
-							</header>
-							<p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Curabitur sem urna, consequat mattis placerat, nulla.</p>				
-						</section>
-					</div>
-
-				</div>
+						}	
+				?>
 			</div>
 		</div>
 		<div id="marketing">
 		<h2 id="Creditos">Reinos de Arcadia</h2>		
 		</div>
+		       <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                 <form action="/Arcadia/index.php/reino/vincularReinoC" method ="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Vinculate a un Reino</h3>
+                    </div>
+                    <div id="body_modal" class="modal-body">                      
+                           
+                            <input type="hidden" value="" name="reinoIdModal" id="reinoIdModal">	                        
+	                        <div class="form-group">
+		                        <label for='codigo'>Codigo:</label>
+		                        <input type='text' id='codigo' name="codigo" class="form-control"   required>
+	                        </div>	                                   	                                    		          
+                    </div>
+                    <div id="modal_footer" class="modal-footer">
+                          <input value="Cancelar" data-dismiss="modal" class="btn btn-danger">   
+                          <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success">             
+                    </div>
+                    </form> 
+                </div>
+
+            </div>
+        </div>
 	</body>
 </html>

@@ -26,7 +26,7 @@
             $_SESSION['codigo']=$valores['codigo'];
             $_SESSION['pass']=$valores['pass']; 
 
-             $conn_string = "host=localhost dbname=arcadiav2 user=p".$valores['codigo']." password=".$valores['pass'];
+             $conn_string = "host=localhost dbname=arcadiav2 user=p".strtolower($valores['codigo'])." password=".$valores['pass'];
              $dbconn4 = pg_connect($conn_string);          
                                            
              if ($dbconn4){ 
@@ -52,7 +52,7 @@
               
                $insert ="INSERT INTO PROFESOR (K_CEDULA,N_NOMBRE,N_APELLIDO,O_CORREO,O_NICKNAME,N_COLEGIO,O_NUM_TEL) 
                          VALUES (".$profesor['documento'].", '".$profesor['nombreE']."', '".$profesor['ApellidoE']."', '".$profesor['correoE']."',
-                         'p".$profesor['UsuarioE']."', '".$profesor['InsEduE']."',".$profesor['TelE']." )";
+                         '".$profesor['UsuarioE']."', '".$profesor['InsEduE']."',".$profesor['TelE']." )";
                $resultInser= pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
                $selectIdAvatar = "SELECT K_AVATAR FROM AVATAR WHERE O_IMAGEN= '".$profesor['Icono']."'";
                $queryAvatar=pg_query($selectIdAvatar) or die('La consulta fallo: ' . pg_last_error());

@@ -21,11 +21,11 @@
 
           function crearReino($reino) 
           {
-            //error_reporting(0);
+            error_reporting(0);
            $user =$_SESSION['codigo'];
            $pass =$_SESSION['pass'];     
            
-             $conn_string = "host=localhost dbname=arcadiav2 user=p".$user." password=".$pass;
+             $conn_string = "host=localhost dbname=arcadiav2 user=p".strtolower($user)." password=".$pass;
              $dbconn4 = pg_connect($conn_string) 
              or die('No se ha podido conectar: ' . pg_last_error());   
 
@@ -50,16 +50,25 @@
            $user=$_SESSION['codigo'];
            $pass=$_SESSION['pass'];
 
-             $conn_string = "host=localhost dbname=arcadiav2 user=e".$user." password=".$pass;
+             $conn_string = "host=localhost dbname=arcadiav2 user=e".strtolower($user)." password=".$pass;
              $dbconn4 = pg_connect($conn_string) 
-             or die('No se ha podido conectar: ' . pg_last_error());       
+             or die('No se ha podido conectar: ' . pg_last_error());  
 
-             $insert ="INSERT INTO CALIFICACION_EN_REINO (K_NICKNAME,K_REINO) 
-                         VALUES ('".$user."', ".$reino['id'].")";
-             $resultInser= pg_query($insert) or die('La consulta fallo: ' . pg_last_error());                                            
-              
+             $consult="SELECT O_CODIGO FROM REINO WHERE K_REINO='".$reino['k_reino']."'"; 
+             $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());  
+             $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+             if ($line['o_codigo']==$reino['codigo']) {
+                     $insert ="INSERT INTO CALIFICACION_EN_REINO (K_NICKNAME,K_REINO) 
+                         VALUES ('".$user."', ".$reino['k_reino'].")";
+                     $resultInser= pg_query($insert) or die('La consulta fallo: ' . pg_last_error());               
               pg_close($dbconn4);  
-              return true;         
+              return true;
+              }else{
+                return false;
+              }
+
+
+                     
                    
           } 
 
@@ -68,11 +77,11 @@
            $user=$_SESSION['codigo'];
            $pass=$_SESSION['pass'];
 
-             $conn_string = "host=localhost dbname=arcadiav2 user=e".$user." password=".$pass;
+             $conn_string = "host=localhost dbname=arcadiav2 user=e".strtolower($user)." password=".$pass;
              $dbconn4 = pg_connect($conn_string) 
              or die('No se ha podido conectar: ' . pg_last_error());   
 
-             $consult="SELECT R.N_NOMBRE,R.N_HISTORIA,IR.O_IMAGEN,P.O_NICKNAME FROM REINO R,PROFESOR P, REINO_AVATAR IR WHERE R.K_CEDULA=P.K_CEDULA AND R.K_IMAGEN_REINO=IR.K_IMAGEN_REINO";
+             $consult="SELECT R.K_REINO, R.N_NOMBRE,R.N_HISTORIA,IR.O_IMAGEN,P.O_NICKNAME FROM REINO R,PROFESOR P, REINO_AVATAR IR WHERE R.K_CEDULA=P.K_CEDULA AND R.K_IMAGEN_REINO=IR.K_IMAGEN_REINO AND R.I_ESTADO='Act'";
              $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());             
              
              $reinos = array();
@@ -92,7 +101,7 @@
                  $user=$_SESSION['codigo'];
                  $pass=$_SESSION['pass'];
 
-                 $conn_string = "host=localhost dbname=arcadiav2 user=p".$user." password=".$pass;
+                 $conn_string = "host=localhost dbname=arcadiav2 user=p".strtolower($user)." password=".$pass;
                  $dbconn4 = pg_connect($conn_string) 
                  or die('No se ha podido conectar: ' . pg_last_error());   
                  
