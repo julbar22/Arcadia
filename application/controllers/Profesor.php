@@ -22,11 +22,16 @@ function ingresarProfesor(){
    if ($validar) {
     $this->load->view('inicioProfesor');
 
-   }else{  $this->load->view('loginProfesor');
+   }else{  $this->load->view('loginProfesor.html');
    echo '<script>alert ("El usuario o contraseña son incorrectas");</script>'; 
  }
 
 }
+
+function inicioProfesor(){
+  $this->load->view('inicioProfesor');
+}
+
 
 function registrarProfesor(){
    $data = array(

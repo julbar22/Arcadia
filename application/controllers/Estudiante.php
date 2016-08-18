@@ -14,8 +14,7 @@ function ingresarEstudiante(){
      $data = array(
         'codigo' => $_POST['inputCodigo'],
         'pass' =>   $_POST['contra']
-    );
-   
+    );   
 
    $this->load->model('Datos/dao_estudiante_model');
    $validar=$this->dao_estudiante_model->estudianteLogin($data);
@@ -29,6 +28,10 @@ function ingresarEstudiante(){
       echo '<script>alert ("Usuario o Contraseña erroneas");</script>'; 
      }
 
+}
+
+function inicioEstudiante(){
+  $this->load->view('inicioEstudiante');
 }
 
 

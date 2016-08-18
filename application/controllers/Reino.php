@@ -62,7 +62,26 @@ function obtenerImagenReinosC(){
   $this->load->view('crearReino',$validar);
 }
 
+function obtenerReinosProfesorC(){
+   $this->load->model('Datos/dao_reino_model');
+   $validar['reinos']=$this->dao_reino_model->obtenerReinosProfesor();
+   $this->load->view('reinosProfesor',$validar);
 
+}
+
+function obtenerReinosEstudianteC(){
+
+}
+
+function obtenerReinoProfesorC(){
+  $this->load->model('Datos/dao_reino_model');
+   $data = array(
+        'k_reino'=> $_POST['k_reino'],           
+      );
+
+  $this->load->view('PlantillaReinoProfesor');
+
+}
 
 }
 

@@ -29,11 +29,10 @@
              $dbconn4 = pg_connect($conn_string) 
              or die('No se ha podido conectar: ' . pg_last_error());   
 
-             $consult="SELECT K_CEDULA FROM PROFESOR WHERE O_NICKNAME='p".$user."'";
+             $consult="SELECT K_CEDULA FROM PROFESOR WHERE O_NICKNAME='".$user."'";
              $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());             
              $profesor = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);      
-             
-             print_r($profesor);
+
 
              $insert ="INSERT INTO REINO (K_REINO,K_CEDULA,N_NOMBRE,I_ESTADO,N_HISTORIA,N_MISION,N_VISION,F_CREACION,K_IMAGEN_REINO,O_CODIGO) 
                          VALUES (nextval('sec_reinos'),".floatval($profesor['k_cedula']).", '".$reino['nombre']."', 'Act', '".$reino['historia']."',
@@ -50,7 +49,7 @@
            $user=$_SESSION['codigo'];
            $pass=$_SESSION['pass'];
 
-             $conn_string = "host=localhost dbname=arcadiav2 user=e".strtolower($user)." password=".$pass;
+             $conn_string = "host=localhost dbname=arcadiav2 user=e".strtolower($user)." password=".$pass; //REVISAR
              $dbconn4 = pg_connect($conn_string) 
              or die('No se ha podido conectar: ' . pg_last_error());  
 
@@ -101,7 +100,7 @@
                  $user=$_SESSION['codigo'];
                  $pass=$_SESSION['pass'];
 
-                 $conn_string = "host=localhost dbname=arcadiav2 user=p".strtolower($user)." password=".$pass;
+                 $conn_string = "host=localhost dbname=arcadiav2 user=p".strtolower($user)." password=".$pass;//CAMBIAR A ADMIN
                  $dbconn4 = pg_connect($conn_string) 
                  or die('No se ha podido conectar: ' . pg_last_error());   
                  
@@ -117,6 +116,33 @@
                  pg_close($dbconn4);   
                  return $reinosAvatar;  
           } 
+
+          function obtenerReinosProfesor(){
+               //error_reporting(0);
+                 $user=$_SESSION['codigo'];
+                 $pass=$_SESSION['pass'];
+
+                 $conn_string = "host=localhost dbname=arcadiav2 user=p".strtolower($user)." password=".$pass;
+                 $dbconn4 = pg_connect($conn_string) 
+                 or die('No se ha podido conectar: ' . pg_last_error());   
+                 $consult="SELECT K_CEDULA FROM PROFESOR WHERE O_NICKNAME='".$user."'";
+                 $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());             
+                 $profesor = pg_fetch_array($resultConsult, null, PGSQL_ASSOC); 
+                 
+                 $consult2="SELECT R.K_REINO,R.N_NOMBRE,R.F_CREACION,RA.O_IMAGEN FROM REINO_AVATAR RA,REINO R WHERE RA.K_IMAGEN_REINO=R.K_IMAGEN_REINO AND R.K_CEDULA=".floatval($profesor['k_cedula'])."";
+                 $resultConsult2 = pg_query($consult2) or die('La consulta fallo: ' . pg_last_error());  
+
+                 $reinosAvatar = array();
+                 $i=0;
+                 while($line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC)){
+                 $reinosAvatar[$i]= $line;
+                 $i++;
+                 } 
+
+                 pg_close($dbconn4);   
+                 return $reinosAvatar; 
+
+          }
 
           }          
           ?>
