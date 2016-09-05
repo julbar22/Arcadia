@@ -22,3 +22,20 @@
     font-family: inherit;
     font-weight: 500;	
 }
+
+.titulo_pagina{
+	font-size: 40px;
+    padding-bottom: 50px;
+    text-align: center;
+    font-weight: 600;
+    font-family: times;
+    color: #aca4a6;
+
+}
+.input-group{
+	width: 100%;
+}
+.input-group-addon{
+	width: 20%;
+}
+

@@ -10,6 +10,8 @@
 <link href="/Arcadia/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/Arcadia/assets/js/jquery-1.11.3.min.js"></script>
 <script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+<script src="/Arcadia/assets/js/jcanvas.min.js" type="text/javascript" charset="utf-8"></script>
+
 
 <script type="text/javascript" charset="utf-8" async defer>
   
@@ -18,6 +20,22 @@
     $('#menu'+menu).toggle();
 
   }
+
+  $(document).ready(function() {
+         var $myCanvas = $('#myCanvas');
+
+$myCanvas.drawImage({
+  source: '/Arcadia/assets/imagenes/mapaArcadia.jpg',
+  x: 0, y: 0, 
+ fromCenter: false,
+  width: 600,
+  height: 500
+
+  
+});
+});
+ 
+
 </script>
 </head>
 <body>
@@ -43,8 +61,8 @@
         
         	<div id="templatemo_menu">
                 <ul>
-                    <li><a href="#">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
-                    <li><a onclick="desplegar('Notas');">Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>                        
+                    <li><a>Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                    <li><a onclick="desplegar('Notas');">Mis Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>                        
 
                     </li>
                     <ul class="menuhijos" id="menuNotas">
@@ -52,13 +70,13 @@
                           <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Actualizar</a></li>
                           <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Estadistica</a></li>
                     </ul>
-                    <li><a  onclick="desplegar('Actividades');">Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                    <li><a  onclick="desplegar('Actividades');">Mis Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                      <ul class="menuhijos" id="menuActividades">
                           <li><a href=""><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> MostrarA</a></li>
                           <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> ActualizarA</a></li>
                           <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> EstadisticaA</a></li>
                     </ul>
-                    <li><a href="#">Reino<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                    <li><a>Reino<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
               </ul>    	
             </div> <!-- end of templatemo_menu -->        
         	
@@ -91,16 +109,8 @@
         <div id="templatemo_content">
         	
             <div class="content_box">
-            	<h2>Web Design Company</h2>
-                <a href="#"><img class="image_wrapper image_fl" src="/Arcadia/assets/imagenes/images/templatemo_image_01.jpg" alt="Image 1" /></a>
-                <h5>Duis vitae velit sed dui malesuada</h5>
-                <p>Sliquet ligula. Maecenas adipiscing  um ipsum. Pelsti lentesque vitae magna. Suspendisse a nibh tristique jus us volutpat. Suspos endisse vitae neque eget ante.</p>
-                <p><a href="#">Read More</a></p>
-              <div class="cleaner h30"></div>
-                <a href="#"><img class="image_wrapper image_fl" src="/Arcadia/assets/imagenes/images/templatemo_image_02.jpg" alt="Image 2" /></a>
-              <h5>Savitae velit sed dui malesu donec</h5>
-              <p> Maecenas adipiscing elementum ipsum. lentesque vitae magna. Sed nec est. Suspendisse a nibh tristique justo rhoncus volutpat. endisse vitae neque eget ante.</p>
-              <p> <a href="#">Read More</a></p>
+            	<h2>Nombre del Reino</h2>
+                <canvas id="myCanvas" width="600" height="500" style="border:1px solid #000000;"></canvas>
           </div>
             
             <div class="content_box">
@@ -133,7 +143,7 @@
             </div>
             
             <div class="content_box last_box">
-            	<h2>Web Projects</h2>
+            	<h2>Galeria</h2>
                 
                 <div id="gallery">
 					<a href="/Arcadia/assets/imagenes/images/gallery/image_01_b.jpg" class="pirobox" title="Project 1"><img src="/Arcadia/assets/imagenes/images/gallery/image_01.jpg" alt="1" /></a>
@@ -142,7 +152,7 @@
                 </div> <!-- end of Gallery -->
                 
               <div class="cleaner h20"></div>    
-              <a href="#"><strong>View All Projects</strong></a></div>
+              <a href="#"><strong>Mirar Galeria</strong></a></div>
             
         </div>
         

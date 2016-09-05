@@ -72,7 +72,7 @@
 									echo "<header>";
 									echo "<h2>".$reinos[$j]['n_nombre']."</h2>";
 									echo "</header>";
-									echo "<p>".$reinos[$j]['o_historia']."</p>";		
+									echo "<p>".$reinos[$j]['n_historia']."</p>";		
 									echo "</section>";
 								    echo "</div>";	
 								    $j++;

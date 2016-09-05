@@ -33,7 +33,7 @@
 					<ul>
 						<li class="active"><a href="index.html">Inicio</a></li>
 						<li><a href="twocolumn1.html">Perfil</a></li>
-						<li><a href="twocolumn2.html">Reinos</a></li>
+						<li><a href="/Arcadia/index.php/reino/obtenerReinosEstudianteC">Reinos</a></li>
 						<li><a href="/Arcadia/index.php/welcome/index">Salir</a></li>
 					</ul>
 				</nav>

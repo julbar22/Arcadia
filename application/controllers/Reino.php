@@ -70,7 +70,9 @@ function obtenerReinosProfesorC(){
 }
 
 function obtenerReinosEstudianteC(){
-
+   $this->load->model('Datos/dao_reino_model');
+   $validar['reinos']=$this->dao_reino_model->obtenerReinosEstudiante();
+   $this->load->view('reinosEstudiante',$validar);
 }
 
 function obtenerReinoProfesorC(){
@@ -80,6 +82,16 @@ function obtenerReinoProfesorC(){
       );
 
   $this->load->view('PlantillaReinoProfesor');
+
+}
+
+function obtenerReinoEstudianteC(){
+  $this->load->model('Datos/dao_reino_model');
+   $data = array(
+        'k_reino'=> $_POST['k_reino'],           
+      );
+
+  $this->load->view('PlantillaReinoEstudiante');
 
 }
 
