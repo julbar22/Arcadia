@@ -48,7 +48,7 @@
            $conn_string = "host=localhost dbname=arcadiav3 user=admin_arcadia password=arcadia";
              $dbconn4 = pg_connect($conn_string)
              or die('No se ha podido conectar: ' . pg_last_error());  
-             $consult="SELECT * FROM ESTUDIANTE WHERE K_NICKNAME='e".$valores['codigo']."'";
+             $consult="SELECT * FROM ESTUDIANTE WHERE K_NICKNAME='".$valores['codigo']."'";
              $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());             
              $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);     
 
@@ -62,7 +62,7 @@
                 $selectIdAvatar = "SELECT K_AVATAR FROM AVATAR WHERE O_IMAGEN= '".$estudiante['Icono']."'";
                 $queryAvatar=pg_query($selectIdAvatar) or die('La consulta fallo: ' . pg_last_error());
                 $line2 = pg_fetch_array($queryAvatar,null, PGSQL_ASSOC);
-                $createAvatar = "INSERT INTO AVATAR_ESTUDIANTE(K_AVATAR,K_NICKNAME) VALUES (".$line2['k_avatar'].",'e".$estudiante['UsuarioE']."')";
+                $createAvatar = "INSERT INTO AVATAR_ESTUDIANTE(K_AVATAR,K_NICKNAME) VALUES (".$line2['k_avatar'].",'".$estudiante['UsuarioE']."')";
                 $queryCreate = pg_query($createAvatar) or die('La consulta fallo: ' . pg_last_error());
                 $query = "CREATE USER e".$valores['codigo']." IN GROUP estudiantes PASSWORD '".$valores['pass']."'";
                 $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());

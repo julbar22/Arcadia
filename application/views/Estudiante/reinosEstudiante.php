@@ -35,9 +35,8 @@
 				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio</a></li>
-						<li><a href="twocolumn1.html">Perfil</a></li>
-						<li  class="active"><a href="#">Reinos</a></li>
+						<li><a href="/Arcadia/index.php/estudiante/inicioEstudiante">Inicio</a></li>						
+						<li  class="active"><a href="#">Perfil</a></li>
 						<li><a href="/Arcadia/index.php/welcome/index">Salir</a></li>
 					</ul>
 				</nav>
@@ -48,7 +47,7 @@
 		<div id="banner">&nbsp;</div>
 
 		<div id="featured">
-			<div class="container">	
+						<div class="container">	
 			<h1 class="titulo_pagina">NOMBRE DE USUARIO</h1>
 				<div class="row">
 					<div class="col-md-5">
@@ -99,7 +98,6 @@
 		</div>
 		<div id="marketing">
 		<h2 id="Creditos">Mis Reinos</h2>	
-		   <br>	
 			<div class="container">
 			    
 				<?php
@@ -111,12 +109,12 @@
                              	if($j<count($reinos)){
                              		$a=$reinos[$j]['k_reino'];                             		
 	                                echo "<div class='3u'>";
-	                                echo "<form method='post' action='/Arcadia/index.php/reino/obtenerReinoProfesorC' >";
+	                                echo "<form method='post' action='/Arcadia/index.php/reino/obtenerReinoEstudianteC' >";
 									echo "<section>";
 									echo "<input name='k_reino' id='k_reino' type='hidden' value=".$reinos[$j]['k_reino']."> ";
 									echo "<a class='image full'><img src=".$reinos[$j]['o_imagen']." alt='' ></a>";
 									echo "<header>";
-									echo "<h2>".$reinos[$j]['n_nombre']."</h2>";
+									echo "<h2> Profesor: ".$reinos[$j]['n_nombre_profesor']."</h2>";
 									echo "</header>";
 									echo "<p>Fecha de creacion: ".$reinos[$j]['f_creacion']."</p>";	
 									echo "<input type='submit' value='Ir al reino' id='btnReino' class='btn btn-primary'>";	
@@ -134,7 +132,7 @@
 						}	
 				?>
 				
-			</div>
+			</div>	
 		</div>
 
 

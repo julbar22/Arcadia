@@ -20,24 +20,24 @@ class welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('ArcadiaLogin.html');
+		$this->load->view('Estudiante/ArcadiaLogin.html');
 	}
 
 	public function registro()
 	{
 		$this->load->model('Datos/dao_estudiante_model');
 		$data['avatares']=$this->dao_estudiante_model->avatarEst();
-		$this->load->view('Registro_Estudiante',$data);
+		$this->load->view('Estudiante/Registro_Estudiante',$data);
 	}
 
 	public function loginProfesor(){
-		$this->load->view('loginProfesor.html');
+		$this->load->view('Profesor/loginProfesor.html');
 	}
 
 	public function registroProfesor()
 	{
 		$this->load->model('Datos/dao_profesor_model');
 		$data['avatares']=$this->dao_profesor_model->avatarEst();
-		$this->load->view('Registro_Profesores',$data);
+		$this->load->view('Profesor/Registro_Profesores',$data);
 	}
 }

@@ -200,9 +200,9 @@ div{
 }
 
 #templatemo_menu ul li a:hover, #templatemo_menu ul .current {
-	padding-left: 60px;
+	padding-left: 30px;
 	color: #777700;
-	background: url(/Arcadia/assets/imagenes/images/templatemo_menu_hover.png) left top no-repeat
+	background: url(/Arcadia/assets/imagenes/images/lupa.png) left top no-repeat
 }
 
 /* end of menu */

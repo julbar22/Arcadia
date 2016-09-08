@@ -20,16 +20,16 @@ function ingresarProfesor(){
    $this->load->model('Datos/dao_profesor_model');
    $validar=$this->dao_profesor_model->profesorLogin($data);
    if ($validar) {
-    $this->load->view('inicioProfesor');
+    $this->load->view('Profesor/inicioProfesor');
 
-   }else{  $this->load->view('loginProfesor.html');
+   }else{  $this->load->view('Profesor/loginProfesor.html');
    echo '<script>alert ("El usuario o contraseña son incorrectas");</script>'; 
  }
 
 }
 
 function inicioProfesor(){
-  $this->load->view('inicioProfesor');
+  $this->load->view('Profesor/inicioProfesor');
 }
 
 
@@ -38,15 +38,15 @@ function registrarProfesor(){
         'codigo' => $_POST['UsuarioE'],
         'pass' =>   $_POST['ContrE']
     );
-     print_r($_POST);
+   
    $this->load->model('Datos/dao_profesor_model');  
    $validar['profesor']=$this->dao_profesor_model->profesorReg($data,$_POST);
    if (count($validar['profesor'])<2) {
-    $this->load->view('loginProfesor.html');
+    $this->load->view('Profesor/loginProfesor.html');
     echo '<script>alert (" Se ha registrado exitosamente");</script>'; 
 
    }else{  
-   $this->load->view('Registro_Profesores',$validar);
+   $this->load->view('Profesor/Registro_Profesores',$validar);
    echo '<script>alert ("El profesor ya tiene usuario registrado");</script>'; 
 
    }

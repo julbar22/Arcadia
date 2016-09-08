@@ -44,11 +44,11 @@
            $conn_string = "host=localhost dbname=arcadiav3 user=admin_arcadia password=arcadia";
              $dbconn4 = pg_connect($conn_string)
              or die('No se ha podido conectar: ' . pg_last_error());    
-             $consult="SELECT * FROM PROFESOR WHERE N_NICKNAME='p".$valores['codigo']."' OR K_CEDULA=".$profesor['documento'];
+             $consult="SELECT * FROM PROFESOR WHERE N_NICKNAME='".$valores['codigo']."' OR K_CEDULA=".$profesor['documento'];
              $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());             
              $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);            
              
-             if ($line['N_NICKNAME']==null) {
+             if ($line['n_nickname']==null) {
               
                $insert ="INSERT INTO PROFESOR (K_CEDULA,N_NOMBRE,N_APELLIDO,O_CORREO,N_NICKNAME,N_COLEGIO,O_NUM_TEL) 
                          VALUES (".$profesor['documento'].", '".$profesor['nombreE']."', '".$profesor['ApellidoE']."', '".$profesor['correoE']."',

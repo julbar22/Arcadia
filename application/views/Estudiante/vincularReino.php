@@ -15,11 +15,10 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
 		<script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<script>
-			
-			function modalWindows(imagenUrl,imagenId) {			          
+						
+			function modalWindows(reinoId) {			          
 			        $('#myModal').modal('show');
-			        document.getElementById("imagenModal").value=imagenUrl;
-			        document.getElementById("imagenModalId").value=imagenId;
+			        document.getElementById("reinoIdModal").value=reinoId;			     
 			    
 			}
 		</script>
@@ -43,9 +42,8 @@
 				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio</a></li>
-						<li><a href="twocolumn1.html">Perfil</a></li>
-						<li><a href="/Arcadia/index.php/reino/obtenerReinosProfesorC">Reinos</a></li>
+						<li><a href="/Arcadia/index.php/estudiante/inicioEstudiante">Inicio</a></li>
+						<li><a href="/Arcadia/index.php/reino/obtenerReinosEstudianteC">Perfil</a></li>
 						<li><a href="/Arcadia/index.php/welcome/index">Salir</a></li>
 					</ul>
 				</nav>
@@ -57,20 +55,20 @@
 
 		<div id="featured">
 			<div class="container">
-			    
 				<?php
 					if (isset($reinos)) {
-						$j=0;
+						$j=0;						
                         for($i=0; $i<count($reinos)/4;$i++){
                         	echo "<div class='row'>";
                              for($h=0;$h<4;$h++){
                              	if($j<count($reinos)){
-                             		$a=$reinos[$j]['o_imagen'];
+                             		$a=$reinos[$j]['k_reino'];
 	                                echo "<div class='3u'>";
 									echo "<section>";
-									echo "<a class='image full'><img src=".$reinos[$j]['o_imagen']." alt='' onClick=\"modalWindows('".$a."',".$reinos[$j]['k_imagen_reino'].")\"></a>";
+									echo "<a class='image full'><img src=".$reinos[$j]['o_imagen']." alt=''  onClick=\"modalWindows(".$a.")\" ></a>";
 									echo "<header>";
 									echo "<h2>".$reinos[$j]['n_nombre']."</h2>";
+									echo "<strong>Profesor: ".$reinos[$j]['n_nickname']."</strong>";
 									echo "</header>";
 									echo "<p>".$reinos[$j]['n_historia']."</p>";		
 									echo "</section>";
@@ -83,60 +81,40 @@
 
                         }
 
+
 						}	
 				?>
-
-				
 			</div>
 		</div>
 		<div id="marketing">
 		<h2 id="Creditos">Reinos de Arcadia</h2>		
 		</div>
-
-       <div id="myModal" class="modal fade" role="dialog">
+		       <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                 <form action="/Arcadia/index.php/reino/crearReinoC" method ="post">
+                 <form action="/Arcadia/index.php/reino/vincularReinoC" method ="post">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title">Crea tu Reino</h3>
+                        <h3 class="modal-title">Vinculate a un Reino</h3>
                     </div>
-                    <div id="body_modal" class="modal-body">
-                       
-                           <input type="hidden" value="" id="imagenModal">
-                            <input type="hidden" value="" name="imagenModalId" id="imagenModalId">
-	                        <div class="form-group">
-		                        <label for='nombre' >Nombre:</label>
-		                        <input type='text' id='nombre' name="nombre" class="form-control"  required>
-	                        </div>
+                    <div id="body_modal" class="modal-body">                      
+                           
+                            <input type="hidden" value="" name="reinoIdModal" id="reinoIdModal">	                        
 	                        <div class="form-group">
 		                        <label for='codigo'>Codigo:</label>
 		                        <input type='text' id='codigo' name="codigo" class="form-control"   required>
-	                        </div>
-	                        <div class="form-group">
-		                        <label for='historia'>Historia:</label>
-		                        <textarea id='historia' name="historia"  class="form-control" required></textarea> 
-	                        </div>
-	                        <div class="form-group">
-		                        <label for='mision'>Mision:</label>
-		                        <textarea id='mision' name="mision" class="form-control" required></textarea> 
-	                        </div>  
-	                        <div class="form-group">
-		                        <label for='vision'>Vision:</label>
-		                        <textarea id='vision' name="vision" class="form-control" required></textarea> 
-	                        </div>                     	                                    		          
+	                        </div>	                                   	                                    		          
                     </div>
                     <div id="modal_footer" class="modal-footer">
                           <input value="Cancelar" data-dismiss="modal" class="btn btn-danger">   
-                          <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success">                                      
+                          <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success">             
                     </div>
                     </form> 
                 </div>
 
             </div>
         </div>
-
 	</body>
 </html>

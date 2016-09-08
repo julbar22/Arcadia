@@ -18,11 +18,11 @@ function vincularReinoC(){
   $validar=$this->dao_reino_model->vincularReino($data);
   if ($validar==true) {
       echo '<script>alert ("se ha vinculado al Reino");</script>';
-       $this->load->view('inicioEstudiante');
+       $this->load->view('Estudiante/inicioEstudiante');
   }else{
 
     echo '<script>alert ("No se ha podido vincular al Reino");</script>';
-     $this->load->view('inicioEstudiante');
+     $this->load->view('Estudiante/inicioEstudiante');
   }
   
  
@@ -41,11 +41,11 @@ function crearReinoC(){
   $validar =$this->dao_reino_model->crearReino($data);
   if ($validar==true) {
       echo '<script>alert ("se ha registrado su Reino");</script>';
-       $this->load->view('inicioProfesor');
+       $this->load->view('Profesor/inicioProfesor');
   }else{
 
     echo '<script>alert ("No se ha podido registrar su Reino");</script>';
-     $this->load->view('inicioProfesor');
+     $this->load->view('Profesor/inicioProfesor');
   }
 
 }
@@ -53,26 +53,26 @@ function crearReinoC(){
 function obtenerReinosC(){
   $this->load->model('Datos/dao_reino_model');  
   $validar['reinos']=$this->dao_reino_model->obtenerReinosCreados();
-   $this->load->view('vincularReino',$validar);
+   $this->load->view('Estudiante/vincularReino',$validar);
 }
 
 function obtenerImagenReinosC(){
   $this->load->model('Datos/dao_reino_model');  
   $validar['reinos']=$this->dao_reino_model->obtenerImagenReinos();
-  $this->load->view('crearReino',$validar);
+  $this->load->view('Profesor/crearReino',$validar);
 }
 
 function obtenerReinosProfesorC(){
    $this->load->model('Datos/dao_reino_model');
    $validar['reinos']=$this->dao_reino_model->obtenerReinosProfesor();
-   $this->load->view('reinosProfesor',$validar);
+   $this->load->view('Profesor/reinosProfesor',$validar);
 
 }
 
 function obtenerReinosEstudianteC(){
    $this->load->model('Datos/dao_reino_model');
    $validar['reinos']=$this->dao_reino_model->obtenerReinosEstudiante();
-   $this->load->view('reinosEstudiante',$validar);
+   $this->load->view('Estudiante/reinosEstudiante',$validar);
 }
 
 function obtenerReinoProfesorC(){
@@ -81,7 +81,7 @@ function obtenerReinoProfesorC(){
         'k_reino'=> $_POST['k_reino'],           
       );
 
-  $this->load->view('PlantillaReinoProfesor');
+  $this->load->view('Profesor/PlantillaReinoProfesor');
 
 }
 
@@ -91,7 +91,7 @@ function obtenerReinoEstudianteC(){
         'k_reino'=> $_POST['k_reino'],           
       );
 
-  $this->load->view('PlantillaReinoEstudiante');
+  $this->load->view('Estudiante/PlantillaReinoEstudiante');
 
 }
 

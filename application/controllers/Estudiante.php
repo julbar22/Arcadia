@@ -20,18 +20,18 @@ function ingresarEstudiante(){
    $validar=$this->dao_estudiante_model->estudianteLogin($data);
 
    if ($validar) {
-    $this->load->view('inicioEstudiante');
+    $this->load->view('Estudiante/inicioEstudiante');
 
    }else{  
 
-      $this->load->view('ArcadiaLogin.html');
+      $this->load->view('Estudiante/ArcadiaLogin.html');
       echo '<script>alert ("Usuario o Contraseña erroneas");</script>'; 
      }
 
 }
 
 function inicioEstudiante(){
-  $this->load->view('inicioEstudiante');
+  $this->load->view('Estudiante/inicioEstudiante');
 }
 
 
@@ -48,7 +48,7 @@ function registrarEstudiante(){
           $this->load->view('ArcadiaLogin.html');
     echo '<script>alert (" Se ha registrado exitosamente");</script>';
   }else{
-    $this->load->view('Registro_Estudiante',$validar);
+    $this->load->view('Estudiante/Registro_Estudiante',$validar);
    echo '<script>alert ("El estudiante ya tiene usuario registrado");</script>';
   }
 }
