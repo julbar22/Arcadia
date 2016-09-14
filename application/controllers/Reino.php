@@ -1,99 +1,79 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Reino extends CI_Controller {
-	function __construct(){
-	     parent::__construct();   
 
-	 }
+    function __construct() {
+        parent::__construct();
+    }
 
+    function vincularReinoC() {
+        $this->load->model('Datos/dao_reino_model');
+        $data = array(
+            'k_reino' => $_POST['reinoIdModal'],
+            'codigo' => $_POST['codigo'],
+        );
+        $validar = $this->dao_reino_model->vincularReino($data);
+        if ($validar == true) {
+            echo '<script>alert ("se ha vinculado al Reino");</script>';
+            $this->load->view('Estudiante/inicioEstudiante');
+        } else {
 
+            echo '<script>alert ("No se ha podido vincular al Reino");</script>';
+            $this->load->view('Estudiante/inicioEstudiante');
+        }
+    }
 
-function vincularReinoC(){
-  $this->load->model('Datos/dao_reino_model');  
-  $data = array(
-      'k_reino'=> $_POST['reinoIdModal'],
-      'codigo'=> $_POST['codigo'],
-    );
-  $validar=$this->dao_reino_model->vincularReino($data);
-  if ($validar==true) {
-      echo '<script>alert ("se ha vinculado al Reino");</script>';
-       $this->load->view('Estudiante/inicioEstudiante');
-  }else{
+    function crearReinoC() {
+        $data = array(
+            'nombre' => $_POST['nombre'],
+            'historia' => $_POST['historia'],
+            'mision' => $_POST['mision'],
+            'vision' => $_POST['vision'],
+            'codigo' => $_POST['codigo'],
+            'imagen' => $_POST['imagenModalId'],
+        );
+        $this->load->model('Datos/dao_reino_model');
+        $validar = $this->dao_reino_model->crearReino($data);
+        if ($validar == true) {
+            echo '<script>alert ("se ha registrado su Reino");</script>';
+            $this->load->view('Profesor/inicioProfesor');
+        } else {
 
-    echo '<script>alert ("No se ha podido vincular al Reino");</script>';
-     $this->load->view('Estudiante/inicioEstudiante');
-  }
-  
- 
-}
+            echo '<script>alert ("No se ha podido registrar su Reino");</script>';
+            $this->load->view('Profesor/inicioProfesor');
+        }
+    }
 
-function crearReinoC(){ 
-  $data = array(
-        'nombre'=> $_POST['nombre'],
-        'historia'=> $_POST['historia'],
-        'mision'=> $_POST['mision'],
-        'vision'=> $_POST['vision'],
-        'codigo'=> $_POST['codigo'],    
-        'imagen'=> $_POST['imagenModalId'],   
-      );
-   $this->load->model('Datos/dao_reino_model');  
-  $validar =$this->dao_reino_model->crearReino($data);
-  if ($validar==true) {
-      echo '<script>alert ("se ha registrado su Reino");</script>';
-       $this->load->view('Profesor/inicioProfesor');
-  }else{
+    function obtenerReinosC() {
+        $this->load->model('Datos/dao_reino_model');
+        $validar['reinos'] = $this->dao_reino_model->obtenerReinosCreados();
+        $this->load->view('Estudiante/vincularReino', $validar);
+    }
 
-    echo '<script>alert ("No se ha podido registrar su Reino");</script>';
-     $this->load->view('Profesor/inicioProfesor');
-  }
+    function obtenerImagenReinosC() {
+        $this->load->model('Datos/dao_reino_model');
+        $validar['reinos'] = $this->dao_reino_model->obtenerImagenReinos();
+        $this->load->view('Profesor/crearReino', $validar);
+    }
 
-}
+    function obtenerReinoProfesorC() {
+        $this->load->model('Datos/dao_reino_model');
+        $data = array(
+            'k_reino' => $_POST['k_reino'],
+        );
+        $this->load->view('Profesor/PlantillaReinoProfesor');
+    }
 
-function obtenerReinosC(){
-  $this->load->model('Datos/dao_reino_model');  
-  $validar['reinos']=$this->dao_reino_model->obtenerReinosCreados();
-   $this->load->view('Estudiante/vincularReino',$validar);
-}
+    function obtenerReinoEstudianteC() {
+        $this->load->model('Datos/dao_reino_model');
+        $data = array(
+            'k_reino' => $_POST['k_reino'],
+        );
 
-function obtenerImagenReinosC(){
-  $this->load->model('Datos/dao_reino_model');  
-  $validar['reinos']=$this->dao_reino_model->obtenerImagenReinos();
-  $this->load->view('Profesor/crearReino',$validar);
-}
-
-function obtenerReinosProfesorC(){
-   $this->load->model('Datos/dao_reino_model');
-   $validar['reinos']=$this->dao_reino_model->obtenerReinosProfesor();
-   $this->load->view('Profesor/reinosProfesor',$validar);
-
-}
-
-function obtenerReinosEstudianteC(){
-   $this->load->model('Datos/dao_reino_model');
-   $validar['reinos']=$this->dao_reino_model->obtenerReinosEstudiante();
-   $this->load->view('Estudiante/reinosEstudiante',$validar);
-}
-
-function obtenerReinoProfesorC(){
-  $this->load->model('Datos/dao_reino_model');
-   $data = array(
-        'k_reino'=> $_POST['k_reino'],           
-      );
-
-  $this->load->view('Profesor/PlantillaReinoProfesor');
-
-}
-
-function obtenerReinoEstudianteC(){
-  $this->load->model('Datos/dao_reino_model');
-   $data = array(
-        'k_reino'=> $_POST['k_reino'],           
-      );
-
-  $this->load->view('Estudiante/PlantillaReinoEstudiante');
-
-}
+        $this->load->view('Estudiante/PlantillaReinoEstudiante');
+    }
 
 }
 
