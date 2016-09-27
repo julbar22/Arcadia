@@ -10,12 +10,12 @@ require_once '../Arcadia/application/models/Datos/dao_reino_model.php';
 // session_start();
 
 /**
- * 
+ *
  */
 class Dao_estudiante_model extends CI_Model {
 
     function __construct() {
-        // $this->load->database();        
+        // $this->load->database();
         parent::__construct();
     }
 
@@ -49,7 +49,7 @@ class Dao_estudiante_model extends CI_Model {
 
         if ($line['k_nickname'] == null) {
 
-            $insert = "INSERT INTO ESTUDIANTE (K_NICKNAME,N_NOMBRE,N_APELLIDO,O_CORREO,F_NACIMIENTO,O_SEXO,O_NUM_TEL,N_COLEGIO,O_GRADO_ACTUAL) 
+            $insert = "INSERT INTO ESTUDIANTE (K_NICKNAME,N_NOMBRE,N_APELLIDO,O_CORREO,F_NACIMIENTO,O_SEXO,O_NUM_TEL,N_COLEGIO,O_GRADO_ACTUAL)
                          VALUES ('" . $estudiante['UsuarioE'] . "', '" . $estudiante['nombreE'] . "','" . $estudiante['ApellidoE'] . "', '" . $estudiante['correoE'] . "',
                          '" . $estudiante['f_nacimiento'] . "', '" . $estudiante['SexoE'] . "'," . $estudiante['TelE'] . ",'" . $estudiante['InsEduE'] . "'," . $estudiante['GradActE'] . " )";
 
@@ -108,6 +108,16 @@ class Dao_estudiante_model extends CI_Model {
         $b['reinos'] = $a->obtenerReinosEstudiante();
         $b['perfil'] = $datosPerfil;
         return $b;
+    }
+
+    function updatePerfilEstudiante($estudiante){
+      print_r($estudiante);
+      //$m = $estudiante['NicknameE'];
+      $conn_string = "host=localhost dbname=arcadiav3 user=admin_arcadia password=arcadia";
+      $dbconn4 = pg_connect($conn_string) or die('No se ha podido conectar: ' . pg_last_error());
+      $update = "UPDATE ESTUDIANTE SET o_correo = '".$estudiante['CorreoE']."', o_num_tel = ".$estudiante['TelefonoE'].", n_colegio = '".$estudiante['ColegioE']."', o_grado_actual = ".$estudiante['GradoE']. " WHERE k_nickname = '" . $estudiante['NicknameE']."';";
+      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+
     }
 
 }
