@@ -43,16 +43,16 @@
         <div id="templatemo_body_wrapper">
             <div id="templatemo_wrapper">
 
-                <div id="tempaltemo_header">    	
+                <div id="tempaltemo_header">
                     <div id="header_content">
                         <div id="site_title">
 
-                        </div>         
+                        </div>
                     </div>
                 </div> <!-- end of header -->
                 <div id="templatemo_main_top-2"></div>
                 <div id="templatemo_main_top">
-                    <a href="#"><img src="/Arcadia/assets/imagenes/arcadialogo.png" alt="LOGO" /></a> 
+                    <a href="#"><img src="/Arcadia/assets/imagenes/arcadialogo.png" alt="LOGO" /></a>
                 </div>
                 <div id="templatemo_main" >
                     <span id="main_top"></span><span id="main_bottom"></span>
@@ -62,7 +62,7 @@
                         <div id="templatemo_menu">
                             <ul>
                                 <li><a href="#">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
-                                <li><a onclick="desplegar('Notas');">Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>                        
+                                <li><a onclick="desplegar('Notas');">Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
 
                                 </li>
                                 <ul class="menuhijos" id="menuNotas">
@@ -77,8 +77,8 @@
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> EstadisticaA</a></li>
                                 </ul>
                                 <li><a href="#">Reino<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
-                            </ul>    	
-                        </div> <!-- end of templatemo_menu -->        
+                            </ul>
+                        </div> <!-- end of templatemo_menu -->
 
 
                         <div class="sidebar_box">
@@ -87,20 +87,20 @@
 
                                 <div class="sb_news_box">
                                     <a href="#">Maecenas adipiscing elem sum ipsum.</a>
-                                    <span>25 September 2048</span>					
+                                    <span>25 September 2048</span>
                                 </div>
 
                                 <div class="sb_news_box">
                                     <a href="#">Aser ecenas adipiscing de lorem ipsum.</a>
-                                    <span>18 September 2048</span>					
+                                    <span>18 September 2048</span>
                                 </div>
 
                                 <a href="#"><strong>View All</strong></a>
                             </div>
 
-                            <div class="sb_bottom"></div>  
+                            <div class="sb_bottom"></div>
 
-                        </div>           
+                        </div>
 
 
                         <div class="cleaner"></div>
@@ -109,7 +109,11 @@
                     <div id="templatemo_content">
 
                         <div class="content_box">
-                            <h2>Nombre del Reino</h2>
+                          <?php
+                         if (isset($perfilR)) {
+                              echo "<h2 class='titulo_pagina'>" . $perfilR[0]['n_nombre'] . "</h2>";
+                          }
+                          ?>
                             <canvas id="myCanvas" width="600" height="500" style="border:1px solid #000000;"></canvas>
                         </div>
 
@@ -117,26 +121,28 @@
 
                             <div class="col_w290 float_l">
 
-                                <h2 class="title_icon why_choose_us">Why Us?</h2>
-
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipis cing elit. Nunc quis sem nec tellus blandit tincid unt. Duis vitae velit sed dui.</p>
-                                <ul class="tmo_list">
-                                    <li><a href="#">Smalesuada dignissim</a></li>
-                                    <li><a href="#">Donec mollis aliquet ligula</a></li>
-                                    <li><a href="#">Maecenas adipiscin</a></li>
-                                </ul>
+                              <h2 class="title_icon why_choose_us">Historia</h2>
+                              <?php
+                             if (isset($perfilR)) {
+                                  echo "<p>" . $perfilR[0]['n_historia'] . "</p>";
+                              }
+                              ?>
                             </div>
 
                             <div class="col_w290 cw290_last float_r">
 
-                                <h2 class="title_icon new_services">Standards</h2>
-
-                                <p>Nunc quis sem nec tellus blandit tincidunt. Du vitae velit sed dui malesuada dignissim. Don lis aliquet ligula. Maecenas adipiscing.</p>
-                                <ul class="tmo_list">
-                                    <li><a href="#">Pellentesque vitae magna</a></li>
-                                    <li><a href="#">Suspendisse uspendisse vitae</a></li>
-                                    <li><a href="#">Pellentesque dolornulla</a></li>
-                                </ul>
+                              <h2 class="title_icon new_services">Misión</h2>
+                              <?php
+                             if (isset($perfilR)) {
+                                  echo "<p>" . $perfilR[0]['n_mision'] . "</p>";
+                              }
+                              ?>
+                              <h2 class="title_icon new_services">Visión</h2>
+                              <?php
+                             if (isset($perfilR)) {
+                                  echo "<p>" . $perfilR[0]['n_vision'] . "</p>";
+                              }
+                              ?>
                             </div>
 
                             <div class="cleaner"></div>
@@ -151,12 +157,12 @@
                                 <a href="images/gallery/image_03_b.jpg" class="pirobox" title="Project 3"><img src="/Arcadia/assets/imagenes/images/gallery/image_03.jpg" alt="3" /></a>
                             </div> <!-- end of Gallery -->
 
-                            <div class="cleaner h20"></div>    
+                            <div class="cleaner h20"></div>
                             <a href="#"><strong>Mirar Galeria</strong></a></div>
 
                     </div>
 
-                    <div class="cleaner"></div>    
+                    <div class="cleaner"></div>
                 </div>
 
                 <div id="templatemo_main_bottom">
@@ -172,9 +178,9 @@
             </div>
         </div>
         <!-- templatemo 243 web design -->
-        <!-- 
-        Web Design Template 
-        http://www.templatemo.com/preview/templatemo_243_web_design 
+        <!--
+        Web Design Template
+        http://www.templatemo.com/preview/templatemo_243_web_design
         -->
 
     </body>

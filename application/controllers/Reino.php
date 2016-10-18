@@ -63,7 +63,8 @@ class Reino extends CI_Controller {
         $data = array(
             'k_reino' => $_POST['k_reino'],
         );
-        $this->load->view('Profesor/PlantillaReinoProfesor');
+        $validar = $this->dao_reino_model->obtenerReinoEspecifico($data);
+        $this->load->view('Profesor/PlantillaReinoProfesor', $validar);
     }
 
     function obtenerReinoEstudianteC() {
