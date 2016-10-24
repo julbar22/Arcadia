@@ -68,7 +68,7 @@
                                 echo "<a class='image full'><img src=" . $reinos[$j]['o_imagen'] . " alt=''  onClick=\"modalWindows(" . $a . ")\" ></a>";
                                 echo "<header>";
                                 echo "<h2>" . $reinos[$j]['n_nombre'] . "</h2>";
-                                echo "<strong>Profesor: " . $reinos[$j]['n_nickname'] . "</strong>";
+                                echo "<strong>Profesor: " . $reinos[$j]['n_profesor'] . "</strong>";
                                 echo "</header>";
                                 echo "<p>" . $reinos[$j]['n_historia'] . "</p>";
                                 echo "</section>";

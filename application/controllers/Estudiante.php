@@ -6,21 +6,22 @@ class Estudiante extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('Datos/dao_estudiante_model'); 
+        $this->load->model('estudiante_model');       
     }
 
     function ingresarEstudiante() {
+                 
         $data = array(
             'codigo' => $_POST['inputCodigo'],
             'pass' => $_POST['contra']
         );
-
-        $this->load->model('Datos/dao_estudiante_model');
+       
         $validar = $this->dao_estudiante_model->estudianteLogin($data);
 
-        if ($validar) {
+        if ($validar) {            
             $this->load->view('Estudiante/inicioEstudiante');
         } else {
-
             $this->load->view('Estudiante/ArcadiaLogin.html');
             echo '<script>alert ("Usuario o Contraseña erroneas");</script>';
         }
@@ -35,24 +36,29 @@ class Estudiante extends CI_Controller {
             'codigo' => $_POST['UsuarioE'],
             'pass' => $_POST['ContrE']
         );
+        $newEstudiante = new Estudiante_model();
+        $newEstudiante=$newEstudiante->crearEstudiante($_POST['UsuarioE'],$_POST['nombreE'],$_POST['ApellidoE'],$_POST['correoE'],$_POST['f_nacimiento'],$_POST['SexoE'],$_POST['TelE'],$_POST['InsEduE'],$_POST['GradActE'],$_POST['Icono']);
+        
+        $responseEstudiante = $this->dao_estudiante_model->estudianteReg($data, $newEstudiante);
 
-
-        $this->load->model('Datos/dao_estudiante_model');
-        $validar['estudiante'] = $this->dao_estudiante_model->estudianteReg($data, $_POST);
-        if (count($validar['estudiante']) < 2) {
-            $this->load->view('ArcadiaLogin.html');
+        if ($responseEstudiante== false) {
+            $this->load->view('Estudiante/ArcadiaLogin.html');
             echo '<script>alert (" Se ha registrado exitosamente");</script>';
         } else {
-            $this->load->view('Estudiante/Registro_Estudiante', $validar);
+            $response['estudiante']=$_POST;
+            $this->load->view('Estudiante/Registro_Estudiante', $response);
             echo '<script>alert ("El estudiante ya tiene usuario registrado");</script>';
         }
     }
 
     function perfilEstudianteC() {
-        $this->load->model('Datos/dao_estudiante_model');
-        $validar = $this->dao_estudiante_model->perfilEstudiante();
-        $this->load->view('Estudiante/reinosEstudiante', $validar);
-    }
+        $validar = new Estudiante_model();
+        $validar = $this->dao_estudiante_model->perfilEstudiante();  
+        $response['reinos']=$validar->ArregloReinos();        
+        $arreglo=$validar->crearArregloEstudiante($validar);             
+        $response['perfil']=$arreglo;    
+        $this->load->view('Estudiante/reinosEstudiante', $response);
+    }  
 
     function actualizarDatosEstudiante(){
         $this->load->model('Datos/dao_estudiante_model');

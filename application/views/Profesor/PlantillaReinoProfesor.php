@@ -15,7 +15,7 @@
 
         <script type="text/javascript" charset="utf-8" async defer>
 
-            function desplegar(menu) {
+             function desplegar(menu) {
 
                 $('#menu' + menu).toggle();
 
@@ -24,15 +24,20 @@
             $(document).ready(function () {
                 var $myCanvas = $('#myCanvas');
 
-                $myCanvas.drawImage({
+                $myCanvas.drawImage({                    
                     source: '/Arcadia/assets/imagenes/mapaArcadia.jpg',
                     x: 0, y: 0,
                     fromCenter: false,
                     width: 600,
-                    height: 500
-
-
+                    height: 500,
+                                     
                 });
+
+                $('#myCanvas').click(function(e){
+                     window.location.href = "/Arcadia/index.php/welcome/mapaActividadesProfesorC";
+                  
+            })
+
             });
 
 
