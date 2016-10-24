@@ -57,6 +57,7 @@ class Estudiante extends CI_Controller {
     function actualizarDatosEstudiante(){
         $this->load->model('Datos/dao_estudiante_model');
         $validar = $this->dao_estudiante_model->updatePerfilEstudiante($_POST);
+        //actualizar Estudiantes
         $validar2 = $this->dao_estudiante_model->perfilEstudiante();
         $this->load->view('Estudiante/reinosEstudiante', $validar2);
     }

@@ -9,7 +9,7 @@ require_once "../Arcadia/application/models/reino_model.php";
 session_start();
 
 /**
- * 
+ *
  */
 class Dao_reino_model extends CI_Model {
 
@@ -31,7 +31,7 @@ class Dao_reino_model extends CI_Model {
         $profesor = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
 
 
-        $insert = "INSERT INTO REINO (K_REINO,K_CEDULA,N_NOMBRE,I_ESTADO,N_HISTORIA,N_MISION,N_VISION,F_CREACION,K_IMAGEN_REINO,O_CODIGO) 
+        $insert = "INSERT INTO REINO (K_REINO,K_CEDULA,N_NOMBRE,I_ESTADO,N_HISTORIA,N_MISION,N_VISION,F_CREACION,K_IMAGEN_REINO,O_CODIGO)
                          VALUES (nextval('sec_reinos')," . floatval($profesor['k_cedula']) . ", '" . $reino['nombre'] . "', 'Act', '" . $reino['historia'] . "',
                          '" . $reino['mision'] . "', '" . $reino['vision'] . "',current_date," . floatval($reino['imagen']) . ",'" . $reino['codigo'] . "')";
         $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
@@ -53,7 +53,7 @@ class Dao_reino_model extends CI_Model {
         $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
         $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
         if ($line['o_codigo'] == $reino['codigo']) {
-            $insert = "INSERT INTO CALIFICACION_EN_REINO (K_NICKNAME,K_REINO) 
+            $insert = "INSERT INTO CALIFICACION_EN_REINO (K_NICKNAME,K_REINO)
                          VALUES ('" . $user . "', " . $reino['k_reino'] . ")";
             $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
             pg_close($dbconn4);
@@ -156,6 +156,25 @@ class Dao_reino_model extends CI_Model {
 
         pg_close($dbconn4);
         return $reinosAvatar;
+    }
+
+    function obtenerReinoEspecifico($data){
+        //print_r($data['k_reino']);
+        $conn_string = "host=localhost dbname=arcadiav3 user=admin_arcadia password=arcadia";
+        $dbconn4 = pg_connect($conn_string) or die('No se ha podido conectar: ' . pg_last_error());
+        $consult = "SELECT * FROM REINO WHERE K_REINO='".$data['k_reino']."'";
+        $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
+
+        $datosReino = array();
+        $i = 0;
+        while ($line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC)) {
+            $datosReino[$i] = $line;
+            $i++;
+        }
+        //print_r($datosPerfil);
+        pg_close($dbconn4);
+        $b['perfilR'] = $datosReino;
+        return $b;
     }
 
 }

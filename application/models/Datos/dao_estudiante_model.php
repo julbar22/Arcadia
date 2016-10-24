@@ -111,7 +111,6 @@ class Dao_estudiante_model extends CI_Model {
     }
 
     function updatePerfilEstudiante($estudiante){
-      print_r($estudiante);
       //$m = $estudiante['NicknameE'];
       $conn_string = "host=localhost dbname=arcadiav3 user=admin_arcadia password=arcadia";
       $dbconn4 = pg_connect($conn_string) or die('No se ha podido conectar: ' . pg_last_error());
