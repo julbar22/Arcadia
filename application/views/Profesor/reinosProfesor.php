@@ -50,7 +50,7 @@
                    <div class="container">	
                 <?php
                 if (isset($perfil)) {
-                    echo "<h1 class='titulo_pagina'>" . $perfil[0]['n_nickname'] . "</h1>";
+                    echo "<h1 class='titulo_pagina'>" . $perfil['n_nickname'] . "</h1>";
                 }
                 ?>
 
@@ -58,7 +58,7 @@
                     <div class="col-md-5">
                         <?php
                         if (isset($perfil)) {
-                            echo "<img src='" . $perfil[0]['o_imagen'] . "'' alt='imagenPerfil' class='img-responsive'>";
+                            echo "<img src='" . $perfil['o_imagen'] . "'' alt='imagenPerfil' class='img-responsive'>";
                         }
                         ?>
 
@@ -75,7 +75,7 @@
                                     <span class="input-group-addon" id="basic-addon1">Nombre</span>
                                     <?php
                                     if (isset($perfil)) {
-                                        echo "<input type='text' disabled='true' class='form-control' aria-describedby='basic-addon1' value='" . $perfil[0]['n_nombre'] . "'>";
+                                        echo "<input type='text' disabled='true' class='form-control' aria-describedby='basic-addon1' value='" . $perfil['n_nombre'] . "'>";
                                     }
                                     ?>                                  
                                 </div>
@@ -84,7 +84,7 @@
                                     <span class="input-group-addon" id="basic-addon1">Apellido</span>
                                     <?php
                                     if (isset($perfil)) {
-                                        echo "<input type='text' disabled='true' class='form-control' aria-describedby='basic-addon1' value='" . $perfil[0]['n_apellido'] . "'>";
+                                        echo "<input type='text' disabled='true' class='form-control' aria-describedby='basic-addon1' value='" . $perfil['n_apellido'] . "'>";
                                     }
                                     ?>                                   
                                 </div>
@@ -93,7 +93,7 @@
                                     <span class="input-group-addon" id="basic-addon1">Correo</span>
                                     <?php
                                     if (isset($perfil)) {
-                                        echo "<input type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil[0]['o_correo'] . "'>";
+                                        echo "<input type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil['o_correo'] . "'>";
                                     }
                                     ?>                                  
                                 </div>
@@ -102,7 +102,7 @@
                                     <span class="input-group-addon" id="basic-addon1">Telefono </span>
                                     <?php
                                     if (isset($perfil)) {
-                                        echo "<input type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil[0]['o_num_tel'] . "'>";
+                                        echo "<input type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil['o_num_tel'] . "'>";
                                     }
                                     ?>                                    
                                 </div>
@@ -111,7 +111,7 @@
                                     <span size="50" class="input-group-addon" id="basic-addon1">Colegio       :</span>
                                     <?php
                                     if (isset($perfil)) {
-                                        echo "<input type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil[0]['n_colegio'] . "'>";
+                                        echo "<input type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil['n_colegio'] . "'>";
                                     }
                                     ?>          
                                 </div>

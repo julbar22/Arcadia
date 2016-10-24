@@ -6,10 +6,11 @@ class Reino extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('Datos/dao_reino_model');
+        $this->load->model('Reino_model');
     }
 
-    function vincularReinoC() {
-        $this->load->model('Datos/dao_reino_model');
+    function vincularReinoC() {        
         $data = array(
             'k_reino' => $_POST['reinoIdModal'],
             'codigo' => $_POST['codigo'],
@@ -26,16 +27,10 @@ class Reino extends CI_Controller {
     }
 
     function crearReinoC() {
-        $data = array(
-            'nombre' => $_POST['nombre'],
-            'historia' => $_POST['historia'],
-            'mision' => $_POST['mision'],
-            'vision' => $_POST['vision'],
-            'codigo' => $_POST['codigo'],
-            'imagen' => $_POST['imagenModalId'],
-        );
-        $this->load->model('Datos/dao_reino_model');
-        $validar = $this->dao_reino_model->crearReino($data);
+        $reino = new Reino_model();
+        $reino=$reino->crearReino("",$_POST['nombre'],$_POST['codigo'],"","",$_POST['historia'],$_POST['imagenModalId'],$_POST['mision'],$_POST['vision'],"");
+            
+        $validar = $this->dao_reino_model->crearReino($reino);
         if ($validar == true) {
             echo '<script>alert ("se ha registrado su Reino");</script>';
             $this->load->view('Profesor/inicioProfesor');
@@ -47,13 +42,17 @@ class Reino extends CI_Controller {
     }
 
     function obtenerReinosC() {
-        $this->load->model('Datos/dao_reino_model');
-        $validar['reinos'] = $this->dao_reino_model->obtenerReinosCreados();
-        $this->load->view('Estudiante/vincularReino', $validar);
+       
+        $reinos=$this->dao_reino_model->obtenerReinosCreados();
+        for($i=0;$i<count($reinos);$i++){
+            $validar[$i]=$reinos[$i]->crearArregloReino($reinos[$i]);
+        }
+        $response['reinos'] = $validar;
+        $this->load->view('Estudiante/vincularReino', $response);
     }
 
-    function obtenerImagenReinosC() {
-        $this->load->model('Datos/dao_reino_model');
+    function obtenerImagenReinosC() {  // esto son avatar reinos toca separarlo
+        
         $validar['reinos'] = $this->dao_reino_model->obtenerImagenReinos();
         $this->load->view('Profesor/crearReino', $validar);
     }

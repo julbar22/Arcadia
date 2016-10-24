@@ -40,4 +40,8 @@ class welcome extends CI_Controller {
 		$data['avatares']=$this->dao_profesor_model->avatarEst();
 		$this->load->view('Profesor/Registro_Profesores',$data);
 	}
+
+ 	public function mapaActividadesProfesorC(){
+		$this->load->view('Profesor/mapaProfesor');
+	}
 }

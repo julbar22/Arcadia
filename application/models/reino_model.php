@@ -1,5 +1,7 @@
 <?php
 	require_once 'Profesor_model.php';
+	require_once 'Region_model.php';
+
 
 	class Reino_model extends CI_Model{
 
@@ -11,10 +13,12 @@
 		protected $vision;
 		protected $fechaCreacion;
 		protected $imagen;
-		protected $profesor;
-		public function __construct(){
-		  $profesor = new Profesor_model();
+		protected $codigo;
+		protected $profesor;		
+		protected $regiones=array();
 
+		public function __construct(){		 
+        
 		}
 
 		public function getReino(){	return $this->idReino;}
@@ -33,6 +37,12 @@
 
 		public function getImagen(){return $this->imagen;}
 
+		public function getCodigo(){return $this->codigo;}
+
+		public function getProfesor(){return $this->profesor;}
+
+		public function getRegiones(){return $this->regiones;}
+
 		public function setReino($reino){$this->idReino = $reino;}
 
 		public function setNombre($nombre){$this->nombre = $nombre;}
@@ -48,6 +58,43 @@
 		public function setFechaCreacion($fechaCreacion){$this->fechaCreacion = $fechaCreacion;	}
 
 		public function setImagen($imagen){	$this->imagen = $imagen; }
+
+		public function setRegiones($regiones){	$this->regiones = $regiones; }
+
+		public function setCodigo($codigo){	$this->codigo = $codigo; }
+
+		public function setProfesor($profesor){	$this->profesor = $profesor; }
+
+		public function crearReino($idreino,$nombre,$codigo,$estado,$fecha,$historia,$imagen,$mision,$vision,$profesor){
+			$newReino= new Reino_model();
+			$newReino->setReino($idreino);
+			$newReino->setNombre($nombre);
+			$newReino->setCodigo($codigo);
+			$newReino->setEstado($estado);
+			$newReino->setFechaCreacion($fecha);
+			$newReino->setHistoria($historia);
+			$newReino->setImagen($imagen);
+			$newReino->setMision($mision);
+			$newReino->setVision($vision);     
+			$newReino->setProfesor($profesor);   
+
+			return $newReino;
+    }
+
+		public function crearArregloReino(Reino_model $newReino){
+            $reino['k_reino']= $newReino->getReino();
+			$reino['n_nombre']= $newReino->getNombre();
+			$reino['o_codigo']= $newReino->getCodigo();
+			$reino['i_estado']= $newReino->getEstado();
+			$reino['f_creacion']= $newReino->getFechaCreacion();
+			$reino['n_historia']= $newReino->getHistoria();
+			$reino['o_imagen']= $newReino->getImagen();
+			$reino['n_mision']= $newReino->getMision();
+			$reino['n_vision']= $newReino->getVision();     
+			$reino['n_profesor']= $newReino->getProfesor(); 
+
+			return $reino;
+		}
 
 		
 	}

@@ -6,6 +6,8 @@ class Profesor extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+          $this->load->model('Datos/dao_profesor_model'); 
+          $this->load->model('profesor_model');
     }
 
     function ingresarProfesor() {
@@ -14,8 +16,6 @@ class Profesor extends CI_Controller {
             'pass' => $_POST['contra']
         );
 
-
-        $this->load->model('Datos/dao_profesor_model');
         $validar = $this->dao_profesor_model->profesorLogin($data);
         if ($validar) {
             $this->load->view('Profesor/inicioProfesor');
@@ -34,22 +34,29 @@ class Profesor extends CI_Controller {
             'codigo' => $_POST['UsuarioE'],
             'pass' => $_POST['ContrE']
         );
-
-        $this->load->model('Datos/dao_profesor_model');
-        $validar['profesor'] = $this->dao_profesor_model->profesorReg($data, $_POST);
-        if (count($validar['profesor']) < 2) {
+        $newProfesor = new Profesor_model();
+                                                                                                                                                        
+        $newProfesor = $newProfesor->crearProfesor($_POST['documento'],$_POST['nombreE'],$_POST['ApellidoE'],$_POST['correoE'],$_POST['UsuarioE'],$_POST['InsEduE'],$_POST['TelE'],$_POST['Icono']);
+      
+        $responseProfesor = $this->dao_profesor_model->profesorReg($data, $newProfesor);
+       
+        if ($responseProfesor==false) {
             $this->load->view('Profesor/loginProfesor.html');
             echo '<script>alert (" Se ha registrado exitosamente");</script>';
         } else {
-            $this->load->view('Profesor/Registro_Profesores', $validar);
+            $response['profesor']=$_POST;
+            $this->load->view('Profesor/Registro_Profesores', $response);
             echo '<script>alert ("El profesor ya tiene usuario registrado");</script>';
         }
     }
 
     function perfilProfesorC() {
-        $this->load->model('Datos/dao_profesor_model');
-        $validar = $this->dao_profesor_model->perfilProfesor();
-        $this->load->view('Profesor/reinosProfesor', $validar);
+        $validar = new Profesor_model();
+        $validar = $this->dao_profesor_model->perfilProfesor();      
+        $response['reinos']=$validar->ArregloReinos();
+        $arreglo=$validar->crearArregloProfesor($validar);
+        $response['perfil']=$arreglo;       
+        $this->load->view('Profesor/reinosProfesor', $response);
     }
 
 }
