@@ -34,7 +34,7 @@
                 });
 
                 $('#myCanvas').click(function(e){
-                     window.location.href = "/Arcadia/index.php/welcome/mapaActividadesProfesorC";
+                     window.location.href = "/Arcadia/index.php/welcome/mapaActividadesProfesorC?k_reino="+$('#idReino').val();
                   
             })
 
@@ -66,7 +66,7 @@
 
                         <div id="templatemo_menu">
                             <ul>
-                                <li><a href="#">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <li><a onclick="desplegar('Notas');">Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
 
                                 </li>
@@ -81,7 +81,7 @@
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> ActualizarA</a></li>
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> EstadisticaA</a></li>
                                 </ul>
-                                <li><a href="#">Reino<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
                         </div> <!-- end of templatemo_menu -->
 
@@ -115,10 +115,12 @@
 
                         <div class="content_box">
                           <?php
-                         if (isset($perfilR)) {
+                         if (isset($perfilR)) {                             
                               echo "<h2 class='titulo_pagina'>" . $perfilR[0]['n_nombre'] . "</h2>";
+                              echo "<input name='idReino' id='idReino' type='hidden' value='".$perfilR[0]['k_reino']."'/>";
                           }
                           ?>
+                           
                             <canvas id="myCanvas" width="600" height="500" style="border:1px solid #000000;"></canvas>
                         </div>
 

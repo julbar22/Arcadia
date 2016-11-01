@@ -61,7 +61,7 @@
 
                         <div id="templatemo_menu">
                             <ul>
-                                <li><a>Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a href="/Arcadia/index.php/estudiante/inicioEstudiante">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <li><a onclick="desplegar('Notas');">Mis Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
 
                                 </li>
@@ -76,7 +76,7 @@
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> ActualizarA</a></li>
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> EstadisticaA</a></li>
                                 </ul>
-                                <li><a>Reino<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
                         </div> <!-- end of templatemo_menu -->
 

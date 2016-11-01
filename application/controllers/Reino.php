@@ -59,7 +59,7 @@ class Reino extends CI_Controller {
 
     function obtenerReinoProfesorC() {       
         $data = array(
-            'k_reino' => $_POST['k_reino'],
+            'k_reino' => $_GET['k_reino'],
         );
         $validar = $this->dao_reino_model->obtenerReinoEspecifico($data);// esto debe devolver objeto reino
         $this->load->view('Profesor/PlantillaReinoProfesor', $validar);
@@ -67,7 +67,7 @@ class Reino extends CI_Controller {
 
     function obtenerReinoEstudianteC() {       
         $data = array(
-            'k_reino' => $_POST['k_reino'],
+            'k_reino' => $_GET['k_reino'],
         );
         $validar = $this->dao_reino_model->obtenerReinoEspecifico($data); //objeto reino
         $this->load->view('Estudiante/PlantillaReinoEstudiante', $validar);

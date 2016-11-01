@@ -173,7 +173,7 @@
                             if ($j < count($reinos)) {
                                 $a = $reinos[$j]['k_reino'];
                                 echo "<div class='3u'>";
-                                echo "<form method='post' action='/Arcadia/index.php/reino/obtenerReinoEstudianteC' >";
+                                echo "<form method='get' action='/Arcadia/index.php/reino/obtenerReinoEstudianteC' >";
                                 echo "<section>";
                                 echo "<input name='k_reino' id='k_reino' type='hidden' value=" . $reinos[$j]['k_reino'] . "> ";
                                 echo "<a class='image full'><img src=" . $reinos[$j]['o_imagen'] . " alt='' ></a>";

@@ -85,6 +85,7 @@
         <div id="marketing">
             <h2 id="Creditos">Reinos de Arcadia</h2>		
         </div>
+        
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
