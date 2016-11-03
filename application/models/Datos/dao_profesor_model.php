@@ -88,8 +88,9 @@ class Dao_profesor_model extends CI_Model {
        
         $line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC);
         
-        $profesor=$this->crearProfesor($line);
-
+        $profesor = new profesor_model();
+        $profesor=$profesor->crearProfesor($line['k_cedula'],$line['n_nombre'],$line['n_apellido'],$line['o_correo'],$line['n_nickname'],$line['n_colegio'],$line['o_num_tel'],$line['o_imagen']);
+        
         $configbd->cerrarSesion();
         $a = new dao_reino_model();
 
@@ -98,19 +99,12 @@ class Dao_profesor_model extends CI_Model {
         return $profesor;      
     }
 
-    function crearProfesor($profesor){
-
-        $newProfesor= new profesor_model();
-        $newProfesor->setCedula($profesor['k_cedula']);
-        $newProfesor->setNickname($profesor['n_nickname']);
-        $newProfesor->setNombre($profesor['n_nombre']);
-        $newProfesor->setApellido($profesor['n_apellido']);
-        $newProfesor->setCorreo($profesor['o_correo']);
-        $newProfesor->setNumTel($profesor['o_num_tel']);
-        $newProfesor->setColegio($profesor['n_colegio']);        
-        $newProfesor->setAvatar($profesor['o_imagen']);            
-        return $newProfesor;
-               
+  function actualizarDatosProfesor(Profesor_model $profesor){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('profesor');       
+      $update = "UPDATE PROFESOR SET o_correo ='".$profesor->getCorreo()."', o_num_tel = ".$profesor->getNumTel().", n_colegio ='".$profesor->getColegio()."' WHERE n_nickname = '". $profesor->getNickname()."';";
+      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+      $configbd->cerrarSesion();
     }
 
 }

@@ -61,11 +61,14 @@ class Estudiante extends CI_Controller {
     }  
 
     function actualizarDatosEstudiante(){
-        $this->load->model('Datos/dao_estudiante_model');
-        $validar = $this->dao_estudiante_model->updatePerfilEstudiante($_POST);
-        //actualizar Estudiantes
+        $newEstudiante = new Estudiante_model();
+        $newEstudiante=$newEstudiante->crearEstudiante($_POST['NicknameE'],"","",$_POST['CorreoE'],"","",$_POST['TelefonoE'],$_POST['ColegioE'],$_POST['GradoE'],"");        
+        $validar = $this->dao_estudiante_model->updatePerfilEstudiante($newEstudiante);
         $validar2 = $this->dao_estudiante_model->perfilEstudiante();
-        $this->load->view('Estudiante/reinosEstudiante', $validar2);
+        $response['reinos']=$validar2->ArregloReinos();        
+        $arreglo=$validar2->crearArregloEstudiante($validar2);             
+        $response['perfil']=$arreglo;
+        $this->load->view('Estudiante/reinosEstudiante', $response);
     }
 
 }

@@ -86,8 +86,9 @@ class Dao_estudiante_model extends CI_Model {
         $resultConsult2 = pg_query($consult2) or die('La consulta fallo: ' . pg_last_error());
         
         $line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC);
-        $estudiante=$this->crearEstudiante($line);
-        
+        $estudiante = new Estudiante_model();
+        $estudiante=$estudiante->crearEstudiante($line['k_nickname'],$line['n_nombre'],$line['n_apellido'],$line['o_correo'],"","",$line['o_num_tel'],$line['n_colegio'],$line['o_grado_actual'],$line['o_imagen']);
+                
         $configbd->cerrarSesion();
         $a = new dao_reino_model();
           
@@ -96,28 +97,12 @@ class Dao_estudiante_model extends CI_Model {
         return $estudiante;
     }
 
-    function updatePerfilEstudiante($estudiante){
-      //$m = $estudiante['NicknameE'];
-      $conn_string = "host=localhost dbname=arcadiav3 user=admin_arcadia password=arcadia";
-      $dbconn4 = pg_connect($conn_string) or die('No se ha podido conectar: ' . pg_last_error());
-      $update = "UPDATE ESTUDIANTE SET o_correo = '".$estudiante['CorreoE']."', o_num_tel = ".$estudiante['TelefonoE'].", n_colegio = '".$estudiante['ColegioE']."', o_grado_actual = ".$estudiante['GradoE']. " WHERE k_nickname = '" . $estudiante['NicknameE']."';";
+    function updatePerfilEstudiante(Estudiante_model $estudiante){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('admin'); //mirar permisode editar colegio
+      $update = "UPDATE ESTUDIANTE SET o_correo = '".$estudiante->getCorreo()."', o_num_tel = ".$estudiante->getNumTel().", n_colegio = '".$estudiante->getColegio()."', o_grado_actual = ".$estudiante->getGradoActual(). " WHERE k_nickname = '" . $estudiante->getNickname()."';";
       $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
-
-    }
-
-    function crearEstudiante($estudiante){
-
-        $newEstudiante= new estudiante_model();
-        $newEstudiante->setNickname($estudiante['k_nickname']);
-        $newEstudiante->setNombre($estudiante['n_nombre']);
-        $newEstudiante->setApellido($estudiante['n_apellido']);
-        $newEstudiante->setCorreo($estudiante['o_correo']);
-        $newEstudiante->setNumTel($estudiante['o_num_tel']);
-        $newEstudiante->setColegio($estudiante['n_colegio']);
-        $newEstudiante->setGradoActual($estudiante['o_grado_actual']);
-        $newEstudiante->setAvatar($estudiante['o_imagen']);            
-        return $newEstudiante;
-               
+      $configbd->cerrarSesion();
     }
 
 }
