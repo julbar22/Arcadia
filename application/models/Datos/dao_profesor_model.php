@@ -99,6 +99,14 @@ class Dao_profesor_model extends CI_Model {
         return $profesor;      
     }
 
+  function actualizarDatosProfesor(Profesor_model $profesor){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('profesor');       
+      $update = "UPDATE PROFESOR SET o_correo ='".$profesor->getCorreo()."', o_num_tel = ".$profesor->getNumTel().", n_colegio ='".$profesor->getColegio()."' WHERE n_nickname = '". $profesor->getNickname()."';";
+      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+      $configbd->cerrarSesion();
+    }
+
 }
 
 ?>

@@ -58,6 +58,18 @@ class Profesor extends CI_Controller {
         $response['perfil']=$arreglo;       
         $this->load->view('Profesor/reinosProfesor', $response);
     }
+    
+    function actualizarDatosProfesorC(){
+        $newProfesor = new Profesor_model();        
+        $newProfesor = $newProfesor->crearProfesor("","","",$_POST['CorreoE'],$_POST['NicknameE'],$_POST['ColegioE'],$_POST['TelefonoE'],"");
+        $validar = $this->dao_profesor_model->actualizarDatosProfesor($newProfesor);
+        $validar2 = $this->dao_profesor_model->perfilProfesor();
+        $response['reinos']=$validar2->ArregloReinos();        
+        $arreglo=$validar2->crearArregloProfesor($validar2);             
+        $response['perfil']=$arreglo;
+        $this->load->view('Profesor/reinosProfesor', $response);
+    }
+
 
 }
 

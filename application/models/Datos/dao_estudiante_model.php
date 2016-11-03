@@ -97,12 +97,12 @@ class Dao_estudiante_model extends CI_Model {
         return $estudiante;
     }
 
-    function updatePerfilEstudiante($estudiante){
-      $conn_string = "host=localhost dbname=arcadiav3 user=admin_arcadia password=arcadia";  //cambiar esto por el estudiante
-      $dbconn4 = pg_connect($conn_string) or die('No se ha podido conectar: ' . pg_last_error());
-      $update = "UPDATE ESTUDIANTE SET o_correo = '".$estudiante['CorreoE']."', o_num_tel = ".$estudiante['TelefonoE'].", n_colegio = '".$estudiante['ColegioE']."', o_grado_actual = ".$estudiante['GradoE']. " WHERE k_nickname = '" . $estudiante['NicknameE']."';";
+    function updatePerfilEstudiante(Estudiante_model $estudiante){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('admin'); //mirar permisode editar colegio
+      $update = "UPDATE ESTUDIANTE SET o_correo = '".$estudiante->getCorreo()."', o_num_tel = ".$estudiante->getNumTel().", n_colegio = '".$estudiante->getColegio()."', o_grado_actual = ".$estudiante->getGradoActual(). " WHERE k_nickname = '" . $estudiante->getNickname()."';";
       $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
-
+      $configbd->cerrarSesion();
     }
 
 }

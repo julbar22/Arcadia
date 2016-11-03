@@ -61,7 +61,9 @@ class Estudiante extends CI_Controller {
     }  
 
     function actualizarDatosEstudiante(){
-        $validar = $this->dao_estudiante_model->updatePerfilEstudiante($_POST);// esto reciba un objeto estudiante
+        $newEstudiante = new Estudiante_model();
+        $newEstudiante=$newEstudiante->crearEstudiante($_POST['NicknameE'],"","",$_POST['CorreoE'],"","",$_POST['TelefonoE'],$_POST['ColegioE'],$_POST['GradoE'],"");        
+        $validar = $this->dao_estudiante_model->updatePerfilEstudiante($newEstudiante);
         $validar2 = $this->dao_estudiante_model->perfilEstudiante();
         $response['reinos']=$validar2->ArregloReinos();        
         $arreglo=$validar2->crearArregloEstudiante($validar2);             
