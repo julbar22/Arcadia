@@ -6,7 +6,7 @@
 		protected $idRegion;
 		protected $nombre;
 		protected $estado;		
-		protected $actividades=array();
+		protected $actividades;
 		public $xMapa;
 		public $yMapa;
 		public $fxMapa;
@@ -34,4 +34,30 @@
 
 		
 	}
+
+		public function crearRegion($idregion,$nombre,$estado){
+			$newRegion= new Region_model();
+			$newRegion->setRegion($idregion);
+			$newRegion->setNombre($nombre);			
+			$newRegion->setEstado($estado);		
+
+			return $newRegion;
+    }
+
+		public function crearArregloRegion(Region_model $newRegion){
+            $region['k_region']= $newRegion->getRegion();
+			$region['n_nombre']= $newRegion->getNombre();		
+			$region['i_estado']= $newRegion->getEstado();			
+
+			return $region;
+		}
+
+		public function ArregloActividades(){
+			$actividadesArreglo= array();
+			for($i=0;$i<count($this->actividades);$i++){
+				$actividadesArreglo[$i]=$this->actividades[$i]->crearArregloActividades($this->actividades[$i]);
+
+			}
+			return $actividadesArreglo;
+		}
 ?>

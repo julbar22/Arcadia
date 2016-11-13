@@ -13,31 +13,60 @@
 
 
         <script type="text/javascript" charset="utf-8" async defer>
+            var  $myCanvas;
+           function createCanvas(json)
+           {
+               alert("entro");
+               var result = [];
+                var keys = Object.keys(json);
+                keys.forEach(function (key) {
+                    result.push(json[key]);
+                });
+               
+               
+                 $('canvas').addLayer({
+                    type: 'image',
+                    layer: true,
+                    source: '/Arcadia/assets/imagenes/arcadialogo.png',                                
+                    x: 0, y: 0,
+                    fromCenter: false,
+                    width: 500,
+                    height: 500
+                })
+
+                  $('canvas').drawLayers();
+                }
+               
+        
 
             $(document).ready(function () {
-                var $myCanvas = $('#myCanvas');
+               
 
-               $myCanvas.addLayer({
+                $('canvas').addLayer({
                     type: 'image',
+                    layer: true,
                     source: '/Arcadia/assets/imagenes/mapaArcadia.jpg',
+                    groups: ['myBoxes'],
+                    name: 'box',
                     x: 0, y: 0,
                     fromCenter: false,
                     width: 960,
                     height: 600
 
 
-                }).addLayer({
-                    layer:true,
-                    type: 'image',
-                    source: '/Arcadia/assets/imagenes/arcadialogo.png',
-                    x: 50, y: 100,
-                    fromCenter: false,
-                    width: 150,
-                    height: 70,
-                    click: function(layer) {
-                      alert("este es el logo");
-                    }
                 }).drawLayers();
+              /*  for(var i=0;i<=5;i++){
+                   $myCanvas.addLayer({
+                    type: 'image',
+                    layer: true,
+                    source: '/Arcadia/assets/imagenes/arcadialogo.png',                                
+                    x: 0+(i*10), y: 0,
+                    fromCenter: false,
+                    width: 200,
+                    height: 150
+                })
+                }
+                $myCanvas.drawLayers();*/
 
             });
 
@@ -60,6 +89,11 @@
                                 <li class="active"><a href="#">Mapa</a></li>
                                 <?php
                                   echo "<li><a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'>Reino</a></li>";
+                                  
+                                  $a[0]="1";
+                                  $a[1]="2";
+                                  echo "<script>createCanvas(" . json_encode($a) . ");</script>";
+                                  
                                 ?>
                                 
                                 <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio</a></li> 

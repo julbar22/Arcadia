@@ -34,7 +34,7 @@
                 });
 
                 $('#myCanvas').click(function(e){
-                     window.location.href = "/Arcadia/index.php/welcome/mapaActividadesProfesorC?k_reino="+$('#idReino').val();
+                     window.location.href = "/Arcadia/index.php/reino/mapaActividadesProfesorC?k_reino="+$('#idReino').val();
                   
             })
 

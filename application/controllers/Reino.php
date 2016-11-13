@@ -73,6 +73,13 @@ class Reino extends CI_Controller {
         $this->load->view('Estudiante/PlantillaReinoEstudiante', $validar);
     }
 
+    function mapaActividadesProfesorC(){
+		$this->load->view('Profesor/mapaProfesor');
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']){
+
+        }
+	}
+
 }
 
 ?>

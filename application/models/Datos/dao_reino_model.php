@@ -149,6 +149,24 @@ class Dao_reino_model extends CI_Model {
         return $b;
     }
 
+    function obtenerActividadesRegion($idReino){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+        $consult2 = "SELECT * FROM REGION WHERE K_REINO='" . $idReino. "'";
+        $resultConsult2 = pg_query($consult2) or die('La consulta fallo: ' . pg_last_error());
+        $regiones = array();
+        $i = 0;
+        while ($line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC)) {
+            
+            $region = new Region_model();
+            $regiones[$i] = $region->crearRegion($line['k_region'],$line['n_nombre'],$line['i_estado']);
+            $i++;
+        }
+
+        $configbd->cerrarSesion();
+
+    }
+
 }
 
 ?>
