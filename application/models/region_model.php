@@ -1,5 +1,5 @@
 <?php
-	//require_once 'Profesor_model.php';
+	require_once 'Actividad_model.php';
 
 	class Region_model extends CI_Model{
 
@@ -32,14 +32,11 @@
 
 		public function setActividades($actividades){	$this->actividades = $actividades; }
 
-		
-	}
-
 		public function crearRegion($idregion,$nombre,$estado){
 			$newRegion= new Region_model();
 			$newRegion->setRegion($idregion);
 			$newRegion->setNombre($nombre);			
-			$newRegion->setEstado($estado);		
+			$newRegion->setEstado($estado);	
 
 			return $newRegion;
     }
@@ -47,17 +44,29 @@
 		public function crearArregloRegion(Region_model $newRegion){
             $region['k_region']= $newRegion->getRegion();
 			$region['n_nombre']= $newRegion->getNombre();		
-			$region['i_estado']= $newRegion->getEstado();			
-
+			$region['i_estado']= $newRegion->getEstado();	
+			$region['actividades']=$newRegion->arregloActividades();		
+            
 			return $region;
 		}
 
-		public function ArregloActividades(){
+		public function arregloActividades(){
 			$actividadesArreglo= array();
 			for($i=0;$i<count($this->actividades);$i++){
-				$actividadesArreglo[$i]=$this->actividades[$i]->crearArregloActividades($this->actividades[$i]);
+				$actividadesArreglo[$i]=$this->actividades[$i]->crearArregloActividad($this->actividades[$i]);
 
 			}
 			return $actividadesArreglo;
 		}
+
+		public function agregarActividad(Actividad_model $actividad){
+
+             $this->actividades[count($this->actividades)]=$actividad;
+
+		}
+
+		
+	}
+
+
 ?>

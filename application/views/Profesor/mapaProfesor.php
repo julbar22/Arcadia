@@ -14,35 +14,21 @@
 
         <script type="text/javascript" charset="utf-8" async defer>
             var  $myCanvas;
+
+              function miFuntionAlert(data){
+                    alert(data);
+                }
+
            function createCanvas(json)
            {
-               alert("entro");
+               
                var result = [];
-                var keys = Object.keys(json);
-                keys.forEach(function (key) {
-                    result.push(json[key]);
-                });
                
-               
-                 $('canvas').addLayer({
-                    type: 'image',
-                    layer: true,
-                    source: '/Arcadia/assets/imagenes/arcadialogo.png',                                
-                    x: 0, y: 0,
-                    fromCenter: false,
-                    width: 500,
-                    height: 500
-                })
-
-                  $('canvas').drawLayers();
-                }
-               
-        
-
-            $(document).ready(function () {
+                    alert(json[0].actividades[0].k_actividad);
+                
                
 
-                $('canvas').addLayer({
+                    $('canvas').addLayer({
                     type: 'image',
                     layer: true,
                     source: '/Arcadia/assets/imagenes/mapaArcadia.jpg',
@@ -55,25 +41,31 @@
 
 
                 }).drawLayers();
-              /*  for(var i=0;i<=5;i++){
-                   $myCanvas.addLayer({
+                for(let i=0;i<json[0].actividades.length;i++){
+                    var aux=i;
+                   $('canvas').addLayer({
                     type: 'image',
                     layer: true,
                     source: '/Arcadia/assets/imagenes/arcadialogo.png',                                
-                    x: 0+(i*10), y: 0,
+                    x: 0+(i*150), y: 0,
                     fromCenter: false,
                     width: 200,
-                    height: 150
+                    height: 150,                    
+                    click: function(layer) {                                    
+                    miFuntionAlert(json[0].actividades[i].n_nombre);
+                 }
                 })
                 }
-                $myCanvas.drawLayers();*/
+                $('canvas').drawLayers();               
+                 
+                }
 
-            });
-
-
+              
+               
         </script>
     </head>
     <body style="background: #edecec;">
+ 
 
         <div class="container-fluid" style="background-image: url('/Arcadia/assets/imagenes/banner4.jpg');height: 450px;">
             <div class="container" >
@@ -89,11 +81,7 @@
                                 <li class="active"><a href="#">Mapa</a></li>
                                 <?php
                                   echo "<li><a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'>Reino</a></li>";
-                                  
-                                  $a[0]="1";
-                                  $a[1]="2";
-                                  echo "<script>createCanvas(" . json_encode($a) . ");</script>";
-                                  
+                                                                 
                                 ?>
                                 
                                 <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio</a></li> 
@@ -133,6 +121,13 @@
 
             </div>
         </div>
+          <?php
+        if (isset($regiones)){
+            print_r($regiones);
+            
+             echo "<script>createCanvas(" . json_encode($regiones) . ");</script>";
 
+        }
+      ?>
     </body>
 </html>
