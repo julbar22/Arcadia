@@ -79,11 +79,18 @@ class Reino extends CI_Controller {
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
 
-        $this->load->view('Profesor/mapaProfesor',$response);
-      
-
-        
+        $this->load->view('Profesor/mapaProfesor',$response);        
 	}
+
+    function actividadesRegion(){
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+        for($i=0;$i<count($listaRegiones);$i++){
+            $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+        }
+
+        $this->load->view('Profesor/ActividadesPorRegion',$response);      
+        
+    }
 
 }
 

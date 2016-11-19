@@ -77,7 +77,14 @@
                                 </ul>
                                 <li><a  onclick="desplegar('Actividades');">Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <ul class="menuhijos" id="menuActividades">
-                                    <li><a href="">Actividades Por Region</a></li>
+                                    <?php
+                                    if (isset($perfilR)) { 
+                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$perfilR[0]['k_reino']. "' >Actividades Por Region</a></li>";
+                                        
+                                    }
+                                     
+                                     ?>
+                                    
                                     <li><a href="#">Actividades Por Estudiante</a></li>
                                     <li><a href="#">Actividades para Revisar</a></li>
                                 </ul>
