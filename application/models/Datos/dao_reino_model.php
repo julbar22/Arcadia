@@ -159,7 +159,7 @@ class Dao_reino_model extends CI_Model {
         while ($line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC)) {
             
             $region = new Region_model();
-            $regiones[$i] = $region->crearRegion($line['k_region'],$line['n_nombre'],$line['i_estado']);
+            $regiones[$i] = $region->crearRegion($line['k_region'],$line['n_nombre'],$line['i_estado'],$line['posicionX'],$line['posicionY'],$line['Imagen']);
             $i++;
         }
 

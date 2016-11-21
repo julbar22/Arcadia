@@ -78,7 +78,7 @@
                                             echo "</tbody>";                                        
                                             echo "</table>";
                                         }
-                                      //  print_r($regiones);
+            
                                         
                                     }
                                      
