@@ -24,20 +24,20 @@
         		case 'estudiante':
                     $user = $_SESSION['codigo'];
                     $pass = $_SESSION['pass'];                   
-        			 $conn_string = "host=localhost dbname=arcadiav3 user= e" . strtolower($user) . " password=" .$pass;
+        			 $conn_string = "host=localhost dbname=arcadiav4 user= e" . strtolower($user) . " password=" .$pass;
                      $this->dbconn4 = pg_connect($conn_string);                     
                      return true;
         			break;
         		case 'profesor':
                     $user = $_SESSION['codigo'];
                     $pass = $_SESSION['pass'];
-        			$conn_string = "host=localhost dbname=arcadiav3 user= p" . strtolower($user) . " password=" .$pass;
+        			$conn_string = "host=localhost dbname=arcadiav4 user= p" . strtolower($user) . " password=" .$pass;
                      $this->dbconn4 = pg_connect($conn_string);
                      return true;
         			break;        				
         		
         		default:
-        			$conn_string = "host=localhost dbname=arcadiav3 user='admin_arcadia' password='arcadia'";
+        			$conn_string = "host=localhost dbname=arcadiav4 user='admin_arcadia' password='arcadia'";
                      $this->dbconn4 = pg_connect($conn_string);
                      return true;
         			break;

@@ -149,6 +149,38 @@ class Dao_reino_model extends CI_Model {
         return $b;
     }
 
+    function obtenerActividadesRegion($idReino){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+        $consult2 = "SELECT * FROM REGION WHERE K_REINO=" . $idReino;
+        $resultConsult2 = pg_query($consult2) or die('La consulta fallo: ' . pg_last_error());
+        $regiones = array();
+        $i = 0;
+        while ($line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC)) {
+            
+            $region = new Region_model();
+            $regiones[$i] = $region->crearRegion($line['k_region'],$line['n_nombre'],$line['i_estado'],$line['posicionX'],$line['posicionY'],$line['Imagen']);
+            $i++;
+        }
+
+        $consultView ="SELECT * FROM VIEW_ACTIVIDADES_REINO WHERE K_REINO=".$idReino;
+        $resultView =  pg_query($consultView) or die('La consulta fallo: ' . pg_last_error());
+        
+        while ($line2 = pg_fetch_array($resultView, null, PGSQL_ASSOC)) {            
+            $actividad = new Actividad_model();            
+            for($h=0;$h<count($regiones);$h++){
+                    if($line2['n_nombre_reg']==$regiones[$h]->getNombre()){                        
+                        $actividad=$actividad->crearActividad($line2['k_actividad'],$line2['n_nombre'],$line2['n_descripcion'],$line2['q_intentos'],$line2['v_porcentaje'],$line2['f_creacion'],$line2['f_vencimiento'],$line2['k_prerequisito'],$line2['k_tipo_actividad'],"");
+                        $regiones[$h]->agregarActividad($actividad);
+                    }
+            }          
+        }
+
+        $configbd->cerrarSesion();
+        return $regiones;
+
+    }
+
 }
 
 ?>

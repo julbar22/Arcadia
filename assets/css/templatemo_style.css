@@ -65,7 +65,7 @@ em { color: #000; }
 
 #templatemo_body_wrapper {
 	width: 100%;
-	background: url(/Arcadia/assets/imagenes/banner4.jpg) center top no-repeat;
+	background: url(/Arcadia/assets/imagenes/fondoReinos.jpg) center top no-repeat;
 	              
 }
 div{
@@ -85,7 +85,7 @@ div{
 #tempaltemo_header { 
 	position: relative;
 	width: 984px;
-	height: 200px;	
+	height: 100px;	
 }
 
 
@@ -201,8 +201,9 @@ div{
 
 #templatemo_menu ul li a:hover, #templatemo_menu ul .current {
 	padding-left: 30px;
-	color: #777700;
-	background: url(/Arcadia/assets/imagenes/images/lupa.png) left top no-repeat
+	background-color: #5f9ea0;
+	color: #FFFFFF;
+	
 }
 
 /* end of menu */

@@ -41,7 +41,5 @@ class welcome extends CI_Controller {
 		$this->load->view('Profesor/Registro_Profesores',$data);
 	}
 
- 	public function mapaActividadesProfesorC(){
-		$this->load->view('Profesor/mapaProfesor');
-	}
+
 }
