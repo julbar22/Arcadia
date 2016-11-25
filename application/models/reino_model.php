@@ -1,6 +1,6 @@
 <?php
 	require_once 'Profesor_model.php';
-	require_once 'Region_model.php';
+
 
 
 	class Reino_model extends CI_Model{

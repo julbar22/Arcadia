@@ -9,6 +9,10 @@ class Actividad extends CI_Controller {
 
     }
 
+    function formularioCrearActividad() {
+        $this->load->view('Profesor/CrearActividad');
+    }
+
 
 
 }

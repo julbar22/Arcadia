@@ -18,10 +18,6 @@
         <script type="text/javascript" charset="utf-8" async defer>
             var  $myCanvas;
 
-            function crearActividad(){
-                 $('#ModalActividades').modal('show');
-            }
-
               function miFuntionAlert(data){
                   
                     $('#modalform').empty();
@@ -125,7 +121,7 @@
 
                         <div id="body_modal" class="modal-body">                  
                             <input type="hidden" value="" name="reinoIdModal" id="reinoIdModal">
-                            <div><input  style="width: 100%;" class="btn btn-default" type="button" value="+" onclick="crearActividad()" ></div>	                        
+                            <div><a href="/Arcadia/index.php/Actividad/formularioCrearActividad"><input  style="width: 100%;" class="btn btn-default" type="button" value="+" ></a></div>	                        
                             <div id="modalform" class="form-group">
                                 
                             </div>	                                   	                                    		          
@@ -140,67 +136,6 @@
             </div>
         </div>
          <!--Modal de actividades -->
-         <!--Modal creacion actividades -->
-        <div id="ModalActividades" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <div class="modal-content">
-                    <form action="/Arcadia/index.php/reino/crearReinoC" method ="post">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h3 class="modal-title">Crea tu Actividad</h3>
-                        </div>
-                        <div id="body_modal" class="modal-body">
-
-                            <input type="hidden" value="" id="imagenModal">
-                            <input type="hidden" value="" name="imagenModalId" id="imagenModalId">
-                           
-                            <div class="form-group">
-                                <label for='nombre' >Nombre:</label>
-                                <input type='text' id='nombre' name="nombre" class="form-control"  required>
-                            </div>
-                            <div class="form-group">
-                                <label for='descripcion'>Descripcion:</label>
-                                <input type='text' id='descripcion' name="descripcion" class="form-control"   required>
-                            </div>
-                            <div class="form-group">
-                                <label for='intentos'>#Intentos:</label>
-                                <input type="number" id='intentos' name="intentos"  class="form-control" required /> 
-                            </div>
-                            <div class="form-group">
-                                <label for='porcentaje'>Porcentaje:</label>
-                                <input type="number" id='porcentaje' name="porcentaje" class="form-control" required />
-                            </div>                              
-                            <div class="form-group">
-                                <label for='fechaVencimiento'>Fecha de Vencimiento:</label>
-                                <input type="date" id='fechaVencimiento' name="fechaVencimiento" class="form-control" required /> 
-                            </div>  
-                            <div class="form-group">
-                                <label for='tipoAactividad'>Tipo Actividad:</label>
-                                <select id="tipoAactividad" name="tipoAactividad" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>       
-                            <div class="form-group">
-                                <label for='fileActividad'>Archivo Adjunto:</label>
-                                <input type="file" id='fileActividad' name="fileActividad" class="form-control" required /> 
-                            </div>                  	                                    		          
-                        </div>
-                        <div id="modal_footer" class="modal-footer">
-                            <input value="Cancelar" data-dismiss="modal" class="btn btn-danger">   
-                            <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success">                                      
-                        </div>
-                    </form> 
-                </div>
-
-            </div>
-        </div>
-        <!-- Modal creacion Actividades -->
-
         
           <?php
         if (isset($regiones)){                     

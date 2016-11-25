@@ -26,11 +26,12 @@ class Reino extends CI_Controller {
         }
     }
 
-    function crearReinoC() {
+    function crearReinoC() {  
+              
         $reino = new Reino_model();
         $reino=$reino->crearReino("",$_POST['nombre'],$_POST['codigo'],"","",$_POST['historia'],$_POST['imagenModalId'],$_POST['mision'],$_POST['vision'],"");
             
-        $validar = $this->dao_reino_model->crearReino($reino);
+        $validar = $this->dao_reino_model->crearReino($reino);          
         if ($validar == true) {
             echo '<script>alert ("se ha registrado su Reino");</script>';
             $this->load->view('Profesor/inicioProfesor');
