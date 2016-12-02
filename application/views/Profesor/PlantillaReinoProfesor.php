@@ -79,14 +79,17 @@
                                 <ul class="menuhijos" id="menuActividades">
                                     <?php
                                     if (isset($perfilR)) { 
-                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$perfilR[0]['k_reino']. "' >Actividades Por Region</a></li>";
-                                        
-                                    }
-                                     
-                                     ?>
-                                    
+                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$perfilR[0]['k_reino']. "' >Actividades Por Region</a></li>";                                      
+                                    }                                     
+                                    ?>                                    
                                     <li><a href="#">Actividades Por Estudiante</a></li>
                                     <li><a href="#">Actividades para Revisar</a></li>
+                                    <?php
+                                    if (isset($perfilR)) { 
+                                        echo "<li><a href='/Arcadia/index.php/pregunta/listadoPreguntasC?k_reino=".$perfilR[0]['k_reino']. "' >Listado de Preguntas</a></li>";                                      
+                                    }                                     
+                                    ?>
+
                                 </ul>
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>

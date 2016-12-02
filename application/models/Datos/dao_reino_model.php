@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 require_once "../Arcadia/application/models/reino_model.php";
-require_once '../Arcadia/application/models/Datos/configbd_model.php';
+require_once '../Arcadia/application/models/Datos/dao_region_model.php';
 
 class Dao_reino_model extends CI_Model {
 
@@ -26,7 +26,13 @@ class Dao_reino_model extends CI_Model {
                          VALUES (nextval('sec_reinos')," . floatval($profesor['k_cedula']) . ", '" . $reino->getNombre(). "', 'Act', '" . $reino->getHistoria() . "',
                          '" . $reino->getMision() . "', '" . $reino->getVision() . "',current_date," . floatval($reino->getImagen()) . ",'" . $reino->getCodigo() . "')";
         $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
+        $idReinoConsult ="SELECT currval('sec_reinos') AS id";
+        $resultConsultId =pg_query($idReinoConsult) or die('La consulta fallo: ' . pg_last_error());
+        $line = pg_fetch_array( $resultConsultId, null, PGSQL_ASSOC);
         $configbd->cerrarSesion();
+        $region = new dao_region_model();
+        $region->regionesGenericas($line['id']);
+
         return true;
     }
 
@@ -132,7 +138,7 @@ class Dao_reino_model extends CI_Model {
 
     function obtenerReinoEspecifico($data){
         //print_r($data['k_reino']);
-        $conn_string = "host=localhost dbname=arcadiav3 user=admin_arcadia password=arcadia";
+        $conn_string = "host=localhost dbname=arcadiav4 user=admin_arcadia password=arcadia";
         $dbconn4 = pg_connect($conn_string) or die('No se ha podido conectar: ' . pg_last_error());
         $consult = "SELECT * FROM REINO WHERE K_REINO='".$data['k_reino']."'";
         $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
@@ -150,19 +156,11 @@ class Dao_reino_model extends CI_Model {
     }
 
     function obtenerActividadesRegion($idReino){
+        
+        $region = new dao_region_model();
+        $regiones=$region->obtenerRegionesPorReino($idReino);
         $configbd = new configbd_model();
         $dbconn4=$configbd->abrirSesion('profesor');
-        $consult2 = "SELECT * FROM REGION WHERE K_REINO=" . $idReino;
-        $resultConsult2 = pg_query($consult2) or die('La consulta fallo: ' . pg_last_error());
-        $regiones = array();
-        $i = 0;
-        while ($line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC)) {
-            
-            $region = new Region_model();
-            $regiones[$i] = $region->crearRegion($line['k_region'],$line['n_nombre'],$line['i_estado'],$line['posicionX'],$line['posicionY'],$line['Imagen']);
-            $i++;
-        }
-
         $consultView ="SELECT * FROM VIEW_ACTIVIDADES_REINO WHERE K_REINO=".$idReino;
         $resultView =  pg_query($consultView) or die('La consulta fallo: ' . pg_last_error());
         
