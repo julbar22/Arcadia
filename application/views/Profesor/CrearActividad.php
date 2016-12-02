@@ -13,7 +13,35 @@
         <script src="/Arcadia/assets/js/jcanvas.min.js" type="text/javascript" charset="utf-8"></script>
         <style>           
             .form-control {padding:0px;}
+            .labelLeft {padding-left:0px;
+                        padding-right:0px;}
         </style>
+        <script type="text/javascript" charset="utf-8" async defer>
+            function tipoActividad(tipo){
+                if(parseInt(tipo)==1){                   
+                    $( '#numeroPreguntas' ).hide();
+                    $('#preguntas').hide();
+                    $('#divFileActividad').show(); 
+                }else{
+                    $( '#numeroPreguntas' ).show();     
+                    $('#divFileActividad').hide();  
+                    $('#preguntas').show();         
+                }
+
+            }
+         $(document).ready(function(){
+
+             $( '#tipoActividad' ).change(function() {
+                tipoActividad( $('#tipoActividad').val());
+            });
+
+             $( '#cantidadDePreguntas' ).change(function() {
+             alert( $('#cantidadDePreguntas').val());
+            });
+         });
+        
+       </script> 
+
 
     </head>
     <body>
@@ -61,7 +89,7 @@
 
                         <div class="content_box">                        
 
-                    <form action="/Arcadia/index.php/reino/crearReinoC" method ="post">
+                    <form action="/Arcadia/index.php/reino/crearReinoC" method ="post" class="form-horizontal">
                             <h3 class="modal-title">Crea tu Actividad</h3>
 
                             <input type="hidden" value="" id="imagenModal">
@@ -88,20 +116,44 @@
                                 <input type="date" id='fechaVencimiento' name="fechaVencimiento" class="form-control" required /> 
                             </div>  
                             <div class="form-group">
-                                <label for='tipoAactividad'>Tipo Actividad:</label>
-                                <select id="tipoAactividad" name="tipoAactividad" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <label for='tipoActividad'>Tipo Actividad:</label>
+                                <select id="tipoActividad" name="tipoActividad" class="form-control" selected="selected">
+                                    <option value="1" >Archivo</option>
+                                    <option value="2">Cuestionario</option>
                                 </select>
                             </div>       
-                            <div class="form-group">
+                            <div id="divFileActividad" class="form-group">
                                 <label for='fileActividad'>Archivo Adjunto:</label>
                                 <input type="file" id='fileActividad' name="fileActividad" class="form-control" required /> 
-                            </div>                  	                                    		          
-                       
+                            </div>  
+                             <div id="numeroPreguntas" class="form-group" style="display:none;" >
+                                 <label for='tipoActividad'>Cantidad de Preguntas:</label>  
+                                <select id="cantidadDePreguntas"  name="cantidadDePreguntas" class="form-control" selected="selected">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">4</option>
+                                        <option value="4">5</option>
+                                        <option value="5">8</option>
+                                        <option value="10">10</option>
+                                </select>
+                            </div>
+                            
+                            <div id="preguntas" style="display:none;">
+                                <div class="form-group">                                                                     
+                                    <label for='pregunta1' class="col-sm-2 labelLeft">Pregunta #1:</label>
+                                    <div class="col-sm-10 labelLeft">
+                                    <select id="cantidadDeOpciones"  name="cantidadDePreguntas" class="form-control" selected="selected">
+                                        <option value="1">2</option>
+                                        <option value="2">3</option>
+                                        <option value="3">4</option>
+                                        <option value="4">5</option>
+                                        <option value="5">6</option>                                       
+                                   </select><br>                                   
+                                   </div>      
+                                   <!--pregunta cerrada -->                           
+                                </div>
+                            </div>                	                                    		          
+                       <!-- hasta aqui va el div de preguntas -->
  
                             <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success">                                      
                       
