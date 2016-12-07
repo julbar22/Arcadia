@@ -20,7 +20,22 @@
 
               function showModalPregunta(){
                     $('#myModal').modal('show');
-                }             
+                }    
+
+         $(document).ready(function(){
+
+             $( '#inlineRadio1' ).change(function() {
+                alert("cambio a abierto");
+                $("#opcion_multiple").hide();
+                $("#respuesta_abierta").show();
+            });
+
+             $( '#inlineRadio2' ).change(function() {
+             alert("cambio a cerrada");
+               $("#opcion_multiple").show();
+                $("#respuesta_abierta").hide();
+            });
+         });          
         </script>
 
     </head>
@@ -93,19 +108,51 @@
                         <div id="body_modal" class="modal-body">                  
                             <input type="hidden" value="" name="reinoIdModal" id="reinoIdModal">                            	                        
                             <div>
+                             <div>
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Pregunta Abierta
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> Pregunta Abierta
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Opcion Multiple
-                                </label>    
+                                </label>  
+                                </div>  <br>
                                 <div>
                                     <label for="inputEmail3" class="col-sm-2 control-label">Pregunta</label>                   
                                     <textarea class="form-control"></textarea>
                                 </div>    
-                                <div>
+                                <div id="respuesta_abierta">
                                 <label for="inputEmail3" class="col-sm-2 control-label">Respuesta</label>
                                 <textarea class="form-control"></textarea>
+                                </div>
+                                <div id="opcion_multiple" style="display:none;">
+                                <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    Opcion 1:
+                                </label>
+                                <textarea class="form-control"></textarea>
+                                </div>
+                                <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    Opcion 2:
+                                </label>
+                                <textarea class="form-control"></textarea>
+                                </div>
+                                <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    Opcion 3:
+                                </label>
+                                <textarea class="form-control"></textarea>
+                                </div>
+                                <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    Opcion 4:
+                                </label>
+                                <textarea class="form-control"></textarea>
+                                </div>
                                 </div>
                                                               
                             
