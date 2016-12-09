@@ -35,20 +35,11 @@
                         <div id="templatemo_menu">
                             <ul>
                                 <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
-                                <li><a onclick="desplegar('Notas');">Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
-
-                                </li>
-                                <ul class="menuhijos" id="menuNotas">
-                                    <li><a href="">Mostrar</a></li>
-                                    <li><a href="#">Actualizar</a></li>
-                                    <li><a href="#">Estadistica</a></li>
-                                </ul>
-                                <li><a  onclick="desplegar('Actividades');">Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
-                                <ul class="menuhijos" id="menuActividades">
-                                    <li><a href="">Actividades Por Region</a></li>
-                                    <li><a href="#">Actividades Por Estudiante</a></li>
-                                    <li><a href="#">Actividades para Revisar</a></li>
-                                </ul>
+                                <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>                               
+                                <?php
+                                  echo "<li><a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'>Reino<span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true' style='float: right;' ></a></li>";
+                                                                 
+                                ?>
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
                         </div> <!-- end of templatemo_menu -->                        
@@ -57,12 +48,14 @@
 
                     <div id="templatemo_content">
 
-                        <div class="content_box">                        
+                        <div class="content_box">  
+                                             
                             <?php
                                     if (isset($regiones)) { 
                                         for($i=0; $i<count($regiones);$i++){
 
                                             echo "<h1>".$regiones[$i]['n_nombre']."</h1>";
+                                            echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad'><input  style='width: 100%;' class='btn btn-default' type='button' value='+' ></a></div>";
                                             echo "<table class='table table-striped'>";
                                             echo "<thead><tr><th>#</th><th>Nombre</th><th>Intentos</th><th>Porcentaje</th></tr></thead>";                                           
                                             

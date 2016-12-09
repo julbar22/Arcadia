@@ -66,7 +66,11 @@
 
                         <div id="templatemo_menu">
                             <ul>
-                                <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a onclick="desplegar('Inicio');">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                    <ul class="menuhijos" id="menuInicio">
+                                        <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio</a></li>
+                                        <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil</a></li>
+                                    </ul>
                                 <li><a onclick="desplegar('Notas');">Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
 
                                 </li>
