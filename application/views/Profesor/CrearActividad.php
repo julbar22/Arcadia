@@ -11,21 +11,21 @@
         <script type="text/javascript" src="/Arcadia/assets/js/jquery-1.11.3.min.js"></script>
         <script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
         <script src="/Arcadia/assets/js/jcanvas.min.js" type="text/javascript" charset="utf-8"></script>
-        <style>           
+        <style>
             .form-control {padding:0px;}
             .labelLeft {padding-left:0px;
                         padding-right:0px;}
         </style>
         <script type="text/javascript" charset="utf-8" async defer>
             function tipoActividad(tipo){
-                if(parseInt(tipo)==1){                   
+                if(parseInt(tipo)==1){
                     $( '#numeroPreguntas' ).hide();
                     $('#preguntas').hide();
-                    $('#divFileActividad').show(); 
+                    $('#divFileActividad').show();
                 }else{
-                    $( '#numeroPreguntas' ).show();     
-                    $('#divFileActividad').hide();  
-                    $('#preguntas').show();         
+                    $( '#numeroPreguntas' ).show();
+                    $('#divFileActividad').hide();
+                    $('#preguntas').show();
                 }
 
             }
@@ -39,8 +39,8 @@
              alert( $('#cantidadDePreguntas').val());
             });
          });
-        
-       </script> 
+
+       </script>
 
 
     </head>
@@ -81,20 +81,20 @@
                                 </ul>
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
-                        </div> <!-- end of templatemo_menu -->                        
-                       
+                        </div> <!-- end of templatemo_menu -->
+
                     </div> <!-- end of sidebar -->
 
                     <div id="templatemo_content">
 
-                        <div class="content_box">                        
+                        <div class="content_box">
 
-                    <form action="/Arcadia/index.php/reino/crearReinoC" method ="post" class="form-horizontal">
+                    <form method ="post" name = "formCrearActividad" class="form-horizontal" enctype="multipart/form-data">
                             <h3 class="modal-title">Crea tu Actividad</h3>
 
                             <input type="hidden" value="" id="imagenModal">
                             <input type="hidden" value="" name="imagenModalId" id="imagenModalId">
-                           
+
                             <div class="form-group">
                                 <label for='nombre' >Nombre:</label>
                                 <input type='text' id='nombre' name="nombre" class="form-control"  required>
@@ -105,29 +105,29 @@
                             </div>
                             <div class="form-group">
                                 <label for='intentos'>#Intentos:</label>
-                                <input type="number" id='intentos' name="intentos"  class="form-control" required /> 
+                                <input type="number" id='intentos' name="intentos"  class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <label for='porcentaje'>Porcentaje:</label>
                                 <input type="number" id='porcentaje' name="porcentaje" class="form-control" required />
-                            </div>                              
+                            </div>
                             <div class="form-group">
                                 <label for='fechaVencimiento'>Fecha de Vencimiento:</label>
-                                <input type="date" id='fechaVencimiento' name="fechaVencimiento" class="form-control" required /> 
-                            </div>  
+                                <input type="date" id='fechaVencimiento' name="fechaVencimiento" class="form-control" required />
+                            </div>
                             <div class="form-group">
                                 <label for='tipoActividad'>Tipo Actividad:</label>
                                 <select id="tipoActividad" name="tipoActividad" class="form-control" selected="selected">
                                     <option value="1" >Archivo</option>
                                     <option value="2">Cuestionario</option>
                                 </select>
-                            </div>       
+                            </div>
                             <div id="divFileActividad" class="form-group">
                                 <label for='fileActividad'>Archivo Adjunto:</label>
-                                <input type="file" id='fileActividad' name="fileActividad" class="form-control" required /> 
-                            </div>  
+                                <input type="file" id='fileActividad' name="fileActividad" required />
+                            </div>
                              <div id="numeroPreguntas" class="form-group" style="display:none;" >
-                                 <label for='tipoActividad'>Cantidad de Preguntas:</label>  
+                                 <label for='tipoActividad'>Cantidad de Preguntas:</label>
                                 <select id="cantidadDePreguntas"  name="cantidadDePreguntas" class="form-control" selected="selected">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -137,9 +137,9 @@
                                         <option value="10">10</option>
                                 </select>
                             </div>
-                            
+
                             <div id="preguntas" style="display:none;">
-                                <div class="form-group">                                                                     
+                                <div class="form-group">
                                     <label for='pregunta1' class="col-sm-2 labelLeft">Pregunta #1:</label>
                                     <div class="col-sm-10 labelLeft">
                                     <select id="cantidadDeOpciones"  name="cantidadDePreguntas" class="form-control" selected="selected">
@@ -147,21 +147,21 @@
                                         <option value="2">3</option>
                                         <option value="3">4</option>
                                         <option value="4">5</option>
-                                        <option value="5">6</option>                                       
-                                   </select><br>                                   
-                                   </div>      
-                                   <!--pregunta cerrada -->                           
+                                        <option value="5">6</option>
+                                   </select><br>
+                                   </div>
+                                   <!--pregunta cerrada -->
                                 </div>
-                            </div>                	                                    		          
+                            </div>
                        <!-- hasta aqui va el div de preguntas -->
- 
-                            <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success">                                      
-                      
-                    </form> 
+
+                            <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success" onclick = "this.form.action = 'http://localhost/Arcadia/index.php/Actividad/crearActividad'">
+
+                    </form>
 
 
                         </div>
- 
+
                     </div>
 
                     <div class="cleaner"></div>

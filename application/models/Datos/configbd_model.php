@@ -5,11 +5,11 @@
     session_start();
 
     class Configbd_model extends CI_Model{
-     
+
         public $dbconn4;
 
         public function __construct(){
-            
+
         }
 
         public function inicioSesion($user,$pass){
@@ -19,23 +19,23 @@
         }
 
         public function abrirSesion($type){
-           
+
         	switch ($type) {
         		case 'estudiante':
                     $user = $_SESSION['codigo'];
-                    $pass = $_SESSION['pass'];                   
+                    $pass = $_SESSION['pass'];
         			 $conn_string = "host=localhost dbname=arcadiav4 user= e" . strtolower($user) . " password=" .$pass;
-                     $this->dbconn4 = pg_connect($conn_string);                     
+                     $this->dbconn4 = pg_connect($conn_string);
                      return true;
         			break;
         		case 'profesor':
                     $user = $_SESSION['codigo'];
                     $pass = $_SESSION['pass'];
-        			$conn_string = "host=localhost dbname=arcadiav4 user= p" . strtolower($user) . " password=" .$pass;
+        			$conn_string = "host=localhost dbname=arcadiav5 user= p" . strtolower($user) . " password=" .$pass;
                      $this->dbconn4 = pg_connect($conn_string);
                      return true;
-        			break;        				
-        		
+        			break;
+
         		default:
         			$conn_string = "host=localhost dbname=arcadiav4 user='admin_arcadia' password='arcadia'";
                      $this->dbconn4 = pg_connect($conn_string);

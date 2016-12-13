@@ -12,7 +12,7 @@
         <meta name="keywords" content="" />
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/Arcadia/assets/css/bootstrap.css" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
         <script>
             function cambiarAtributo(){
@@ -22,7 +22,7 @@
                 var gradoField = document.getElementById("GradoE");
                 correoField.removeAttribute('disabled');
                 telefonoField.removeAttribute('disabled');
-                colegioField.removeAttribute('disabled');              
+                colegioField.removeAttribute('disabled');
                 document.getElementById("actualizarDatos").style.display = "block";
                 document.getElementById("actualizarDatos").style.float = "right";
               }
@@ -42,7 +42,7 @@
 
 
         <div id="header">
-            <div class="container">				
+            <div class="container">
                 <div id="logo">
                     <a href="#"><img src="/Arcadia/assets/imagenes/arcadialogo2.png" alt=""></a>
                 </div>
@@ -50,7 +50,7 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio</a></li>						
+                        <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio</a></li>
                         <li  class="active"><a href="#">Perfil</a></li>
                         <li><a href="/Arcadia/index.php/welcome/index">Salir</a></li>
                     </ul>
@@ -62,11 +62,11 @@
         <div id="banner">&nbsp;</div>
 
         <div id="featured">
-                     <form method="post" name="formActualizar">
+        <form method="post" name="formActualizar">
 
-            <div class="container">	
+            <div class="container">
                 <?php
-                if (isset($perfil)) {                   
+                if (isset($perfil)) {
                     echo "<h1 class='titulo_pagina'>" . $perfil['n_nickname'] . "</h1>";
                 }
                 ?>
@@ -78,7 +78,7 @@
                             echo "<img src='" . $perfil['o_imagen'] . "'' alt='imagenPerfil' class='img-responsive'>";
                         }
                         ?>
-                 
+
 
                     </div>
                     <div class="col-md-7">
@@ -96,7 +96,7 @@
                                     if (isset($perfil)) {
                                         echo "<input id='Nombre' name='Nombre' type='text' disabled='true' class='form-control' aria-describedby='basic-addon1' value='" . $perfil['n_nombre'] . "'>";
                                     }
-                                    ?>                                  
+                                    ?>
                                 </div>
                                 <br>
                                 <div class="input-group">
@@ -105,7 +105,7 @@
                                     if (isset($perfil)) {
                                         echo "<input id='Apellido' name='Apellido' type='text' disabled='true' class='form-control' aria-describedby='basic-addon1' value='" . $perfil['n_apellido'] . "'>";
                                     }
-                                    ?>                                   
+                                    ?>
                                 </div>
                                 <br>
                                 <div class="input-group">
@@ -114,7 +114,7 @@
                                     if (isset($perfil)) {
                                         echo "<input id='CorreoE' name='CorreoE' type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil['o_correo'] . "'>";
                                     }
-                                    ?>                                  
+                                    ?>
                                 </div>
                                 <br>
                                 <div class="input-group">
@@ -123,7 +123,7 @@
                                     if (isset($perfil)) {
                                         echo "<input id='TelefonoE' name='TelefonoE' type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil['o_num_tel'] . "'>";
                                     }
-                                    ?>                                    
+                                    ?>
                                 </div>
                                 <br>
                                 <div class="input-group">
@@ -132,8 +132,8 @@
                                     if (isset($perfil)) {
                                         echo "<input id='ColegioE' name='ColegioE' type='text' class='form-control' disabled='true' aria-describedby='basic-addon1' value='" . $perfil['n_colegio'] . "'>";
                                     }
-                                    ?>          
-                                </div>                              
+                                    ?>
+                                </div>
                                      <?php
                                     if (isset($perfil)) {
                                             echo "<input id='NicknameE' name='NicknameE' type='hidden' value='" . $perfil['n_nickname'] . "'>";
@@ -149,8 +149,8 @@
          </form>
         </div>
         <div id="marketing">
-            <h2 id="Creditos">Mis Reinos</h2>	
-            <br>	
+            <h2 id="Creditos">Mis Reinos</h2>
+            <br>
             <div class="container">
 
                 <?php
