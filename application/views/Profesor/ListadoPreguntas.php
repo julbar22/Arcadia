@@ -19,6 +19,8 @@
             var  $myCanvas;
 
               function showModalPregunta(){
+                   var idReino= <?php echo $_GET['k_reino']; ?>;                  
+                   document.getElementById("reinoIdModal").value = idReino;
                     $('#myModal').modal('show');
                 }    
 
@@ -59,11 +61,14 @@
                     <div id="templatemo_sidebar">
 
                         <div id="templatemo_menu">
-                            <ul>
-                                <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio<span class="glyphicon glyphicon-play" aria-hidden="true" style="float: right;" ></a></li>
-                                 <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil<span class="glyphicon glyphicon-play" aria-hidden="true" style="float: right;" ></a></li>                        
-                                 <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Reino<span class="glyphicon glyphicon-play" aria-hidden="true" style="float: right;" ></a></li>                             
-                                <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-play" aria-hidden="true" style="float: right;" ></a></li>
+                                                        <ul>
+                                <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>                               
+                                <?php
+                                  echo "<li><a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'>Reino<span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true' style='float: right;' ></a></li>";
+                                                                 
+                                ?>
+                                <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
                         </div> <!-- end of templatemo_menu -->                        
                        
@@ -99,7 +104,7 @@
             <div class="modal-dialog">
 
                 <div class="modal-content">
-                    <form action="#" method ="post">
+                    <form action="/Arcadia/index.php/pregunta/crearPregunta" method ="post">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h3 class="modal-title">Crea tu pregunta</h3>
@@ -110,48 +115,48 @@
                             <div>
                              <div>
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> Pregunta Abierta
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="abierta" checked> Pregunta Abierta
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Opcion Multiple
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="cerrada"> Opcion Multiple
                                 </label>  
                                 </div>  <br>
                                 <div>
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Pregunta</label>                   
-                                    <textarea class="form-control"></textarea>
+                                    <label for="pregunta" class="col-sm-2 control-label">Pregunta</label>                   
+                                    <textarea id="pregunta" name="pregunta"  class="form-control"></textarea>
                                 </div>    
                                 <div id="respuesta_abierta">
-                                <label for="inputEmail3" class="col-sm-2 control-label">Respuesta</label>
-                                <textarea class="form-control"></textarea>
+                                <label for="r1" class="col-sm-2 control-label">Respuesta</label>
+                                <textarea id="r1" name="r1" class="form-control"></textarea>
                                 </div>
                                 <div id="opcion_multiple" style="display:none;">
                                 <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input type="radio" name="RadioOptions" id="Radio1" value="option1">
                                     Opcion 1:
                                 </label>
-                                <textarea class="form-control"></textarea>
+                                <textarea id="option1" name="option1" class="form-control"></textarea>
                                 </div>
                                 <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input type="radio" name="RadioOptions" id="Radio2" value="option2">
                                     Opcion 2:
                                 </label>
-                                <textarea class="form-control"></textarea>
+                                <textarea id="option2" name="option2" class="form-control"></textarea>
                                 </div>
                                 <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input type="radio" name="RadioOptions" id="Radio3" value="option3">
                                     Opcion 3:
                                 </label>
-                                <textarea class="form-control"></textarea>
+                                <textarea id="option3" name="option3" class="form-control"></textarea>
                                 </div>
                                 <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input type="radio" name="RadioOptions" id="Radio4" value="option4">
                                     Opcion 4:
                                 </label>
-                                <textarea class="form-control"></textarea>
+                                <textarea id="option4" name="option4" class="form-control"></textarea>
                                 </div>
                                 </div>
                                                               

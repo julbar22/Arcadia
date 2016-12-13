@@ -136,23 +136,18 @@ class Dao_reino_model extends CI_Model {
         return $reinosAvatar;
     }
 
-    function obtenerReinoEspecifico($data){
-        //print_r($data['k_reino']);
-        $conn_string = "host=localhost dbname=arcadiav4 user=admin_arcadia password=arcadia";
-        $dbconn4 = pg_connect($conn_string) or die('No se ha podido conectar: ' . pg_last_error());
+    function obtenerReinoEspecifico($data,$rol){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion($rol);
+             
         $consult = "SELECT * FROM REINO WHERE K_REINO='".$data['k_reino']."'";
         $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
-
-        $datosReino = array();
-        $i = 0;
-        while ($line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC)) {
-            $datosReino[$i] = $line;
-            $i++;
-        }
-        //print_r($datosPerfil);
-        pg_close($dbconn4);
-        $b['perfilR'] = $datosReino;
-        return $b;
+        $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+        $reino = new Reino_model();
+        $reino = $reino->crearReino($line['k_reino'],$line['n_nombre'],"","",$line['f_creacion'],$line['n_historia'],"",$line['n_mision'],$line['n_vision'],"");
+                  
+        $configbd->cerrarSesion();   
+        return $reino;
     }
 
     function obtenerActividadesRegion($idReino){

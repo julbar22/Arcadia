@@ -101,8 +101,7 @@
                         </div>
                         <div id="body_modal" class="modal-body">
 
-                            <input type="hidden" value="" id="imagenModal">
-                            <input type="hidden" value="" name="imagenModalId" id="imagenModalId">
+                            <input type="hidden" value="" id="idReino">                            
                             <div class="form-group">
                                 <label for='nombre' >Nombre:</label>
                                 <input type='text' id='nombre' name="nombre" class="form-control"  required>
