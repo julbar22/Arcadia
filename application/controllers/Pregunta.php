@@ -13,7 +13,14 @@ class Pregunta extends CI_Controller {
     }
 
     function listadoPreguntasC(){
-        $this->load->view('Profesor/ListadoPreguntas');
+        $validar=$this->dao_cuestionario_model->verPreguntas($_GET['k_reino']);
+        $arrayPreguntas = array();
+        for($i=0;$i<count($validar);$i++){
+            $arrayPreguntas[$i]=$validar[$i]->crearArregloPregunta($validar[$i]);
+            $arrayPreguntas[$i]['respuestas']=$validar[$i]->ArregloRespuestas();
+        }
+        $response['preguntas']=$arrayPreguntas;
+        $this->load->view('Profesor/ListadoPreguntas',$response);
     }
 
     function crearPregunta(){
@@ -23,7 +30,7 @@ class Pregunta extends CI_Controller {
                   $newRespuesta = new Respuesta_model();
                   $newRespuesta = $newRespuesta->crearRespuesta("","",true,$_POST['r1']);
                   $newPregunta->setRespuesta($newRespuesta);
-                  $this->dao_cuestionario_model->crearPregunta($newPregunta);
+                  $this->dao_cuestionario_model->crearPregunta($newPregunta,$_POST['reinoIdModal']);
              
         }else{
                 $newPregunta = new Pregunta_model();                                                                                                                                                        
@@ -43,10 +50,21 @@ class Pregunta extends CI_Controller {
                 }
 
                 $newPregunta->setRespuesta($respuestas);
-                $this->dao_cuestionario_model->crearPregunta($newPregunta);                
-            
                 
-        }              
+                $this->dao_cuestionario_model->crearPregunta($newPregunta,$_POST['reinoIdModal']);         
+                
+                
+        } 
+        $response['reinoId']=$_POST['reinoIdModal'];      
+        $validar=$this->dao_cuestionario_model->verPreguntas($_POST['reinoIdModal']);
+        $arrayPreguntas = array();
+        for($i=0;$i<count($validar);$i++){
+            $arrayPreguntas[$i]=$validar[$i]->crearArregloPregunta($validar[$i]);
+            $arrayPreguntas[$i]['respuestas']=$validar[$i]->ArregloRespuestas();
+        }
+        $response['preguntas']=$arrayPreguntas;
+        $this->load->view('Profesor/ListadoPreguntas',$response);
+                   
     }
 }
 

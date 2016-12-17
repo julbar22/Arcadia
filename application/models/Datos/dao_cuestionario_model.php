@@ -12,11 +12,11 @@ class Dao_cuestionario_model extends CI_Model {
         parent::__construct();
     }
 
-    function crearPregunta(pregunta_model $pregunta) {        
+    function crearPregunta(Pregunta_model $pregunta,$idReino) {        
         $configbd = new configbd_model();
         $dbconn4=$configbd->abrirSesion('profesor');
-            $insert = "INSERT INTO pregunta (K_PREGUNTA,N_TIPO_PREGUNTA,O_PREGUNTA) 
-                       VALUES (nextval('sec_preguntas'),'" . $pregunta->getTipoPregunta(). "', '" . $pregunta->getPregunta(). "')";
+            $insert = "INSERT INTO pregunta (K_PREGUNTA,N_TIPO_PREGUNTA,O_PREGUNTA,K_REINO) 
+                       VALUES (nextval('sec_preguntas'),'" . $pregunta->getTipoPregunta(). "', '" . $pregunta->getPregunta(). "',".$idReino.")";
             $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
             $idpreguntaConsult ="SELECT currval('sec_preguntas') AS id";
             $resultConsultId =pg_query($idpreguntaConsult) or die('La consulta fallo: ' . pg_last_error());
@@ -43,6 +43,34 @@ class Dao_cuestionario_model extends CI_Model {
 
         $configbd->cerrarSesion();
         return true;
+    }
+
+    function verPreguntas($idReino){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+        $query = "SELECT * FROM PREGUNTA WHERE K_REINO=".$idReino;
+        $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
+        $preguntas = array();
+        $i = 0;
+        while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {            
+            $newPregunta = new Pregunta_model();
+            $newPregunta=$newPregunta->crearPregunta($line['k_pregunta'],$line['n_tipo_pregunta'],$line['o_pregunta']);
+            $queryRespuestas = "SELECT * FROM RESPUESTA WHERE K_PREGUNTA=".$line['k_pregunta'];
+            $resultRespuestas = pg_query($queryRespuestas) or die('La consulta fallo: ' . pg_last_error());
+            $respuestas = array();
+            $j= 0;
+            while ($lineRespuestas = pg_fetch_array($resultRespuestas, null, PGSQL_ASSOC)) { 
+                $newRespuesta= new Respuesta_model();
+                $newRespuesta=$newRespuesta->crearRespuesta($lineRespuestas['k_respuesta'],$lineRespuestas['k_pregunta'],$lineRespuestas['o_opcion'],$lineRespuestas['o_respuesta']);
+                $respuestas[$j]=$newRespuesta;
+                $j++;
+            }
+            $newPregunta->setRespuesta($respuestas);
+            $preguntas[$i] = $newPregunta;
+            $i++;
+        }
+        $configbd->cerrarSesion();
+        return $preguntas;
     }
 
 

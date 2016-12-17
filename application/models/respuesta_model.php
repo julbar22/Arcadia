@@ -39,7 +39,7 @@
 			return $newRespuesta;
     }
 
-		public function crearArregloRespuesta(Pregunta_model $newRespuesta){
+		public function crearArregloRespuesta(Respuesta_model $newRespuesta){
 			$respuesta['k_respuesta']= $newRespuesta->getIdRespuesta();
             $respuesta['k_pregunta']= $newRespuesta->getIdPregunta();
 			$respuesta['o_opcion']= $newRespuesta->getOpcionVerdadera();
