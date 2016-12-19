@@ -50,9 +50,15 @@
                 $('#myModalVer').modal('show');
             }
 
-            function eliminarPregunta(pregunta){
-                alert("entro");
-                 window.location.href='/Arcadia/index.php/pregunta/eliminarPregunta?k_reino=0&k_pregunta=0';
+            function eliminarPregunta(idPregunta){
+                alert(idPregunta);
+                 var idReino= <?php if(isset($reinoId)){
+                                          echo $reinoId;
+                                      }else{
+                                         echo $_GET['k_reino'];
+                                      }
+                ?>;
+                 window.location.href='/Arcadia/index.php/pregunta/eliminarPregunta?k_reino='+idReino+'&k_pregunta='+idPregunta;
             }
             
 
@@ -133,7 +139,7 @@
                                                 echo "<td>".$preguntas[$i]['n_tipo_pregunta']."</td>";
                                                 $aux=$i;
                                                 echo "<td><button class='btn btn-default' onclick='verDetalle(". json_encode($preguntas[$aux]) .")'><span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span></button></td>";
-                                                echo "<td><button class='btn btn-default' onclick='eliminarPregunta(". json_encode($preguntas[$aux]) .")'><span class='glyphicon glyphicon-remove-sign ' aria-hidden='true'></span></button></td>";
+                                                echo "<td><button class='btn btn-default' onclick='eliminarPregunta(". json_encode($preguntas[$aux]['k_pregunta']) .")'><span class='glyphicon glyphicon-remove-sign ' aria-hidden='true'></span></button></td>";
                                                 
                                                 echo "<tr>";      
                                                                                    

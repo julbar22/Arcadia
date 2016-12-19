@@ -73,6 +73,22 @@ class Dao_cuestionario_model extends CI_Model {
         return $preguntas;
     }
 
+    function borrarPregunta($idPregunta){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+
+        $queryRespuestas = "DELETE FROM RESPUESTA WHERE K_PREGUNTA=".$idPregunta;
+        $resultRespuestas = pg_query($queryRespuestas) or die('La consulta fallo: ' . pg_last_error());
+
+        $query = "DELETE FROM PREGUNTA WHERE K_PREGUNTA=".$idPregunta;
+        $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());               
+      
+        $configbd->cerrarSesion();
+
+        return true;
+
+    }
+
 
 }
 

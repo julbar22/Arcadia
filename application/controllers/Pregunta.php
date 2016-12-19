@@ -66,6 +66,32 @@ class Pregunta extends CI_Controller {
         $this->load->view('Profesor/ListadoPreguntas',$response);
                    
     }
+
+    function eliminarPregunta(){
+        $eliminacion=$this->dao_cuestionario_model->borrarPregunta($_GET['k_pregunta']);
+
+        $response['reinoId']=$_GET['k_reino'];      
+        $validar=$this->dao_cuestionario_model->verPreguntas($_GET['k_reino']);
+        $arrayPreguntas = array();
+        for($i=0;$i<count($validar);$i++){
+            $arrayPreguntas[$i]=$validar[$i]->crearArregloPregunta($validar[$i]);
+            $arrayPreguntas[$i]['respuestas']=$validar[$i]->ArregloRespuestas();
+        }
+        $response['preguntas']=$arrayPreguntas;
+        $this->load->view('Profesor/ListadoPreguntas',$response);
+
+    }
+
+    function getPreguntas($idReino){
+      
+        $validar=$this->dao_cuestionario_model->verPreguntas($idReino);
+        $arrayPreguntas = array();
+        for($i=0;$i<count($validar);$i++){
+            $arrayPreguntas[$i]=$validar[$i]->crearArregloPregunta($validar[$i]);            
+        }
+        $response['preguntas']=$arrayPreguntas;
+        return $response;
+    }
 }
 
 ?>
