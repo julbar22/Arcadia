@@ -30,21 +30,40 @@
 
             }
          $(document).ready(function(){
-
+             
+                     
              $( '#tipoActividad' ).change(function() {
                 tipoActividad( $('#tipoActividad').val());
-            });
-
-             $( '#cantidadDePreguntas' ).change(function() {
-             alert( $('#cantidadDePreguntas').val());
-            });
+            });          
+       
          });
+
+         function verPreguntas(preguntas){             
+             $('#preguntas').empty();
+                for(var i=0;i< $('#cantidadDePreguntas').val();i++){
+                    $('#preguntas').append(
+                    "<div class='form-group'>"+                                                           
+                        "<label for='pregunta"+(i+1)+"' class='col-sm-2 labelLeft'>Pregunta #"+(i+1)+":</label>"+
+                        "<div class='col-sm-10 labelLeft'>"+
+                        "<select id='pregunta"+(i+1)+"'  name='pregunta"+(i+1)+"' class='form-control' selected='selected'>"+
+                            "<option value='1'>2</option>"+
+                            "<option value='2'>3</option>"+
+                            "<option value='3'>4</option>"+
+                            "<option value='4'>5</option>"+
+                            "<option value='5'>6</option>" +                                      
+                        "</select><br> " +                      
+                        "</div>  "       +                                                  
+                    "</div>"
+                );
+                }
+         }
         
        </script> 
 
 
     </head>
     <body>
+    
         <div id="templatemo_body_wrapper">
             <div id="templatemo_wrapper">
 
@@ -64,6 +83,7 @@
 
                         <div id="templatemo_menu">
                             <ul>
+
                                 <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <li><a onclick="desplegar('Notas');">Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
 
@@ -128,29 +148,31 @@
                             </div>  
                              <div id="numeroPreguntas" class="form-group" style="display:none;" >
                                  <label for='tipoActividad'>Cantidad de Preguntas:</label>  
-                                <select id="cantidadDePreguntas"  name="cantidadDePreguntas" class="form-control" selected="selected">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">4</option>
-                                        <option value="4">5</option>
-                                        <option value="5">8</option>
-                                        <option value="10">10</option>
-                                </select>
+                                 <?php 
+                                    echo "<select id='cantidadDePreguntas'   onchange='verPreguntas(".json_encode($preguntas).")'  name='cantidadDePreguntas' class='form-control' selected='selected'>
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>4</option>
+                                        <option value='4'>5</option>
+                                        <option value='5'>8</option>
+                                        <option value='10'>10</option>                                        
+                                        </select>"
+                                 ?>
+                                
                             </div>
                             
                             <div id="preguntas" style="display:none;">
                                 <div class="form-group">                                                                     
                                     <label for='pregunta1' class="col-sm-2 labelLeft">Pregunta #1:</label>
                                     <div class="col-sm-10 labelLeft">
-                                    <select id="cantidadDeOpciones"  name="cantidadDePreguntas" class="form-control" selected="selected">
+                                    <select id="pregunta1"  name="pregunta1" class="form-control" selected="selected">
                                         <option value="1">2</option>
                                         <option value="2">3</option>
                                         <option value="3">4</option>
                                         <option value="4">5</option>
                                         <option value="5">6</option>                                       
                                    </select><br>                                   
-                                   </div>      
-                                   <!--pregunta cerrada -->                           
+                                   </div>                                                           
                                 </div>
                             </div>                	                                    		          
                        <!-- hasta aqui va el div de preguntas -->

@@ -55,7 +55,7 @@
                                         for($i=0; $i<count($regiones);$i++){
 
                                             echo "<h1>".$regiones[$i]['n_nombre']."</h1>";
-                                            echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad'><input  style='width: 100%;' class='btn btn-default' type='button' value='+' ></a></div>";
+                                            echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino=".$_GET['k_reino']."&k_region=".$regiones[$i]['k_region']."' ><input  style='width: 100%;' class='btn btn-default' type='button' value='+' ></a></div>";
                                             echo "<table class='table table-striped'>";
                                             echo "<thead><tr><th>#</th><th>Nombre</th><th>Intentos</th><th>Porcentaje</th></tr></thead>";                                           
                                             

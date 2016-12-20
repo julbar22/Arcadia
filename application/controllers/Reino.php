@@ -52,7 +52,7 @@ class Reino extends CI_Controller {
         $this->load->view('Estudiante/vincularReino', $response);
     }
 
-    function obtenerImagenReinosC() {  // esto son avatar reinos toca separarlo
+    function obtenerImagenReinosC() {
         
         $validar['reinos'] = $this->dao_reino_model->obtenerImagenReinos();
         $this->load->view('Profesor/crearReino', $validar);
@@ -62,7 +62,8 @@ class Reino extends CI_Controller {
         $data = array(
             'k_reino' => $_GET['k_reino'],
         );
-        $validar = $this->dao_reino_model->obtenerReinoEspecifico($data);// esto debe devolver objeto reino
+        $newReino = $this->dao_reino_model->obtenerReinoEspecifico($data,'profesor');// esto debe devolver objeto reino
+        $validar['perfilR'][0]= $newReino->crearArregloReino($newReino);
         $this->load->view('Profesor/PlantillaReinoProfesor', $validar);
     }
 
@@ -70,7 +71,8 @@ class Reino extends CI_Controller {
         $data = array(
             'k_reino' => $_GET['k_reino'],
         );
-        $validar = $this->dao_reino_model->obtenerReinoEspecifico($data); //objeto reino
+        $newReino = $this->dao_reino_model->obtenerReinoEspecifico($data,'estudiante'); //objeto reino
+        $validar['perfilR'][0]=$newReino->crearArregloReino($newReino);
         $this->load->view('Estudiante/PlantillaReinoEstudiante', $validar);
     }
 
