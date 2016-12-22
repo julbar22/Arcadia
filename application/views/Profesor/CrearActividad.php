@@ -40,6 +40,26 @@
             });
          });
 
+         function verPreguntas(preguntas){
+    $('#preguntas').empty();
+       for(var i=0;i< $('#cantidadDePreguntas').val();i++){
+           $('#preguntas').append(
+           "<div class='form-group'>"+
+               "<label for='pregunta"+(i+1)+"' class='col-sm-2 labelLeft'>Pregunta #"+(i+1)+":</label>"+
+               "<div class='col-sm-10 labelLeft'>"+
+               "<select id='pregunta"+(i+1)+"'  name='pregunta"+(i+1)+"' class='form-control' selected='selected'>"+
+                   "<option value='1'>2</option>"+
+                   "<option value='2'>3</option>"+
+                   "<option value='3'>4</option>"+
+                   "<option value='4'>5</option>"+
+                   "<option value='5'>6</option>" +
+               "</select><br> " +
+               "</div>  "       +
+           "</div>"
+       );
+       }
+}
+
        </script>
 
 
@@ -126,36 +146,39 @@
                                 <label for='fileActividad'>Archivo Adjunto:</label>
                                 <input type="file" id='fileActividad' name="fileActividad" required />
                             </div>
-                             <div id="numeroPreguntas" class="form-group" style="display:none;" >
-                                 <label for='tipoActividad'>Cantidad de Preguntas:</label>
-                                <select id="cantidadDePreguntas"  name="cantidadDePreguntas" class="form-control" selected="selected">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">4</option>
-                                        <option value="4">5</option>
-                                        <option value="5">8</option>
-                                        <option value="10">10</option>
-                                </select>
-                            </div>
+                            <div id="numeroPreguntas" class="form-group" style="display:none;" >
+                                <label for='tipoActividad'>Cantidad de Preguntas:</label>
+                                <?php
+                                   echo "<select id='cantidadDePreguntas'   onchange='verPreguntas(".json_encode($preguntas).")'  name='cantidadDePreguntas' class='form-control' selected='selected'>
+                                       <option value='1'>1</option>
+                                       <option value='2'>2</option>
+                                       <option value='3'>4</option>
+                                       <option value='4'>5</option>
+                                       <option value='5'>8</option>
+                                       <option value='10'>10</option>
+                                       </select>"
+                                ?>
 
-                            <div id="preguntas" style="display:none;">
-                                <div class="form-group">
-                                    <label for='pregunta1' class="col-sm-2 labelLeft">Pregunta #1:</label>
-                                    <div class="col-sm-10 labelLeft">
-                                    <select id="cantidadDeOpciones"  name="cantidadDePreguntas" class="form-control" selected="selected">
-                                        <option value="1">2</option>
-                                        <option value="2">3</option>
-                                        <option value="3">4</option>
-                                        <option value="4">5</option>
-                                        <option value="5">6</option>
-                                   </select><br>
-                                   </div>
-                                   <!--pregunta cerrada -->
-                                </div>
-                            </div>
+                           </div>
+
+                           <div id="preguntas" style="display:none;">
+                               <div class="form-group">
+                                   <label for='pregunta1' class="col-sm-2 labelLeft">Pregunta #1:</label>
+                                   <div class="col-sm-10 labelLeft">
+                                   <select id="pregunta1"  name="pregunta1" class="form-control" selected="selected">
+                                       <option value="1">2</option>
+                                       <option value="2">3</option>
+                                       <option value="3">4</option>
+                                       <option value="4">5</option>
+                                       <option value="5">6</option>
+                                  </select><br>
+                                  </div>
+                               </div>
+                           </div>
+ 
                        <!-- hasta aqui va el div de preguntas -->
                             <?php
-                                echo "<input type='submit' value='Enviar Datos' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/crearActividad?k_reino=".$_GET['k_reino']."&k_region".$_GET['k_region']."' \">";
+                                echo "<input type='submit' value='Enviar Datos' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/crearActividad?k_reino=".$_GET['k_reino']."&k_region=".$_GET['k_region']."' \">";
                             ?>
 
                     </form>
