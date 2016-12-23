@@ -41,23 +41,23 @@
          });
 
          function verPreguntas(preguntas){
-    $('#preguntas').empty();
-       for(var i=0;i< $('#cantidadDePreguntas').val();i++){
-           $('#preguntas').append(
-           "<div class='form-group'>"+
-               "<label for='pregunta"+(i+1)+"' class='col-sm-2 labelLeft'>Pregunta #"+(i+1)+":</label>"+
-               "<div class='col-sm-10 labelLeft'>"+
-               "<select id='pregunta"+(i+1)+"'  name='pregunta"+(i+1)+"' class='form-control' selected='selected'>"+
-                   "<option value='1'>2</option>"+
-                   "<option value='2'>3</option>"+
-                   "<option value='3'>4</option>"+
-                   "<option value='4'>5</option>"+
-                   "<option value='5'>6</option>" +
-               "</select><br> " +
-               "</div>  "       +
-           "</div>"
-       );
-       }
+            $('#preguntas').empty();
+            for(var i=0;i< $('#cantidadDePreguntas').val();i++){
+                $('#preguntas').append(
+                "<div class='form-group'>"+
+                    "<label for='pregunta"+(i+1)+"' class='col-sm-2 labelLeft'>Pregunta #"+(i+1)+":</label>"+
+                    "<div class='col-sm-10 labelLeft'>"+
+                    "<select id='pregunta"+(i+1)+"'  name='pregunta"+(i+1)+"' class='form-control' selected='selected'>"+                       
+                    "</select><br> " +
+                    "</div>"+
+                "</div>"
+                );
+            }
+            for(var i=0;i< $('#cantidadDePreguntas').val();i++){
+                for(var j=0;j<preguntas.length;j++){    
+                    $('#pregunta'+(i+1)).append("<option value="+preguntas[j].k_pregunta+">"+preguntas[j].o_pregunta +"</option>");                                 
+                }
+            }        
 }
 
        </script>
@@ -144,7 +144,7 @@
                             </div>
                             <div id="divFileActividad" class="form-group">
                                 <label for='fileActividad'>Archivo Adjunto:</label>
-                                <input type="file" id='fileActividad' name="fileActividad" required />
+                                <input type="file" id='fileActividad' name="fileActividad" />
                             </div>
                             <div id="numeroPreguntas" class="form-group" style="display:none;" >
                                 <label for='tipoActividad'>Cantidad de Preguntas:</label>
@@ -152,9 +152,9 @@
                                    echo "<select id='cantidadDePreguntas'   onchange='verPreguntas(".json_encode($preguntas).")'  name='cantidadDePreguntas' class='form-control' selected='selected'>
                                        <option value='1'>1</option>
                                        <option value='2'>2</option>
-                                       <option value='3'>4</option>
-                                       <option value='4'>5</option>
-                                       <option value='5'>8</option>
+                                       <option value='4'>4</option>
+                                       <option value='5'>5</option>
+                                       <option value='8'>8</option>
                                        <option value='10'>10</option>
                                        </select>"
                                 ?>
@@ -166,11 +166,12 @@
                                    <label for='pregunta1' class="col-sm-2 labelLeft">Pregunta #1:</label>
                                    <div class="col-sm-10 labelLeft">
                                    <select id="pregunta1"  name="pregunta1" class="form-control" selected="selected">
-                                       <option value="1">2</option>
-                                       <option value="2">3</option>
-                                       <option value="3">4</option>
-                                       <option value="4">5</option>
-                                       <option value="5">6</option>
+                                    <?php 
+                                    for($i=0;$i<count($preguntas);$i++){
+                                        echo "<option value='".$preguntas[$i]['k_pregunta']."' >".$preguntas[$i]['o_pregunta']."</option>";
+                                    }
+                                        
+                                    ?>                                       
                                   </select><br>
                                   </div>
                                </div>

@@ -23,26 +23,35 @@ class Actividad extends CI_Controller {
     }
 
     function crearActividad(){
-        $result = $this->updateFile();
-        if($result[0]==true){
+        if($_POST['tipoActividad']==1){
+            $result = $this->updateFile();
+            if($result[0]==true){
 
-          $newActividad = new Actividad_model;
-          $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"");
-          $idRegion = $_GET['k_region'];
-          $responseActividad = $this->dao_actividad_model->actividadReg($newActividad, $idRegion);
+            $newActividad = new Actividad_model;
+            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"");
+            $idRegion = $_GET['k_region'];
+            $responseActividad = $this->dao_actividad_model->actividadReg($newActividad, $idRegion);
 
-          $newAnexo = new Anexo_model;
-          $newAnexo = $newAnexo->crearAnexo(1,$responseActividad,$result[2],"Descripcion");
-          $responseAnexo = $this->dao_anexo_model->anexoReg($newAnexo);
-
-          $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
-          for($i=0;$i<count($listaRegiones);$i++){
-              $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
-          }
-
-          $this->load->view('Profesor/ActividadesPorRegion',$response);
+            $newAnexo = new Anexo_model;
+            $newAnexo = $newAnexo->crearAnexo(1,$responseActividad,$result[2],"Descripcion");
+            $responseAnexo = $this->dao_anexo_model->anexoReg($newAnexo);
         }
+        }else{
+            $newActividad = new Actividad_model;
+            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"");
+            $idRegion = $_GET['k_region'];
+            for($h=0;$h<$_POST['cantidadDePreguntas'];$h++){
+                $preguntas[$h]=$_POST['pregunta'.($h+1)];
+            }
+            
+            $responseActividad = $this->dao_actividad_model->actividadCuestionario($newActividad, $idRegion,$preguntas);
+        }
+            $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+            for($i=0;$i<count($listaRegiones);$i++){
+                $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+            }
 
+            $this->load->view('Profesor/ActividadesPorRegion',$response);
     }
 
     function updateFile(){
