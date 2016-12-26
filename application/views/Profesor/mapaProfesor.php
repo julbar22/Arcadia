@@ -18,7 +18,7 @@
         <script type="text/javascript" charset="utf-8" async defer>
             var  $myCanvas;
 
-              function miFuntionAlert(data){
+              function miFuntionAlert(data, idRegion){
                   
                     $('#modalform').empty();
                       $('#modalform').append("<table id='myTable' class='table table-striped'>");
@@ -35,6 +35,9 @@
                     }
                     $('#myTable').append("</tbody>");
                     $('#modalform').append("</table>");
+                    var idReino =<?php echo $_GET['k_reino']; ?>;
+                    $('#urlCrearActividad').attr("href", "/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino="+idReino+"&k_region="+idRegion);
+
                     $('#myModal').modal('show');
                 }
 
@@ -64,8 +67,8 @@
                     x: json[i]['posicionX'], y: json[i]['posicionY'],                    
                     width: 115, height: 48,
            
-                    click: function(layer) {                                    
-                    miFuntionAlert(json[i].actividades);
+                    click: function(layer) {                                  
+                    miFuntionAlert(json[i].actividades,json[i]['k_region']);
                  }
                 }).drawLayers();    
                 }
@@ -121,7 +124,7 @@
 
                         <div id="body_modal" class="modal-body">                  
                             <input type="hidden" value="" name="reinoIdModal" id="reinoIdModal">
-                            <div><a href="/Arcadia/index.php/Actividad/formularioCrearActividad"><input  style="width: 100%;" class="btn btn-default" type="button" value="+" ></a></div>	                        
+                            <div><a href="" id="urlCrearActividad"><input  style="width: 100%;" class="btn btn-default" type="button" value="+" ></a></div>	                        
                             <div id="modalform" class="form-group">
                                 
                             </div>	                                   	                                    		          
