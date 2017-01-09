@@ -10,7 +10,7 @@ class Reino extends CI_Controller {
         $this->load->model('Reino_model');
     }
 
-    function vincularReinoC() {        
+    function vincularReinoC() {
         $data = array(
             'k_reino' => $_POST['reinoIdModal'],
             'codigo' => $_POST['codigo'],
@@ -26,12 +26,12 @@ class Reino extends CI_Controller {
         }
     }
 
-    function crearReinoC() {  
-              
+    function crearReinoC() {
+
         $reino = new Reino_model();
         $reino=$reino->crearReino("",$_POST['nombre'],$_POST['codigo'],"","",$_POST['historia'],$_POST['imagenModalId'],$_POST['mision'],$_POST['vision'],"");
-            
-        $validar = $this->dao_reino_model->crearReino($reino);          
+
+        $validar = $this->dao_reino_model->crearReino($reino);
         if ($validar == true) {
             echo '<script>alert ("se ha registrado su Reino");</script>';
             $this->load->view('Profesor/inicioProfesor');
@@ -43,7 +43,7 @@ class Reino extends CI_Controller {
     }
 
     function obtenerReinosC() {
-       
+
         $reinos=$this->dao_reino_model->obtenerReinosCreados();
         for($i=0;$i<count($reinos);$i++){
             $validar[$i]=$reinos[$i]->crearArregloReino($reinos[$i]);
@@ -53,12 +53,12 @@ class Reino extends CI_Controller {
     }
 
     function obtenerImagenReinosC() {
-        
+
         $validar['reinos'] = $this->dao_reino_model->obtenerImagenReinos();
         $this->load->view('Profesor/crearReino', $validar);
     }
 
-    function obtenerReinoProfesorC() {       
+    function obtenerReinoProfesorC() {
         $data = array(
             'k_reino' => $_GET['k_reino'],
         );
@@ -67,7 +67,7 @@ class Reino extends CI_Controller {
         $this->load->view('Profesor/PlantillaReinoProfesor', $validar);
     }
 
-    function obtenerReinoEstudianteC() {       
+    function obtenerReinoEstudianteC() {
         $data = array(
             'k_reino' => $_GET['k_reino'],
         );
@@ -76,13 +76,13 @@ class Reino extends CI_Controller {
         $this->load->view('Estudiante/PlantillaReinoEstudiante', $validar);
     }
 
-    function mapaActividadesProfesorC(){	
+    function mapaActividadesProfesorC(){
         $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
         for($i=0;$i<count($listaRegiones);$i++){
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
 
-        $this->load->view('Profesor/mapaProfesor',$response);        
+        $this->load->view('Profesor/mapaProfesor',$response);
 	}
 
     function actividadesRegion(){
@@ -91,9 +91,30 @@ class Reino extends CI_Controller {
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
 
-        $this->load->view('Profesor/ActividadesPorRegion',$response);      
-        
+        $this->load->view('Profesor/ActividadesPorRegion',$response);
+
     }
+
+        function actividadesRegionEst(){
+
+            $listaRegiones = $this->dao_reino_model->obtenerActividadesRegionEst($_GET['k_reino']);
+            for($i=0;$i<count($listaRegiones);$i++){
+                $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+            }
+
+            $this->load->view('Estudiante/ActividadesPorRegion',$response);
+
+        }
+
+        function notasRegionEst(){
+
+            $listaRegiones = $this->dao_reino_model->obtenerActividadesYNotaRegionEst($_GET['k_reino']);
+            for($i=0;$i<count($listaRegiones);$i++){
+                $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+            }
+
+            $this->load->view('Estudiante/NotasPorRegion',$response);
+        }
 
 
 }

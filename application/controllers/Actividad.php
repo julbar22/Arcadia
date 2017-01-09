@@ -14,6 +14,41 @@ class Actividad extends CI_Controller {
         $this->load->model('anexo_model');
         $this->load->model('Datos/dao_reino_model');
         $this->load->model('Reino_model');
+        $this->load->model('actividad_resuelta_model');
+        $this->load->model('Datos/dao_soporte_model');
+        $this->load->model('Soporte_model');
+    }
+
+    function descargarDocumentoActividad() {
+        $path = "uploads/"; // change the path to fit your websites document structure
+
+        $dl_file = preg_replace("([^\w\s\d\-_~,;:\[\]\(\).]|[\.]{2,})", '', $_GET['download_file']); // simple file name validation
+        $fullPath = $path.$dl_file;
+
+        if ($fd = fopen ($fullPath, "r")) {
+            $fsize = filesize($fullPath);
+            $path_parts = pathinfo($fullPath);
+            $ext = strtolower($path_parts["extension"]);
+            switch ($ext) {
+                case "pdf":
+                header("Content-type: application/pdf");
+                header("Content-Disposition: attachment; filename=\"".$path_parts["basename"]."\""); // use 'attachment' to force a file download
+                break;
+                // add more headers for other content types here
+                default;
+                header("Content-type: application/octet-stream");
+                header("Content-Disposition: filename=\"".$path_parts["basename"]."\"");
+                break;
+            }
+            header("Content-length: $fsize");
+            header("Cache-control: private"); //use this to open files directly
+            while(!feof($fd)) {
+                $buffer = fread($fd, 2048);
+                echo $buffer;
+            }
+        }
+        fclose ($fd);
+        exit;
     }
 
     function formularioCrearActividad() {
@@ -43,7 +78,7 @@ class Actividad extends CI_Controller {
             for($h=0;$h<$_POST['cantidadDePreguntas'];$h++){
                 $preguntas[$h]=$_POST['pregunta'.($h+1)];
             }
-            
+
             $responseActividad = $this->dao_actividad_model->actividadCuestionario($newActividad, $idRegion,$preguntas);
         }
             $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
@@ -52,6 +87,39 @@ class Actividad extends CI_Controller {
             }
 
             $this->load->view('Profesor/ActividadesPorRegion',$response);
+    }
+
+    function crearActividadResuelta(){
+
+        $intentos = $_GET['n_intentos'];
+        $intentos = explode("/",$intentos);
+        if($this->dao_actividad_model->validarIntentosActividad($_SESSION['codigo'],$_GET['k_actividad']) < $intentos[1])
+        {
+            $result = $this->updateFile();
+
+            if($result[0]==true)
+            {
+
+                if($intentos[0]<$intentos[1])
+                {
+                    $newActividadResuelta = new Actividad_Resuelta_model;
+                    $newActividadResuelta = $newActividadResuelta->crearActividadResuelta(1,$_SESSION['codigo'],$_GET['k_actividad'],"",1,$_GET['n_intentos']+1);
+                    $responseActividadResuelta = $this->dao_actividad_model->actividadResueltaEst($newActividadResuelta);
+
+                    $newSoporte = new Soporte_model;
+                    $newSoporte = $newSoporte->crearSoporte(1,$responseActividadResuelta,$result[2],"Descripcion");
+                    $responseSoporte = $this->dao_soporte_model->soporteActEst($newSoporte);
+                }
+           }
+        }
+
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesRegionEst($_GET['k_reino']);
+
+        for($i=0;$i<count($listaRegiones);$i++){
+            $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+        }
+
+                        $this->load->view('Estudiante/ActividadesPorRegion',$response);
     }
 
     function updateFile(){

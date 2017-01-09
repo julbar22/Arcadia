@@ -44,6 +44,40 @@ class Dao_actividad_model extends CI_Model {
       return $line['id'];
     }
 
+
+        function actividadResueltaEst(Actividad_Resuelta_model $actividadResuelta)
+        {
+            error_reporting(0);
+
+            $configbd = new configbd_model();
+            $dbconn4= $configbd->abrirSesion('estudiante');
+            $insert = "INSERT INTO ACTIVIDAD_RESUELTA (k_actividad_resuelta,k_nickname,k_actividad,n_observacion,v_nota,q_intento)
+                             VALUES (nextval('sec_actividades_resueltas'),'".$actividadResuelta->getNickname()."',".$actividadResuelta->getActividad().",'".$actividadResuelta->getObservacion()."',".$actividadResuelta->getNota().",".$actividadResuelta->getIntento().")";
+            $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
+
+            $query = "SELECT k_actividad_resuelta FROM ACTIVIDAD_RESUELTA WHERE k_nickname = '".$actividadResuelta->getNickname()."' AND k_actividad = ".$actividadResuelta->getActividad()." AND q_intento = ".$actividadResuelta->getIntento();
+            $resultQuery = pg_query($query) or die('La consulta fallo: '. pg_last_error());
+            $line = pg_fetch_array( $resultQuery, null, PGSQL_ASSOC);
+            return $line['k_actividad_resuelta'];
+        }
+
+        function validarIntentosActividad($nickmane, $actividad)
+        {
+            error_reporting(0);
+            $configbd = new configbd_model();
+            $dbconn4= $configbd->abrirSesion('estudiante');
+
+            $query =  "SELECT K_ACTIVIDAD_RESUELTA FROM ACTIVIDAD_RESUELTA WHERE K_NICKNAME='" . $nickmane . "' AND K_ACTIVIDAD = ".$actividad;
+            $resultQuery = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
+            $i = 0;
+
+            while ($line = pg_fetch_array($resultQuery, null, PGSQL_ASSOC)) {
+                  $i++;
+            }
+
+            return $i;
+        }
+
     function actividadCuestionario(Actividad_model $actividad, $regionId,$preguntas){
       $configbd = new configbd_model();
       $dbconn4=$configbd->abrirSesion('profesor');
@@ -65,13 +99,13 @@ class Dao_actividad_model extends CI_Model {
       $resultConsultId =pg_query($idActividadConsult) or die('La consulta fallo: ' . pg_last_error());
       $line = pg_fetch_array( $resultConsultId, null, PGSQL_ASSOC);
  // se agregan las preguntas al cuestionario
-      
+
       for($j=0;$j<count($preguntas);$j++){
         $insertCuestionario ="INSERT INTO CUESTIONARIO (K_PREGUNTA,K_ACTIVIDAD)
                               VALUES (".$preguntas[$j].",".$line['id'].")";
         $resultInser = pg_query($insertCuestionario) or die('La consulta fallo: ' . pg_last_error());
       }
-      
+
 
       $configbd->cerrarSesion();
 

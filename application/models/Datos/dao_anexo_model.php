@@ -17,7 +17,6 @@ class Dao_anexo_model extends CI_Model {
     }
 
     function anexoReg(Anexo_model $anexo) {
-      echo ($anexo);
       error_reporting(0);
       $configbd = new configbd_model();
       $dbconn4=$configbd->abrirSesion('profesor');
