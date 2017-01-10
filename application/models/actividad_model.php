@@ -13,6 +13,7 @@
 		protected $preRequisito;
 		protected $tipoActividad;
 		protected $planDePremios;
+		protected $estado;
 
 		public function __construct(){		
 
@@ -38,6 +39,8 @@
 
 		public function getPlanDePremios(){return $this->planDePremios;}
 
+		public function getEstado(){return $this->estado;}
+
 		public function setActividad($Actividad){$this->idActividad = $Actividad;}
 
 		public function setNombre($nombre){$this->nombre = $nombre;}
@@ -58,7 +61,9 @@
 
 		public function setPlanDePremios($planDePremios){$this->planDePremios = $planDePremios;}
 
-		public function crearActividad($idActividad,$nombre,$descripcion,$intentos,$porcentaje,$fechaCreacion,$fechaVencimiento,$preRequisito,$tipoActividad,$planDePremios){
+		public function setEstado($estado){$this->estado= $estado;}
+
+		public function crearActividad($idActividad,$nombre,$descripcion,$intentos,$porcentaje,$fechaCreacion,$fechaVencimiento,$preRequisito,$tipoActividad,$planDePremios,$estado){
 			$newActividad= new Actividad_model();
 			$newActividad->setActividad($idActividad);
 			$newActividad->setNombre($nombre);
@@ -70,6 +75,7 @@
 			$newActividad->setPreRequisito($preRequisito);
 			$newActividad->setTipoActividad($tipoActividad);     
 			$newActividad->setPlanDePremios($planDePremios);  
+			$newActividad->setEstado($estado);
 
 			return $newActividad;
     }
@@ -85,6 +91,7 @@
 			$actividad['k_prerequisito']= $newActividad->getPreRequisito();     
 			$actividad['k_tipo_actividad']= $newActividad->getTipoActividad(); 
 			$actividad['k_plan_premios']= $newActividad->getPlanDePremios();
+			$actividad['i_estado']= $newActividad->getEstado();
 
 			return $actividad;
 		}	
