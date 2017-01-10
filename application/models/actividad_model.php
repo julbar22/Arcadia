@@ -16,6 +16,7 @@
 		protected $anexo;
 		protected $intetosRealizados;
 		protected $nota;
+		protected $estado;
 
 		public function __construct(){
 
@@ -47,6 +48,8 @@
 
 		public function getNota(){return $this->nota;}
 
+		public function getEstado(){return $this->estado;}
+
 		public function setActividad($Actividad){$this->idActividad = $Actividad;}
 
 		public function setNombre($nombre){$this->nombre = $nombre;}
@@ -73,7 +76,9 @@
 
 		public function setNota($nota){$this->nota = $nota;}
 
-		public function crearActividad($idActividad,$nombre,$descripcion,$intentos,$porcentaje,$fechaCreacion,$fechaVencimiento,$preRequisito,$tipoActividad,$planDePremios){
+		public function setEstado($estado){$this->estado= $estado;}
+
+		public function crearActividad($idActividad,$nombre,$descripcion,$intentos,$porcentaje,$fechaCreacion,$fechaVencimiento,$preRequisito,$tipoActividad,$planDePremios,$estado){
 			$newActividad= new Actividad_model();
 			$newActividad->setActividad($idActividad);
 			$newActividad->setNombre($nombre);
@@ -85,6 +90,7 @@
 			$newActividad->setPreRequisito($preRequisito);
 			$newActividad->setTipoActividad($tipoActividad);
 			$newActividad->setPlanDePremios($planDePremios);
+			$newActividad->setEstado($estado);
 
 			return $newActividad;
     }
@@ -103,6 +109,7 @@
 			$actividad['n_anexo']= $newActividad->getAnexo();
 			$actividad['n_intentos_realizados']= $newActividad->getIntentosRealizados();
 			$actividad['n_nota']= $newActividad->getNota();
+			$actividad['i_estado']= $newActividad->getEstado();
 
 			return $actividad;
 		}

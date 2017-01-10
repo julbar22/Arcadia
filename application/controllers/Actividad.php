@@ -63,7 +63,7 @@ class Actividad extends CI_Controller {
             if($result[0]==true){
 
             $newActividad = new Actividad_model;
-            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"");
+            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
             $idRegion = $_GET['k_region'];
             $responseActividad = $this->dao_actividad_model->actividadReg($newActividad, $idRegion);
 
@@ -73,7 +73,7 @@ class Actividad extends CI_Controller {
         }
         }else{
             $newActividad = new Actividad_model;
-            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"");
+            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
             $idRegion = $_GET['k_region'];
             for($h=0;$h<$_POST['cantidadDePreguntas'];$h++){
                 $preguntas[$h]=$_POST['pregunta'.($h+1)];
@@ -173,6 +173,19 @@ class Actividad extends CI_Controller {
         $file_name = $temp[0]."(1)".".".$temp[1];
         return $file_name;
     }
+
+     function actualizarActividad(){ 
+ 
+         $newActividad = new Actividad_model();
+         $newActividad=$newActividad->crearActividad($_POST['actividadIdModal'],"","","","","","","","","",$_POST['Estado']);        
+         $validar = $this->dao_actividad_model->actualizarActividad($newActividad);
+         $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+         for($i=0;$i<count($listaRegiones);$i++){
+             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+         }
+ 
+         $this->load->view('Profesor/ActividadesPorRegion',$response);
+     }
 }
 
 ?>

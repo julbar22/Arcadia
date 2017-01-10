@@ -164,7 +164,7 @@ class Dao_reino_model extends CI_Model {
             $actividad = new Actividad_model();
             for($h=0;$h<count($regiones);$h++){
                     if($line2['n_nombre_reg']==$regiones[$h]->getNombre()){
-                        $actividad=$actividad->crearActividad($line2['k_actividad'],$line2['n_nombre'],$line2['n_descripcion'],$line2['q_intentos'],$line2['v_porcentaje'],$line2['f_creacion'],$line2['f_vencimiento'],$line2['k_prerequisito'],$line2['k_tipo_actividad'],"");
+                        $actividad=$actividad->crearActividad($line2['k_actividad'],$line2['n_nombre'],$line2['n_descripcion'],$line2['q_intentos'],$line2['v_porcentaje'],$line2['f_creacion'],$line2['f_vencimiento'],$line2['k_prerequisito'],$line2['k_tipo_actividad'],"",$line2['i_estado']);
                         $regiones[$h]->agregarActividad($actividad);
                     }
             }
