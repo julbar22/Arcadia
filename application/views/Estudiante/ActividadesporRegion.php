@@ -61,36 +61,43 @@
                                             echo "<tbody>";
                                             for($j=0;$j<count($regiones[$i]['actividades']);$j++){
                                                                             //              print_r($regiones[$i]['actividades'][$j]['n_anexo']->getNombre());
+
                                                 echo "<tr>";
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['n_intentos_realizados']."/".$regiones[$i]['actividades'][$j]['q_intentos']."</td>";
+
                                                 if($regiones[$i]['actividades'][$j]['k_tipo_actividad']==1)
                                                 {
                                                   echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$regiones[$i]['actividades'][$j]['n_anexo']->getNombre()."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></td>";
-
-                                                      if($regiones[$i]['actividades'][$j]['n_intentos_realizados']<$regiones[$i]['actividades'][$j]['q_intentos'])
-                                                      {
-                                                          echo "<td>
-                                                                    <form method ='post' name = 'formEnviarRespuesta' class='form-horizontal' enctype='multipart/form-data'>
-                                                                        <div id='divFileActividad' class='form-group'>
-                                                                            <input type='file' id='fileActividad' name='fileActividad' class='btn btn-default' required />
-                                                                        </div>
-                                                                        <input type='submit' value='Enviar Respuesta' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/crearActividadResuelta?k_actividad=".$regiones[$i]['actividades'][$j]['k_actividad']."&n_intentos=".$regiones[$i]['actividades'][$j]['n_intentos_realizados']."/".$regiones[$i]['actividades'][$j]['q_intentos']."&k_reino=".$_GET['k_reino']."' \">
-                                                                    </form>
-                                                                </td>";
-                                                      }
-                                                      else {
-                                                          echo "<td>Maximo de Intetos Permitidos</td>";
-                                                      }
-                                                }else
-                                                {
+                                                    switch ($regiones[$i]['actividades'][$j]['i_estado'])
+                                                    {
+                                                            case "Activa":
+                                                                    if($regiones[$i]['actividades'][$j]['n_intentos_realizados']<$regiones[$i]['actividades'][$j]['q_intentos'])
+                                                                    {
+                                                                        echo "<td>
+                                                                                  <form method ='post' name = 'formEnviarRespuesta' class='form-horizontal' enctype='multipart/form-data'>
+                                                                                      <div id='divFileActividad' class='form-group'>
+                                                                                          <input type='file' id='fileActividad' name='fileActividad' class='btn btn-default' required />
+                                                                                      </div>
+                                                                                      <input type='submit' value='Enviar Respuesta' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/crearActividadResuelta?k_actividad=".$regiones[$i]['actividades'][$j]['k_actividad']."&n_intentos=".$regiones[$i]['actividades'][$j]['n_intentos_realizados']."/".$regiones[$i]['actividades'][$j]['q_intentos']."&k_reino=".$_GET['k_reino']."' \">
+                                                                                  </form>
+                                                                              </td>";
+                                                                    }
+                                                                    else {
+                                                                        echo "<td>Maximo de Intetos Permitidos</td>";
+                                                                    }
+                                                                    break;
+                                                            case "Inactiva":
+                                                                        echo "<td>Actvidad Inactiva</td>";
+                                                                    break;
+                                                            case "Cerrada":
+                                                                        echo "<td>Actvidad Cerrada</td>";
+                                                                     break;
+                                                    }
+                                                } else {
                                                    echo "<td></td>";
                                                    echo "<td><button onclick='myFunction()' class='btn btn-primary'>Resolver</button></td>";
                                                 }
-
-
-
-
                                                 echo "<tr>";
                                             }
                                             echo "</tbody>";

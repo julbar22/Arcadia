@@ -119,6 +119,69 @@ class Dao_actividad_model extends CI_Model {
       $configbd->cerrarSesion();
     }
 
+    function obtenerFechaVencimiento($k_actividad){
+        error_reporting(0);
+        $configbd = new configbd_model();
+        $dbconn4= $configbd->abrirSesion('estudiante');
+        $consulta = "Select f_vencimiento FROM ACTIVIDAD WHERE k_actividad = ".$k_actividad;
+        $resultConsulta = pg_query($consulta) or die('La consulta fallo: ' . pg_last_error());
+        $line = pg_fetch_array( $resultConsulta, null, PGSQL_ASSOC);
+        return $line['f_vencimiento'];
+    }
+
+    function validarFechaVencimientoActividad($fechaVencimiento, $k_actividad){
+        date_default_timezone_set('America/Bogota');
+        $date = date('m/d/Y h:i:s a', time());
+        $hoy = strtotime($date);
+        $fechaVen = strtotime($fechaVencimiento);
+        if ($hoy > $fechaVen){
+            $updateActividad = "Update ACTIVIDAD set I_ESTADO = 'Cerrada' WHERE K_ACTIVIDAD = ".$k_actividad.";";
+            $resultQuery = pg_query($updateActividad) or die('La consulta fallo: ' . pg_last_error());
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function obtenerRespuesta($idActividad, $nicknameEstudiante, $tipoActividad){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+        $consult = "SELECT * FROM actividad_resuelta WHERE k_nickname = '".$nicknameEstudiante."' AND k_actividad = ".$idActividad;
+        $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
+        $respueta['anexo'] = "No Resuelta";
+        $respueta['nota'] = 0.00;
+        $intento = -1;
+
+        while ($line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC)) {
+            if($line['k_actividad_resuelta'] > $intento){
+                $respueta['Id'] = $line['k_actividad_resuelta'];
+                $respueta['anexo'] = $line['k_actividad_resuelta'];
+                $respueta['nota'] = $line['v_nota'];
+                $intento = $line['k_actividad_resuelta'];
+            }
+        }
+
+        if ($tipoActividad == 1 AND $intento > -1){
+            $consult = "SELECT n_nombre FROM soporte WHERE k_actividad_resuelta = ".$respueta['anexo'];
+            $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
+            $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+            $respueta['anexo'] = $line['n_nombre'];
+        }
+        if ($tipoActividad == 0 AND $intento > -1){
+            $respueta['anexo'] = "Cuestionario";
+        }
+
+        return $respueta;
+    }
+
+    function actualizarNota($notas, $keys){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+        for($i = 0; $i < count($notas); $i = $i + 2){
+            $update = "UPDATE actividad_resuelta SET v_nota = ".$notas[$keys[$i]]." WHERE k_actividad_resuelta = ".$notas[$keys[$i+1]];
+            $resultUpdate = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+        }
+    }
 }
 
 ?>

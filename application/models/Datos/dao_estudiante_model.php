@@ -20,7 +20,7 @@ class Dao_estudiante_model extends CI_Model {
 
        $configbd = new configbd_model();
        $configbd->inicioSesion($valores['codigo'],$valores['pass']);
-       $dbconn4=$configbd->abrirSesion('estudiante');            
+       $dbconn4=$configbd->abrirSesion('estudiante');
 
         if ($dbconn4) {
             $configbd->cerrarSesion();
@@ -41,9 +41,9 @@ class Dao_estudiante_model extends CI_Model {
 
         if ($line['k_nickname'] == null) {
 
-            $insert = "INSERT INTO ESTUDIANTE (K_NICKNAME,N_NOMBRE,N_APELLIDO,O_CORREO,F_NACIMIENTO,O_SEXO,O_NUM_TEL,N_COLEGIO,O_GRADO_ACTUAL) 
+            $insert = "INSERT INTO ESTUDIANTE (K_NICKNAME,N_NOMBRE,N_APELLIDO,O_CORREO,F_NACIMIENTO,O_SEXO,O_NUM_TEL,N_COLEGIO,O_GRADO_ACTUAL)
                          VALUES ('" . $estudiante->getNickname() . "', '" . $estudiante->getNombre() . "','" . $estudiante->getApellido() . "', '" . $estudiante->getCorreo() . "',
-                         '" . $estudiante->getFechaNacimiento() . "', '" . $estudiante->getSexo() . "'," . $estudiante->getNumTel() . ",'" . $estudiante->getColegio() . "'," . $estudiante->getGradoActual() . " )";       
+                         '" . $estudiante->getFechaNacimiento() . "', '" . $estudiante->getSexo() . "'," . $estudiante->getNumTel() . ",'" . $estudiante->getColegio() . "'," . $estudiante->getGradoActual() . " )";
             $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
             $selectIdAvatar = "SELECT K_AVATAR FROM AVATAR WHERE O_IMAGEN= '" . $estudiante->getAvatar() . "'";
             $queryAvatar = pg_query($selectIdAvatar) or die('La consulta fallo: ' . pg_last_error());
@@ -78,22 +78,22 @@ class Dao_estudiante_model extends CI_Model {
     }
 
     function perfilEstudiante() {
-       
+
         $configbd = new configbd_model();
-        $dbconn4=$configbd->abrirSesion('estudiante');        
+        $dbconn4=$configbd->abrirSesion('estudiante');
 
         $consult2 = "SELECT * FROM VIEW_PERFIL_ESTUDIANTE WHERE K_NICKNAME='" . $_SESSION['codigo'] . "'";
         $resultConsult2 = pg_query($consult2) or die('La consulta fallo: ' . pg_last_error());
-        
+
         $line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC);
         $estudiante = new Estudiante_model();
         $estudiante=$estudiante->crearEstudiante($line['k_nickname'],$line['n_nombre'],$line['n_apellido'],$line['o_correo'],"","",$line['o_num_tel'],$line['n_colegio'],$line['o_grado_actual'],$line['o_imagen']);
-                
+
         $configbd->cerrarSesion();
         $a = new dao_reino_model();
-          
+
         $estudiante->setReino($a->obtenerReinosEstudiante());
-          
+
         return $estudiante;
     }
 
@@ -105,6 +105,20 @@ class Dao_estudiante_model extends CI_Model {
       $configbd->cerrarSesion();
     }
 
+
+    function obtenerListaEstudiantes($listaEstudiantes){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+        $consult = "SELECT * FROM ESTUDIANTE WHERE K_NICKNAME ='";
+        for($j = 0; $j < count($listaEstudiantes); $j++){
+            $resultConsult = pg_query($consult.$listaEstudiantes[$j]."'") or die('La consulta fallo: ' . pg_last_error());
+            $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+            $estudiante = new estudiante_model();
+            $estudiante=$estudiante->crearEstudiante($line['k_nickname'],$line['n_nombre'],$line['n_apellido'],$line['o_correo'],"","",$line['o_num_tel'],$line['n_colegio'],$line['o_grado_actual'],"");
+            $arregloEstudiantes[$j] = $estudiante;
+        }
+        return $arregloEstudiantes;
+    }
 }
 
 ?>

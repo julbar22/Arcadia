@@ -16,6 +16,7 @@ class Actividad extends CI_Controller {
         $this->load->model('Reino_model');
         $this->load->model('actividad_resuelta_model');
         $this->load->model('Datos/dao_soporte_model');
+        $this->load->model('Datos/dao_estudiante_model');
         $this->load->model('Soporte_model');
     }
 
@@ -90,10 +91,9 @@ class Actividad extends CI_Controller {
     }
 
     function crearActividadResuelta(){
-
         $intentos = $_GET['n_intentos'];
         $intentos = explode("/",$intentos);
-        if($this->dao_actividad_model->validarIntentosActividad($_SESSION['codigo'],$_GET['k_actividad']) < $intentos[1])
+        if($this->dao_actividad_model->validarIntentosActividad($_SESSION['codigo'],$_GET['k_actividad']) < $intentos[1] AND $this->verificarFechaActividad($_GET['k_actividad']) != 1)
         {
             $result = $this->updateFile();
 
@@ -119,7 +119,7 @@ class Actividad extends CI_Controller {
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
 
-                        $this->load->view('Estudiante/ActividadesPorRegion',$response);
+        $this->load->view('Estudiante/ActividadesPorRegion',$response);
     }
 
     function updateFile(){
@@ -131,7 +131,7 @@ class Actividad extends CI_Controller {
             $rename = true;
             while($rename)
             {
-                $rename = $this->validateDuplicateFile($file_name);
+                $rename = $this->validarArchivoDuplicado($file_name);
                 if ($rename)
                 {
                     $file_name = $this->renameFile($file_name);
@@ -151,7 +151,7 @@ class Actividad extends CI_Controller {
         return $result;
     }
 
-    function validateDuplicateFile($file_name)
+    function validarArchivoDuplicado($file_name)
     {
         $dir = "uploads/";
         $rename = false;
@@ -174,17 +174,50 @@ class Actividad extends CI_Controller {
         return $file_name;
     }
 
-     function actualizarActividad(){ 
- 
+     function actualizarActividad(){
+
          $newActividad = new Actividad_model();
-         $newActividad=$newActividad->crearActividad($_POST['actividadIdModal'],"","","","","","","","","",$_POST['Estado']);        
+         $newActividad=$newActividad->crearActividad($_POST['actividadIdModal'],"","","","","","","","","",$_POST['Estado']);
          $validar = $this->dao_actividad_model->actualizarActividad($newActividad);
          $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
          for($i=0;$i<count($listaRegiones);$i++){
              $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
          }
- 
+
          $this->load->view('Profesor/ActividadesPorRegion',$response);
+     }
+
+     function verificarFechaActividad($k_actividad){
+        $fechaVencimiento = $this->dao_actividad_model->obtenerFechaVencimiento($k_actividad);
+        return $this->dao_actividad_model->validarFechaVencimientoActividad($fechaVencimiento, $k_actividad);
+     }
+
+     function listaMisionesEstudiante(){
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+        for ($i = 0; $i < count($listaRegiones); $i++){
+            for($j = 0; $j < count($listaRegiones[$i]->getActividades()); $j++){
+              $idActividad = $listaRegiones[$i]->getActividades()[$j]->getActividad();
+              $tipoActividad = $listaRegiones[$i]->getActividades()[$j]->getTipoActividad();
+              $response['respuestas'][$i][$j] = $this->dao_actividad_model->obtenerRespuesta($idActividad, $_GET['k_estudiante'], $tipoActividad);
+            }
+        }
+        for($i=0;$i<count($listaRegiones);$i++){
+            $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+        }
+        $Estudiante[0]=$_GET['k_estudiante'];
+        $response['Estudiante'] = $this->dao_estudiante_model->obtenerListaEstudiantes($Estudiante);
+        $this->load->view('Profesor/MisionesEstudiante',$response);
+     }
+
+     function actualizarNota(){
+       $i = 0;
+       while ($key = current($_POST)) {
+            $keys[$i] = key($_POST);
+            $i++;
+            next($_POST);
+        }
+       $this->dao_actividad_model->actualizarNota($_POST, $keys);
+       $this->listaMisionesEstudiante();
      }
 }
 
