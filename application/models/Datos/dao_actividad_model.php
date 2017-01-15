@@ -177,10 +177,21 @@ class Dao_actividad_model extends CI_Model {
     function actualizarNota($notas, $keys){
         $configbd = new configbd_model();
         $dbconn4=$configbd->abrirSesion('profesor');
-        for($i = 0; $i < count($notas); $i = $i + 2){
+        for($i = 0; $i < count($keys); $i = $i + 2){
             $update = "UPDATE actividad_resuelta SET v_nota = ".$notas[$keys[$i]]." WHERE k_actividad_resuelta = ".$notas[$keys[$i+1]];
             $resultUpdate = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
         }
+    }
+
+    function obtenerActividad($idActividad){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+        $consult = "SELECT * FROM actividad WHERE k_actividad = ".$idActividad;
+        $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
+        $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+        $actividad = new actividad_model;
+        $actividad = $actividad->crearActividad($line['k_actividad'],$line['n_nombre'],$line['n_descripcion'],$line['q_intentos'],$line['v_porcentaje'],$line['f_creacion'],$line['f_vencimiento'],$line['k_prerequisito'],$line['k_tipo_actividad'],"",$line['i_estado']);
+        return $actividad;
     }
 }
 

@@ -15,14 +15,18 @@
             .form-control {padding:0px;}
         </style>
         <script>
-            function cambiarAtributo(x, y){
+            function cambiarAtributo(x){
 
-                var notaField = document.getElementById("Nota"+x+""+y);
-                var idField = document.getElementById("Id"+x+""+y);
-                var buttonField = document.getElementById("BNota"+x+""+y);
+                var notaField = document.getElementById("Nota"+x);
+                var idField = document.getElementById("Id"+x);
+                var buttonField = document.getElementById("BNota"+x);
+                var buttonEnviar = document.getElementById("btnSubmit");
                 notaField.removeAttribute('disabled');
                 idField.removeAttribute('disabled');
+                buttonEnviar.removeAttribute('disabled');
                 buttonField.setAttribute("disabled","disabled");
+              }
+              function actualizarDatos(){
               }
         </script>
     </head>
@@ -64,44 +68,32 @@
 
                         <div class="content_box">
                             <?php
-                                    if (isset($regiones)) {
+                                    if (isset($actividad)) {
 
-                                        echo "<h1>Misiones ".$Estudiante[0]->getNombre()." ".$Estudiante[0]->getApellido()."</h1>";
-
-                                        for($i=0; $i<count($regiones);$i++){
-
-                                            echo "<h1>Región: ".$regiones[$i]['n_nombre']."</h1>";
-                                            echo "<form method='post' name='formActualizar'>";
-                                            echo "<table class='table table-striped'>";
-                                            echo "<thead><tr><th>Nombre</th><th>F. Vencimiento</th><th>Respuesta</th><th>Nota</th><th>Calificar</th></tr></thead>";
-                                            echo "<tbody><form method='post' name='form'></form>";
-                                            for($j=0;$j<count($regiones[$i]['actividades']);$j++){
-                                                echo "<tr>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['f_vencimiento']."</td>";
-                                                if($regiones[$i]['actividades'][$j]['i_estado'] == "Activa"){
-                                                    echo "<td>Todavia no</td><td>es tiempo</td><td>de calificar</td>";
-                                                } else {
-                                                    if($respuestas[$i][$j]['anexo'] == "No Resuelta"){
-                                                        echo "<td>".$respuestas[$i][$j]['anexo']."</td>";
-                                                        echo "<td>"."</td>";
-                                                        echo "<td>"."</td>";
-                                                    } else {
-                                                        echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$respuestas[$i][$j]['anexo']."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></td>";
-                                                        echo "<input id='Bota".$i.$j."' name='Bota".$i.$j."' step='0.01' type='hidden' min='0' max='5' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i][$j]['nota']."'>";
-                                                        echo "<td><input id='Nota".$i.$j."' name='Nota".$i.$j."' step='0.01' type='number' min='0' max='5' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i][$j]['nota']."'>"."<input id='Id".$i.$j."' name='Id".$i.$j."' type='hidden' disabled='true' value='".$respuestas[$i][$j]['Id']."'>"."</td>";
-                                                        echo "<td><button value='Calificar' id='BNota".$i.$j."' type='button' class='btn btn-primary' onclick= 'cambiarAtributo(".$i.",".$j.")'>Calificar</button></td>";
-                                                    }
-                                                }
-                                                echo "</tr>";
+                                        echo "<h1>Misión ".$actividad->getNombre()."</h1>";
+                                        echo "<form method='post' name='formActualizar'>";
+                                        echo "<table class='table table-striped'>";
+                                        echo "<thead><tr><th>Nombre</th><th>Apellidos</th><th>Respuesta</th><th>Nota</th><th>Calificar</th></tr></thead>";
+                                        echo "<tbody><form method='post' name='form'></form>";
+                                        for($i=0; $i<count($estudiantes);$i++){
+                                            echo "<tr>";
+                                            echo "<td>".$estudiantes[$i]->getNombre()."</td>";
+                                            echo "<td>".$estudiantes[$i]->getApellido()."</td>";
+                                            if($respuestas[$i]['anexo'] == "No Resuelta"){
+                                                echo "<td>".$respuestas[$i]['anexo']."</td>";
+                                                echo "<td>"."</td>";
+                                                echo "<td>"."</td>";
+                                            } else {
+                                                echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$respuestas[$i]['anexo']."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></form></td>";
+                                                echo "<input id='Bota".$i."' name='Bota".$i."' step='0.01' type='hidden' min='0' max='5' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>";
+                                                echo "<td><input id='Nota".$i."' name='Nota".$i."' step='0.01' type='number' min='0' max='5' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>"."<input id='Id".$i."' name='Id".$i."' type='hidden' disabled='true' value='".$respuestas[$i]['Id']."'>"."</td>";
+                                                echo "<td><button value='Calificar' id='BNota".$i."' type='button' class='btn btn-primary' onclick= 'cambiarAtributo(".$i.")'>Calificar</button></td>";
                                             }
-                                            echo "</tbody>";
-                                            echo "</table>";
-                                            echo "<input type='submit' value='Actualizar Notas' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/actualizarNota?k_estudiante=".$_GET['k_estudiante']."&k_reino=".$_GET['k_reino']."' \">";
-                                            echo "</form>";
                                         }
-
-
+                                        echo "</tbody>";
+                                        echo "</table>";
+                                        echo "<input type='submit' value='Actualizar Notas' id='btnSubmit' name='btnSubmit' class='btn btn-success' disabled='true' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/actualizarActividadNota?k_actividad=".$_GET['k_actividad']."&k_reino=".$_GET['k_reino']."' \">";
+                                        echo "</form>";
                                     }
 
                             ?>

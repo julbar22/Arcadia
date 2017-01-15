@@ -76,7 +76,6 @@
                                 </li>
                                 <ul class="menuhijos" id="menuNotas">
                                     <li><a href=""><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Mostrar</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Actualizar</a></li>
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Estadistica</a></li>
                                 </ul>
                                 <li><a  onclick="desplegar('Actividades');"> Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
@@ -85,15 +84,9 @@
                                     if (isset($perfilR)) {
                                         echo "<li><a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Actividades Por Region</a></li>";
                                         echo "<li><a href='/Arcadia/index.php/reino/listaEstudiantesReino?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Actividades Por Estudiante</a></li>";
-                                    }
-                                    ?>
-                                    <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span >Actividades para Revisar</a></li>
-                                    <?php
-                                    if (isset($perfilR)) {
                                         echo "<li><a href='/Arcadia/index.php/pregunta/listadoPreguntasC?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Listado de Preguntas</a></li>";
                                     }
                                     ?>
-
                                 </ul>
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>

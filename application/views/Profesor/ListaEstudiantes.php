@@ -62,7 +62,7 @@
                                           echo "<td>".$listaEstudiantes[$i]->getNombre()."</td>";
                                           echo "<td>".$listaEstudiantes[$i]->getApellido()."</td>";
                                           echo "<td>
-                                                    <form method ='post' name = 'formEnviarRespuesta' class='form-horizontal' enctype='multipart/form-data'>
+                                                    <form method ='post' name = 'form' class='form-horizontal' enctype='multipart/form-data'>
                                                         <input type='submit' value='Ver Misiones' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/listaMisionesEstudiante?k_estudiante=".$listaEstudiantes[$i]->getNickname()."&k_reino=".$_GET['k_reino']."' \">
                                                     </form>
                                                 </td>";

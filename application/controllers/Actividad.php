@@ -219,6 +219,32 @@ class Actividad extends CI_Controller {
        $this->dao_actividad_model->actualizarNota($_POST, $keys);
        $this->listaMisionesEstudiante();
      }
+
+     function actualizarActividadNota(){
+       $i = 0;
+       while ($key = current($_POST)) {
+                if (key($_POST) != "btnSubmit"){
+                    $keys[$i] = key($_POST);
+                }
+                $i++;
+                next($_POST);
+        }
+       $this->dao_actividad_model->actualizarNota($_POST, $keys);
+       $this->listaEstudianteEnMision();
+     }
+
+     function listaEstudianteEnMision(){
+         $listaEstudiantes = $this->dao_reino_model->obtenerEstudiantesReino($_GET['k_reino']);
+         $listaEstudiantes = $this->dao_estudiante_model->obtenerListaEstudiantes($listaEstudiantes);
+         sort($listaEstudiantes);
+         $actividad = $this->dao_actividad_model->obtenerActividad($_GET['k_actividad']);
+         $response['actividad'] = $actividad;
+         $response['estudiantes'] = $listaEstudiantes;
+         for ($i = 0; $i < count($listaEstudiantes); $i++){
+               $response['respuestas'][$i] = $this->dao_actividad_model->obtenerRespuesta($_GET['k_actividad'], $listaEstudiantes[$i]->getNickname(), $actividad->getTipoActividad());
+         }
+        $this->load->view('Profesor/MisionRespuestas',$response);
+     }
 }
 
 ?>
