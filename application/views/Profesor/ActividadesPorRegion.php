@@ -16,23 +16,52 @@
         </style>
         <script type="text/javascript" charset="utf-8" async defer>
          var global;
+         var region;
             function checkboxEstado(idCheckbox){                
                 if(!$('#check'+idCheckbox.k_actividad).prop('checked')){
                     $('.checkActividad').removeAttr("disabled");
                     $('#buttonEditarActividad').attr("disabled",true);
+                    $('#buttonEliminarActividad').attr("disabled",true);
                 }else{
                  $('.checkActividad').attr("disabled",true);
                  $('#check'+idCheckbox.k_actividad).removeAttr("disabled");
                  $('#buttonEditarActividad').removeAttr("disabled");
+                 $('#buttonEliminarActividad').removeAttr("disabled");
                 }          
                 global=idCheckbox;    
             }
+
+            function checkboxRegion(idRegion){
+                if(!$('#check'+idRegion).prop('checked')){
+                    $('.checkRegion').removeAttr("disabled");
+                    $('#buttonAdicionarActividad').attr("disabled",true);                    
+                }else{
+                 $('.checkRegion').attr("disabled",true);
+                 $('#check'+idRegion).removeAttr("disabled");
+                 $('#buttonAdicionarActividad').removeAttr("disabled");                 
+                }          
+                region=idRegion;  
+            }
+
+            function adicionar(){
+                 var idReino = <?php echo $_GET['k_reino']; ?>;                 
+                 window.location.href = "/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino="+idReino+"&k_region="+region;
+                 
+            }
+
             function modalEditar(){
                     $('#actividadIdModal').val(global.k_actividad);
                     $('#nombreModal').val(global.n_nombre);
-                    $('#myModal').modal('show');
-                   
+                    $('#porcentaje').val(global.v_porcentaje*100);
+                    $('#fechaVencimiento').val(global.f_vencimiento);
+                    $('#Estado').val(global.i_estado);
+                    $('#myModal').modal('show');                   
             }
+            function eliminarActividad(){
+                 var idReino = <?php echo $_GET['k_reino']; ?>;                 
+                 window.location.href = "/Arcadia/index.php/actividad/eliminarActividadC?k_reino="+idReino+"&k_actividad="+global.k_actividad;
+            }
+
         </script>      
     </head>
     <body>
@@ -71,13 +100,23 @@
                     <div id="templatemo_content">
 
                         <div class="content_box">  
-                            <div><input  id='buttonEditarActividad' style='width: 100%;' onclick='modalEditar()' class='btn btn-default' type='button' value='Editar' disabled></div>     
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <input  id='buttonAdicionarActividad'  onclick='adicionar()' class='btn btn-default' type='button' value='Adicionar' disabled>                                                                 
+                            </div>
+                            <div class="btn-group" role="group">
+                                <input  id='buttonEditarActividad'  onclick='modalEditar()' class='btn btn-default' type='button' value='Editar' disabled>                                 
+                            </div>
+                            <div class="btn-group" role="group">
+                                <input  id='buttonEliminarActividad'  onclick='eliminarActividad()' class='btn btn-default' type='button' value='Eliminar' disabled>   
+                            </div>
+                            </div>
+                        
+                            
                             <?php
                                     if (isset($regiones)) { 
-                                        for($i=0; $i<count($regiones);$i++){
-
-                                            echo "<h1>".$regiones[$i]['n_nombre']."</h1>";
-                                            echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino=".$_GET['k_reino']."&k_region=".$regiones[$i]['k_region']."' ><input  style='width: 100%;' class='btn btn-default' type='button' value='+' ></a></div>";
+                                        for($i=0; $i<count($regiones);$i++){                                                                                             
+                                            echo "<h1> <input type='checkbox' class='checkRegion' id='check".$regiones[$i]['k_region']."' onclick='checkboxRegion(".json_encode($regiones[$i]['k_region']).")'>   ".$regiones[$i]['n_nombre']."</h1>";                                       
                                             echo "<table class='table table-striped'>";
                                             echo "<thead><tr><th>#</th><th>Nombre</th><th>Intentos</th><th>Porcentaje</th><th>Estado</th></tr></thead>";                                           
                                             
@@ -141,7 +180,15 @@
                             <div id="modalform" class="form-group">
                                 <div class="form-group">                                    
                                     <label for='nombreModal'>Nombre:</label>
-                                    <input type='text' id='nombreModal' value="" name="nombreModal" class="form-control" disabled>
+                                    <input type='text' id='nombreModal' value="" name="nombreModal" class="form-control" required>
+                                </div>                                
+                                <div class="form-group">
+                                    <label for='porcentaje'>Porcentaje:</label>
+                                    <input type="number" id='porcentaje' name="porcentaje" class="form-control" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for='fechaVencimiento'>Fecha de Vencimiento:</label>
+                                    <input type="date" id='fechaVencimiento' name="fechaVencimiento" class="form-control" required />
                                 </div>
                                 <div class="form-group">                                    
                                     <label for='Estado'>Estado:</label>

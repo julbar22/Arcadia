@@ -114,7 +114,15 @@ class Dao_actividad_model extends CI_Model {
    function actualizarActividad(Actividad_model $actividad){
       $configbd = new configbd_model();
       $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
-      $update = "UPDATE ACTIVIDAD SET I_ESTADO = '".$actividad->getEstado()."' WHERE k_actividad = " . $actividad->getActividad().";";
+      $update = "UPDATE ACTIVIDAD SET I_ESTADO = '".$actividad->getEstado()."',F_VENCIMIENTO=(to_date('" . $actividad->getFechaVencimiento() . "', 'YYYY-MM-DD')), N_NOMBRE='".$actividad->getNombre()."', V_PORCENTAJE=".(floatval($actividad->getPorcentaje())/100)." WHERE k_actividad = " . $actividad->getActividad().";";
+      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+      $configbd->cerrarSesion();
+    }
+
+    function eliminarActividad($idActividad){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
+      $update = "UPDATE ACTIVIDAD SET I_ESTADO = 'Eliminada' WHERE k_actividad = " .$idActividad.";";
       $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
       $configbd->cerrarSesion();
     }

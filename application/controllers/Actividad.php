@@ -177,14 +177,24 @@ class Actividad extends CI_Controller {
      function actualizarActividad(){ 
  
          $newActividad = new Actividad_model();
-         $newActividad=$newActividad->crearActividad($_POST['actividadIdModal'],"","","","","","","","","",$_POST['Estado']);        
+         $newActividad=$newActividad->crearActividad($_POST['actividadIdModal'],$_POST['nombreModal'],"","",$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"","","",$_POST['Estado']);        
          $validar = $this->dao_actividad_model->actualizarActividad($newActividad);
          $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
          for($i=0;$i<count($listaRegiones);$i++){
              $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
          }
  
+         $this->load->view('Profesor/ActividadesPorRegion',$response);          
+     }
+
+     function eliminarActividadC(){
+         $this->dao_actividad_model->eliminarActividad($_GET['k_actividad']);
+         $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+         for($i=0;$i<count($listaRegiones);$i++){
+             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+         } 
          $this->load->view('Profesor/ActividadesPorRegion',$response);
+
      }
 }
 
