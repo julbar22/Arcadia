@@ -14,25 +14,16 @@
         <style>
             .form-control {padding:0px;}
         </style>
-        <script type="text/javascript" charset="utf-8" async defer>
-         var global;
-            function checkboxEstado(idCheckbox){
-                if(!$('#check'+idCheckbox.k_actividad).prop('checked')){
-                    $('.checkActividad').removeAttr("disabled");
-                    $('#buttonEditarActividad').attr("disabled",true);
-                }else{
-                 $('.checkActividad').attr("disabled",true);
-                 $('#check'+idCheckbox.k_actividad).removeAttr("disabled");
-                 $('#buttonEditarActividad').removeAttr("disabled");
-                }
-                global=idCheckbox;
-            }
-            function modalEditar(){
-                    $('#actividadIdModal').val(global.k_actividad);
-                    $('#nombreModal').val(global.n_nombre);
-                    $('#myModal').modal('show');
+        <script>
+            function cambiarAtributo(x, y){
 
-            }
+                var notaField = document.getElementById("Nota"+x+""+y);
+                var idField = document.getElementById("Id"+x+""+y);
+                var buttonField = document.getElementById("BNota"+x+""+y);
+                notaField.removeAttribute('disabled');
+                idField.removeAttribute('disabled');
+                buttonField.setAttribute("disabled","disabled");
+              }
         </script>
     </head>
     <body>
@@ -70,39 +61,44 @@
 
                     <div id="templatemo_content">
 
+
                         <div class="content_box">
-                            <div><input  id='buttonEditarActividad' style='width: 100%;' onclick='modalEditar()' class='btn btn-default' type='button' value='Editar' disabled></div>
                             <?php
                                     if (isset($regiones)) {
+
+                                        echo "<h1>Misiones ".$Estudiante[0]->getNombre()." ".$Estudiante[0]->getApellido()."</h1>";
+
                                         for($i=0; $i<count($regiones);$i++){
 
-                                            echo "<h1>".$regiones[$i]['n_nombre']."</h1>";
-                                            echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino=".$_GET['k_reino']."&k_region=".$regiones[$i]['k_region']."' ><input  style='width: 100%;' class='btn btn-default' type='button' value='Añadir Actividad en ".$regiones[$i]['n_nombre']."' ></a></div>";
+                                            echo "<h1>Región: ".$regiones[$i]['n_nombre']."</h1>";
+                                            echo "<form method='post' name='formActualizar'>";
                                             echo "<table class='table table-striped'>";
-                                            echo "<thead><tr><th>#</th><th>Nombre</th><th>Intentos</th><th>Porcentaje</th><th>Estado</th><th>Calificar</th></tr></thead>";
-
-                                            echo "<tbody>";
+                                            echo "<thead><tr><th>Nombre</th><th>F. Vencimiento</th><th>Respuesta</th><th>Nota</th><th>Calificar</th></tr></thead>";
+                                            echo "<tbody><form method='post' name='form'></form>";
                                             for($j=0;$j<count($regiones[$i]['actividades']);$j++){
                                                 echo "<tr>";
-                                                echo "<td><input type='checkbox' class='checkActividad' id='check".$regiones[$i]['actividades'][$j]['k_actividad']."' onclick='checkboxEstado(".json_encode($regiones[$i]['actividades'][$j]).")'></td>" ;
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['q_intentos']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['v_porcentaje']." %</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['i_estado']."</td>";
-                                                if($regiones[$i]['actividades'][$j]['i_estado'] == "Cerrada"){
-                                                    echo "<td>
-                                                              <form method ='post' name = 'form' class='form-horizontal' enctype='multipart/form-data'>
-                                                                  <input type='submit' value='Respuestas' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/listaEstudianteEnMision?k_actividad=".$regiones[$i]['actividades'][$j]['k_actividad']."&k_reino=".$_GET['k_reino']."' \">
-                                                              </form>
-                                                          </td>";
+                                                echo "<td>".$regiones[$i]['actividades'][$j]['f_vencimiento']."</td>";
+                                                if($regiones[$i]['actividades'][$j]['i_estado'] == "Activa"){
+                                                    echo "<td>Todavia no</td><td>es tiempo</td><td>de calificar</td>";
                                                 } else {
-                                                    echo "<td>"."</td>";
+                                                    if($respuestas[$i][$j]['anexo'] == "No Resuelta"){
+                                                        echo "<td>".$respuestas[$i][$j]['anexo']."</td>";
+                                                        echo "<td>"."</td>";
+                                                        echo "<td>"."</td>";
+                                                    } else {
+                                                        echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$respuestas[$i][$j]['anexo']."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></td>";
+                                                        echo "<input id='Bota".$i.$j."' name='Bota".$i.$j."' type='hidden' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i][$j]['nota']."'>";
+                                                        echo "<td><input id='Nota".$i.$j."' name='Nota".$i.$j."' step='0.01' type='number' min='0' max='10' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i][$j]['nota']."'>"."<input id='Id".$i.$j."' name='Id".$i.$j."' type='hidden' disabled='true' value='".$respuestas[$i][$j]['Id']."'>"."</td>";
+                                                        echo "<td><button value='Calificar' id='BNota".$i.$j."' type='button' class='btn btn-primary' onclick= 'cambiarAtributo(".$i.",".$j.")'>Calificar</button></td>";
+                                                    }
                                                 }
-
-                                                echo "<tr>";
+                                                echo "</tr>";
                                             }
                                             echo "</tbody>";
                                             echo "</table>";
+                                            echo "<input type='submit' value='Actualizar Notas' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/actualizarNota?k_estudiante=".$_GET['k_estudiante']."&k_reino=".$_GET['k_reino']."' \">";
+                                            echo "</form>";
                                         }
 
 

@@ -24,18 +24,18 @@
             $(document).ready(function () {
                 var $myCanvas = $('#myCanvas');
 
-                $myCanvas.drawImage({                    
+                $myCanvas.drawImage({
                     source: '/Arcadia/assets/imagenes/mapaArcadia.jpg',
                     x: 0, y: 0,
                     fromCenter: false,
                     width: 600,
                     height: 500,
-                                     
+
                 });
 
                 $('#myCanvas').click(function(e){
                      window.location.href = "/Arcadia/index.php/reino/mapaActividadesProfesorC?k_reino="+$('#idReino').val();
-                  
+
             })
 
             });
@@ -68,32 +68,25 @@
                             <ul>
                                 <li><a onclick="desplegar('Inicio');">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                     <ul class="menuhijos" id="menuInicio">
-                                        <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio</a></li>
-                                        <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil</a></li>
+                                        <li><a href="/Arcadia/index.php/profesor/inicioProfesor"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Inicio</a></li>
+                                        <li><a href="/Arcadia/index.php/profesor/perfilProfesorC"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Perfil</a></li>
                                     </ul>
-                                <li><a onclick="desplegar('Notas');">Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
+                                <li><a onclick="desplegar('Notas');"> Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
 
                                 </li>
                                 <ul class="menuhijos" id="menuNotas">
-                                    <li><a href="">Mostrar</a></li>
-                                    <li><a href="#">Actualizar</a></li>
-                                    <li><a href="#">Estadistica</a></li>
+                                    <li><a href=""><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Mostrar</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Estadistica</a></li>
                                 </ul>
-                                <li><a  onclick="desplegar('Actividades');">Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a  onclick="desplegar('Actividades');"> Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <ul class="menuhijos" id="menuActividades">
                                     <?php
-                                    if (isset($perfilR)) { 
-                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$perfilR[0]['k_reino']. "' >Actividades Por Region</a></li>";                                      
-                                    }                                     
-                                    ?>                                    
-                                    <li><a href="#">Actividades Por Estudiante</a></li>
-                                    <li><a href="#">Actividades para Revisar</a></li>
-                                    <?php
-                                    if (isset($perfilR)) { 
-                                        echo "<li><a href='/Arcadia/index.php/pregunta/listadoPreguntasC?k_reino=".$perfilR[0]['k_reino']. "' >Listado de Preguntas</a></li>";                                      
-                                    }                                     
+                                    if (isset($perfilR)) {
+                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Actividades Por Region</a></li>";
+                                        echo "<li><a href='/Arcadia/index.php/reino/listaEstudiantesReino?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Actividades Por Estudiante</a></li>";
+                                        echo "<li><a href='/Arcadia/index.php/pregunta/listadoPreguntasC?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Listado de Preguntas</a></li>";
+                                    }
                                     ?>
-
                                 </ul>
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
@@ -129,12 +122,12 @@
 
                         <div class="content_box">
                           <?php
-                         if (isset($perfilR)) {                             
+                         if (isset($perfilR)) {
                               echo "<h2 class='titulo_pagina'>" . $perfilR[0]['n_nombre'] . "</h2>";
                               echo "<input name='idReino' id='idReino' type='hidden' value='".$perfilR[0]['k_reino']."'/>";
                           }
                           ?>
-                           
+
                             <canvas id="myCanvas" width="600" height="500" style="border:1px solid #000000;"></canvas>
                         </div>
 

@@ -1,12 +1,14 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once "../Arcadia/application/controllers/Region.php";
 
 class Reino extends CI_Controller {
 
     function __construct() {
         parent::__construct();
         $this->load->model('Datos/dao_reino_model');
+        $this->load->model('Datos/dao_estudiante_model');
         $this->load->model('Reino_model');
     }
 
@@ -95,28 +97,35 @@ class Reino extends CI_Controller {
 
     }
 
-        function actividadesRegionEst(){
 
-            $listaRegiones = $this->dao_reino_model->obtenerActividadesRegionEst($_GET['k_reino']);
-            for($i=0;$i<count($listaRegiones);$i++){
-                $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
-            }
+    function listaEstudiantesReino(){
+        $listaEstudiantes = $this->dao_reino_model->obtenerEstudiantesReino($_GET['k_reino']);
+        $listaEstudiantes = $this->dao_estudiante_model->obtenerListaEstudiantes($listaEstudiantes);
+        sort($listaEstudiantes);
+        $response['listaEstudiantes'] = $listaEstudiantes;
+        $this->load->view('Profesor/ListaEstudiantes',$response);
+    }
 
-            $this->load->view('Estudiante/ActividadesPorRegion',$response);
+    function actividadesRegionEst(){
 
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesRegionEst($_GET['k_reino']);
+        for($i=0;$i<count($listaRegiones);$i++){
+            $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
+        $this->load->view('Estudiante/ActividadesPorRegion',$response);
+    }
 
-        function notasRegionEst(){
-
-            $listaRegiones = $this->dao_reino_model->obtenerActividadesYNotaRegionEst($_GET['k_reino']);
-            for($i=0;$i<count($listaRegiones);$i++){
-                $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
-            }
-
-            $this->load->view('Estudiante/NotasPorRegion',$response);
+    function notasRegionEst(){
+        $acumulados = new Region();
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesYNotaRegionEst($_GET['k_reino']);
+        $notas = $acumulados->calcularNotaEnRegion($listaRegiones);
+        $response['porcentajes'] = $notas['porcentaje'];
+        $response['acumulados'] = $notas['nota'];
+        for($i=0;$i<count($listaRegiones);$i++){
+            $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
-
-
+        $this->load->view('Estudiante/NotasPorRegion',$response);
+    }
 }
 
 ?>

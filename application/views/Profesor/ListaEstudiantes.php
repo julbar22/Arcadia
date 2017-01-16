@@ -14,26 +14,6 @@
         <style>
             .form-control {padding:0px;}
         </style>
-        <script type="text/javascript" charset="utf-8" async defer>
-         var global;
-            function checkboxEstado(idCheckbox){
-                if(!$('#check'+idCheckbox.k_actividad).prop('checked')){
-                    $('.checkActividad').removeAttr("disabled");
-                    $('#buttonEditarActividad').attr("disabled",true);
-                }else{
-                 $('.checkActividad').attr("disabled",true);
-                 $('#check'+idCheckbox.k_actividad).removeAttr("disabled");
-                 $('#buttonEditarActividad').removeAttr("disabled");
-                }
-                global=idCheckbox;
-            }
-            function modalEditar(){
-                    $('#actividadIdModal').val(global.k_actividad);
-                    $('#nombreModal').val(global.n_nombre);
-                    $('#myModal').modal('show');
-
-            }
-        </script>
     </head>
     <body>
 
@@ -71,42 +51,26 @@
                     <div id="templatemo_content">
 
                         <div class="content_box">
-                            <div><input  id='buttonEditarActividad' style='width: 100%;' onclick='modalEditar()' class='btn btn-default' type='button' value='Editar' disabled></div>
                             <?php
-                                    if (isset($regiones)) {
-                                        for($i=0; $i<count($regiones);$i++){
-
-                                            echo "<h1>".$regiones[$i]['n_nombre']."</h1>";
-                                            echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino=".$_GET['k_reino']."&k_region=".$regiones[$i]['k_region']."' ><input  style='width: 100%;' class='btn btn-default' type='button' value='Añadir Actividad en ".$regiones[$i]['n_nombre']."' ></a></div>";
-                                            echo "<table class='table table-striped'>";
-                                            echo "<thead><tr><th>#</th><th>Nombre</th><th>Intentos</th><th>Porcentaje</th><th>Estado</th><th>Calificar</th></tr></thead>";
-
-                                            echo "<tbody>";
-                                            for($j=0;$j<count($regiones[$i]['actividades']);$j++){
-                                                echo "<tr>";
-                                                echo "<td><input type='checkbox' class='checkActividad' id='check".$regiones[$i]['actividades'][$j]['k_actividad']."' onclick='checkboxEstado(".json_encode($regiones[$i]['actividades'][$j]).")'></td>" ;
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['q_intentos']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['v_porcentaje']." %</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['i_estado']."</td>";
-                                                if($regiones[$i]['actividades'][$j]['i_estado'] == "Cerrada"){
-                                                    echo "<td>
-                                                              <form method ='post' name = 'form' class='form-horizontal' enctype='multipart/form-data'>
-                                                                  <input type='submit' value='Respuestas' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/listaEstudianteEnMision?k_actividad=".$regiones[$i]['actividades'][$j]['k_actividad']."&k_reino=".$_GET['k_reino']."' \">
-                                                              </form>
-                                                          </td>";
-                                                } else {
-                                                    echo "<td>"."</td>";
-                                                }
-
-                                                echo "<tr>";
-                                            }
-                                            echo "</tbody>";
-                                            echo "</table>";
-                                        }
-
-
+                                    echo "<h1>Lista Estudiantes</h1>";
+                                    echo "<table class='table table-striped'>";
+                                    echo "<thead><tr><th>Nombres</th><th>Apellidos</th><th>Ver Misiones</th></tr></thead>";
+                                    echo "<tbody>";
+                                    if (isset($listaEstudiantes)) {
+                                        for($i=0; $i<count($listaEstudiantes);$i++){
+                                          echo "<tr>";
+                                          echo "<td>".$listaEstudiantes[$i]->getNombre()."</td>";
+                                          echo "<td>".$listaEstudiantes[$i]->getApellido()."</td>";
+                                          echo "<td>
+                                                    <form method ='post' name = 'form' class='form-horizontal' enctype='multipart/form-data'>
+                                                        <input type='submit' value='Ver Misiones' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/listaMisionesEstudiante?k_estudiante=".$listaEstudiantes[$i]->getNickname()."&k_reino=".$_GET['k_reino']."' \">
+                                                    </form>
+                                                </td>";
+                                          echo "<tr>";
+                                      }
                                     }
+                                    echo "</tbody>";
+                                    echo "</table>";
 
                             ?>
 

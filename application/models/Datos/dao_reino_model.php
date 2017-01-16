@@ -5,12 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once "../Arcadia/application/models/reino_model.php";
 require_once '../Arcadia/application/models/Datos/dao_region_model.php';
+require_once '../Arcadia/application/models/Datos/dao_actividad_model.php';
 require_once "../Arcadia/application/models/anexo_model.php";
 
 class Dao_reino_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('Datos/dao_actividad_model');
     }
 
     function crearReino(Reino_model $reino) {
@@ -181,11 +183,8 @@ class Dao_reino_model extends CI_Model {
         $regiones=$region->obtenerRegionesPorReinoEst($idReino);
         $configbd = new configbd_model();
         $dbconn4=$configbd->abrirSesion('estudiante');
-
         $consultView ="SELECT * FROM VIEW_ACTIVIDADES_REINO WHERE K_REINO=".$idReino;
-
         $resultView =  pg_query($consultView) or die('La consulta fallo: ' . pg_last_error());
-
         $consultAnexos = "SELECT * FROM anexo WHERE K_ACTIVIDAD=";
         $consultRespuestas = "SELECT * FROM actividad_resuelta WHERE K_ACTIVIDAD=";
 
@@ -193,7 +192,12 @@ class Dao_reino_model extends CI_Model {
             $actividad = new Actividad_model();
             for($h=0;$h<count($regiones);$h++){
                     if($line2['n_nombre_reg']==$regiones[$h]->getNombre()){
-                        $actividad=$actividad->crearActividad($line2['k_actividad'],$line2['n_nombre'],$line2['n_descripcion'],$line2['q_intentos'],$line2['v_porcentaje'],$line2['f_creacion'],$line2['f_vencimiento'],$line2['k_prerequisito'],$line2['k_tipo_actividad'],"");
+
+                        if ($line2['i_estado'] == "Activa" AND $this->dao_actividad_model->validarFechaVencimientoActividad($line2['f_vencimiento'], $line2['k_actividad'])){
+                                $line2['i_estado'] = "Cerrada";
+                        }
+
+                        $actividad=$actividad->crearActividad($line2['k_actividad'],$line2['n_nombre'],$line2['n_descripcion'],$line2['q_intentos'],$line2['v_porcentaje'],$line2['f_creacion'],$line2['f_vencimiento'],$line2['k_prerequisito'],$line2['k_tipo_actividad'],"",$line2['i_estado']);
                         $regiones[$h]->agregarActividad($actividad);
 
                         if ($line2['k_tipo_actividad']==1){
@@ -216,10 +220,8 @@ class Dao_reino_model extends CI_Model {
               }
             }
         }
-
         $configbd->cerrarSesion();
         return $regiones;
-
     }
 
     function obtenerActividadesYNotaRegionEst($idReino){
@@ -228,48 +230,54 @@ class Dao_reino_model extends CI_Model {
         $regiones=$region->obtenerRegionesPorReinoEst($idReino);
         $configbd = new configbd_model();
         $dbconn4=$configbd->abrirSesion('estudiante');
-
         $consultView ="SELECT * FROM VIEW_ACTIVIDADES_REINO WHERE K_REINO=".$idReino;
-
         $resultView =  pg_query($consultView) or die('La consulta fallo: ' . pg_last_error());
-
         $consultAnexos = "SELECT * FROM anexo WHERE K_ACTIVIDAD=";
         $consultRespuestas = "SELECT * FROM actividad_resuelta WHERE K_ACTIVIDAD=";
 
         while ($line2 = pg_fetch_array($resultView, null, PGSQL_ASSOC)) {
             $actividad = new Actividad_model();
             for($h=0;$h<count($regiones);$h++){
-                    if($line2['n_nombre_reg']==$regiones[$h]->getNombre()){
-                        $actividad=$actividad->crearActividad($line2['k_actividad'],$line2['n_nombre'],$line2['n_descripcion'],$line2['q_intentos'],$line2['v_porcentaje'],$line2['f_creacion'],$line2['f_vencimiento'],$line2['k_prerequisito'],$line2['k_tipo_actividad'],"");
-                        $regiones[$h]->agregarActividad($actividad);
-
+                if($line2['n_nombre_reg']==$regiones[$h]->getNombre()){
+                    $actividad=$actividad->crearActividad($line2['k_actividad'],$line2['n_nombre'],$line2['n_descripcion'],$line2['q_intentos'],$line2['v_porcentaje'],$line2['f_creacion'],$line2['f_vencimiento'],$line2['k_prerequisito'],$line2['k_tipo_actividad'],"",$line2['i_estado']);
+                    $regiones[$h]->agregarActividad($actividad);
                         if ($line2['k_tipo_actividad']==1){
                             $resultQuery = pg_query($consultAnexos.$line2['k_actividad']) or die('La consulta fallo: ' . pg_last_error());
                             $line3 = pg_fetch_array($resultQuery, null, PGSQL_ASSOC);
-
                             $anexo = new Anexo_model();
                             $anexo = $anexo->crearAnexo($line3['k_anexo'],$line3['k_actividad'],$line3['n_nombre'],$line3['n_description']);
                             $actividad->agregarAnexo($anexo);
                         }
-                          $query = $consultRespuestas.$line2['k_actividad']." AND K_NICKNAME='".$_SESSION['codigo']."'";
-                          $resultQuery = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
-
-                          $nota = 0.00;
-                          $intentos = 0;
-                          while ($line4 = pg_fetch_array($resultQuery, null, PGSQL_ASSOC))
-                          {
-                              $nota = $line4['v_nota'];
-                              $intentos++;
-                          }
-                          $actividad->setIntentosRealizados($intentos);
-                          $actividad->setNota($nota);
-              }
-            }
+                        $query = $consultRespuestas.$line2['k_actividad']." AND K_NICKNAME='".$_SESSION['codigo']."'";
+                        $resultQuery = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
+                        $nota = 0.00;
+                        $intentos = 0;
+                        while ($line4 = pg_fetch_array($resultQuery, null, PGSQL_ASSOC))
+                        {
+                            $nota = $line4['v_nota'];
+                            $intentos++;
+                        }
+                        $actividad->setIntentosRealizados($intentos);
+                        $actividad->setNota($nota);
+                    }
+                }
         }
-
         $configbd->cerrarSesion();
         return $regiones;
+    }
 
+    function obtenerEstudiantesReino($idReino){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor');
+        $consulta = "SELECT * FROM CALIFICACION_EN_REINO WHERE K_REINO =".$idReino;
+        $resultQuery = pg_query($consulta) or die('La consulta fallo: ' . pg_last_error());
+        $counter = 0;
+        while ($line4 = pg_fetch_array($resultQuery, null, PGSQL_ASSOC))
+        {
+            $estudiantes[$counter] = $line4['k_nickname'];
+            $counter++;
+        }
+        return $estudiantes;
     }
 
 }
