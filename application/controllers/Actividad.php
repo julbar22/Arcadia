@@ -64,7 +64,7 @@ class Actividad extends CI_Controller {
             if($result[0]==true){
 
             $newActividad = new Actividad_model;
-            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
+            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'] / 100,"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
             $idRegion = $_GET['k_region'];
             $responseActividad = $this->dao_actividad_model->actividadReg($newActividad, $idRegion);
 
@@ -103,7 +103,7 @@ class Actividad extends CI_Controller {
                 if($intentos[0]<$intentos[1])
                 {
                     $newActividadResuelta = new Actividad_Resuelta_model;
-                    $newActividadResuelta = $newActividadResuelta->crearActividadResuelta(1,$_SESSION['codigo'],$_GET['k_actividad'],"",1,$_GET['n_intentos']+1);
+                    $newActividadResuelta = $newActividadResuelta->crearActividadResuelta(1,$_SESSION['codigo'],$_GET['k_actividad'],"",0,$_GET['n_intentos']+1);
                     $responseActividadResuelta = $this->dao_actividad_model->actividadResueltaEst($newActividadResuelta);
 
                     $newSoporte = new Soporte_model;

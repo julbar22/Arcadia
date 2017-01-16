@@ -54,6 +54,7 @@
                                         for($i=0; $i<count($regiones);$i++){
 
                                             echo "<h1>"."Región: ".$regiones[$i]['n_nombre']."</h1>";
+                                            echo "<h3> Tu rendimiento en el ".$porcentajes[$i]." % de misiones es de ".$acumulados[$i]."</h1>";
                                             echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino=".$_GET['k_reino']."&k_region=".$regiones[$i]['k_region']."' ></a></div>";
                                             echo "<table class='table table-striped'>";
                                             echo "<thead><tr><th>Nombre</th><th>Nota</th><th>Porcentaje</th></tr></thead>";
@@ -100,4 +101,3 @@
 
     </body>
 </html>
-z

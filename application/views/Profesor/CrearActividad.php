@@ -47,17 +47,17 @@
                 "<div class='form-group'>"+
                     "<label for='pregunta"+(i+1)+"' class='col-sm-2 labelLeft'>Pregunta #"+(i+1)+":</label>"+
                     "<div class='col-sm-10 labelLeft'>"+
-                    "<select id='pregunta"+(i+1)+"'  name='pregunta"+(i+1)+"' class='form-control' selected='selected'>"+                       
+                    "<select id='pregunta"+(i+1)+"'  name='pregunta"+(i+1)+"' class='form-control' selected='selected'>"+
                     "</select><br> " +
                     "</div>"+
                 "</div>"
                 );
             }
             for(var i=0;i< $('#cantidadDePreguntas').val();i++){
-                for(var j=0;j<preguntas.length;j++){    
-                    $('#pregunta'+(i+1)).append("<option value="+preguntas[j].k_pregunta+">"+preguntas[j].o_pregunta +"</option>");                                 
+                for(var j=0;j<preguntas.length;j++){
+                    $('#pregunta'+(i+1)).append("<option value="+preguntas[j].k_pregunta+">"+preguntas[j].o_pregunta +"</option>");
                 }
-            }        
+            }
 }
 
        </script>
@@ -85,9 +85,9 @@
                         <div id="templatemo_menu">
                             <ul>
                                 <li><a href="/Arcadia/index.php/profesor/inicioProfesor">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
-                                <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>                               
+                                <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <?php
-                                  echo "<li><a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'>Reino<span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true' style='float: right;' ></a></li>";                                                   
+                                  echo "<li><a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'>Reino<span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true' style='float: right;' ></a></li>";
                                 ?>
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
@@ -119,7 +119,7 @@
                             </div>
                             <div class="form-group">
                                 <label for='porcentaje'>Porcentaje:</label>
-                                <input type="number" id='porcentaje' name="porcentaje" class="form-control" required />
+                                <input type="number" min='0' max='100' id='porcentaje' name="porcentaje" class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <label for='fechaVencimiento'>Fecha de Vencimiento:</label>
@@ -156,17 +156,17 @@
                                    <label for='pregunta1' class="col-sm-2 labelLeft">Pregunta #1:</label>
                                    <div class="col-sm-10 labelLeft">
                                    <select id="pregunta1"  name="pregunta1" class="form-control" selected="selected">
-                                    <?php 
+                                    <?php
                                     for($i=0;$i<count($preguntas);$i++){
                                         echo "<option value='".$preguntas[$i]['k_pregunta']."' >".$preguntas[$i]['o_pregunta']."</option>";
                                     }
-                                        
-                                    ?>                                       
+
+                                    ?>
                                   </select><br>
                                   </div>
                                </div>
                            </div>
- 
+
                        <!-- hasta aqui va el div de preguntas -->
                             <?php
                                 echo "<input type='submit' value='Enviar Datos' id='btnSubmit' class='btn btn-success' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/crearActividad?k_reino=".$_GET['k_reino']."&k_region=".$_GET['k_region']."' \">";

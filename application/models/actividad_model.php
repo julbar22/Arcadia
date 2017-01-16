@@ -84,7 +84,7 @@
 			$newActividad->setNombre($nombre);
 			$newActividad->setDescripcion($descripcion);
 			$newActividad->setIntentos($intentos);
-			$newActividad->setPorcentaje($porcentaje);
+			$newActividad->setPorcentaje($porcentaje * 100);
 			$newActividad->setFechaCreacion($fechaCreacion);
 			$newActividad->setFechaVencimiento($fechaVencimiento);
 			$newActividad->setPreRequisito($preRequisito);

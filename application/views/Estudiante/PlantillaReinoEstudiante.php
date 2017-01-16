@@ -71,7 +71,6 @@
                                       echo "<li><a href='/Arcadia/index.php/reino/notasRegionEst?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Mostrar</a></a></li>";
                                   }
                                   ?>
-                                    <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Actualizar</a></li>
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Estadistica</a></li>
                                 </ul>
                                 <li><a  onclick="desplegar('Actividades');">Mis Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>

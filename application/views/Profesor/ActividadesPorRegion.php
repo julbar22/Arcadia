@@ -87,7 +87,7 @@
                                                 echo "<td><input type='checkbox' class='checkActividad' id='check".$regiones[$i]['actividades'][$j]['k_actividad']."' onclick='checkboxEstado(".json_encode($regiones[$i]['actividades'][$j]).")'></td>" ;
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['q_intentos']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['v_porcentaje']."</td>";
+                                                echo "<td>".$regiones[$i]['actividades'][$j]['v_porcentaje']." %</td>";
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['i_estado']."</td>";
                                                 if($regiones[$i]['actividades'][$j]['i_estado'] == "Cerrada"){
                                                     echo "<td>

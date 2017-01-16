@@ -1,6 +1,7 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once "../Arcadia/application/controllers/Region.php";
 
 class Reino extends CI_Controller {
 
@@ -115,7 +116,11 @@ class Reino extends CI_Controller {
     }
 
     function notasRegionEst(){
+        $acumulados = new Region();
         $listaRegiones = $this->dao_reino_model->obtenerActividadesYNotaRegionEst($_GET['k_reino']);
+        $notas = $acumulados->calcularNotaEnRegion($listaRegiones);
+        $response['porcentajes'] = $notas['porcentaje'];
+        $response['acumulados'] = $notas['nota'];
         for($i=0;$i<count($listaRegiones);$i++){
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
