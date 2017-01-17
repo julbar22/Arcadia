@@ -37,8 +37,6 @@ class Region extends CI_Controller {
         }
         return $response;
     }
-
-
 }
 
 ?>

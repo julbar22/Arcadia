@@ -92,22 +92,23 @@ class Reino extends CI_Controller {
         for($i=0;$i<count($listaRegiones);$i++){
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
-
         $this->load->view('Profesor/ActividadesPorRegion',$response);
-
     }
 
-
     function listaEstudiantesReino(){
-        $listaEstudiantes = $this->dao_reino_model->obtenerEstudiantesReino($_GET['k_reino']);
-        $listaEstudiantes = $this->dao_estudiante_model->obtenerListaEstudiantes($listaEstudiantes);
+        $listaEstudiantes = $this->obtenerEstudiantesReino();
         sort($listaEstudiantes);
         $response['listaEstudiantes'] = $listaEstudiantes;
         $this->load->view('Profesor/ListaEstudiantes',$response);
     }
 
-    function actividadesRegionEst(){
+    function obtenerEstudiantesReino(){
+      $listaEstudiantes = $this->dao_reino_model->obtenerEstudiantesReino($_GET['k_reino']);
+      $listaEstudiantes = $this->dao_estudiante_model->obtenerListaEstudiantes($listaEstudiantes);
+      return $listaEstudiantes;
+    }
 
+    function actividadesRegionEst(){
         $listaRegiones = $this->dao_reino_model->obtenerActividadesRegionEst($_GET['k_reino']);
         for($i=0;$i<count($listaRegiones);$i++){
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
@@ -125,6 +126,23 @@ class Reino extends CI_Controller {
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
         $this->load->view('Estudiante/NotasPorRegion',$response);
+    }
+
+    function notasTotales(){
+      $response['estudiantes'] = $this->obtenerEstudiantesReino();
+      $response['regiones'] = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+      sort($response['estudiantes']);
+      for($i = 0; $i < count($response['regiones']); $i++){
+        for($j = 0; $j < count($response['estudiantes']); $j++){
+          $response['totales'][$i][$j] = 0;
+          for($k = 0; $k < count($response['regiones'][$i]->getActividades()); $k++){
+            $respuesta = $this->dao_actividad_model->obtenerRespuesta($response['regiones'][$i]->getActividades()[$k]->getActividad(), $response['estudiantes'][$j]->getNickname(), $response['regiones'][$i]->getActividades()[$k]->getTipoActividad());
+            $response['notas'][$i][$j][$k] = $respuesta['nota'];
+            $response['totales'][$i][$j] += $response['regiones'][$i]->getActividades()[$k]->getPorcentaje()*$respuesta['nota']/100;
+          }
+        }
+      }
+      $this->load->view('Profesor/Notas',$response);
     }
 }
 

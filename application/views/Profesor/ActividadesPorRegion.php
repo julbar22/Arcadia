@@ -1,10 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Web Design - Free CSS Templates</title>
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
 
         <link href="/Arcadia/assets/css/templatemo_style.css" rel="stylesheet" type="text/css" />
         <link href="/Arcadia/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -60,7 +56,6 @@
                                 <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <?php
                                   echo "<li><a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'>Reino<span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true' style='float: right;' ></a></li>";
-
                                 ?>
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
@@ -104,12 +99,8 @@
                                             echo "</tbody>";
                                             echo "</table>";
                                         }
-
-
                                     }
-
                             ?>
-
                         </div>
 
                     </div>
