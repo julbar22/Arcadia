@@ -3,26 +3,27 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once "../Arcadia/application/controllers/Actividad.php";
 require_once "../Arcadia/application/controllers/Pregunta.php";
+require_once "../Arcadia/application/controllers/Region.php";
+require_once "../Arcadia/application/controllers/Reino.php";
 
 class Actividad extends CI_Controller {
 
     function __construct() {
         parent::__construct();
         $this->load->model('Datos/dao_actividad_model');
-        $this->load->model('actividad_model');
         $this->load->model('Datos/dao_anexo_model');
-        $this->load->model('anexo_model');
         $this->load->model('Datos/dao_reino_model');
-        $this->load->model('Reino_model');
-        $this->load->model('actividad_resuelta_model');
         $this->load->model('Datos/dao_soporte_model');
         $this->load->model('Datos/dao_estudiante_model');
+        $this->load->model('actividad_model');
+        $this->load->model('anexo_model');
+        $this->load->model('Reino_model');
+        $this->load->model('actividad_resuelta_model');
         $this->load->model('Soporte_model');
     }
 
     function descargarDocumentoActividad() {
         $path = "uploads/"; // change the path to fit your websites document structure
-
         $dl_file = preg_replace("([^\w\s\d\-_~,;:\[\]\(\).]|[\.]{2,})", '', $_GET['download_file']); // simple file name validation
         $fullPath = $path.$dl_file;
 
@@ -35,7 +36,6 @@ class Actividad extends CI_Controller {
                 header("Content-type: application/pdf");
                 header("Content-Disposition: attachment; filename=\"".$path_parts["basename"]."\""); // use 'attachment' to force a file download
                 break;
-                // add more headers for other content types here
                 default;
                 header("Content-type: application/octet-stream");
                 header("Content-Disposition: filename=\"".$path_parts["basename"]."\"");
@@ -62,16 +62,14 @@ class Actividad extends CI_Controller {
         if($_POST['tipoActividad']==1){
             $result = $this->updateFile();
             if($result[0]==true){
-
-            $newActividad = new Actividad_model;
-            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'] / 100,"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
-            $idRegion = $_GET['k_region'];
-            $responseActividad = $this->dao_actividad_model->actividadReg($newActividad, $idRegion);
-
-            $newAnexo = new Anexo_model;
-            $newAnexo = $newAnexo->crearAnexo(1,$responseActividad,$result[2],"Descripcion");
-            $responseAnexo = $this->dao_anexo_model->anexoReg($newAnexo);
-        }
+                $newActividad = new Actividad_model;
+                $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'] / 100,"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
+                $idRegion = $_GET['k_region'];
+                $responseActividad = $this->dao_actividad_model->actividadReg($newActividad, $idRegion);
+                $newAnexo = new Anexo_model;
+                $newAnexo = $newAnexo->crearAnexo(1,$responseActividad,$result[2],"Descripcion");
+                $responseAnexo = $this->dao_anexo_model->insertarAnexoActividad($newAnexo);
+            }
         }else{
             $newActividad = new Actividad_model;
             $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
@@ -79,61 +77,47 @@ class Actividad extends CI_Controller {
             for($h=0;$h<$_POST['cantidadDePreguntas'];$h++){
                 $preguntas[$h]=$_POST['pregunta'.($h+1)];
             }
-
             $responseActividad = $this->dao_actividad_model->actividadCuestionario($newActividad, $idRegion,$preguntas);
         }
-            $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
-            for($i=0;$i<count($listaRegiones);$i++){
-                $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
-            }
-
-            $this->load->view('Profesor/ActividadesPorRegion',$response);
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesReino($_GET['k_reino'], "profesor");
+        for($i=0;$i<count($listaRegiones);$i++){
+            $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+        }
+        $this->load->view('Profesor/ActividadesPorRegion',$response);
     }
 
     function crearActividadResuelta(){
         $intentos = $_GET['n_intentos'];
         $intentos = explode("/",$intentos);
-        if($this->dao_actividad_model->validarIntentosActividad($_SESSION['codigo'],$_GET['k_actividad']) < $intentos[1] AND $this->verificarFechaActividad($_GET['k_actividad']) != 1)
-        {
+        if($this->dao_actividad_model->validarIntentosActividad($_SESSION['codigo'],$_GET['k_actividad']) < $intentos[1] AND $this->verificarFechaActividad($_GET['k_actividad']) != 1){
             $result = $this->updateFile();
-
-            if($result[0]==true)
-            {
-
-                if($intentos[0]<$intentos[1])
-                {
+            if($result[0]==true){
+                if($intentos[0]<$intentos[1]){
+                    $newSoporte = new Soporte_model;
                     $newActividadResuelta = new Actividad_Resuelta_model;
                     $newActividadResuelta = $newActividadResuelta->crearActividadResuelta(1,$_SESSION['codigo'],$_GET['k_actividad'],"",0,$_GET['n_intentos']+1);
-                    $responseActividadResuelta = $this->dao_actividad_model->actividadResueltaEst($newActividadResuelta);
-
-                    $newSoporte = new Soporte_model;
+                    $responseActividadResuelta = $this->dao_actividad_model->InsertarActividadResueltaEst($newActividadResuelta);
                     $newSoporte = $newSoporte->crearSoporte(1,$responseActividadResuelta,$result[2],"Descripcion");
-                    $responseSoporte = $this->dao_soporte_model->soporteActEst($newSoporte);
+                    $responseSoporte = $this->dao_soporte_model->insertarSoporteActividad($newSoporte);
                 }
-           }
+            }
         }
-
-        $listaRegiones = $this->dao_reino_model->obtenerActividadesRegionEst($_GET['k_reino']);
-
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesReino($_GET['k_reino'], "estudiante");
         for($i=0;$i<count($listaRegiones);$i++){
             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
         }
-
         $this->load->view('Estudiante/ActividadesPorRegion',$response);
     }
 
     function updateFile(){
         $result;
-        if(!$_FILES['fileActividad']['error'])
-        {
+        if(!$_FILES['fileActividad']['error']){
             $file_name = $_FILES['fileActividad']['name'];
             $file_type = $_FILES['fileActividad']['type'];
             $rename = true;
-            while($rename)
-            {
+            while($rename){
                 $rename = $this->validarArchivoDuplicado($file_name);
-                if ($rename)
-                {
+                if ($rename){
                     $file_name = $this->renameFile($file_name);
                 }
             }
@@ -142,25 +126,22 @@ class Actividad extends CI_Controller {
             $result[1] =  'Congratulations!  Your file was accepted.';
             $result[2] =  $file_name;
             $result[3] =  $file_type;
-        }
-        else
-        {
+        } else {
             $result[0] =  false;
             $result[1] = 'Ooops!  Your upload triggered the following error:  '.$_FILES['fileActividad']['error'];
         }
         return $result;
     }
 
-    function validarArchivoDuplicado($file_name)
-    {
+    function validarArchivoDuplicado($file_name){
         $dir = "uploads/";
         $rename = false;
         if (is_dir($dir)){
               if ($dh = opendir($dir)){
                   while (($file = readdir($dh)) !== false){
-                    if ($file_name == $file){
-                        $rename = true;
-                    }
+                      if ($file_name == $file){
+                          $rename = true;
+                      }
               }
               closedir($dh);
             }
@@ -175,11 +156,10 @@ class Actividad extends CI_Controller {
     }
 
      function actualizarActividad(){
-
          $newActividad = new Actividad_model();
          $newActividad=$newActividad->crearActividad($_POST['actividadIdModal'],"","","","","","","","","",$_POST['Estado']);
          $validar = $this->dao_actividad_model->actualizarActividad($newActividad);
-         $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+         $listaRegiones = $this->dao_reino_model->obtenerActividadesReino($_GET['k_reino'], "profesor");
          for($i=0;$i<count($listaRegiones);$i++){
              $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
          }
@@ -193,7 +173,7 @@ class Actividad extends CI_Controller {
      }
 
      function listaMisionesEstudiante(){
-        $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+        $listaRegiones = $this->dao_reino_model->obtenerActividadesReino($_GET['k_reino'], "profesor");
         for ($i = 0; $i < count($listaRegiones); $i++){
             for($j = 0; $j < count($listaRegiones[$i]->getActividades()); $j++){
               $idActividad = $listaRegiones[$i]->getActividades()[$j]->getActividad();
@@ -210,27 +190,33 @@ class Actividad extends CI_Controller {
      }
 
      function actualizarNota(){
-       $i = 0;
-       while ($key = current($_POST)) {
-            $keys[$i] = key($_POST);
-            $i++;
-            next($_POST);
-        }
-       $this->dao_actividad_model->actualizarNota($_POST, $keys);
-       $this->listaMisionesEstudiante();
+         $i = 0;
+         $reino = new Reino();
+         while ($key = current($_POST)) {
+              $keys[$i] = key($_POST);
+              $i++;
+              next($_POST);
+          }
+         $this->dao_actividad_model->actualizarNota($_POST, $keys);
+         $estudiante[0] = $_GET['k_estudiante'];
+         $this->calcularNotaReino($estudiante, $_GET['k_reino']);
+         $reino->listaEstudiantesReino();
      }
 
      function actualizarActividadNota(){
-       $i = 0;
-       while ($key = current($_POST)) {
-                if (key($_POST) != "btnSubmit"){
-                    $keys[$i] = key($_POST);
-                }
-                $i++;
-                next($_POST);
-        }
-       $this->dao_actividad_model->actualizarNota($_POST, $keys);
-       $this->listaEstudianteEnMision();
+         $i = 0;
+         $reino = new Reino();
+         while ($key = current($_POST)) {
+            if (key($_POST) != "btnSubmit"){
+                $keys[$i] = key($_POST);
+            }
+            $i++;
+            next($_POST);
+         }
+         $this->dao_actividad_model->actualizarNota($_POST, $keys);
+         $listaEstudiantes = $this->dao_reino_model->obtenerEstudiantesReino($_GET['k_reino']);
+         $this->calcularNotaReino($listaEstudiantes, $_GET['k_reino']);
+         $reino->actividadesRegion();
      }
 
      function listaEstudianteEnMision(){
@@ -244,6 +230,54 @@ class Actividad extends CI_Controller {
                $response['respuestas'][$i] = $this->dao_actividad_model->obtenerRespuesta($_GET['k_actividad'], $listaEstudiantes[$i]->getNickname(), $actividad->getTipoActividad());
          }
         $this->load->view('Profesor/MisionRespuestas',$response);
+     }
+
+     function promedioActividad($notas){
+         $promedio = 0;
+         for($i = 0; $i < count($notas); $i++){
+           $promedio += $notas[$i];
+         }
+         return number_format((float)($promedio/count($notas)), 2, '.', '');
+     }
+
+     function calcularNotaReino($estudiantes, $reino){
+       $actividad = new actividad_model();
+       for ($i = 0; $i < count($estudiantes); $i++){
+         $actividades = $this->dao_reino_model->obtenerActividadesReino($reino, "profesor");
+         $porcentaje[$i] = 0;
+         for($j = 0; $j < count($actividades); $j++){
+           for ($k = 0; $k < count($actividades[$j]->getActividades()); $k++){
+             $respuestas = $this->dao_actividad_model->obtenerRespuesta($actividades[$j]->getActividades()[$k]->getActividad(), $estudiantes[$i], $actividades[$j]->getActividades()[$k]->getTipoActividad());
+             $porcentaje[$i] += $actividades[$j]->getActividades()[$k]->getPorcentaje();
+             $nota[$j][$k] = $respuestas['nota'];
+             $porcentajeParcial[$j][$k] = $actividades[$j]->getActividades()[$k]->getPorcentaje();
+           }
+         }
+         $nivel = $this->calcularNivelReino($nota,$porcentajeParcial,$porcentaje[$i]);
+         $this->dao_reino_model->actualizarNotaReino($reino, $estudiantes[$i], $nivel['nivel'], $nivel['valor']);
+       }
+     }
+
+     function calcularNivelReino($nota, $porcentajeP, $porcentajeT){
+       $respuesta['valor'] = 0;
+       for ($i = 0; $i<count($nota); $i++){
+        for($j = 0; $j<count($nota[$i]); $j++){
+            $respuesta['valor'] += $nota[$i][$j] * $porcentajeP[$i][$j] / $porcentajeT;
+          }
+       }
+       if($respuesta['valor'] >= 0 and $respuesta['valor'] <= 2.5){
+         $respuesta['nivel'] = 0;
+       }
+       if($respuesta['valor'] > 2.5 and $respuesta['valor'] <= 5){
+         $respuesta['nivel'] = 1;
+       }
+       if($respuesta['valor'] > 5 and $respuesta['valor'] <= 7.5){
+         $respuesta['nivel'] = 2;
+       }
+       if($respuesta['valor'] > 7.5 and $respuesta['valor'] <= 10){
+         $respuesta['nivel'] = 3;
+       }
+       return $respuesta;
      }
 }
 

@@ -98,11 +98,11 @@ class Dao_estudiante_model extends CI_Model {
     }
 
     function updatePerfilEstudiante(Estudiante_model $estudiante){
-      $configbd = new configbd_model();
-      $dbconn4=$configbd->abrirSesion('admin'); //mirar permisode editar colegio
-      $update = "UPDATE ESTUDIANTE SET o_correo = '".$estudiante->getCorreo()."', o_num_tel = ".$estudiante->getNumTel().", n_colegio = '".$estudiante->getColegio()."', o_grado_actual = ".$estudiante->getGradoActual(). " WHERE k_nickname = '" . $estudiante->getNickname()."';";
-      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
-      $configbd->cerrarSesion();
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('admin'); //mirar permisode editar colegio
+        $update = "UPDATE ESTUDIANTE SET o_correo = '".$estudiante->getCorreo()."', o_num_tel = ".$estudiante->getNumTel().", n_colegio = '".$estudiante->getColegio()."', o_grado_actual = ".$estudiante->getGradoActual(). " WHERE k_nickname = '" . $estudiante->getNickname()."';";
+        $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+        $configbd->cerrarSesion();
     }
 
 
@@ -117,6 +117,7 @@ class Dao_estudiante_model extends CI_Model {
             $estudiante=$estudiante->crearEstudiante($line['k_nickname'],$line['n_nombre'],$line['n_apellido'],$line['o_correo'],"","",$line['o_num_tel'],$line['n_colegio'],$line['o_grado_actual'],"");
             $arregloEstudiantes[$j] = $estudiante;
         }
+        $configbd->cerrarSesion();
         return $arregloEstudiantes;
     }
 }

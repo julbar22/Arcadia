@@ -44,39 +44,31 @@ class Dao_actividad_model extends CI_Model {
       return $line['id'];
     }
 
+    function InsertarActividadResueltaEst(Actividad_Resuelta_model $actividadResuelta){
+        $configbd = new configbd_model();
+        $dbconn4= $configbd->abrirSesion('estudiante');
+        $insert = "INSERT INTO ACTIVIDAD_RESUELTA (k_actividad_resuelta,k_nickname,k_actividad,n_observacion,v_nota,q_intento)
+                  VALUES (nextval('sec_actividades_resueltas'),'".$actividadResuelta->getNickname()."',".$actividadResuelta->getActividad().",'".$actividadResuelta->getObservacion()."',".$actividadResuelta->getNota().",".$actividadResuelta->getIntento().")";
+        $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
+        $query = "SELECT k_actividad_resuelta FROM ACTIVIDAD_RESUELTA WHERE k_nickname = '".$actividadResuelta->getNickname()."' AND k_actividad = ".$actividadResuelta->getActividad()." AND q_intento = ".$actividadResuelta->getIntento();
+        $resultQuery = pg_query($query) or die('La consulta fallo: '. pg_last_error());
+        $line = pg_fetch_array( $resultQuery, null, PGSQL_ASSOC);
+        $configbd->cerrarSesion();
+        return $line['k_actividad_resuelta'];
+    }
 
-        function actividadResueltaEst(Actividad_Resuelta_model $actividadResuelta)
-        {
-            error_reporting(0);
-
-            $configbd = new configbd_model();
-            $dbconn4= $configbd->abrirSesion('estudiante');
-            $insert = "INSERT INTO ACTIVIDAD_RESUELTA (k_actividad_resuelta,k_nickname,k_actividad,n_observacion,v_nota,q_intento)
-                             VALUES (nextval('sec_actividades_resueltas'),'".$actividadResuelta->getNickname()."',".$actividadResuelta->getActividad().",'".$actividadResuelta->getObservacion()."',".$actividadResuelta->getNota().",".$actividadResuelta->getIntento().")";
-            $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
-
-            $query = "SELECT k_actividad_resuelta FROM ACTIVIDAD_RESUELTA WHERE k_nickname = '".$actividadResuelta->getNickname()."' AND k_actividad = ".$actividadResuelta->getActividad()." AND q_intento = ".$actividadResuelta->getIntento();
-            $resultQuery = pg_query($query) or die('La consulta fallo: '. pg_last_error());
-            $line = pg_fetch_array( $resultQuery, null, PGSQL_ASSOC);
-            return $line['k_actividad_resuelta'];
+    function validarIntentosActividad($nickmane, $actividad){
+        $configbd = new configbd_model();
+        $dbconn4= $configbd->abrirSesion('estudiante');
+        $query =  "SELECT K_ACTIVIDAD_RESUELTA FROM ACTIVIDAD_RESUELTA WHERE K_NICKNAME='" . $nickmane . "' AND K_ACTIVIDAD = ".$actividad;
+        $resultQuery = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
+        $i = 0;
+        while ($line = pg_fetch_array($resultQuery, null, PGSQL_ASSOC)) {
+            $i++;
         }
-
-        function validarIntentosActividad($nickmane, $actividad)
-        {
-            error_reporting(0);
-            $configbd = new configbd_model();
-            $dbconn4= $configbd->abrirSesion('estudiante');
-
-            $query =  "SELECT K_ACTIVIDAD_RESUELTA FROM ACTIVIDAD_RESUELTA WHERE K_NICKNAME='" . $nickmane . "' AND K_ACTIVIDAD = ".$actividad;
-            $resultQuery = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
-            $i = 0;
-
-            while ($line = pg_fetch_array($resultQuery, null, PGSQL_ASSOC)) {
-                  $i++;
-            }
-
-            return $i;
-        }
+        $configbd->cerrarSesion();
+        return $i;
+    }
 
     function actividadCuestionario(Actividad_model $actividad, $regionId,$preguntas){
       $configbd = new configbd_model();
@@ -112,15 +104,14 @@ class Dao_actividad_model extends CI_Model {
     }
 
    function actualizarActividad(Actividad_model $actividad){
-      $configbd = new configbd_model();
-      $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
-      $update = "UPDATE ACTIVIDAD SET I_ESTADO = '".$actividad->getEstado()."' WHERE k_actividad = " . $actividad->getActividad().";";
-      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
-      $configbd->cerrarSesion();
-    }
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
+        $update = "UPDATE ACTIVIDAD SET I_ESTADO = '".$actividad->getEstado()."' WHERE k_actividad = " . $actividad->getActividad().";";
+        $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+        $configbd->cerrarSesion();
+     }
 
     function obtenerFechaVencimiento($k_actividad){
-        error_reporting(0);
         $configbd = new configbd_model();
         $dbconn4= $configbd->abrirSesion('estudiante');
         $consulta = "Select f_vencimiento FROM ACTIVIDAD WHERE k_actividad = ".$k_actividad;
@@ -160,7 +151,6 @@ class Dao_actividad_model extends CI_Model {
                 $intento = $line['k_actividad_resuelta'];
             }
         }
-
         if ($tipoActividad == 1 AND $intento > -1){
             $consult = "SELECT n_nombre FROM soporte WHERE k_actividad_resuelta = ".$respueta['anexo'];
             $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
@@ -170,7 +160,7 @@ class Dao_actividad_model extends CI_Model {
         if ($tipoActividad == 0 AND $intento > -1){
             $respueta['anexo'] = "Cuestionario";
         }
-
+        $configbd->cerrarSesion();
         return $respueta;
     }
 
@@ -181,6 +171,7 @@ class Dao_actividad_model extends CI_Model {
             $update = "UPDATE actividad_resuelta SET v_nota = ".$notas[$keys[$i]]." WHERE k_actividad_resuelta = ".$notas[$keys[$i+1]];
             $resultUpdate = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
         }
+        $configbd->cerrarSesion();
     }
 
     function obtenerActividad($idActividad){
@@ -189,9 +180,18 @@ class Dao_actividad_model extends CI_Model {
         $consult = "SELECT * FROM actividad WHERE k_actividad = ".$idActividad;
         $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
         $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+        $tipoActividad = $this->dao_actividad_model->obtenerTipoActividad($line['k_tipo_actividad']);
         $actividad = new actividad_model;
         $actividad = $actividad->crearActividad($line['k_actividad'],$line['n_nombre'],$line['n_descripcion'],$line['q_intentos'],$line['v_porcentaje'],$line['f_creacion'],$line['f_vencimiento'],$line['k_prerequisito'],$line['k_tipo_actividad'],"",$line['i_estado']);
+        $configbd->cerrarSesion();
         return $actividad;
+    }
+
+    function obtenerTipoActividad($k_tipo_actividad){
+        $consultTipoA = "SELECT * FROM tipo_actividad WHERE k_tipo_actividad = ".$k_tipo_actividad;
+        $resultTipoA = pg_query($consultTipoA) or die('La consulta fallo: ' . pg_last_error());
+        $tipoAct = pg_fetch_array($resultTipoA, null, PGSQL_ASSOC);
+        return $tipoAct['n_nombre'];
     }
 }
 

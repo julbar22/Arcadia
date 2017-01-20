@@ -73,11 +73,11 @@
                                   ?>
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Estadistica</a></li>
                                 </ul>
-                                <li><a  onclick="desplegar('Actividades');">Mis Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a  onclick="desplegar('Actividades');">Mis Misiones<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <ul class="menuhijos" id="menuActividades">
                                     <?php
                                     if (isset($perfilR)) {
-                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegionEst?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Actividades por Región</a></a></li>";
+                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegionEst?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Misiones por Región</a></a></li>";
                                     }
                                     ?>
                                 </ul>

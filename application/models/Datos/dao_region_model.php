@@ -34,55 +34,31 @@ class Dao_region_model extends CI_Model {
     }
 
     function crearRegionDao(Region_model $region,$idReino) {
-        //print_r($region);
         $configbd = new configbd_model();
         $dbconn4=$configbd->abrirSesion('profesor');
-
         $insert = "INSERT INTO REGION (K_REGION,K_REINO,N_NOMBRE,I_ESTADO,O_POSICIONX,O_POSICIONY,O_IMAGEN)
                          VALUES (nextval('sec_regiones')," . $idReino . ", '" . $region->getNombre(). "', 'Act', " . $region->getxMapa() . ",
                          " . $region->getyMapa() . ", '" . $region->getImagen() . "')";
         $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
         $configbd->cerrarSesion();
-        print_r($idReino);
         return true;
     }
 
-    function obtenerRegionesPorReino($idReino){
+    function obtenerRegionesPorReino($idReino, $sesion){
         $configbd = new configbd_model();
-        $dbconn4=$configbd->abrirSesion('profesor');
+        $dbconn4=$configbd->abrirSesion($sesion);
         $consult2 = "SELECT * FROM REGION WHERE K_REINO=" . $idReino;
         $resultConsult2 = pg_query($consult2) or die('La consulta fallo: ' . pg_last_error());
         $regiones = array();
         $i = 0;
         while ($line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC)) {
-
             $region = new Region_model();
             $regiones[$i] = $region->crearRegion($line['k_region'],$line['n_nombre'],$line['i_estado'],$line['o_posicionx'],$line['o_posiciony'],$line['o_imagen']);
             $i++;
         }
-          $configbd->cerrarSesion();
-          return $regiones;
-
+        $configbd->cerrarSesion();
+        return $regiones;
     }
-
-    function obtenerRegionesPorReinoEst($idReino){
-        $configbd = new configbd_model();
-        $dbconn4=$configbd->abrirSesion('estudiante');
-        $consult2 = "SELECT * FROM REGION WHERE K_REINO=" . $idReino;
-        $resultConsult2 = pg_query($consult2) or die('La consulta fallo: ' . pg_last_error());
-        $regiones = array();
-        $i = 0;
-        while ($line = pg_fetch_array($resultConsult2, null, PGSQL_ASSOC)) {
-
-            $region = new Region_model();
-            $regiones[$i] = $region->crearRegion($line['k_region'],$line['n_nombre'],$line['i_estado'],$line['o_posicionx'],$line['o_posiciony'],$line['o_imagen']);
-            $i++;
-        }
-          $configbd->cerrarSesion();
-          return $regiones;
-
-    }
-
 }
 
 ?>

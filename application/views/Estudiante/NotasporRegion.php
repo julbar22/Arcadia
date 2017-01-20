@@ -50,39 +50,30 @@
 
                         <div class="content_box">
                             <?php
-                                    if (isset($regiones)) {
-                                        for($i=0; $i<count($regiones);$i++){
-
-                                            echo "<h1>"."Región: ".$regiones[$i]['n_nombre']."</h1>";
-                                            echo "<h3> Tu rendimiento en el ".$porcentajes[$i]." % de misiones es de ".$acumulados[$i]."</h1>";
-                                            echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino=".$_GET['k_reino']."&k_region=".$regiones[$i]['k_region']."' ></a></div>";
-                                            echo "<table class='table table-striped'>";
-                                            echo "<thead><tr><th>Nombre</th><th>Nota</th><th>Porcentaje</th></tr></thead>";
-
-                                            echo "<tbody>";
-                                            for($j=0;$j<count($regiones[$i]['actividades']);$j++){
-                                                                                        //  print_r($regiones[$i]['actividades'][$j]);
-                                                echo "<tr>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['n_nota']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['v_porcentaje']." %</td>";
-                                                echo "<tr>";
-                                            }
-                                          //  echo "<td>Promedio Notas : </td>";
-                                        //    echo "<tr><td>Nota Final : </td><tr>";
-                                            echo "</tbody>";
-                                            echo "</table>";
-                                        }
-
-
+                            echo "<a align='center' href='/Arcadia/index.php/reino/obtenerReinoEstudianteC?k_reino=".$_GET['k_reino']."'><input align='center' type='submit' value='Volver' id='btnSubmit' class='btn btn-info'></a>";
+                            echo "<h1 align='center' ><img src='/Arcadia/assets/imagenes/arcadiaIcon2r.png' alt='LOGO' /> Lista de Misiones y Notas<img src='/Arcadia/assets/imagenes/arcadiaIcon2.png' alt='LOGO' /></h1></br>";
+                            if (isset($regiones)) {
+                                for($i=0; $i<count($regiones);$i++){
+                                    echo "<h2><img src='/Arcadia/assets/imagenes/arcadiaIcon4.png' alt='LOGO' /> Región: ".$regiones[$i]['n_nombre']."</h2>";
+                                    echo "<h3> Tu rendimiento en el ".$porcentajes[$i]." % de misiones es de ".$acumulados[$i]."</h1>";
+                                    echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino=".$_GET['k_reino']."&k_region=".$regiones[$i]['k_region']."' ></a></div>";
+                                    echo "<table class='table table-striped'>";
+                                    echo "<thead><tr><th>Nombre</th><th>Nota</th><th>Porcentaje</th></tr></thead>";
+                                    echo "<tbody>";
+                                    for($j=0;$j<count($regiones[$i]['actividades']);$j++){
+                                        echo "<tr>";
+                                        echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
+                                        echo "<td>".$regiones[$i]['actividades'][$j]['n_nota']."</td>";
+                                        echo "<td>".$regiones[$i]['actividades'][$j]['v_porcentaje']." %</td>";
+                                        echo "<tr>";
                                     }
-
+                                    echo "</tbody>";
+                                    echo "</table>";
+                                    }
+                                }
                             ?>
-
                         </div>
-
                     </div>
-
                     <div class="cleaner"></div>
                 </div>
 
@@ -92,7 +83,7 @@
             </div> <!-- end of wrapper -->
         </div>
 
-        <div id="templatemo_footer_wrapper"><div id="templatemo_footer">Actividades Por Region</div></div>
+        <div id="templatemo_footer_wrapper"><div id="templatemo_footer">Notas Por Region</div></div>
         <!-- templatemo 243 web design -->
         <!--
         Web Design Template
