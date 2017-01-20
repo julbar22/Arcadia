@@ -16,18 +16,19 @@
         </style>
         <script>
             function cambiarAtributo(x){
-
-                var notaField = document.getElementById("Nota"+x);
-                var idField = document.getElementById("Id"+x);
-                var buttonField = document.getElementById("BNota"+x);
-                var buttonEnviar = document.getElementById("btnSubmit");
-                notaField.removeAttribute('disabled');
-                idField.removeAttribute('disabled');
-                buttonEnviar.removeAttribute('disabled');
-                buttonField.setAttribute("disabled","disabled");
+              for (var i = 0; i < x; i++){
+                var notaField = document.getElementById("Nota"+i);
+                var idField = document.getElementById("Id"+i);
+                if (notaField != null){
+                  notaField.removeAttribute('disabled');
+                  idField.removeAttribute('disabled');
+                }
               }
-              function actualizarDatos(){
-              }
+              var buttonField = document.getElementById("BNota");
+              var buttonEnviar = document.getElementById("btnSubmit");
+              buttonEnviar.removeAttribute('disabled');
+              buttonField.setAttribute("disabled","disabled");
+            }
         </script>
     </head>
     <body>
@@ -69,11 +70,22 @@
                         <div class="content_box">
                             <?php
                                     if (isset($actividad)) {
-
-                                        echo "<h1>Misión ".$actividad->getNombre()."</h1>";
+                                        echo "<a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$_GET['k_reino']."'><input type='submit' value='Volver' id='btnVolver' class='btn btn-info'></a>";
+                                        echo "</br><h1 align='center' ><img src='/Arcadia/assets/imagenes/arcadiaIcon6.png' alt='LOGO' /> Misión : ".$actividad->getNombre()." <img src='/Arcadia/assets/imagenes/arcadiaIcon6r.png' alt='LOGO' /></h1>";
+                                        switch ($actividad->getTipoActividad()) {
+                                          case 0 :
+                                            echo "<h2 align='center' >Tipo : Cuestionario</h2></br>";
+                                            break;
+                                          case 1 :
+                                            echo "<h2 align='center' >Tipo : Archivo</h2></br>";
+                                            break;
+                                          default:
+                                            echo "<td></td>";
+                                            break;
+                                        }
                                         echo "<form method='post' name='formActualizar'>";
                                         echo "<table class='table table-striped'>";
-                                        echo "<thead><tr><th>Nombre</th><th>Apellidos</th><th>Respuesta</th><th>Nota</th><th>Calificar</th></tr></thead>";
+                                        echo "<thead><tr><th>Nombre</th><th>Apellidos</th><th>Respuesta</th><th>Nota</th></tr></thead>";
                                         echo "<tbody><form method='post' name='form'></form>";
                                         for($i=0; $i<count($estudiantes);$i++){
                                             echo "<tr>";
@@ -87,12 +99,12 @@
                                                 echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$respuestas[$i]['anexo']."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></form></td>";
                                                 echo "<input id='Bota".$i."' name='Bota".$i."' type='hidden' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>";
                                                 echo "<td><input id='Nota".$i."' name='Nota".$i."' step='0.01' type='number' min='0' max='10' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>"."<input id='Id".$i."' name='Id".$i."' type='hidden' disabled='true' value='".$respuestas[$i]['Id']."'>"."</td>";
-                                                echo "<td><button value='Calificar' id='BNota".$i."' type='button' class='btn btn-primary' onclick= 'cambiarAtributo(".$i.")'>Calificar</button></td>";
                                             }
                                         }
                                         echo "</tbody>";
                                         echo "</table>";
-                                        echo "<input type='submit' value='Actualizar Notas' id='btnSubmit' name='btnSubmit' class='btn btn-success' disabled='true' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/actualizarActividadNota?k_actividad=".$_GET['k_actividad']."&k_reino=".$_GET['k_reino']."' \">";
+                                        echo "<button value='Calificar' name='BNota' id='BNota' type='button' class='btn btn-primary' onclick= 'cambiarAtributo(".count($estudiantes).")'>Calificar</button> ";
+                                        echo "<input type='submit' value='Actualizar Notas' id='btnSubmit' name='btnSubmit' class='btn btn-success' disabled='disabled' onclick = \"this.form.action = 'http://localhost/Arcadia/index.php/Actividad/actualizarActividadNota?k_actividad=".$_GET['k_actividad']."&k_reino=".$_GET['k_reino']."' \">";
                                         echo "</form>";
                                     }
 

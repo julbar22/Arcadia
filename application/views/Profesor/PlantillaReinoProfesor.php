@@ -82,12 +82,12 @@
                                     ?>
                                     <li><a href="#"><span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Estadistica</a></li>
                                 </ul>
-                                <li><a  onclick="desplegar('Actividades');"> Actividades<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
+                                <li><a  onclick="desplegar('Actividades');"> Misiones<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <ul class="menuhijos" id="menuActividades">
                                     <?php
                                     if (isset($perfilR)) {
-                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Actividades Por Region</a></li>";
-                                        echo "<li><a href='/Arcadia/index.php/reino/listaEstudiantesReino?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Actividades Por Estudiante</a></li>";
+                                        echo "<li><a href='/Arcadia/index.php/reino/actividadesRegion?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Misiones Por Region</a></li>";
+                                        echo "<li><a href='/Arcadia/index.php/reino/listaEstudiantesReino?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Misiones Por Estudiante</a></li>";
                                         echo "<li><a href='/Arcadia/index.php/pregunta/listadoPreguntasC?k_reino=".$perfilR[0]['k_reino']. "' ><span class='glyphicon glyphicon-pawn' aria-hidden='true'></span> Listado de Preguntas</a></li>";
                                     }
                                     ?>

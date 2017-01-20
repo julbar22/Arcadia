@@ -18,16 +18,13 @@ class Dao_soporte_model extends CI_Model {
         parent::__construct();
     }
 
-    function soporteActEst(Soporte_model $soporte)
-    {
-        error_reporting(0);
+    function insertarSoporteActividad(Soporte_model $soporte){
         $configbd = new configbd_model();
         $dbconn4= $configbd->abrirSesion('estudiante');
-
         $insert = "INSERT INTO SOPORTE (k_soporte,k_actividad_resuelta,n_nombre,n_description)
-                         VALUES (nextval('sec_sopotes'),". $soporte->getActividadResuelta(). ", '" . $soporte->getNombre(). "','" . $soporte->getDescripcion() . "')";
-
+                   VALUES (nextval('sec_sopotes'),". $soporte->getActividadResuelta(). ", '" . $soporte->getNombre(). "','" . $soporte->getDescripcion() . "')";
         $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
+        $configbd->cerrarSesion();
         return true;
     }
 

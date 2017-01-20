@@ -40,7 +40,6 @@
                                 <li><a href="/Arcadia/index.php/profesor/perfilProfesorC">Perfil<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <?php
                                   echo "<li><a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'>Reino<span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true' style='float: right;' ></a></li>";
-
                                 ?>
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
@@ -52,13 +51,15 @@
 
                         <div class="content_box">
                             <?php
-                                    echo "<h1>Lista Estudiantes</h1>";
+                                    echo "<a href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'><input type='submit' value='Volver' id='btnSubmit' class='btn btn-info'></a>";
+                                    echo "</br><h1 align='center' ><img src='/Arcadia/assets/imagenes/arcadiaIcon5.png' alt='LOGO' /> Lista Estudiantes <img src='/Arcadia/assets/imagenes/arcadiaIcon5r.png' alt='LOGO' /></h1>";
                                     echo "<table class='table table-striped'>";
-                                    echo "<thead><tr><th>Nombres</th><th>Apellidos</th><th>Ver Misiones</th></tr></thead>";
+                                    echo "<thead><tr><th>Clase</th><th>Nombres</th><th>Apellidos</th><th>Ver Misiones</th></tr></thead>";
                                     echo "<tbody>";
                                     if (isset($listaEstudiantes)) {
                                         for($i=0; $i<count($listaEstudiantes);$i++){
                                           echo "<tr>";
+                                          echo "<td><img src='/Arcadia/assets/imagenes/arcadiaIcon3.png' alt='LOGO' /></td>";
                                           echo "<td>".$listaEstudiantes[$i]->getNombre()."</td>";
                                           echo "<td>".$listaEstudiantes[$i]->getApellido()."</td>";
                                           echo "<td>
@@ -71,7 +72,7 @@
                                     }
                                     echo "</tbody>";
                                     echo "</table>";
-
+                                    header("ListaEstudiantes.php");
                             ?>
 
                         </div>

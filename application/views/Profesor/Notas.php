@@ -31,7 +31,7 @@
             if (isset($regiones)) {
              //print_r($regiones);
              for($i=0; $i<count($regiones);$i++){
-               echo "<h1><img src='/Arcadia/assets/imagenes/arcadiaIcon.png' alt='LOGO' /> Región: ".$regiones[$i]->getNombre()." "."<img src='/Arcadia/assets/imagenes/arcadiaIcon.png' alt='LOGO' /></h1>";
+               echo "<h1><img src='/Arcadia/assets/imagenes/arcadiaIcon1.png' alt='LOGO' /> Región: ".$regiones[$i]->getNombre()." "."<img src='/Arcadia/assets/imagenes/arcadiaIcon1r.png' alt='LOGO' /></h1>";
                 echo "<div class='tbl-header'>";
                     echo "<table cellpadding='0' cellspacing='0' border='0' class='table table-header-rotated'>";
                       echo "<thead>";
@@ -62,8 +62,16 @@
                                 echo "<td>".$notas[$i][$k][$j]."</td>";
                               }
                               echo "<td>".$totales[$i][$k]."</td>";
+                              echo "</tr>";
+                            }
+                            echo "<tr>";
+                              echo "<td width='80'></td>";
+                              echo "<td width='80'>Promedio Actividad</td>";
+                                for($j=0; $j<count($regiones[$i]->getActividades());$j++){
+                                  echo "<td>".$promAct[$i][$j]."</td>";
+                                }
+                              echo "<td></td>";  
                             echo "</tr>";
-                          }
                   echo "</tbody>";
                 echo "</table>";
               echo "</div>";

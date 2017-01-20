@@ -66,15 +66,19 @@
                     <div id="templatemo_content">
 
                         <div class="content_box">
+                            <?php
+                            echo "<a align='center' href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'><input align='center' type='submit' value='Volver' id='btnSubmit' class='btn btn-info'></a>";
+                            echo "<h1 align='center' ><img src='/Arcadia/assets/imagenes/arcadiaIcon2r.png' alt='LOGO' /> Lista de Misiones <img src='/Arcadia/assets/imagenes/arcadiaIcon2.png' alt='LOGO' /></h1></br>";
+                            ?>
                             <div><input  id='buttonEditarActividad' style='width: 100%;' onclick='modalEditar()' class='btn btn-default' type='button' value='Editar' disabled></div>
                             <?php
                                     if (isset($regiones)) {
                                         for($i=0; $i<count($regiones);$i++){
 
-                                            echo "<h1>".$regiones[$i]['n_nombre']."</h1>";
+                                            echo "<h2><img src='/Arcadia/assets/imagenes/arcadiaIcon4.png' alt='LOGO' /> Región: ".$regiones[$i]['n_nombre']."</h2>";
                                             echo "<div><a href='/Arcadia/index.php/Actividad/formularioCrearActividad?k_reino=".$_GET['k_reino']."&k_region=".$regiones[$i]['k_region']."' ><input  style='width: 100%;' class='btn btn-default' type='button' value='Añadir Actividad en ".$regiones[$i]['n_nombre']."' ></a></div>";
                                             echo "<table class='table table-striped'>";
-                                            echo "<thead><tr><th>#</th><th>Nombre</th><th>Intentos</th><th>Porcentaje</th><th>Estado</th><th>Calificar</th></tr></thead>";
+                                            echo "<thead><tr><th></th><th>Nombre</th><th>Intentos</th><th>Porcentaje</th><th>Estado</th><th>Calificar</th></tr></thead>";
 
                                             echo "<tbody>";
                                             for($j=0;$j<count($regiones[$i]['actividades']);$j++){
@@ -97,7 +101,7 @@
                                                 echo "<tr>";
                                             }
                                             echo "</tbody>";
-                                            echo "</table>";
+                                            echo "</table></br>";
                                         }
                                     }
                             ?>

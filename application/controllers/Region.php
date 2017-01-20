@@ -29,7 +29,6 @@ class Region extends CI_Controller {
         for($i = 0; $i <count($regiones); $i++){
             $response['porcentaje'][$i] = 0;
             $response['nota'][$i] = 0;
-            //echo ($regiones[$i]->getActividades());
             for ($j = 0; $j < count($regiones[$i]->getActividades()); $j++){
                 $response['porcentaje'][$i] += $regiones[$i]->getActividades()[$j]->getPorcentaje();
                 $response['nota'][$i] +=  $regiones[$i]->getActividades()[$j]->getPorcentaje()*$regiones[$i]->getActividades()[$j]->getNota()/100;
