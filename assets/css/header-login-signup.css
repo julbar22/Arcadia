@@ -1,9 +1,10 @@
 .header-login-signup{
+	background-color:#292c2f;
+	box-shadow:0 1px 1px #ccc;
 	padding: 20px 40px;
-	box-sizing:border-box;
-	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
-	height: 80px;
- 	background-color: white;
+	height: 92px;
+	color: #ffffff;
+	box-sizing: border-box;
 }
 
 .header-login-signup .header-limiter {
@@ -22,13 +23,13 @@
 }
 
 .header-login-signup .header-limiter h1 span {
-	color: #FFFFFF;
+	color: #5383d3;
 }
 
 /* The navigation links */
 
 .header-login-signup .header-limiter a {
-	color: #FFFFFF;
+	color: #ffffff;
 	text-decoration: none;
 }
 
@@ -54,7 +55,7 @@
 }
 
 .header-login-signup .header-limiter nav a.selected {
-	color: #FFFFFF;
+	color: #608bd2;
 }
 
 /* Login/Sign up buttons */
@@ -80,7 +81,7 @@
 
 .header-login-signup .header-limiter ul li:last-child a {
 	font-weight: bold;
-	background-color: #FFFFFF;
+	background-color: #3a3c3e;
 	padding: 10px 15px;
 	border-radius: 3px;
 }

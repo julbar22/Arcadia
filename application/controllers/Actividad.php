@@ -60,7 +60,7 @@ class Actividad extends CI_Controller {
 
     function crearActividad(){
         if($_POST['tipoActividad']==1){
-            $result = $this->updateFile();
+            $result = $this->updateFile('uploads/', $_FILES['fileActividad']['error'],$_FILES['fileActividad']['name'],$_FILES['fileActividad']['tmp_name']);
             if($result[0]==true){
                 $newActividad = new Actividad_model;
                 $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'] / 100,"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
@@ -69,6 +69,7 @@ class Actividad extends CI_Controller {
                 $newAnexo = new Anexo_model;
                 $newAnexo = $newAnexo->crearAnexo(1,$responseActividad,$result[2],"Descripcion");
                 $responseAnexo = $this->dao_anexo_model->insertarAnexoActividad($newAnexo);
+                $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." creo la actividad ".$_POST['nombre'], $_GET['k_reino'], 'profesor');
             }
         }else{
             $newActividad = new Actividad_model;
@@ -78,6 +79,7 @@ class Actividad extends CI_Controller {
                 $preguntas[$h]=$_POST['pregunta'.($h+1)];
             }
             $responseActividad = $this->dao_actividad_model->actividadCuestionario($newActividad, $idRegion,$preguntas);
+            $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." creo la actividad ".$_POST['nombre'], $_GET['k_reino'], 'profesor');
         }
         $listaRegiones = $this->dao_reino_model->obtenerActividadesReino($_GET['k_reino'], "profesor");
         for($i=0;$i<count($listaRegiones);$i++){
@@ -90,7 +92,7 @@ class Actividad extends CI_Controller {
         $intentos = $_GET['n_intentos'];
         $intentos = explode("/",$intentos);
         if($this->dao_actividad_model->validarIntentosActividad($_SESSION['codigo'],$_GET['k_actividad']) < $intentos[1] AND $this->verificarFechaActividad($_GET['k_actividad']) != 1){
-            $result = $this->updateFile();
+            $result = $this->updateFile('uploads/',$_FILES['fileActividad']['error'],$_FILES['fileActividad']['name'],$_FILES['fileActividad']['tmp_name']);
             if($result[0]==true){
                 if($intentos[0]<$intentos[1]){
                     $newSoporte = new Soporte_model;
@@ -109,32 +111,32 @@ class Actividad extends CI_Controller {
         $this->load->view('Estudiante/ActividadesPorRegion',$response);
     }
 
-    function updateFile(){
+    function updateFile($ruta, $error, $name, $tmpName){
         $result;
-        if(!$_FILES['fileActividad']['error']){
-            $file_name = $_FILES['fileActividad']['name'];
-            $file_type = $_FILES['fileActividad']['type'];
+        if(!$error){
+            $file_name = $name;
+      //      $file_type = $_FILES['fileActividad']['type'];
+            $file_name = preg_replace("/[^a-z0-9_\.\-[:space:]]/i", "_", $file_name);
             $rename = true;
             while($rename){
-                $rename = $this->validarArchivoDuplicado($file_name);
+                $rename = $this->validarArchivoDuplicado($file_name,$ruta);
                 if ($rename){
                     $file_name = $this->renameFile($file_name);
                 }
             }
-            move_uploaded_file($_FILES['fileActividad']['tmp_name'], 'uploads/'.$file_name);
+            move_uploaded_file($tmpName, $ruta.$file_name);
             $result[0] =  true;
             $result[1] =  'Congratulations!  Your file was accepted.';
             $result[2] =  $file_name;
-            $result[3] =  $file_type;
+        //    $result[3] =  $file_type;
         } else {
             $result[0] =  false;
-            $result[1] = 'Ooops!  Your upload triggered the following error:  '.$_FILES['fileActividad']['error'];
+            $result[1] = 'Ooops!  Your upload triggered the following error:  '.$error;
         }
         return $result;
     }
 
-    function validarArchivoDuplicado($file_name){
-        $dir = "uploads/";
+    function validarArchivoDuplicado($file_name, $dir){
         $rename = false;
         if (is_dir($dir)){
               if ($dh = opendir($dir)){
@@ -200,6 +202,7 @@ class Actividad extends CI_Controller {
          $this->dao_actividad_model->actualizarNota($_POST, $keys);
          $estudiante[0] = $_GET['k_estudiante'];
          $this->calcularNotaReino($estudiante, $_GET['k_reino']);
+         $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." actualizó las notas en el reino ", $_GET['k_reino'], 'profesor');
          $reino->listaEstudiantesReino();
      }
 
@@ -216,6 +219,7 @@ class Actividad extends CI_Controller {
          $this->dao_actividad_model->actualizarNota($_POST, $keys);
          $listaEstudiantes = $this->dao_reino_model->obtenerEstudiantesReino($_GET['k_reino']);
          $this->calcularNotaReino($listaEstudiantes, $_GET['k_reino']);
+         $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." actualizó las notas en el reino ", $_GET['k_reino'], 'profesor');
          $reino->actividadesRegion();
      }
 
@@ -253,29 +257,47 @@ class Actividad extends CI_Controller {
              $porcentajeParcial[$j][$k] = $actividades[$j]->getActividades()[$k]->getPorcentaje();
            }
          }
-         $nivel = $this->calcularNivelReino($nota,$porcentajeParcial,$porcentaje[$i]);
+         $notaActual = $this->dao_estudiante_model->notaEnReino($estudiantes[$i], $reino, "profesor");
+         $nivel = $this->calcularNivelReino($nota,$porcentajeParcial,$porcentaje[$i],$notaActual['valor'],$notaActual['clase'],$estudiantes[$i]);
          $this->dao_reino_model->actualizarNotaReino($reino, $estudiantes[$i], $nivel['nivel'], $nivel['valor']);
        }
      }
 
-     function calcularNivelReino($nota, $porcentajeP, $porcentajeT){
+     function calcularNivelReino($nota, $porcentajeP, $porcentajeT, $notaActual, $clase, $estudiante){
+       $respuesta['subioNivel'] = "false";
        $respuesta['valor'] = 0;
+       if($porcentajeT < 100){
+         $porcentajeT=100;
+       }
        for ($i = 0; $i<count($nota); $i++){
         for($j = 0; $j<count($nota[$i]); $j++){
             $respuesta['valor'] += $nota[$i][$j] * $porcentajeP[$i][$j] / $porcentajeT;
           }
        }
        if($respuesta['valor'] >= 0 and $respuesta['valor'] <= 2.5){
-         $respuesta['nivel'] = 0;
+         $respuesta['nivel'] = ($clase * 4) + 0;
        }
        if($respuesta['valor'] > 2.5 and $respuesta['valor'] <= 5){
-         $respuesta['nivel'] = 1;
+         if($notaActual <= 2.5){
+           $respuesta['subioNivel'] = "true";
+         }
+         $respuesta['nivel'] = ($clase * 4) + 1;
        }
        if($respuesta['valor'] > 5 and $respuesta['valor'] <= 7.5){
-         $respuesta['nivel'] = 2;
+         if($notaActual <= 5){
+           $respuesta['subioNivel'] = "true";
+         }
+         $respuesta['nivel'] = ($clase * 4) + 2;
        }
        if($respuesta['valor'] > 7.5 and $respuesta['valor'] <= 10){
-         $respuesta['nivel'] = 3;
+         if($notaActual <= 7.5){
+           $respuesta['subioNivel'] = "true";
+         }
+         $respuesta['nivel'] = ($clase * 4) + 3;
+       }
+       if($respuesta['subioNivel'] == "true"){
+          $this->dao_estudiante_model->verificarNivelNuevo($respuesta['nivel'], $estudiante, "profesor");
+          $this->dao_reino_model->insertarNovedad("FELICIDADES!!! ".$estudiante." subió de nivel ", $_GET['k_reino'], 'profesor');
        }
        return $respuesta;
      }

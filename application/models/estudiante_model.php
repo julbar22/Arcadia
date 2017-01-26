@@ -15,9 +15,9 @@
 		protected $gradoActual;
 		protected $avatar;
 		protected $reino;
-
+		protected $clase;
 		public function __construct(){
-			
+
 		}
 
 		public function ArregloReinos(){
@@ -29,7 +29,7 @@
 			return $reinos;
 		}
 
-		public function crearEstudiante($nickname,$nombre,$apellido,$correo,$fechaNacimiento,$sexo,$telefono,$colegio,$grado,$avatar){
+		public function crearEstudiante($nickname,$nombre,$apellido,$correo,$fechaNacimiento,$sexo,$telefono,$colegio,$grado,$avatar,$clase){
 				$newEstudiante = new Estudiante_model();
 				$newEstudiante->setNickname($nickname);
 				$newEstudiante->setNombre($nombre);
@@ -41,12 +41,12 @@
 				$newEstudiante->setColegio($colegio);
 				$newEstudiante->setGradoActual($grado);
 				$newEstudiante->setAvatar($avatar);
-
+				$newEstudiante->setClase($clase);
 				return $newEstudiante;
 		}
 
 		public function crearArregloEstudiante(Estudiante_model $newEstudiante){
-             
+
 			$estudiante['k_nickname'] = $newEstudiante->getNickname();
 			$estudiante['n_nombre'] = $newEstudiante->getNombre();
 			$estudiante['n_apellido'] = $newEstudiante->getApellido();
@@ -57,11 +57,9 @@
 			$estudiante['n_colegio'] = $newEstudiante->getColegio();
 			$estudiante['o_grado_actual'] = $newEstudiante->getGradoActual();
 			$estudiante['o_imagen'] = $newEstudiante->getAvatar();
-			
+			$estudiante['k_clase'] = $newEstudiante->getClase();
 
 			return $estudiante;
-
-
     }
 
 		public function getNickname(){return $this->nickname;}
@@ -83,6 +81,8 @@
 		public function getGradoActual(){	return $this->gradoActual;}
 
 		public function getAvatar(){	return $this->avatar;}
+
+		public function getClase(){	return $this->clase;}
 
 		public function getReino(){	return $this->reino;}
 
@@ -108,6 +108,7 @@
 
 		public function setReino($reino){	$this->reino = $reino;}
 
-		
+		public function setClase($clase){	$this->clase = $clase;}
+
 	}
 ?>

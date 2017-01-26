@@ -18,10 +18,12 @@
             function cambiarAtributo(x, y){
               var i;
               for (i = 0; i < y; i++) {
-                var notaField = document.getElementById("Nota"+x+""+i);
-                var idField = document.getElementById("Id"+x+""+i);
-                notaField.removeAttribute('disabled');
-                idField.removeAttribute('disabled');
+                  var notaField = document.getElementById("Nota"+x+""+i);
+                  var idField = document.getElementById("Id"+x+""+i);
+                  if(notaField != null){
+                    notaField.removeAttribute('disabled');
+                    idField.removeAttribute('disabled');
+                  }
               }
               var buttonField = document.getElementById("BNota"+x+""+y);
               buttonField.setAttribute("disabled","disabled");

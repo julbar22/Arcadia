@@ -20,8 +20,10 @@ class Reino extends CI_Controller {
         );
         $validar = $this->dao_reino_model->vincularReino($data);
         if ($validar == true) {
+            $this->dao_estudiante_model->vinvularPremiosEstudiante($data['k_reino']);
             echo '<script>alert ("se ha vinculado al Reino");</script>';
             $this->load->view('Estudiante/inicioEstudiante');
+            $this->dao_reino_model->insertarNovedad("El estudiante ".$_SESSION['codigo']." se unió al reino ", $data['k_reino'], 'estudiante');
         } else {
 
             echo '<script>alert ("No se ha podido vincular al Reino");</script>';
@@ -30,7 +32,7 @@ class Reino extends CI_Controller {
     }
 
     function crearReinoC() {
-
+        print_r($_POST);
         $reino = new Reino_model();
         $reino=$reino->crearReino("",$_POST['nombre'],$_POST['codigo'],"","",$_POST['historia'],$_POST['imagenModalId'],$_POST['mision'],$_POST['vision'],"");
 
@@ -62,21 +64,39 @@ class Reino extends CI_Controller {
     }
 
     function obtenerReinoProfesorC() {
-        $data = array(
-            'k_reino' => $_GET['k_reino'],
-        );
-        $newReino = $this->dao_reino_model->obtenerReinoEspecifico($data,'profesor');// esto debe devolver objeto reino
-        $validar['perfilR'][0]= $newReino->crearArregloReino($newReino);
+        $validar = $this->listarInfoEstudiante('profesor');
         $this->load->view('Profesor/PlantillaReinoProfesor', $validar);
     }
 
     function obtenerReinoEstudianteC() {
-        $data = array(
-            'k_reino' => $_GET['k_reino'],
-        );
-        $newReino = $this->dao_reino_model->obtenerReinoEspecifico($data,'estudiante'); //objeto reino
-        $validar['perfilR'][0]=$newReino->crearArregloReino($newReino);
+        $validar = $this->listarInfoEstudiante('estudiante');
         $this->load->view('Estudiante/PlantillaReinoEstudiante', $validar);
+    }
+
+    function cargarGaleria() {
+      $validar = $this->listarInfoEstudiante('estudiante');
+      $this->load->view('Estudiante/galeriaEstudiante', $validar);
+    }
+
+    function cargarGaleriaProfesor() {
+      $validar = $this->listarInfoEstudiante('pofesor');
+      $this->load->view('Profesor/galeriaProfesor', $validar);
+    }
+
+    function listarInfoEstudiante($sesion){
+      $data = array(
+          'k_reino' => $_GET['k_reino'],
+      );
+      $newReino = $this->dao_reino_model->obtenerReinoEspecifico($data,$sesion); //objeto reino
+      $validar['perfilR'][0]=$newReino->crearArregloReino($newReino);
+      $validar['galeria'] = $this->dao_reino_model->obtenerGaleria($_GET['k_reino'], $sesion);
+      $validar['novedades'] = $this->dao_reino_model->obtenerNovedades($_GET['k_reino'],$sesion);
+      if($sesion == 'estudiante'){
+        $validar['honores'] = $this->dao_estudiante_model->obtenerHonores($_SESSION['codigo'], $sesion);
+        $validar['premios'] = $this->dao_estudiante_model->obtenerPremios($_SESSION['codigo'], $_GET['k_reino'],$sesion);
+        $validar['nivel'] = $this->dao_estudiante_model->notaEnReino($_SESSION['codigo'], $_GET['k_reino'],$sesion);
+      }
+      return $validar;
     }
 
     function mapaActividadesProfesorC(){
@@ -152,6 +172,34 @@ class Reino extends CI_Controller {
         }
       }
       $this->load->view('Profesor/Notas',$response);
+    }
+
+    function actualizarGaleria(){
+      switch ($_POST['tipoA']) {
+        case 2:
+        case 0:
+          $documento = new Actividad();
+          $result = $documento->updateFile('assets/imagenes/images/gallery/',$_FILES['fileArchivoNuevo']['error'], $_FILES['fileArchivoNuevo']['name'],$_FILES['fileArchivoNuevo']['tmp_name']);
+          if($result[0]==true){
+              $this->dao_reino_model->insertarMultimedia($_GET['k_reino'],$_POST['tipoA'],"","","/Arcadia/assets/imagenes/images/gallery/".$result[2]);
+          }
+          break;
+        case 1:
+            $video = explode("=",$_POST['video']);
+            if(count($video) == 2){
+              $this->dao_reino_model->insertarMultimedia($_GET['k_reino'],$_POST['tipoA'],"","","https://www.youtube.com/embed/".$video[1]);
+            }
+          break;
+        default:
+          break;
+      }
+      $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." insertó un elemento en la galeria ", $_GET['k_reino'], 'profesor');
+      $this->cargarGaleriaProfesor();
+    }
+
+    function crearNovedad(){
+      $this->dao_reino_model->insertarNovedad($_POST['novedad'], $_GET['k_reino'], 'profesor');
+      $this->obtenerReinoProfesorC();
     }
 }
 

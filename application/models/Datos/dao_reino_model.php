@@ -49,8 +49,18 @@ class Dao_reino_model extends CI_Model {
         $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
         $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
         if ($line['o_codigo'] == $reino['codigo']) {
-            $insert = "INSERT INTO CALIFICACION_EN_REINO (K_NICKNAME,K_REINO)
-                         VALUES ('" . $_SESSION['codigo'] . "', " . $reino['k_reino'] . ")";
+            $consultaClase = "SELECT k_clase FROM estudiante WHERE K_NICKNAME ='".$_SESSION['codigo']."'";
+            $resultConsult = pg_query($consultaClase) or die('La consulta fallo: ' . pg_last_error());
+            $line2 = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+            $consultaNivel = "SELECT * FROM nivel WHERE v_clase =".$line2['k_clase'];
+            $resultConsult = pg_query($consultaNivel) or die('La consulta fallo: ' . pg_last_error());
+            while ($line3 = pg_fetch_array($resultConsult, null, PGSQL_ASSOC)) {
+                if($line3['v_puntaje_r'] == 0)
+                  $kClase =  $line3['k_nivel'];
+            }
+
+            $insert = "INSERT INTO CALIFICACION_EN_REINO (K_NICKNAME,K_REINO,K_NIVEL,V_ACUMULADO)
+                         VALUES ('" . $_SESSION['codigo'] . "', " . $reino['k_reino'] .",".$kClase. ",0)";
             $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
             $configbd->cerrarSesion();
             return true;
@@ -172,7 +182,7 @@ class Dao_reino_model extends CI_Model {
                     if ($line2['i_estado'] == "Activa" AND $act->validarFechaVencimientoActividad($line2['f_vencimiento'], $line2['k_actividad'])){
                         $line2['i_estado'] = "Cerrada";
                     }
-                    $tipoActividad = $this->dao_actividad_model->obtenerTipoActividad($line2['k_tipo_actividad'], $sesion);
+                    $tipoActividad = $act->obtenerTipoActividad($line2['k_tipo_actividad'], $sesion);
                     $actividad=$actividad->crearActividad($line2['k_actividad'],$line2['n_nombre'],$line2['n_descripcion'],$line2['q_intentos'],$line2['v_porcentaje'],$line2['f_creacion'],$line2['f_vencimiento'],$line2['k_prerequisito'],$line2['k_tipo_actividad'],"",$line2['i_estado']);
                     $regiones[$h]->agregarActividad($actividad);
                     if ($sesion == 'estudiante'){
@@ -197,19 +207,17 @@ class Dao_reino_model extends CI_Model {
         return $regiones;
     }
 
-    function
-
     function obtenerEstudiantesReino($idReino){
         $configbd = new configbd_model();
         $dbconn4=$configbd->abrirSesion('profesor');
         $consulta = "SELECT * FROM CALIFICACION_EN_REINO WHERE K_REINO =".$idReino;
         $resultQuery = pg_query($consulta) or die('La consulta fallo: ' . pg_last_error());
         $counter = 0;
-        while ($line4 = pg_fetch_array($resultQuery, null, PGSQL_ASSOC))
-        {
+        while ($line4 = pg_fetch_array($resultQuery, null, PGSQL_ASSOC)){
             $estudiantes[$counter] = $line4['k_nickname'];
             $counter++;
         }
+        $configbd->cerrarSesion();
         return $estudiantes;
     }
 
@@ -218,6 +226,79 @@ class Dao_reino_model extends CI_Model {
         $dbconn4=$configbd->abrirSesion('profesor');
         $update = "UPDATE calificacion_en_reino SET v_acumulado = ".$valorAcumulado." , k_nivel = ".$nivel." WHERE k_reino = ".$reino." AND k_nickname = '".$nicknameEstudiante."'";
         $resultUpdate = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+        $configbd->cerrarSesion();
+    }
+
+    function obtenerGaleria($reino, $sesion){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion($sesion);
+        $consulta = "SELECT * FROM multimedia WHERE k_reino = ".$reino;
+        $resultConsulta = pg_query($consulta) or die('La consulta fallo: ' . pg_last_error());
+        $galeria['documentos'] = null;
+        $galeria['videos'] = null;
+        $galeria['imagenes'] = null;
+        $i=0;
+        $j=0;
+        $k=0;
+        while ($line = pg_fetch_array($resultConsulta, null, PGSQL_ASSOC)){
+            switch ($line['k_tipo_archivo']) {
+              case 0:
+                $galeria['documentos'][$i] = $line['n_archivo'];
+                $i++;
+                break;
+              case 1:
+                $galeria['videos'][$j] = $line['n_archivo'];
+                $j++;
+                break;
+              case 2:
+                $galeria['imagenes'][$k] = $line['n_archivo'];
+                $k++;
+                break;
+              default:
+                break;
+            }
+        }
+        $configbd->cerrarSesion();
+        return $galeria;
+    }
+
+    function insertarMultimedia($reino, $tipoA, $nombreA, $descripcion, $archivo){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('profesor');
+      $insert = "INSERT INTO multimedia (k_multimedia,k_tipo_archivo,k_reino,n_nombre,n_descripcion,n_archivo)
+                 VALUES (nextval('sec_multimedia'), ".$tipoA.", ".$reino.", '".$nombreA."' , '".$descripcion."' , '".$archivo."')";
+      $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
+      $configbd->cerrarSesion();
+    }
+
+    function insertarNovedad($novedad, $reino, $sesion){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion($sesion);
+      date_default_timezone_set('America/Bogota');
+      $date = date('Y-m-d', time());
+      $insertNovedad = "INSERT INTO novedad (k_novedad, k_reino, n_descripcion, f_fecha_creacion)
+                        VALUES (nextval('sec_novedades'), ".$reino.", '".$novedad."', "."(to_date('" . $date . "', 'YYYY-MM-DD'))".")";
+      $resultInser = pg_query($insertNovedad) or die('La consulta fallo: ' . pg_last_error());
+    }
+
+    function obtenerNovedades($reino, $sesion){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion($sesion);
+      $consultaSec = "SELECT last_value FROM sec_novedades;";
+      $consultaNovedades = "SELECT * FROM novedad WHERE k_reino = ".$reino." AND k_novedad = ";
+      $resultConsult = pg_query($consultaSec) or die('La consulta fallo: ' . pg_last_error());
+      $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+      $j=0;
+      for($i = $line['last_value']; $j < 8 AND $i >=0; $i--){
+        $resultConsult = pg_query($consultaNovedades.$i) or die('La consulta fallo: ' . pg_last_error());
+        $line2 = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
+        if($line2 != null){
+          $respuesta[$j]['novedad'] = $line2['n_descripcion'];
+          $respuesta[$j]['fecha'] = $line2['f_fecha_creacion'];
+          $j++;
+        }
+      }
+      return $respuesta;
     }
 
 }
