@@ -71,7 +71,8 @@ class Actividad extends CI_Controller {
                 $responseAnexo = $this->dao_anexo_model->insertarAnexoActividad($newAnexo);
                 $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." creo la actividad ".$_POST['nombre'], $_GET['k_reino'], 'profesor');
             }
-        }else{
+        }
+        if($_POST['tipoActividad']==2){
             $newActividad = new Actividad_model;
             $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
             $idRegion = $_GET['k_region'];
@@ -79,6 +80,20 @@ class Actividad extends CI_Controller {
                 $preguntas[$h]=$_POST['pregunta'.($h+1)];
             }
             $responseActividad = $this->dao_actividad_model->actividadCuestionario($newActividad, $idRegion,$preguntas);
+            $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." creo la actividad ".$_POST['nombre'], $_GET['k_reino'], 'profesor');
+        }
+        if($_POST['tipoActividad']==3){
+            $newActividad = new Actividad_model;
+            $newActividadResuelta = new Actividad_Resuelta_model;
+            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],1,$_POST['porcentaje'] / 100,"","1990/1/1","",$_POST['tipoActividad'],"","");
+            $idRegion = $_GET['k_region'];
+            $responseActividad = $this->dao_actividad_model->actividadReg($newActividad, $idRegion);
+            $listaEstudiantes = $this->dao_reino_model->obtenerEstudiantesReino($_GET['k_reino']);
+            $listaEstudiantes = $this->dao_estudiante_model->obtenerListaEstudiantes($listaEstudiantes);
+            for($i = 0; $i < count($listaEstudiantes); $i++){
+              $newActividadResuelta = $newActividadResuelta->crearActividadResuelta(1,$listaEstudiantes[$i]->getNickname(),$responseActividad,"",0,1);
+              $responseActividadResuelta = $this->dao_actividad_model->InsertarActividadResueltaEst($newActividadResuelta, 'profesor');
+            }
             $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." creo la actividad ".$_POST['nombre'], $_GET['k_reino'], 'profesor');
         }
         $listaRegiones = $this->dao_reino_model->obtenerActividadesReino($_GET['k_reino'], "profesor");
@@ -98,7 +113,7 @@ class Actividad extends CI_Controller {
                     $newSoporte = new Soporte_model;
                     $newActividadResuelta = new Actividad_Resuelta_model;
                     $newActividadResuelta = $newActividadResuelta->crearActividadResuelta(1,$_SESSION['codigo'],$_GET['k_actividad'],"",0,$_GET['n_intentos']+1);
-                    $responseActividadResuelta = $this->dao_actividad_model->InsertarActividadResueltaEst($newActividadResuelta);
+                    $responseActividadResuelta = $this->dao_actividad_model->InsertarActividadResueltaEst($newActividadResuelta, 'estudiante');
                     $newSoporte = $newSoporte->crearSoporte(1,$responseActividadResuelta,$result[2],"Descripcion");
                     $responseSoporte = $this->dao_soporte_model->insertarSoporteActividad($newSoporte);
                 }

@@ -12,7 +12,7 @@
         <script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
         <script src="/Arcadia/assets/js/jcanvas.min.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="/Arcadia/assets/css/header-login-signup.css">
-
+        <link rel="stylesheet" href="/Arcadia/assets/css/tabla_inicio.css">
         <script type="text/javascript" charset="utf-8" async defer>
 
             function desplegar(menu) {

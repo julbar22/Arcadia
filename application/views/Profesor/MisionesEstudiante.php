@@ -89,11 +89,14 @@
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['f_vencimiento']."</td>";
                                                 switch ($regiones[$i]['actividades'][$j]['k_tipo_actividad']) {
-                                                  case 0 :
+                                                  case 2 :
                                                     echo "<td>Cuestionario</td>";
                                                     break;
                                                   case 1 :
                                                     echo "<td>Archivo</td>";
+                                                    break;
+                                                  case 3 :
+                                                    echo "<td>Actividad en Clase</td>";
                                                     break;
                                                   default:
                                                     echo "<td></td>";
@@ -102,15 +105,22 @@
                                                 if($regiones[$i]['actividades'][$j]['i_estado'] == "Activa"){
                                                     echo "<td>Misión Activa</td><td></td>";
                                                 } else {
-                                                    if($respuestas[$i][$j]['anexo'] == "No Resuelta"){
+                                                    switch ($respuestas[$i][$j]['anexo']) {
+                                                      case "No Resuelta":
                                                         echo "<td>".$respuestas[$i][$j]['anexo']."</td>";
                                                         echo "<td>"."</td>";
-                                                        echo "<td>"."</td>";
-                                                    } else {
+                                                        break;
+                                                      case "Actividad en Clase":
+                                                          echo "<td></td>";
+                                                          echo "<input id='Bota".$i.$j."' name='Bota".$i.$j."' type='hidden' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i][$j]['nota']."'>";
+                                                          echo "<td><input id='Nota".$i.$j."' name='Nota".$i.$j."' step='0.01' type='number' min='0' max='10' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i][$j]['nota']."'>"."<input id='Id".$i.$j."' name='Id".$i.$j."' type='hidden' disabled='true' value='".$respuestas[$i][$j]['Id']."'>"."</td>";
+                                                          break;
+                                                      default:
                                                         $flag ++;
                                                         echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$respuestas[$i][$j]['anexo']."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></td>";
                                                         echo "<input id='Bota".$i.$j."' name='Bota".$i.$j."' type='hidden' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i][$j]['nota']."'>";
                                                         echo "<td><input id='Nota".$i.$j."' name='Nota".$i.$j."' step='0.01' type='number' min='0' max='10' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i][$j]['nota']."'>"."<input id='Id".$i.$j."' name='Id".$i.$j."' type='hidden' disabled='true' value='".$respuestas[$i][$j]['Id']."'>"."</td>";
+                                                        break;
                                                     }
                                                 }
                                                 echo "</tr>";

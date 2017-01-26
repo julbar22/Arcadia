@@ -19,15 +19,35 @@
         <script type="text/javascript" charset="utf-8" async defer>
             function tipoActividad(tipo){
                 if(parseInt(tipo)==1){
-                    $( '#numeroPreguntas' ).hide();
+                    $('#numeroPreguntas').hide();
                     $('#preguntas').hide();
                     $('#divFileActividad').show();
-                }else{
-                    $( '#numeroPreguntas' ).show();
+                    $('#divDechaVencimiento').show();
+                    $('#divIntentos').show();
+                    $('#intentos').attr('required', 'required');
+                    $('#fechaVencimiento').attr('required', 'required');
+                    $('#fileActividad').attr('required', 'required');
+                }
+                if(parseInt(tipo)==2){
+                    $('#numeroPreguntas').show();
                     $('#divFileActividad').hide();
                     $('#preguntas').show();
+                    $('#divDechaVencimiento').show();
+                    $('#divIntentos').show();
+                    $('#intentos').attr('required', 'required');
+                    $('#fechaVencimiento').attr('required', 'required');
+                    $('#fileActividad').removeAttr('required');
                 }
-
+                if(parseInt(tipo)==3){
+                    $('#numeroPreguntas').hide();
+                    $('#divFileActividad').hide();
+                    $('#preguntas').hide();
+                    $('#divFechaVencimiento').hide();
+                    $('#divIntentos').hide();
+                    $('#intentos').removeAttr('required');
+                    $('#fechaVencimiento').removeAttr('required');
+                    $('#fileActividad').removeAttr('required');
+                }
             }
          $(document).ready(function(){
 
@@ -36,7 +56,6 @@
             });
 
              $( '#cantidadDePreguntas' ).change(function() {
-             alert( $('#cantidadDePreguntas').val());
             });
          });
 
@@ -100,41 +119,43 @@
                         <div class="content_box">
 
                     <form method ="post" name = "formCrearActividad" class="form-horizontal" enctype="multipart/form-data">
-                            <h3 class="modal-title">Crea tu Actividad</h3>
+                            <center><h2 class="modal-title"><img src='/Arcadia/assets/imagenes/arcadiaIcon19.png' alt='LOGO' /> Crea tu Actividad <img src='/Arcadia/assets/imagenes/arcadiaIcon19r.png' alt='LOGO' /></h2></center><br>
 
                             <input type="hidden" value="" id="imagenModal">
                             <input type="hidden" value="" name="imagenModalId" id="imagenModalId">
 
+
+                            <div class="form-group">
+                                <label for='tipoActividad'>Tipo Actividad:</label>
+                                <select id="tipoActividad" name="tipoActividad" class="form-control" selected="selected">
+                                    <option value="1">Archivo</option>
+                                    <option value="2">Cuestionario</option>
+                                    <option value="3">Actividad en Clase</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for='nombre' >Nombre:</label>
                                 <input type='text' id='nombre' name="nombre" class="form-control"  required>
                             </div>
                             <div class="form-group">
-                                <label for='descripcion'>Descripcion:</label>
+                                <label for='descripcion' id="descripcionLabel" id="descripcionLabel">Descripcion:</label>
                                 <input type='text' id='descripcion' name="descripcion" class="form-control"   required>
                             </div>
-                            <div class="form-group">
-                                <label for='intentos'>#Intentos:</label>
+                            <div class="form-group" id="divIntentos">
+                                <label for='intentos' id="intentosLabel" id="intentosLabel">#Intentos:</label>
                                 <input type="number" id='intentos' name="intentos"  class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <label for='porcentaje'>Porcentaje:</label>
                                 <input type="number" min='0' max='100' id='porcentaje' name="porcentaje" class="form-control" required />
                             </div>
-                            <div class="form-group">
-                                <label for='fechaVencimiento'>Fecha de Vencimiento:</label>
+                            <div class="form-group" id="divFechaVencimiento">
+                                <label for='fechaVencimiento' id="fechaVenLabel" name="fechaVenLabel">Fecha de Vencimiento:</label>
                                 <input type="date" id='fechaVencimiento' name="fechaVencimiento" class="form-control" required />
-                            </div>
-                            <div class="form-group">
-                                <label for='tipoActividad'>Tipo Actividad:</label>
-                                <select id="tipoActividad" name="tipoActividad" class="form-control" selected="selected">
-                                    <option value="1" >Archivo</option>
-                                    <option value="2">Cuestionario</option>
-                                </select>
                             </div>
                             <div id="divFileActividad" class="form-group">
                                 <label for='fileActividad'>Archivo Adjunto:</label>
-                                <input type="file" id='fileActividad' name="fileActividad" />
+                                <input type="file" id='fileActividad' name="fileActividad" required/>
                             </div>
                             <div id="numeroPreguntas" class="form-group" style="display:none;" >
                                 <label for='tipoActividad'>Cantidad de Preguntas:</label>

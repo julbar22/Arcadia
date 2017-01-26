@@ -91,14 +91,22 @@
                                             echo "<tr>";
                                             echo "<td>".$estudiantes[$i]->getNombre()."</td>";
                                             echo "<td>".$estudiantes[$i]->getApellido()."</td>";
-                                            if($respuestas[$i]['anexo'] == "No Resuelta"){
-                                                echo "<td>".$respuestas[$i]['anexo']."</td>";
-                                                echo "<td>"."</td>";
-                                                echo "<td>"."</td>";
-                                            } else {
-                                                echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$respuestas[$i]['anexo']."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></form></td>";
-                                                echo "<input id='Bota".$i."' name='Bota".$i."' type='hidden' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>";
-                                                echo "<td><input id='Nota".$i."' name='Nota".$i."' step='0.01' type='number' min='0' max='10' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>"."<input id='Id".$i."' name='Id".$i."' type='hidden' disabled='true' value='".$respuestas[$i]['Id']."'>"."</td>";
+                                            switch ($respuestas[$i]['anexo']) {
+                                              case "No Resuelta":
+                                                  echo "<td>".$respuestas[$i]['anexo']."</td>";
+                                                  echo "<td>"."</td>";
+                                                  echo "<td>"."</td>";
+                                                  break;
+                                              case "Actividad en Clase":
+                                                  echo "<td>".$respuestas[$i]['anexo']."</td>";
+                                                  echo "<input id='Bota".$i."' name='Bota".$i."' type='hidden' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>";
+                                                  echo "<td><input id='Nota".$i."' name='Nota".$i."' step='0.01' type='number' min='0' max='10' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>"."<input id='Id".$i."' name='Id".$i."' type='hidden' disabled='true' value='".$respuestas[$i]['Id']."'>"."</td>";
+                                                  break;
+                                              default:
+                                                  echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$respuestas[$i]['anexo']."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></form></td>";
+                                                  echo "<input id='Bota".$i."' name='Bota".$i."' type='hidden' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>";
+                                                  echo "<td><input id='Nota".$i."' name='Nota".$i."' step='0.01' type='number' min='0' max='10' size='1' style='text-align:center;' disabled='true' class='form-control' aria-describedby='basic-addon1' value='".$respuestas[$i]['nota']."'>"."<input id='Id".$i."' name='Id".$i."' type='hidden' disabled='true' value='".$respuestas[$i]['Id']."'>"."</td>";
+                                                  break;
                                             }
                                         }
                                         echo "</tbody>";
