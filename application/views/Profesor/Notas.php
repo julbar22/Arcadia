@@ -70,7 +70,7 @@
                                 for($j=0; $j<count($regiones[$i]->getActividades());$j++){
                                   echo "<td>".$promAct[$i][$j]."</td>";
                                 }
-                              echo "<td></td>";  
+                              echo "<td></td>";
                             echo "</tr>";
                   echo "</tbody>";
                 echo "</table>";

@@ -1,9 +1,10 @@
 .header-login-signup{
+	background-color:#292c2f;
+	box-shadow:0 1px 1px #ccc;
 	padding: 20px 40px;
-	box-sizing:border-box;
-	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
-	height: 100px;
- 	background-color: white;
+	height: 92px;
+	color: #ffffff;
+	box-sizing: border-box;
 }
 
 .header-login-signup .header-limiter {
@@ -22,13 +23,13 @@
 }
 
 .header-login-signup .header-limiter h1 span {
-	color: #FFFFFF;
+	color: #5383d3;
 }
 
 /* The navigation links */
 
 .header-login-signup .header-limiter a {
-	color: #FFFFFF;
+	color: #ffffff;
 	text-decoration: none;
 }
 
@@ -54,7 +55,7 @@
 }
 
 .header-login-signup .header-limiter nav a.selected {
-	color: #FFFFFF;
+	color: #608bd2;
 }
 
 /* Login/Sign up buttons */
@@ -80,7 +81,7 @@
 
 .header-login-signup .header-limiter ul li:last-child a {
 	font-weight: bold;
-	background-color: #FFFFFF;
+	background-color: #3a3c3e;
 	padding: 10px 15px;
 	border-radius: 3px;
 }
@@ -119,201 +120,7 @@
 
 /* For the headers to look good, be sure to reset the margin and padding of the body */
 
-.header-login-signup2{
-	padding: 20px 40px;
-	box-sizing:border-box;
-	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
-	height: 92px;
-	background: rgba(19,37,56,1);
-	background: -moz-linear-gradient(left, rgba(19,37,56,1) 0%, rgba(21,53,84,1) 20%, rgba(26,65,102,1) 38%, rgba(28,70,110,1) 51%, rgba(26,65,102,1) 65%, rgba(21,53,84,1) 84%, rgba(19,37,56,1) 100%);
-	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(19,37,56,1)), color-stop(20%, rgba(21,53,84,1)), color-stop(38%, rgba(26,65,102,1)), color-stop(51%, rgba(28,70,110,1)), color-stop(65%, rgba(26,65,102,1)), color-stop(84%, rgba(21,53,84,1)), color-stop(100%, rgba(19,37,56,1)));
-	background: -webkit-linear-gradient(left, rgba(19,37,56,1) 0%, rgba(21,53,84,1) 20%, rgba(26,65,102,1) 38%, rgba(28,70,110,1) 51%, rgba(26,65,102,1) 65%, rgba(21,53,84,1) 84%, rgba(19,37,56,1) 100%);
-	background: -o-linear-gradient(left, rgba(19,37,56,1) 0%, rgba(21,53,84,1) 20%, rgba(26,65,102,1) 38%, rgba(28,70,110,1) 51%, rgba(26,65,102,1) 65%, rgba(21,53,84,1) 84%, rgba(19,37,56,1) 100%);
-	background: -ms-linear-gradient(left, rgba(19,37,56,1) 0%, rgba(21,53,84,1) 20%, rgba(26,65,102,1) 38%, rgba(28,70,110,1) 51%, rgba(26,65,102,1) 65%, rgba(21,53,84,1) 84%, rgba(19,37,56,1) 100%);
-	background: linear-gradient(to right, rgba(19,37,56,1) 0%, rgba(21,53,84,1) 20%, rgba(26,65,102,1) 38%, rgba(28,70,110,1) 51%, rgba(26,65,102,1) 65%, rgba(21,53,84,1) 84%, rgba(19,37,56,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#132538', endColorstr='#132538', GradientType=1 );
-}
-
-.header-login-signup2 .header-limiter {
-	max-width: 1200px;
-	text-align: center;
-	margin: 0 auto;
-}
-
-/* Logo */
-
-.header-login-signup2 .header-limiter h1{
-	float: left;
-	font: normal 28px Cookie, Arial, Helvetica, sans-serif;
-	line-height: 80px;
-	margin: 0;
-}
-
-.header-login-signup2 .header-limiter h1 span {
-	color: #FFFFFF;
-}
-
-/* The navigation links */
-
-.header-login-signup2 .header-limiter a {
-	color: #FFFFFF;
-	text-decoration: none;
-}
-
-.header-login-signup2 .header-limiter nav {
-	font:16px Arial, Helvetica, sans-serif;
-	line-height: 50px;
-	float: left;
-	margin: 0 0 0 60px;
-	padding: 0;
-}
-
-.header-login-signup2 .header-limiter nav a{
-	font-size: 14px;
-	display: inline-block;
-	padding: 0 5px;
-	opacity: 0.9;
-	text-decoration:none;
-	line-height: 1;
-}
-
-.header-login-signup2 .header-limiter nav a:hover {
-	opacity: 1;
-}
-
-.header-login-signup2 .header-limiter nav a.selected {
-	color: #FFFFFF;
-}
-
-/* Login/Sign up buttons */
-
-.header-login-signup2 .header-limiter ul {
-	font: 14px Arial, Helvetica, sans-serif;
-	list-style: none;
-	line-height: 4;
-	float: right;
-}
-
-.header-login-signup2 .header-limiter ul li {
-	display: inline-block;
-	margin-left: 20px;
-	opacity:0.9;
-}
-
-.header-login-signup2 .header-limiter ul li:hover{
-	opacity: 1;
-}
-
-/* The sign up button */
-
-.header-login-signup2 .header-limiter ul li:last-child a {
-	font-weight: bold;
-	background-color: #FFFFFF;
-	padding: 10px 15px;
-	border-radius: 10px;
-}
-
-/* Making the header responsive */
-
-@media all and (max-width: 600px) {
-
-	.header-login-signup2 {
-		padding: 25px;
-		height: 85px;
-	}
-
-	.header-login-signup2 .header-limiter h1 {
-		float: none;
-		margin: -8px 0 2px;
-		text-align: center;
-		font-size: 24px;
-		line-height: 1;
-	}
-
-	.header-login-signup2 .header-limiter nav {
-		margin: 0;
-		float: none;
-	}
-
-	.header-login-signup2 .header-limiter nav li a {
-		font-size: 13px;
-	}
-
-	.header-login-signup2 .header-limiter ul {
-		display: none;
-	}
-
-}
-
-/* For the headers to look good, be sure to reset the margin and padding of the body */
-
 body {
 	margin:0;
 	padding:0;
 }
-
-.datagrid table {
-		border-collapse: collapse;
-		 text-align: left;
-		 width: 100%;
-}
-.datagrid {
-	font: normal 12px/150% Arial, Helvetica, sans-serif;
-  background: #fff;
-  overflow: hidden;
-  border: 2px solid #006699;
- -webkit-border-radius: 4px;
- -moz-border-radius: 3px;
-  border-radius: 3px;
-	width: 50%;
-}
-.datagrid table td, .datagrid table th {
-	 padding: 7px 15px;
-}
-
-.datagrid table thead th {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
-	background-color:#006699;
-	color:#FFFFFF;
-	font-size: 12px; font-weight: bold; border-left: 1px solid #0070A8;
-	}
-
-.datagrid table thead th:first-child {
-	border: none; }
-
-	.datagrid table tbody td {
-		 color: #00496B;
-		 font-size: 18px;
-		 font-weight: normal;
-}
-
-.datagrid table tbody .alt td {
-	 background: #E1EEF4;
-	 color: #00496B;
-}
-
-.datagrid table tbody td:first-child { border-left: none; }
-.datagrid table tbody tr:last-child td { border-bottom: none; }
-.datagrid table tfoot td div { border-top: 1px solid #006699;background: #E1EEF4;}
-.datagrid table tfoot td { padding: 0; font-size: 12px }
-.datagrid table tfoot td div{ padding: 2px; }
-.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }
-.datagrid table tfoot  li { display: inline; }
-.datagrid table tfoot li a {
-	text-decoration: none;
-	 display: inline-block;
-	 padding: 2px 8px;
-	 margin: 1px;
-	 color: #FFFFFF;
-	 border: 1px solid #006699;
-	 -webkit-border-radius:
-	 3px; -moz-border-radius: 3px;
-	 border-radius: 3px;
-	 background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );
-	 background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );
-	 filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
-	 background-color:#006699;
-}
-
-.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #006699; color: #FFFFFF; background: none; background-color:#00557F;}div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
