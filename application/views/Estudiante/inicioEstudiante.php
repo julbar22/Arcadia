@@ -12,7 +12,7 @@
         <meta name="keywords" content="" />
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
         <link rel="stylesheet" href="/Arcadia/assets/css/skel-noscript.css" />
         <link rel="stylesheet" href="/Arcadia/assets/css/style.css" />
@@ -23,7 +23,7 @@
 
 
         <div id="header">
-            <div class="container">				
+            <div class="container">
                 <div id="logo">
                     <a href="#"><img src="/Arcadia/assets/imagenes/arcadialogo2.png" alt=""></a>
                 </div>
@@ -31,7 +31,7 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li class="active"><a href="#">Inicio</a></li>					
+                        <li class="active"><a href="#">Inicio</a></li>
                         <li><a href="/Arcadia/index.php/estudiante/perfilEstudianteC">Perfil</a></li>
                         <li><a href="/Arcadia/index.php/welcome/index">Salir</a></li>
                     </ul>
@@ -52,7 +52,7 @@
                             <header>
                                 <h2>Escoge tu Reino</h2>
                             </header>
-                            <p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante. Sed vel tellus.</p>				
+                            <p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante. Sed vel tellus.</p>
                         </section>
                     </div>
 
@@ -62,7 +62,7 @@
                             <header>
                                 <h2>Historia</h2>
                             </header>
-                            <p>Pellentesque tristique ante. Sed vel tellus. Curabitur sem urna, consequat suscipit mattis placerat, nulla.</p>				
+                            <p>Pellentesque tristique ante. Sed vel tellus. Curabitur sem urna, consequat suscipit mattis placerat, nulla.</p>
                         </section>
                     </div>
 
@@ -72,7 +72,7 @@
                             <header>
                                 <h2>Mision</h2>
                             </header>
-                            <p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Curabitur sem urna, consequat mattis placerat, nulla.</p>				
+                            <p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Curabitur sem urna, consequat mattis placerat, nulla.</p>
                         </section>
                     </div>
 
@@ -82,7 +82,7 @@
                             <header>
                                 <h2>Vision</h2>
                             </header>
-                            <p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Curabitur sem urna, consequat mattis placerat, nulla.</p>				
+                            <p>Pellentesque viverra vulputate enim. Aliquam erat volutpat. Curabitur sem urna, consequat mattis placerat, nulla.</p>
                         </section>
                     </div>
 
@@ -100,12 +100,12 @@
                             </header>
                             <ul class="style1">
                                 <li class="first"><img src="/Arcadia/assets/imagenes/pics06.jpg" width="80" height="80" alt="">
-                                    <p>- El logo de Arcadia fue diseñado basándose en el tutorial del usuario whtb760 en YouTube 
+                                    <p>- El logo de Arcadia fue diseñado basándose en el tutorial del usuario whtb760 en YouTube
                                         http://www.youtube.com/watch?v=UnuiQyP-_8I. </p>
                                 </li>
                                 <li><img src="/Arcadia/assets/imagenes/pics07.jpg" width="80" height="80" alt="">
                                     <p>- El mapa de Arcadia fue diseñado utilizando el tutorial y el archivo realizado por el usuario ILoveMyMatty que se puede encontrar en: http://www.youtube.com/watch?v=ZpTWObGSKD0. </p>
-                                </li>								
+                                </li>
                             </ul>
                         </section>
                     </div>
@@ -120,7 +120,7 @@
                                 </li>
                                 <li><img src="/Arcadia/assets/imagenes/pics10.jpg" width="80" height="80" alt="">
                                     <p>- Las imágenes de los edificios de los pueblos fueron tomadas del sitio web Open Clip Art del usuario nicubunu: http://openclipart.org/user-detail/nicubunu. </p>
-                                </li>								
+                                </li>
                             </ul>
                         </section>
                     </div>

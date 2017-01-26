@@ -11,7 +11,7 @@
         <script type="text/javascript" src="/Arcadia/assets/js/jquery-1.11.3.min.js"></script>
         <script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
         <script src="/Arcadia/assets/js/jcanvas.min.js" type="text/javascript" charset="utf-8"></script>
-
+        <link rel="stylesheet" href="/Arcadia/assets/css/header-login-signup.css">
 
         <script type="text/javascript" charset="utf-8" async defer>
 
@@ -25,13 +25,11 @@
                 var $myCanvas = $('#myCanvas');
 
                 $myCanvas.drawImage({
-                    source: '/Arcadia/assets/imagenes/mapaArcadia.jpg',
+                    source: '/Arcadia/assets/imagenes/mapaArcadia2.jpg',
                     x: 0, y: 0,
                     fromCenter: false,
                     width: 600,
                     height: 500
-
-
                 });
             });
 
@@ -39,6 +37,7 @@
         </script>
     </head>
     <body>
+
 
         <div id="templatemo_body_wrapper">
             <div id="templatemo_wrapper">
@@ -60,6 +59,7 @@
                     <div id="templatemo_sidebar">
 
                         <div id="templatemo_menu">
+                            <h3><center>Menu</center></h3>
                             <ul>
                                 <li><a href="/Arcadia/index.php/estudiante/inicioEstudiante">Inicio<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                                 <li><a onclick="desplegar('Notas');">Mis Notas<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></span></a>
@@ -84,30 +84,21 @@
                                 <li><a href="/Arcadia/index.php/welcome/index">Salir<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float: right;" ></a></li>
                             </ul>
                         </div> <!-- end of templatemo_menu -->
-
-
-                        <div class="sidebar_box">
-                            <div class="sb_title">Novedades</div>
-                            <div class="sb_content">
-
-                                <div class="sb_news_box">
-                                    <a href="#">Maecenas adipiscing elem sum ipsum.</a>
-                                    <span>25 September 2048</span>
-                                </div>
-
-                                <div class="sb_news_box">
-                                    <a href="#">Aser ecenas adipiscing de lorem ipsum.</a>
-                                    <span>18 September 2048</span>
-                                </div>
-
-                                <a href="#"><strong>View All</strong></a>
-                            </div>
-
-                            <div class="sb_bottom"></div>
-
-                        </div>
-
-
+                        <?php
+                        if(isset($novedades)){
+                          echo "<div class='sidebar_box'>";
+                              echo "<div class='sb_title'>Novedades</div>";
+                              echo "<div class='sb_content'>";
+                              for($i=0; $i<count($novedades);$i++){
+                                echo "<div class='sb_news_box'>";
+                                  echo  "<a>".$novedades[$i]['novedad']."</a>";
+                                  echo  "<span>".$novedades[$i]['fecha']."</span>";
+                                echo "</div>";
+                              }
+                              echo "</div>";
+                          echo "</div>";
+                        }
+                        ?>
                         <div class="cleaner"></div>
                     </div> <!-- end of sidebar -->
 
@@ -116,12 +107,54 @@
                         <div class="content_box">
                             <?php
                            if (isset($perfilR)) {
-                                echo "<h2 class='titulo_pagina'>" . $perfilR[0]['n_nombre'] . "</h2>";
+                                echo "<h1 class='titulo_pagina'><center> <img src='/Arcadia/assets/imagenes/arcadiaIcon14.png' alt='LOGO' /> Bienvenido al Reino " . $perfilR[0]['n_nombre'] . " <img src='/Arcadia/assets/imagenes/arcadiaIcon14.png' alt='LOGO' /></center></h1></br>";
+                                echo "<h4>Nos alegra tenerte de vuelta ".$_SESSION['codigo']." "."'".$honores['titulo']."'</h4></br>";
                             }
                             ?>
-                            <canvas id="myCanvas" width="600" height="500" style="border:1px solid #000000;"></canvas>
+
+                            <center><div class="datagrid">
+                              <table>
+                                <tbody>
+                                 <?php
+                                 if (isset($perfilR)) {
+                                      echo "<tr><td>Tu nivel </td><td>".$nivel['nivel']."</td></tr>";
+                                      echo "<tr class='alt'><td>Tu nota en el reino</td><td>".$nivel['valor']."</td></tr>";
+                                      echo "<tr><td>Tu oro disponible </td><td>".$premios['oro']." <img src='/Arcadia/assets/imagenes/coinIcon.png' alt='LOGO' /></td></tr>";
+                                 }
+                                 ?>
+                                </tbody>
+                              </table>
+                            </div></center></br>
+                            <center><canvas id="myCanvas" width="600" height="500" style="border:1px solid #000000;"></canvas></center>
                         </div>
 
+                        <div class="content_box last_box">
+                        <h2><img src='/Arcadia/assets/imagenes/arcadiaIcon4.png' alt='LOGO' />Galeria</h2>
+                        <?php
+                          if(isset($galeria)){
+                            echo "<div id='gallery'>";
+                              if($galeria['videos'] != null){
+                                for($i = 0; $i < count($galeria['videos']) AND $i < 1; $i++){
+                                  echo "<iframe src='".$galeria['videos'][$i]."' width='560' height='315' frameborder='0' allowfullscreen></iframe></br></br>";
+                                }
+                              }
+                              if($galeria['imagenes'] != null){
+                                for($i = 0; $i < count($galeria['imagenes']) AND $i < 3; $i++){
+                                  echo "<a href='".$galeria['imagenes'][$i]."' ><img height=123 width=154 src='".$galeria['imagenes'][$i]."'></a>";
+                                }
+                                echo "<div class='cleaner h20'></div>";
+                              }
+                              if($galeria['documentos'] != null){
+                                for($i = 0; $i < count($galeria['documentos']) AND $i < 3; $i++){
+                                  echo "<a href='".$galeria['documentos'][$i]."' ><img height=123 width=154 src='/Arcadia/assets/imagenes/images/gallery/docIcon.png'></a>";
+                                }
+                                echo "<div class='cleaner h20'></div>";
+                              }
+                              echo "</div>";
+                              echo "<a href='/Arcadia/index.php/reino/cargarGaleria?k_reino=".$perfilR[0]['k_reino']."'><strong>Mirar Galeria</strong></a></div>";
+                            }
+                          ?>
+                           <!-- end of Gallery -->
                         <div class="content_box">
 
                             <div class="col_w290 float_l">
@@ -153,17 +186,7 @@
                             <div class="cleaner"></div>
                         </div>
 
-                        <div class="content_box last_box">
-                            <h2>Galeria</h2>
 
-                            <div id="gallery">
-                                <a href="/Arcadia/assets/imagenes/images/gallery/image_01_b.jpg" class="pirobox" title="Project 1"><img src="/Arcadia/assets/imagenes/images/gallery/image_01.jpg" alt="1" /></a>
-                                <a href="images/gallery/image_02_b.jpg" class="pirobox" title="Project 2"><img src="/Arcadia/assets/imagenes/images/gallery/image_02.jpg" alt="2" /></a>
-                                <a href="images/gallery/image_03_b.jpg" class="pirobox" title="Project 3"><img src="/Arcadia/assets/imagenes/images/gallery/image_03.jpg" alt="3" /></a>
-                            </div> <!-- end of Gallery -->
-
-                            <div class="cleaner h20"></div>
-                            <a href="#"><strong>Mirar Galeria</strong></a></div>
 
                     </div>
 

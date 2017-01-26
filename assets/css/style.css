@@ -53,7 +53,7 @@
 			{
 				display: inline-block;
 			}
-			
+
 				.image img
 				{
 					display: block;
@@ -66,20 +66,20 @@
 					width: 100%;
 					margin: 0 0 2em 0;
 				}
-				
+
 				.image.full
 				{
 					display: block;
 					width: 100%;
 					margin-bottom: 2em;
 				}
-				
+
 				.image.left
 				{
 					float: left;
 					margin: 0 2em 2em 0;
 				}
-				
+
 				.image.centered
 				{
 					display: block;
@@ -96,12 +96,12 @@
 		{
 			margin-bottom: 1em;
 		}
-			
+
 			header h2
 			{
 				font-weight: 600;
 			}
-		
+
 			header .byline
 			{
 				display: block;
@@ -112,16 +112,16 @@
 		ul.style
 		{
 		}
-		
+
 		ul.style li
 		{
 			padding: 0.55em 0em;
 		}
-		
+
 		ul.style li:first-child
 		{
 		}
-		
+
 		ul.style a
 		{
 			color: #774535 !important;
@@ -130,16 +130,16 @@
 		ul.style1
 		{
 		}
-		
+
 		ul.style1 li
 		{
 			padding: 0.55em 0em;
 		}
-		
+
 		ul.style1 li:first-child
 		{
 		}
-		
+
 		ul.style1 a
 		{
 			color: #774535 !important;
@@ -150,7 +150,7 @@
 			float: left;
 			margin-right: 1em;
 		}
-	
+
 /*********************************************************************************/
 /* Header                                                                        */
 /*********************************************************************************/
@@ -182,7 +182,7 @@
 		{
 			float: left;
 		}
-		
+
 			#nav > ul > li:last-child
 			{
 				padding-right: 0;
@@ -220,13 +220,26 @@
 	#banner
 	{
 		position: relative;
-		background: #333 url(/Arcadia/assets/imagenes/banner4.jpg);
+		background: #fff url(/Arcadia/assets/imagenes/banner4.jpg);
 		background-size: cover;
 	}
-	
+
 	.homepage #banner
 	{
 	}
+
+
+		#bannerx
+		{
+			position: relative;
+			background: #fff url(/Arcadia/assets/imagenes/banner3.jpg);
+			background-size: cover;
+		}
+
+		.homepage #bannerx
+		{
+		}
+
 
 /*********************************************************************************/
 /* Main                                                                          */
@@ -239,12 +252,12 @@
 		background: #261611;
 		color: #774535;
 	}
-	
+
 	#main header h2
 	{
 		color: #bc765f;
 	}
-	
+
 	#main a
 	{
 		color: #bc765f;
@@ -272,7 +285,7 @@
 		background: #372019;
 		color: #8c5240;
 	}
-	
+
 	#marketing header h2
 	{
 		color: #c0745d;
@@ -281,7 +294,7 @@
 /*********************************************************************************/
 /* Copyright                                                                     */
 /*********************************************************************************/
-	
+
 	#copyright
 	{
 		position: relative;
@@ -289,13 +302,13 @@
 		text-align: center;
 		color: #774535;
 	}
-	
+
 	#copyright .container
 	{
 	}
-	
+
 	#copyright a
 	{
 		text-decoration: none;
 		color: #774535 !important;
-	}		
+	}

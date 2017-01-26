@@ -2,9 +2,9 @@
 Credit: http://www.templatemo.com
 */
 
-/* 
-Web Design Template 
-http://www.templatemo.com/preview/templatemo_243_web_design 
+/*
+Web Design Template
+http://www.templatemo.com/preview/templatemo_243_web_design
 */
 body {
 	margin: 0px;
@@ -12,7 +12,7 @@ body {
 	color: #666;
 	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 12px;
-	line-height: 1.7em; 
+	line-height: 1.7em;
 	background: url(/Arcadia/assets/imagenes/images/templatemo_body.jpg);
 	background-color: #dbdbdd;
 	background-position: top;
@@ -66,7 +66,7 @@ em { color: #000; }
 #templatemo_body_wrapper {
 	width: 100%;
 	background: url(/Arcadia/assets/imagenes/fondoReinos.jpg) center top no-repeat;
-	              
+
 }
 div{
 	box-sizing: content-box;
@@ -82,10 +82,10 @@ div{
 	margin: 0 auto;
 }
 
-#tempaltemo_header { 
+#tempaltemo_header {
 	position: relative;
 	width: 984px;
-	height: 100px;	
+	height: 100px;
 }
 
 
@@ -93,7 +93,7 @@ div{
 #header_content {
 	float: left;
 	margin: 130px 0 0 90px;
-	width: 460px;	
+	width: 460px;
 }
 
 #site_title a {
@@ -106,7 +106,7 @@ div{
 }
 
 #header_content p {
-	font-size: 18px;
+	font-size: 6px;
 	color: #fff;
 	text-align: justify;
 }
@@ -128,7 +128,7 @@ div{
 #templatemo_main_bottom {
 	width: 984px;
 	height: 30px;
-	background: url(/Arcadia/assets/imagenes/images/templatemo_content_bottom.png) no-repeat 
+	background: url(/Arcadia/assets/imagenes/images/templatemo_content_bottom.png) no-repeat
 }
 
 #templatemo_main {
@@ -156,7 +156,7 @@ div{
 	color: #666666;
 	background: url(/Arcadia/assets/imagenes/images/templatemo_sidebar_box_top.jpg) no-repeat top left;
 }
-.sb_content { 
+.sb_content {
 	padding: 20px 30px;
 	background: url(/Arcadia/assets/imagenes/images/templatemo_sidebar_box_middle.jpg) repeat-y left;
 }
@@ -192,7 +192,7 @@ div{
 	height: 36px;
 	padding: 0 20px 0 30px;
 	font-size: 14px;
-	color: #444444;	
+	color: #444444;
 	text-decoration: none;
 	font-weight: normal;
 	outline: none;
@@ -203,7 +203,7 @@ div{
 	padding-left: 30px;
 	background-color: #5f9ea0;
 	color: #FFFFFF;
-	
+
 }
 
 /* end of menu */

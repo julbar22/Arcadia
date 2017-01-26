@@ -12,7 +12,7 @@
         <meta name="keywords" content="" />
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/Arcadia/assets/css/bootstrap.css" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
         <script>
 
@@ -20,7 +20,6 @@
                 $('#myModal').modal('show');
                 document.getElementById("imagenModal").value = imagenUrl;
                 document.getElementById("imagenModalId").value = imagenId;
-
             }
         </script>
 
@@ -35,7 +34,7 @@
 
 
         <div id="header">
-            <div class="container">				
+            <div class="container">
                 <div id="logo">
                     <a href="#"><img src="/Arcadia/assets/imagenes/arcadialogo2.png" alt=""></a>
                 </div>
@@ -86,7 +85,7 @@
             </div>
         </div>
         <div id="marketing">
-            <h2 id="Creditos">Reinos de Arcadia</h2>		
+            <h2 id="Creditos">Reinos de Arcadia</h2>
         </div>
 
         <div id="myModal" class="modal fade" role="dialog">
@@ -101,10 +100,12 @@
                         </div>
                         <div id="body_modal" class="modal-body">
 
-                            <input type="hidden" value="" id="idReino">                            
+                            <input type="hidden" value="" id="idReino">
                             <div class="form-group">
                                 <label for='nombre' >Nombre:</label>
                                 <input type='text' id='nombre' name="nombre" class="form-control"  required>
+                                <input id='imagenModal' name='imagenModal' class='form-control' value='' type='hidden'>
+                                <input id='imagenModalId' name='imagenModalId' class='form-control' value='' type='hidden'>
                             </div>
                             <div class="form-group">
                                 <label for='codigo'>Codigo:</label>
@@ -112,22 +113,22 @@
                             </div>
                             <div class="form-group">
                                 <label for='historia'>Historia:</label>
-                                <textarea id='historia' name="historia"  class="form-control" required></textarea> 
+                                <textarea id='historia' name="historia"  class="form-control" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for='mision'>Mision:</label>
-                                <textarea id='mision' name="mision" class="form-control" required></textarea> 
-                            </div>  
+                                <textarea id='mision' name="mision" class="form-control" required></textarea>
+                            </div>
                             <div class="form-group">
                                 <label for='vision'>Vision:</label>
-                                <textarea id='vision' name="vision" class="form-control" required></textarea> 
-                            </div>                     	                                    		          
+                                <textarea id='vision' name="vision" class="form-control" required></textarea>
+                            </div>
                         </div>
                         <div id="modal_footer" class="modal-footer">
-                            <input value="Cancelar" data-dismiss="modal" class="btn btn-danger">   
-                            <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success">                                      
+                            <input value="Cancelar" data-dismiss="modal" class="btn btn-danger">
+                            <input type="submit" value="Enviar Datos" id="btnSubmit" class="btn btn-success">
                         </div>
-                    </form> 
+                    </form>
                 </div>
 
             </div>

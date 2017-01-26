@@ -26,7 +26,11 @@ class welcome extends CI_Controller {
 	public function registro()
 	{
 		$this->load->model('Datos/dao_estudiante_model');
+		$this->load->model('Datos/dao_clase_model');
+		$this->load->model('clase_model');
+		$data['clases']=$this->dao_clase_model->obtenerClases();
 		$data['avatares']=$this->dao_estudiante_model->avatarEst();
+		$data['clases'] = $this->dao_clase_model->anexarAvatares($data['avatares'],$data['clases']);
 		$this->load->view('Estudiante/Registro_Estudiante',$data);
 	}
 
