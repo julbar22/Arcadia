@@ -110,7 +110,11 @@
                                                 echo "<td><input type='checkbox' class='checkActividad' id='check".$regiones[$i]['actividades'][$j]['k_actividad']."' onclick='checkboxEstado(".json_encode($regiones[$i]['actividades'][$j]).",".$i.",". $_GET['k_reino'].")'></td>" ;
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['n_nombre']."</td>";
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['n_intentos_realizados']."/".$regiones[$i]['actividades'][$j]['q_intentos']."</td>";
-                                                echo "<td>".$regiones[$i]['actividades'][$j]['f_vencimiento']."</td>";
+                                                if($regiones[$i]['actividades'][$j]['k_tipo_actividad'] == 3){
+                                                  echo "<td>Actividad en Clase</td>";
+                                                }  else {
+                                                  echo "<td>".$regiones[$i]['actividades'][$j]['f_vencimiento']."</td>";          
+                                                }
                                                 echo "<td>".$regiones[$i]['actividades'][$j]['i_estado']."</td>";
                                                 if($regiones[$i]['actividades'][$j]['k_tipo_actividad']==1){
                                                   echo "<td><form method='post' action='http://localhost/Arcadia/index.php/Actividad/descargarDocumentoActividad?download_file=".$regiones[$i]['actividades'][$j]['n_anexo']->getNombre()."' role='form' class='form-inline'><button type='submit' id='Descargar' name='Descargar' class='btn btn-primary'>Descargar</button></form></td>";

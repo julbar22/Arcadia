@@ -177,6 +177,7 @@ class Dao_reino_model extends CI_Model {
 
         while ($line2 = pg_fetch_array($resultView, null, PGSQL_ASSOC)) {
             $actividad = new Actividad_model();
+            $anexoM = new dao_anexo_model();
             for($h=0;$h<count($regiones);$h++){
                 if($line2['n_nombre_reg']==$regiones[$h]->getNombre()){
                     if ($line2['i_estado'] == "Activa" AND $act->validarFechaVencimientoActividad($line2['f_vencimiento'], $line2['k_actividad'])){
@@ -187,7 +188,7 @@ class Dao_reino_model extends CI_Model {
                     $regiones[$h]->agregarActividad($actividad);
                     if ($sesion == 'estudiante'){
                         if ($line2['k_tipo_actividad']==1){
-                          $actividad->agregarAnexo($this->dao_anexo_model->obtenerAnexoActividad($line2['k_actividad']));
+                          $actividad->agregarAnexo($anexoM->obtenerAnexoActividad($line2['k_actividad']));
                         }
                         $query = $consultRespuestas.$line2['k_actividad']." AND K_NICKNAME='".$_SESSION['codigo']."'";
                         $resultQuery = pg_query($query) or die('La consulta fallo: ' . pg_last_error());

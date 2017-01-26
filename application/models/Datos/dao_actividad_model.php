@@ -22,15 +22,18 @@ class Dao_actividad_model extends CI_Model {
       $consult = "SELECT K_CEDULA FROM PROFESOR WHERE N_NICKNAME='" . $_SESSION['codigo'] . "'";
       $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
       $profesor = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
-
+      if($actividad->getTipoActividad == 3){
+        $estadoActividad = 'Cerrada';
+      } else {
+        $estadoActividad = 'Activa';
+      }
       if($actividad->getPreRequisito()=="")
       {
         $insert = "INSERT INTO ACTIVIDAD (K_ACTIVIDAD,K_REGION,N_NOMBRE,N_DESCRIPCION,Q_INTENTOS,V_PORCENTAJE,F_CREACION,F_VENCIMIENTO,K_TIPO_ACTIVIDAD,I_ESTADO)
                          VALUES (nextval('sec_actividades')," . floatval($regionId) . ", '" . $actividad->getNombre(). "','" . $actividad->getDescripcion() . "', " . floatval($actividad->getIntentos()) . ",
-                        " .floatval($actividad->getPorcentaje())/100 . ",current_date," . "(to_date('" . $actividad->getFechaVencimiento() . "', 'YYYY-MM-DD'))," . floatval($actividad->getTipoActividad()) . ",'Activa')";
+                        " .floatval($actividad->getPorcentaje())/100 . ",current_date," . "(to_date('" . $actividad->getFechaVencimiento() . "', 'YYYY-MM-DD'))," . floatval($actividad->getTipoActividad()) . ",'".$estadoActividad."')";
 
-      }else
-      {
+      }else{
         $insert = "INSERT INTO ACTIVIDAD (K_ACTIVIDAD,K_REGION,N_NOMBRE,N_DESCRIPCION,Q_INTENTOS,V_PORCENTAJE,F_CREACION,F_VENCIMIENTO,K_PREREQUISITO,K_TIPO_ACTIVIDAD,I_ESTADO)
                          VALUES (nextval('sec_actividades')," . 1 . ", '" . $actividad->getNombre(). "','" . $actividad->getDescripcion() . "', " . floatval($actividad->getIntentos()) . ",
                          " .floatval($actividad->getPorcentaje())/100 . ",current_date," . "(to_date('" . $actividad->getFechaVencimiento() . "', 'YYYY-MM-DD'))," . floatval($actividad->getPreRequisito()) . "," . floatval($actividad->getTipoActividad()) . ",'Activa')";
@@ -44,9 +47,9 @@ class Dao_actividad_model extends CI_Model {
       return $line['id'];
     }
 
-    function InsertarActividadResueltaEst(Actividad_Resuelta_model $actividadResuelta){
+    function InsertarActividadResueltaEst(Actividad_Resuelta_model $actividadResuelta, $sesion){
         $configbd = new configbd_model();
-        $dbconn4= $configbd->abrirSesion('estudiante');
+        $dbconn4= $configbd->abrirSesion($sesion);
         $insert = "INSERT INTO ACTIVIDAD_RESUELTA (k_actividad_resuelta,k_nickname,k_actividad,n_observacion,v_nota,q_intento)
                   VALUES (nextval('sec_actividades_resueltas'),'".$actividadResuelta->getNickname()."',".$actividadResuelta->getActividad().",'".$actividadResuelta->getObservacion()."',".$actividadResuelta->getNota().",".$actividadResuelta->getIntento().")";
         $resultInser = pg_query($insert) or die('La consulta fallo: ' . pg_last_error());
@@ -157,8 +160,11 @@ class Dao_actividad_model extends CI_Model {
             $line = pg_fetch_array($resultConsult, null, PGSQL_ASSOC);
             $respueta['anexo'] = $line['n_nombre'];
         }
-        if ($tipoActividad == 0 AND $intento > -1){
+        if ($tipoActividad == 2 AND $intento > -1){
             $respueta['anexo'] = "Cuestionario";
+        }
+        if ($tipoActividad == 3 AND $intento > -1){
+            $respueta['anexo'] = "Actividad en Clase";
         }
         $configbd->cerrarSesion();
         return $respueta;
@@ -193,6 +199,8 @@ class Dao_actividad_model extends CI_Model {
         $tipoAct = pg_fetch_array($resultTipoA, null, PGSQL_ASSOC);
         return $tipoAct['n_nombre'];
     }
+
+
 }
 
 ?>
