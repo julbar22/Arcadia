@@ -22,7 +22,7 @@
                     $('#numeroPreguntas').hide();
                     $('#preguntas').hide();
                     $('#divFileActividad').show();
-                    $('#divDechaVencimiento').show();
+                    $('#divFechaVencimiento').show();
                     $('#divIntentos').show();
                     $('#intentos').attr('required', 'required');
                     $('#fechaVencimiento').attr('required', 'required');
@@ -32,7 +32,7 @@
                     $('#numeroPreguntas').show();
                     $('#divFileActividad').hide();
                     $('#preguntas').show();
-                    $('#divDechaVencimiento').show();
+                    $('#divFechaVencimiento').show();
                     $('#divIntentos').show();
                     $('#intentos').attr('required', 'required');
                     $('#fechaVencimiento').attr('required', 'required');

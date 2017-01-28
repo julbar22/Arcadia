@@ -74,7 +74,7 @@ class Actividad extends CI_Controller {
         }
         if($_POST['tipoActividad']==2){
             $newActividad = new Actividad_model;
-            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje'],"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
+            $newActividad = $newActividad->crearActividad(1,$_POST['nombre'],$_POST['descripcion'],$_POST['intentos'],$_POST['porcentaje']/100,"",$_POST['fechaVencimiento'],"",$_POST['tipoActividad'],"","");
             $idRegion = $_GET['k_region'];
             for($h=0;$h<$_POST['cantidadDePreguntas'];$h++){
                 $preguntas[$h]=$_POST['pregunta'.($h+1)];
@@ -172,16 +172,17 @@ class Actividad extends CI_Controller {
         return $file_name;
     }
 
-     function actualizarActividad(){
+     function actualizarActividad(){ 
+ 
          $newActividad = new Actividad_model();
-         $newActividad=$newActividad->crearActividad($_POST['actividadIdModal'],"","","","","","","","","",$_POST['Estado']);
+         $newActividad=$newActividad->crearActividad($_POST['actividadIdModal'],$_POST['nombreModal'],"","",$_POST['porcentaje']/100,"",$_POST['fechaVencimiento'],"","","",$_POST['Estado']);        
          $validar = $this->dao_actividad_model->actualizarActividad($newActividad);
-         $listaRegiones = $this->dao_reino_model->obtenerActividadesReino($_GET['k_reino'], "profesor");
+         $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
          for($i=0;$i<count($listaRegiones);$i++){
              $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
          }
-
-         $this->load->view('Profesor/ActividadesPorRegion',$response);
+ 
+         $this->load->view('Profesor/ActividadesPorRegion',$response);          
      }
 
      function verificarFechaActividad($k_actividad){
@@ -316,6 +317,27 @@ class Actividad extends CI_Controller {
        }
        return $respuesta;
      }
+
+    function eliminarActividadC(){
+         $this->dao_actividad_model->eliminarActividad($_GET['k_actividad']);
+         $listaRegiones = $this->dao_reino_model->obtenerActividadesRegion($_GET['k_reino']);
+         for($i=0;$i<count($listaRegiones);$i++){
+             $response['regiones'][$i]=$listaRegiones[$i]->crearArregloRegion($listaRegiones[$i]);
+         } 
+         $this->load->view('Profesor/ActividadesPorRegion',$response);
+
+     }
+
+     function verCuestionarioPorIdC(){             
+         $response=$this->dao_actividad_model->verCuestionarioporId();
+         echo json_encode($response);
+
+     }
+
+    public function unityIndex(){
+		$this->dao_actividad_model->setVariables($_GET['k_actividad']);
+        $this->load->view('Estudiante/unityIndex');	
+	}
 }
 
 ?>

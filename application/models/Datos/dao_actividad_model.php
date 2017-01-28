@@ -106,14 +106,6 @@ class Dao_actividad_model extends CI_Model {
 
     }
 
-   function actualizarActividad(Actividad_model $actividad){
-        $configbd = new configbd_model();
-        $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
-        $update = "UPDATE ACTIVIDAD SET I_ESTADO = '".$actividad->getEstado()."' WHERE k_actividad = " . $actividad->getActividad().";";
-        $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
-        $configbd->cerrarSesion();
-     }
-
     function obtenerFechaVencimiento($k_actividad){
         $configbd = new configbd_model();
         $dbconn4= $configbd->abrirSesion('estudiante');
@@ -198,6 +190,43 @@ class Dao_actividad_model extends CI_Model {
         $resultTipoA = pg_query($consultTipoA) or die('La consulta fallo: ' . pg_last_error());
         $tipoAct = pg_fetch_array($resultTipoA, null, PGSQL_ASSOC);
         return $tipoAct['n_nombre'];
+    }
+
+     function actualizarActividad(Actividad_model $actividad){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
+      $update = "UPDATE ACTIVIDAD SET I_ESTADO = '".$actividad->getEstado()."',F_VENCIMIENTO=(to_date('" . $actividad->getFechaVencimiento() . "', 'YYYY-MM-DD')), N_NOMBRE='".$actividad->getNombre()."', V_PORCENTAJE=".(floatval($actividad->getPorcentaje())/100)." WHERE k_actividad = " . $actividad->getActividad().";";
+      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+      $configbd->cerrarSesion();
+    }
+
+    function eliminarActividad($idActividad){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
+      $update = "UPDATE ACTIVIDAD SET I_ESTADO = 'Eliminada' WHERE k_actividad = " .$idActividad.";";
+      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+      $configbd->cerrarSesion();
+    }
+
+    function verCuestionarioPorId(){
+       $configbd = new configbd_model();
+       $dbconn4=$configbd->abrirSesion('admin');
+       $select = "SELECT * FROM VIEW_CUESTIONARIO_ID WHERE k_actividad = " .$_SESSION['cuestionario'].";";
+       $resultSelect = pg_query($select) or die('La consulta fallo: ' . pg_last_error());
+        $cuestionarios = array();
+        $i = 0;
+        while ($line = pg_fetch_array($resultSelect, null, PGSQL_ASSOC)) {
+            $cuestionarios[$i]=$line;           
+            $i++;
+        }        
+       $configbd->cerrarSesion();
+       shuffle($cuestionarios);
+       return  $cuestionarios;
+    }
+
+    function setVariables($id){
+      $_SESSION['cuestionario']=$id;
+      
     }
 
 

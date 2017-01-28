@@ -35,12 +35,15 @@
                 if(global.n_intentos_realizados >= global.q_intentos){
                   $('#textoModal').val("Máximo de intentos permitidos");
                   $('#ModalActividadFallida').modal('show');
-                }else{
+                }else{                    
                   switch(global.k_tipo_actividad) {
-                    case "0":
+                    
+                    case "2":
                       $('#nombreActividadT0').val("Nombre : "+global.n_nombre);
                       $('#tipoActividadT0').val("Tipo : Cuestionario");
+                      $("#btnSubmitCuestionario").attr("onclick","this.form.action ='/Arcadia/index.php/actividad/unityIndex?k_actividad="+global.k_actividad+"&k_reino="+reinoG+"'");
                       $('#ModalFormulario').modal('show');
+                      
                       break;
                     case "1":
                       $('#nombreActividadT1').val("Nombre : "+global.n_nombre);
@@ -214,7 +217,7 @@
                             <p style="text-align:center"><img align="middle" src='/Arcadia/assets/imagenes/cuestionarioIcon.png' alt='LOGO'></p>
                             <h3 align='center'><input size="30" disabled='true' style="text-align:center" id="nombreActividadT0" name="nombreActividadT0" value="" enabled></h3>
                             <h3 align='center'><input size="30" disabled='true' style="text-align:center" id="tipoActividadT0" name="tipoActividadT0" value="" enabled></h3>
-                            <p style="text-align:center"><button onclick='myFunction()' class='btn btn-primary'>Resolver</button></p>
+                            <p style="text-align:center"><input type='submit' value='Resolver' name='btnSubmitCuestionario' id='btnSubmitCuestionario' class='btn btn-success' onclick=""></p>
                         </div>
                     </form>
                 </div>

@@ -16,19 +16,29 @@
                 if(!$('#check'+idCheckbox.k_actividad).prop('checked')){
                     $('.checkActividad').removeAttr("disabled");
                     $('#buttonEditarActividad').attr("disabled",true);
+                    $('#buttonEliminarActividad').attr("disabled",true);
                 }else{
                  $('.checkActividad').attr("disabled",true);
                  $('#check'+idCheckbox.k_actividad).removeAttr("disabled");
                  $('#buttonEditarActividad').removeAttr("disabled");
+                $('#buttonEliminarActividad').removeAttr("disabled");
                 }
                 global=idCheckbox;
             }
             function modalEditar(){
                     $('#actividadIdModal').val(global.k_actividad);
                     $('#nombreModal').val(global.n_nombre);
-                    $('#myModal').modal('show');
-
+                    $('#porcentaje').val(global.v_porcentaje*100);
+                    $('#fechaVencimiento').val(global.f_vencimiento);
+                    $('#Estado').val(global.i_estado);
+                    $('#myModal').modal('show');                   
             }
+
+            function eliminarActividad(){
+                 var idReino = <?php echo $_GET['k_reino']; ?>;                 
+                 window.location.href = "/Arcadia/index.php/actividad/eliminarActividadC?k_reino="+idReino+"&k_actividad="+global.k_actividad;
+            }
+
         </script>
     </head>
     <body>
@@ -70,7 +80,14 @@
                             echo "<a align='center' href='/Arcadia/index.php/reino/obtenerReinoProfesorC?k_reino=".$_GET['k_reino']."'><input align='center' type='submit' value='Volver' id='btnSubmit' class='btn btn-info'></a>";
                             echo "<h1 align='center' ><img src='/Arcadia/assets/imagenes/arcadiaIcon2r.png' alt='LOGO' /> Lista de Misiones <img src='/Arcadia/assets/imagenes/arcadiaIcon2.png' alt='LOGO' /></h1></br>";
                             ?>
-                            <div><input  id='buttonEditarActividad' style='width: 100%;' onclick='modalEditar()' class='btn btn-default' type='button' value='Editar' disabled></div>
+                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <input  id='buttonEditarActividad'  onclick='modalEditar()' class='btn btn-default' type='button' value='Editar' disabled>                                 
+                            </div>
+                            <div class="btn-group" role="group">
+                                <input  id='buttonEliminarActividad'  onclick='eliminarActividad()' class='btn btn-default' type='button' value='Eliminar' disabled>   
+                            </div>
+                            </div>
                             <?php
                                     if (isset($regiones)) {
                                         for($i=0; $i<count($regiones);$i++){
@@ -133,23 +150,31 @@
             <div class="modal-dialog">
 
                 <div class="modal-content">
-
+                
                 <form method ='post' >
-
-
+                
+                   
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h3 class="modal-title">Editar Actividad</h3>
                         </div>
 
-                        <div id="body_modal" class="modal-body">
-                            <input type="hidden" value="" name="actividadIdModal" id="actividadIdModal">
+                        <div id="body_modal" class="modal-body">                               
+                            <input type="hidden" value="" name="actividadIdModal" id="actividadIdModal">                                                  
                             <div id="modalform" class="form-group">
-                                <div class="form-group">
+                                <div class="form-group">                                    
                                     <label for='nombreModal'>Nombre:</label>
-                                    <input type='text' id='nombreModal' value="" name="nombreModal" class="form-control" disabled>
+                                    <input type='text' id='nombreModal' value="" name="nombreModal" class="form-control" required>
+                                </div>                                
+                                <div class="form-group">
+                                    <label for='porcentaje'>Porcentaje:</label>
+                                    <input type="number" id='porcentaje' name="porcentaje" class="form-control" required />
                                 </div>
                                 <div class="form-group">
+                                    <label for='fechaVencimiento'>Fecha de Vencimiento:</label>
+                                    <input type="date" id='fechaVencimiento' name="fechaVencimiento" class="form-control" required />
+                                </div>
+                                <div class="form-group">                                    
                                     <label for='Estado'>Estado:</label>
                                     <select id="Estado" name="Estado" class="form-control" selected="selected">
                                         <option value="Activa" >Activa</option>
@@ -157,15 +182,15 @@
                                         <option value="Cerrada">Cerrada</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>	                                   	                                    		          
                         </div>
                         <div id="modal_footer" class="modal-footer">
-                            <input value="Cancelar" data-dismiss="modal" class="btn btn-danger">
+                            <input value="Cancelar" data-dismiss="modal" class="btn btn-danger">                               
                             <?php
                                 echo "<input type='submit' value='Enviar Datos' id='btnSubmit' class='btn btn-success' onclick =\"this.form.action = '/Arcadia/index.php/Actividad/actualizarActividad?k_reino=".$_GET['k_reino']."'\" >";
-                            ?>
+                            ?>       
                         </div>
-                    </form>
+                    </form> 
                 </div>
 
             </div>
