@@ -52,5 +52,9 @@
              pg_close($this->dbconn4);
         }
 
+        public function destruirSesion(){
+            session_destroy();
+        }
+
     }
 ?>

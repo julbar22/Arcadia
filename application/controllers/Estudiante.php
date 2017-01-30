@@ -65,6 +65,13 @@ class Estudiante extends CI_Controller {
         $this->load->view('Estudiante/reinosEstudiante', $response);
     }
 
+    function perfilEstudianteC2(){
+
+        $variables['nickname']=$this->dao_estudiante_model->verNickname();      
+        $variables['k_actividad']= 0;
+        echo json_encode($variables);
+    }
+
     function actualizarDatosEstudiante(){
         $newEstudiante = new Estudiante_model();
         $newEstudiante=$newEstudiante->crearEstudiante($_POST['NicknameE'],"","",$_POST['CorreoE'],"","",$_POST['TelefonoE'],$_POST['ColegioE'],$_POST['GradoE'],"", "");

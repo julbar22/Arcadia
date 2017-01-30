@@ -56,8 +56,8 @@ class Dao_actividad_model extends CI_Model {
         $query = "SELECT k_actividad_resuelta FROM ACTIVIDAD_RESUELTA WHERE k_nickname = '".$actividadResuelta->getNickname()."' AND k_actividad = ".$actividadResuelta->getActividad()." AND q_intento = ".$actividadResuelta->getIntento();
         $resultQuery = pg_query($query) or die('La consulta fallo: '. pg_last_error());
         $line = pg_fetch_array( $resultQuery, null, PGSQL_ASSOC);
-        $configbd->cerrarSesion();
-        return $line['k_actividad_resuelta'];
+        $configbd->cerrarSesion();       
+        return $line;
     }
 
     function validarIntentosActividad($nickmane, $actividad){
@@ -106,14 +106,6 @@ class Dao_actividad_model extends CI_Model {
 
     }
 
-   function actualizarActividad(Actividad_model $actividad){
-        $configbd = new configbd_model();
-        $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
-        $update = "UPDATE ACTIVIDAD SET I_ESTADO = '".$actividad->getEstado()."' WHERE k_actividad = " . $actividad->getActividad().";";
-        $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
-        $configbd->cerrarSesion();
-     }
-
     function obtenerFechaVencimiento($k_actividad){
         $configbd = new configbd_model();
         $dbconn4= $configbd->abrirSesion('estudiante');
@@ -137,9 +129,10 @@ class Dao_actividad_model extends CI_Model {
         }
     }
 
-    function obtenerRespuesta($idActividad, $nicknameEstudiante, $tipoActividad){
+    function obtenerRespuesta($idActividad, $nicknameEstudiante, $tipoActividad,$sesion){
         $configbd = new configbd_model();
-        $dbconn4=$configbd->abrirSesion('profesor');
+        //$dbconn4=$configbd->abrirSesion('profesor');
+        $dbconn4=$configbd->abrirSesion($sesion);
         $consult = "SELECT * FROM actividad_resuelta WHERE k_nickname = '".$nicknameEstudiante."' AND k_actividad = ".$idActividad;
         $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
         $respueta['anexo'] = "No Resuelta";
@@ -200,6 +193,55 @@ class Dao_actividad_model extends CI_Model {
         return $tipoAct['n_nombre'];
     }
 
+     function actualizarActividad(Actividad_model $actividad){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
+      $update = "UPDATE ACTIVIDAD SET I_ESTADO = '".$actividad->getEstado()."',F_VENCIMIENTO=(to_date('" . $actividad->getFechaVencimiento() . "', 'YYYY-MM-DD')), N_NOMBRE='".$actividad->getNombre()."', V_PORCENTAJE=".(floatval($actividad->getPorcentaje())/100)." WHERE k_actividad = " . $actividad->getActividad().";";
+      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+      $configbd->cerrarSesion();
+    }
+
+    function eliminarActividad($idActividad){
+      $configbd = new configbd_model();
+      $dbconn4=$configbd->abrirSesion('profesor'); //mirar permisode editar colegio
+      $update = "UPDATE ACTIVIDAD SET I_ESTADO = 'Eliminada' WHERE k_actividad = " .$idActividad.";";
+      $resultInser = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
+      $configbd->cerrarSesion();
+    }
+
+    function verCuestionarioPorId(){
+       $configbd = new configbd_model();
+       $dbconn4=$configbd->abrirSesion('admin');
+       $select = "SELECT * FROM VIEW_CUESTIONARIO_ID WHERE k_actividad = " .$_SESSION['cuestionario'].";";
+       $resultSelect = pg_query($select) or die('La consulta fallo: ' . pg_last_error());
+        $cuestionarios = array();
+        $i = 0;
+        while ($line = pg_fetch_array($resultSelect, null, PGSQL_ASSOC)) {
+            $cuestionarios[$i]=$line;           
+            $i++;
+        }        
+       $configbd->cerrarSesion();
+       shuffle($cuestionarios);
+       return  $cuestionarios;
+    }
+
+    function setVariables($id,$actividadR,$idReino){
+      $_SESSION['cuestionario']=$id;
+      $_SESSION['k_actividad_resuelta']=$actividadR;
+      $_SESSION['k_reino']=$idReino;
+      
+    }
+
+    function notaCuestionario($nota){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('estudiante');
+        $update = "UPDATE actividad_resuelta SET v_nota = ".$nota." WHERE k_actividad_resuelta = ".$_SESSION['k_actividad_resuelta'];
+        $resultUpdate = pg_query($update) or die('La consulta fallo: ' . pg_last_error());   
+        
+        $configbd->cerrarSesion();
+        
+
+    }
 
 }
 

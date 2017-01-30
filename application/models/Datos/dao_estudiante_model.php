@@ -15,6 +15,11 @@ class Dao_estudiante_model extends CI_Model {
         parent::__construct();
     }
 
+    function verNickname(){
+
+        return $_SESSION['codigo'];
+    }
+
     function estudianteLogin($valores) {
       // error_reporting(0);
 
