@@ -18,7 +18,7 @@ class Estudiante extends CI_Controller {
         );
 
         $validar = $this->dao_estudiante_model->estudianteLogin($data);
-
+        
         if ($validar) {
             $this->load->view('Estudiante/inicioEstudiante');
         } else {

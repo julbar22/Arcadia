@@ -21,7 +21,7 @@ class Dao_estudiante_model extends CI_Model {
     }
 
     function estudianteLogin($valores) {
-      // error_reporting(0);
+       error_reporting(0);
 
        $configbd = new configbd_model();
        $configbd->inicioSesion($valores['codigo'],$valores['pass']);
