@@ -175,7 +175,7 @@
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Telefono   </span>
-                        <input type="tel" id="TelE" name="TelE"  placeholder="DIGITE SU TELEFONO"  class="form-control" required>
+                        <input type="number" id="TelE" name="TelE"  placeholder="DIGITE SU TELEFONO"  class="form-control" required>
                     </div>
                     <br>
                     <div class="input-group">

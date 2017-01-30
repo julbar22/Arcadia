@@ -23,16 +23,7 @@ class Pregunta extends CI_Controller {
         $this->load->view('Profesor/ListadoPreguntas',$response);
     }
 
-    function crearPregunta(){
-        if ($_POST['inlineRadioOptions']=="abierta"){
-                  $newPregunta = new Pregunta_model();                                                                                                                                                        
-                  $newPregunta = $newPregunta->crearPregunta("","abierta",$_POST['pregunta']);
-                  $newRespuesta = new Respuesta_model();
-                  $newRespuesta = $newRespuesta->crearRespuesta("","",true,$_POST['r1']);
-                  $newPregunta->setRespuesta($newRespuesta);
-                  $this->dao_cuestionario_model->crearPregunta($newPregunta,$_POST['reinoIdModal']);
-             
-        }else{
+    function crearPregunta(){        
                 $newPregunta = new Pregunta_model();                                                                                                                                                        
                 $newPregunta = $newPregunta->crearPregunta("","cerrada",$_POST['pregunta']);
                 $respuestas =array();
@@ -54,7 +45,7 @@ class Pregunta extends CI_Controller {
                 $this->dao_cuestionario_model->crearPregunta($newPregunta,$_POST['reinoIdModal']);         
                 
                 
-        } 
+         
         $response['reinoId']=$_POST['reinoIdModal'];      
         $validar=$this->dao_cuestionario_model->verPreguntas($_POST['reinoIdModal']);
         $arrayPreguntas = array();

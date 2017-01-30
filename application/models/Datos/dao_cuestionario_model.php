@@ -29,7 +29,7 @@ class Dao_cuestionario_model extends CI_Model {
             $resultInser = pg_query($insertRespuesta) or die('La consulta fallo: ' . pg_last_error());
         }else{
             for($i=0;$i<4;$i++){
-                print_r($pregunta->getRespuesta());
+               
              $insertRespuesta = "INSERT INTO respuesta (K_RESPUESTA,K_PREGUNTA,O_OPCION,O_RESPUESTA) 
                        VALUES (nextval('sec_respuestas')," . $line['id'] . ",'" . $pregunta->getRespuesta()[$i]->getRespuesta(). "',".$pregunta->getRespuesta()[$i]->getOpcionVerdadera().")";
                         

@@ -27,7 +27,7 @@
 	{
 		position: absolute;
 		left: 0em;
-		top: 2.5em;
+		top: 0em;
 	}
 
 
@@ -41,7 +41,7 @@
 	{
 		position: absolute;
 		right: 0em;
-		top: 5em;
+		top: 3em;
 	}
 
 		#nav > ul > li

@@ -41,8 +41,8 @@
                     case "2":
                       $('#nombreActividadT0').val("Nombre : "+global.n_nombre);
                       $('#tipoActividadT0').val("Tipo : Cuestionario");
-                      $("#btnSubmitCuestionario").attr("onclick","this.form.action ='/Arcadia/index.php/actividad/unityIndex?k_actividad="+global.k_actividad+"&k_reino="+reinoG+"'");
-                      $('#ModalFormulario').modal('show');
+                      $("#btnSubmitCuestionario").attr("onclick","this.form.action ='/Arcadia/index.php/actividad/crearCuestionarioResuelto?k_actividad="+global.k_actividad+"&n_intentos="+global.n_intentos_realizados+"/"+global.q_intentos+"&k_reino="+reinoG+"'");
+                      $('#ModalFormulario').modal('show');           
                       
                       break;
                     case "1":

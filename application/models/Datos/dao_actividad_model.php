@@ -56,8 +56,8 @@ class Dao_actividad_model extends CI_Model {
         $query = "SELECT k_actividad_resuelta FROM ACTIVIDAD_RESUELTA WHERE k_nickname = '".$actividadResuelta->getNickname()."' AND k_actividad = ".$actividadResuelta->getActividad()." AND q_intento = ".$actividadResuelta->getIntento();
         $resultQuery = pg_query($query) or die('La consulta fallo: '. pg_last_error());
         $line = pg_fetch_array( $resultQuery, null, PGSQL_ASSOC);
-        $configbd->cerrarSesion();
-        return $line['k_actividad_resuelta'];
+        $configbd->cerrarSesion();       
+        return $line;
     }
 
     function validarIntentosActividad($nickmane, $actividad){
@@ -129,9 +129,10 @@ class Dao_actividad_model extends CI_Model {
         }
     }
 
-    function obtenerRespuesta($idActividad, $nicknameEstudiante, $tipoActividad){
+    function obtenerRespuesta($idActividad, $nicknameEstudiante, $tipoActividad,$sesion){
         $configbd = new configbd_model();
-        $dbconn4=$configbd->abrirSesion('profesor');
+        //$dbconn4=$configbd->abrirSesion('profesor');
+        $dbconn4=$configbd->abrirSesion($sesion);
         $consult = "SELECT * FROM actividad_resuelta WHERE k_nickname = '".$nicknameEstudiante."' AND k_actividad = ".$idActividad;
         $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
         $respueta['anexo'] = "No Resuelta";
@@ -224,11 +225,23 @@ class Dao_actividad_model extends CI_Model {
        return  $cuestionarios;
     }
 
-    function setVariables($id){
+    function setVariables($id,$actividadR,$idReino){
       $_SESSION['cuestionario']=$id;
+      $_SESSION['k_actividad_resuelta']=$actividadR;
+      $_SESSION['k_reino']=$idReino;
       
     }
 
+    function notaCuestionario($nota){
+        $configbd = new configbd_model();
+        $dbconn4=$configbd->abrirSesion('estudiante');
+        $update = "UPDATE actividad_resuelta SET v_nota = ".$nota." WHERE k_actividad_resuelta = ".$_SESSION['k_actividad_resuelta'];
+        $resultUpdate = pg_query($update) or die('La consulta fallo: ' . pg_last_error());   
+        
+        $configbd->cerrarSesion();
+        
+
+    }
 
 }
 

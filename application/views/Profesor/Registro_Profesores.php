@@ -89,7 +89,7 @@
 
                     <div class="form-group">	
 
-                        <input type="tel" id="TelE" name="TelE"  placeholder="DIGITE SU TELEFONO"  class="form-control" required>
+                        <input type="number" id="TelE" name="TelE"  placeholder="DIGITE SU TELEFONO"  class="form-control" required>
                     </div>
                     <div class="form-group">	
 

@@ -126,6 +126,22 @@ class Actividad extends CI_Controller {
         $this->load->view('Estudiante/ActividadesPorRegion',$response);
     }
 
+    function crearCuestionarioResuelto(){               
+        $intentos = $_GET['n_intentos'];
+        $intentos = explode("/",$intentos);
+        if($this->dao_actividad_model->validarIntentosActividad($_SESSION['codigo'],$_GET['k_actividad']) < $intentos[1] AND $this->verificarFechaActividad($_GET['k_actividad']) != 1){
+                   
+                if($intentos[0]<$intentos[1]){
+                    $newSoporte = new Soporte_model;
+                    $newActividadResuelta = new Actividad_Resuelta_model;
+                    $newActividadResuelta = $newActividadResuelta->crearActividadResuelta(1,$_SESSION['codigo'],$_GET['k_actividad'],"",0,$_GET['n_intentos']+1);                   
+                    $responseActividadResuelta = $this->dao_actividad_model->InsertarActividadResueltaEst($newActividadResuelta, 'estudiante');             
+                    $this->dao_actividad_model->setVariables($_GET['k_actividad'],$responseActividadResuelta['k_actividad_resuelta'],$_GET['k_reino']);                
+               }            
+        }
+        $this->load->view('Estudiante/unityIndex');	
+    }
+
     function updateFile($ruta, $error, $name, $tmpName){
         $result;
         if(!$error){
@@ -217,7 +233,7 @@ class Actividad extends CI_Controller {
           }
          $this->dao_actividad_model->actualizarNota($_POST, $keys);
          $estudiante[0] = $_GET['k_estudiante'];
-         $this->calcularNotaReino($estudiante, $_GET['k_reino']);
+         $this->calcularNotaReino($estudiante, $_GET['k_reino'],"profesor");
          $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." actualizó las notas en el reino ", $_GET['k_reino'], 'profesor');
          $reino->listaEstudiantesReino();
      }
@@ -234,7 +250,7 @@ class Actividad extends CI_Controller {
          }
          $this->dao_actividad_model->actualizarNota($_POST, $keys);
          $listaEstudiantes = $this->dao_reino_model->obtenerEstudiantesReino($_GET['k_reino']);
-         $this->calcularNotaReino($listaEstudiantes, $_GET['k_reino']);
+         $this->calcularNotaReino($listaEstudiantes, $_GET['k_reino'],"profesor");
          $this->dao_reino_model->insertarNovedad("El profesor ".$_SESSION['codigo']." actualizó las notas en el reino ", $_GET['k_reino'], 'profesor');
          $reino->actividadesRegion();
      }
@@ -260,20 +276,22 @@ class Actividad extends CI_Controller {
          return number_format((float)($promedio/count($notas)), 2, '.', '');
      }
 
-     function calcularNotaReino($estudiantes, $reino){
+     function calcularNotaReino($estudiantes, $reino,$sesion){
        $actividad = new actividad_model();
        for ($i = 0; $i < count($estudiantes); $i++){
-         $actividades = $this->dao_reino_model->obtenerActividadesReino($reino, "profesor");
+         $actividades = $this->dao_reino_model->obtenerActividadesReino($reino, $sesion);
+        
          $porcentaje[$i] = 0;
          for($j = 0; $j < count($actividades); $j++){
            for ($k = 0; $k < count($actividades[$j]->getActividades()); $k++){
-             $respuestas = $this->dao_actividad_model->obtenerRespuesta($actividades[$j]->getActividades()[$k]->getActividad(), $estudiantes[$i], $actividades[$j]->getActividades()[$k]->getTipoActividad());
+             $respuestas = $this->dao_actividad_model->obtenerRespuesta($actividades[$j]->getActividades()[$k]->getActividad(), $estudiantes[$i], $actividades[$j]->getActividades()[$k]->getTipoActividad(),$sesion);
              $porcentaje[$i] += $actividades[$j]->getActividades()[$k]->getPorcentaje();
+             
              $nota[$j][$k] = $respuestas['nota'];
              $porcentajeParcial[$j][$k] = $actividades[$j]->getActividades()[$k]->getPorcentaje();
            }
          }
-         $notaActual = $this->dao_estudiante_model->notaEnReino($estudiantes[$i], $reino, "profesor");
+         $notaActual = $this->dao_estudiante_model->notaEnReino($estudiantes[$i], $reino, $sesion);
          $nivel = $this->calcularNivelReino($nota,$porcentajeParcial,$porcentaje[$i],$notaActual['valor'],$notaActual['clase'],$estudiantes[$i]);
          $this->dao_reino_model->actualizarNotaReino($reino, $estudiantes[$i], $nivel['nivel'], $nivel['valor']);
        }
@@ -334,9 +352,11 @@ class Actividad extends CI_Controller {
 
      }
 
-    public function unityIndex(){
-		$this->dao_actividad_model->setVariables($_GET['k_actividad']);
-        $this->load->view('Estudiante/unityIndex');	
+    public function notaCuestionarioC(){
+        
+		$this->dao_actividad_model->notaCuestionario($_POST['nota']);
+        $estudiante[0]=$_SESSION['codigo'];
+        $this->calcularNotaReino($estudiante, $_SESSION['k_reino'],"estudiante");  
 	}
 }
 

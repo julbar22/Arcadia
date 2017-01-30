@@ -14,8 +14,11 @@
         <style>           
             .form-control {padding:0px;}
         </style>
+       
         
         <script type="text/javascript" charset="utf-8" async defer>
+
+        
             var  $myCanvas;
 
               function showModalPregunta(){
@@ -31,12 +34,7 @@
 
             function verDetalle(pregunta){ 
                 $("#myModalVer #pregunta").val(pregunta['o_pregunta']);        
-
-                if(pregunta['n_tipo_pregunta']=="abierta"){
-                   $("#myModalVer #opcion_multiple").hide();
-                   $("#myModalVer #respuesta_abierta").show();
-                    $("#myModalVer #r1").val(pregunta['respuestas'][0]["o_opcion"]); 
-                }else{
+               
                     $("#myModalVer #opcion_multiple").show();
                     $("#myModalVer #respuesta_abierta").hide();
                      for(let i =0; i<pregunta['respuestas'].length; i++){                                 
@@ -45,13 +43,13 @@
                                 $(" #myModalVer #Radio"+(i+1)).attr('checked', true);
                               }                                                   
                     }
-                }
+                
                 
                 $('#myModalVer').modal('show');
             }
 
             function eliminarPregunta(idPregunta){
-                alert(idPregunta);
+               // alert(idPregunta);
                  var idReino= <?php if(isset($reinoId)){
                                           echo $reinoId;
                                       }else{
@@ -60,24 +58,7 @@
                 ?>;
                  window.location.href='/Arcadia/index.php/pregunta/eliminarPregunta?k_reino='+idReino+'&k_pregunta='+idPregunta;
             }
-            
-
-            
-
-         $(document).ready(function(){
-
-             $( '#inlineRadio1' ).change(function() {
-              
-                $("#opcion_multiple").hide();
-                $("#respuesta_abierta").show();
-            });
-
-             $( '#inlineRadio2' ).change(function() {
-             
-               $("#opcion_multiple").show();
-                $("#respuesta_abierta").hide();
-            });
-         });          
+                     
         </script>
 
     </head>
@@ -183,23 +164,11 @@
                                           
                             <input type="hidden" value="" name="reinoIdModal" id="reinoIdModal">                            	                        
                             <div>
-                             <div id="opciones">
-                                <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="abierta" checked> Pregunta Abierta
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="cerrada"> Opcion Multiple
-                                </label>  
-                                </div>  <br>
                                 <div>
                                     <label for="pregunta" class="col-sm-2 control-label">Pregunta</label>                   
                                     <textarea id="pregunta" name="pregunta"  class="form-control"></textarea>
-                                </div>    
-                                <div id="respuesta_abierta">
-                                <label for="r1" class="col-sm-2 control-label">Respuesta</label>
-                                <textarea id="r1" name="r1" class="form-control"></textarea>
-                                </div>
-                                <div id="opcion_multiple" style="display:none;">
+                                </div>                              
+                                <div id="opcion_multiple" style="">
                                 <div class="checkbox">
                                 <label>
                                     <input type="radio" name="RadioOptions" id="Radio1" value="option1">
@@ -266,12 +235,8 @@
                                 <div>
                                     <label for="pregunta" class="col-sm-2 control-label">Pregunta</label>                   
                                     <textarea id="pregunta" name="pregunta"  class="form-control"></textarea>
-                                </div>    
-                                <div id="respuesta_abierta">
-                                <label for="r1" class="col-sm-2 control-label">Respuesta</label>
-                                <textarea id="r1" name="r1" class="form-control"></textarea>
-                                </div>
-                                <div id="opcion_multiple" style="display:none;">
+                                </div>                          
+                                <div id="opcion_multiple" style="">
                                 <div class="checkbox">
                                 <label>
                                     <input type="radio" name="RadioOptions" id="Radio1" value="option1">

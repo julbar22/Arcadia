@@ -224,7 +224,7 @@ class Dao_reino_model extends CI_Model {
 
     function actualizarNotaReino($reino, $nicknameEstudiante, $nivel, $valorAcumulado){
         $configbd = new configbd_model();
-        $dbconn4=$configbd->abrirSesion('profesor');
+        $dbconn4=$configbd->abrirSesion('admin');
         $update = "UPDATE calificacion_en_reino SET v_acumulado = ".$valorAcumulado." , k_nivel = ".$nivel." WHERE k_reino = ".$reino." AND k_nickname = '".$nicknameEstudiante."'";
         $resultUpdate = pg_query($update) or die('La consulta fallo: ' . pg_last_error());
         $configbd->cerrarSesion();
