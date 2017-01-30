@@ -26,16 +26,18 @@
                     $pass = $_SESSION['pass'];
         			 $conn_string = "host=localhost dbname=arcadiav6 user= e" . strtolower($user) . " password=" .$pass;
                      $this->dbconn4 = pg_connect($conn_string);
+                     if($this->dbconn4)
                      return true;
+                     return false;
         			break;
         		case 'profesor':
                     $user = $_SESSION['codigo'];
                     $pass = $_SESSION['pass'];
-
         			$conn_string = "host=localhost dbname=arcadiav6 user= p" . strtolower($user) . " password=" .$pass;
-
                      $this->dbconn4 = pg_connect($conn_string);
+                     if($this->dbconn4)
                      return true;
+                     return false;
         			break;
 
         		default:

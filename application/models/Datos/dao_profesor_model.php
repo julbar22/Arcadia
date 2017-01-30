@@ -18,7 +18,7 @@ class Dao_profesor_model extends CI_Model {
     }
 
     function profesorLogin($valores) {
-
+        error_reporting(0);
        $configbd = new configbd_model();
        $configbd->inicioSesion($valores['codigo'],$valores['pass']);
        $dbconn4=$configbd->abrirSesion('profesor');
