@@ -161,7 +161,7 @@ class Reino extends CI_Controller {
         for($j = 0; $j < count($response['estudiantes']); $j++){
           $response['totales'][$i][$j] = 0;
           for($k = 0; $k < count($response['regiones'][$i]->getActividades()); $k++){
-            $respuesta = $this->dao_actividad_model->obtenerRespuesta($response['regiones'][$i]->getActividades()[$k]->getActividad(), $response['estudiantes'][$j]->getNickname(), $response['regiones'][$i]->getActividades()[$k]->getTipoActividad());
+            $respuesta = $this->dao_actividad_model->obtenerRespuesta($response['regiones'][$i]->getActividades()[$k]->getActividad(), $response['estudiantes'][$j]->getNickname(), $response['regiones'][$i]->getActividades()[$k]->getTipoActividad(), "profesor");
             $response['notas'][$i][$j][$k] = $respuesta['nota'];
             $response['totales'][$i][$j] += $response['regiones'][$i]->getActividades()[$k]->getPorcentaje()*$respuesta['nota']/100;
             $response['promAct'][$i][$k][$j] = $respuesta['nota'];

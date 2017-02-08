@@ -39,8 +39,8 @@
                 });
 
                 $('#myCanvas').click(function(e){
-                     window.location.href = "/Arcadia/index.php/reino/mapaActividadesProfesorC?k_reino="+$('#idReino').val();
-
+                  var idReino = document.getElementById('idReino').getAttribute('value');
+                  window.location.href = "/Arcadia/index.php/reino/mapaActividadesProfesorC?k_reino="+idReino;
             })
 
             });
@@ -120,7 +120,7 @@
                                 echo "</div>";
                               echo "</form>";
                               echo "<input type='submit' value='Añadir' onclick = 'mostrarInput()' id='btnSubmit' class='btn btn-info'>";
-                              echo "<div class='sb_bottom'></div>";                              
+                              echo "<div class='sb_bottom'></div>";
                               echo "</div>";
                           echo "</div>";
                         }
@@ -135,6 +135,7 @@
                           <?php
                          if (isset($perfilR)) {
                               echo "<h1 class='titulo_pagina'><center> <img src='/Arcadia/assets/imagenes/arcadiaIcon14.png' alt='LOGO' /> Bienvenido al Reino " . $perfilR[0]['n_nombre'] . " <img src='/Arcadia/assets/imagenes/arcadiaIcon14.png' alt='LOGO' /></center></h1></br>";
+                              echo "<div value='".$_GET['k_reino']."' name='idReino' id='idReino' hidden></div>";
                               echo "<h3><img src='/Arcadia/assets/imagenes/arcadiaIcon4.png' alt='LOGO' /> Mapa : Clic en el mapa para mas opciones</h3></br>";
                           }
                           ?>

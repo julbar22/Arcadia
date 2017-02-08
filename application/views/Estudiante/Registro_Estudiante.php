@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/Arcadia/assets/css/specific_Css/styleRE.css" />
         <link rel="stylesheet" type="text/css" href="/Arcadia/assets/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/Arcadia/assets/css/estilosNotas.css">
+        <link rel="stylesheet" href="/Arcadia/assets/css/header-login-signup.css">
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
         <script src="/Arcadia/assets/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -97,7 +98,7 @@
         </script>
     </head>
     <body class="niceHeader" >
-        <header class="niceHeader">
+        <header class="header-login-signup">
             <img src="/Arcadia/assets/imagenes/arcadialogo.png" class="img-responsive col-md-offset-4 " alt="Responsive image">
 
         </header>

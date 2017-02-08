@@ -1,0 +1,622 @@
+2016-06-18 15:43:31 ERROR  : ERROR:  error de sintaxis en o cerca de «TE»
+LINE 1: TE) REFERENCES CATEGORIA)
+        ^
+2016-06-18 15:44:07 ERROR  : ERROR:  error de sintaxis en o cerca de «OFF»
+LINE 1: SET ECHO OFF
+                 ^
+2016-06-18 15:44:14 ERROR  : ERROR:  error de sintaxis en o cerca de «OFF»
+LINE 1: SET ECHO OFF
+                 ^
+2016-06-18 15:44:23 ERROR  : ERROR:  error de sintaxis en o cerca de «Prompt»
+LINE 3: Prompt ******  Borrando tablas ....
+        ^
+2016-06-18 15:44:29 ERROR  : ERROR:  error de sintaxis en o cerca de «/»
+LINE 5: /
+        ^
+2016-06-18 15:45:36 ERROR  : ERROR:  error de sintaxis en o cerca de «drop»
+LINE 6: drop table pedido
+        ^
+2016-06-18 15:45:50 ERROR  : ERROR:  error de sintaxis en o cerca de «CREATE»
+LINE 9: CREATE TABLE producto(
+        ^
+2016-06-18 15:45:59 ERROR  : ERROR:  error de sintaxis en o cerca de «CREATE»
+LINE 9: CREATE TABLE producto(
+        ^
+2016-06-18 15:46:28 ERROR  : ERROR:  no existe el tipo «number»
+LINE 4: V_VALPRODU NUMBER(10,2) NOT NULL,
+                   ^
+2016-06-18 15:46:46 ERROR  : ERROR:  error de sintaxis en o cerca de «(»
+LINE 4: V_VALPRODU INT(10,2) NOT NULL,
+                      ^
+2016-06-18 15:46:54 ERROR  : ERROR:  error de sintaxis en o cerca de «(»
+LINE 5: V_VALPRODU INTEGER(10,2) NOT NULL,
+                          ^
+2016-06-18 15:55:33 ERROR  : ERROR:  error de sintaxis en o cerca de «(»
+LINE 5: V_VALPRODU INTEGER(10) NOT NULL,
+                          ^
+2016-06-18 15:55:44 ERROR  : ERROR:  error de sintaxis en o cerca de «(»
+LINE 5: V_VALPRODU INT(10) NOT NULL,
+                      ^
+2016-06-18 15:56:00 ERROR  : ERROR:  no existe el tipo «number»
+LINE 5: Q_STOCK NUMBER(4) NOT NULL,
+                ^
+2016-06-18 15:56:10 ERROR  : ERROR:  error de sintaxis en o cerca de «CREATE»
+LINE 9: CREATE TABLE producto(
+        ^
+2016-06-18 15:56:23 ERROR  : ERROR:  la relación «categoria» ya existe
+2016-06-18 15:56:28 ERROR  : ERROR:  la relación «producto» ya existe
+2016-06-18 16:04:41 ERROR  : ERROR:  error de sintaxis en o cerca de «INSERT»
+LINE 3: INSERT INTO categoria VALUES('SA', 'Salud')
+        ^
+2016-06-18 16:05:06 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «categoria_pk»
+DETAIL:  Ya existe la llave (k_codcate)=(SA).
+2016-06-18 16:05:20 ERROR  : ERROR:  el valor null para la columna «k_codgerente» viola la restricción not null
+DETAIL:  La fila que falla contiene (22, Bogot�, Cra 4  n 23-48, null).
+2016-06-18 16:05:27 ERROR  : ERROR:  el valor null para la columna «k_codgerente» viola la restricción not null
+DETAIL:  La fila que falla contiene (22, Bogot�, Cra 4  n 23-48, null).
+2016-06-18 16:05:37 ERROR  : ERROR:  el valor null para la columna «k_codgerente» viola la restricción not null
+DETAIL:  La fila que falla contiene (22, Bogota, Cra 4  n 23-48, null).
+2016-06-18 16:06:05 ERROR  : ERROR:  el valor null para la columna «k_codgerente» viola la restricción not null
+DETAIL:  La fila que falla contiene (22, Bogota, Cra 4  n 23-48, null).
+2016-06-18 16:07:35 ERROR  : ERROR:  inserción o actualización en la tabla «oficina» viola la llave foránea «oficina_repventas_fk»
+DETAIL:  La llave (k_codgerente)=(1) no está presente en la tabla «repventas».
+2016-06-18 16:08:38 ERROR  : ERROR:  el valor null para la columna «k_coddirector» viola la restricción not null
+DETAIL:  La fila que falla contiene (104, Juan, Lopez, 1967-06-21, 22, Gerente, 1985-05-19, null, 200000, null).
+2016-06-18 16:10:28 ERROR  : ERROR:  el valor null para la columna «v_valventas» viola la restricción not null
+DETAIL:  La fila que falla contiene (105, Bertha, Alvarez, 1969-05-19, 22, Rep Ventas, 1988-02-12, 104, 350000, null).
+2016-06-18 16:11:10 ERROR  : ERROR:  inserción o actualización en la tabla «oficina» viola la llave foránea «oficina_repventas_fk»
+DETAIL:  La llave (k_codgerente)=(1) no está presente en la tabla «repventas».
+2016-06-18 16:13:16 ERROR  : ERROR:  el valor null para la columna «k_coddirector» viola la restricción not null
+DETAIL:  La fila que falla contiene (104, Juan, Lopez, 1967-06-21, 22, Gerente, 1985-05-19, null, 200000, null).
+2016-06-18 16:13:21 ERROR  : ERROR:  inserción o actualización en la tabla «oficina» viola la llave foránea «oficina_repventas_fk»
+DETAIL:  La llave (k_codgerente)=(1) no está presente en la tabla «repventas».
+2016-06-18 16:14:22 ERROR  : ERROR:  inserción o actualización en la tabla «cliente» viola la llave foránea «cliente_repventas_fk»
+DETAIL:  La llave (k_codrepre)=(103) no está presente en la tabla «repventas».
+2016-06-18 16:14:41 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «producto_pk»
+DETAIL:  Ya existe la llave (k_codprodu)=(244M).
+2016-06-18 16:14:46 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «producto_pk»
+DETAIL:  Ya existe la llave (k_codprodu)=(245C).
+2016-06-18 16:14:53 ERROR  : ERROR:  error de sintaxis en o cerca de «INSERT»
+LINE 4: INSERT INTO producto  VALUES('245H','Hidratante',45900,9,'BE...
+        ^
+2016-06-18 16:15:15 ERROR  : ERROR:  error de sintaxis en o cerca de «INSERT»
+LINE 3: INSERT INTO producto  VALUES('244G','Kit soluci�n para ropa'...
+        ^
+2016-06-18 16:15:55 ERROR  : ERROR:  el valor null para la columna «k_coddirector» viola la restricción not null
+DETAIL:  La fila que falla contiene (104, Juan, Lopez, 1967-06-21, 22, Gerente, 1985-05-19, null, 200000, null).
+2016-06-18 16:16:24 ERROR  : ERROR:  inserción o actualización en la tabla «oficina» viola la llave foránea «oficina_repventas_fk»
+DETAIL:  La llave (k_codgerente)=(1) no está presente en la tabla «repventas».
+2016-06-18 16:16:39 ERROR  : ERROR:  inserción o actualización en la tabla «repventas» viola la llave foránea «repventas_repventas_fk»
+DETAIL:  La llave (k_coddirector)=(104) no está presente en la tabla «repventas».
+2016-06-18 16:16:50 ERROR  : ERROR:  el valor null para la columna «k_coddirector» viola la restricción not null
+DETAIL:  La fila que falla contiene (104, Juan, Lopez, 1967-06-21, 22, Gerente, 1985-05-19, null, 200000, null).
+2016-06-18 16:17:35 ERROR  : ERROR:  el valor null para la columna «k_codgerente» viola la restricción not null
+DETAIL:  La fila que falla contiene (22, Bogota, Cra 4  n 23-48, null).
+2016-06-18 16:19:38 ERROR  : ERROR:  el valor null para la columna «k_coddirector» viola la restricción not null
+DETAIL:  La fila que falla contiene (104, Juan, Lopez, 1967-06-21, 22, Gerente, 1985-05-19, null, 200000, null).
+2016-06-18 16:20:14 ERROR  : ERROR:  el valor null para la columna «v_valventas» viola la restricción not null
+DETAIL:  La fila que falla contiene (104, Juan, Lopez, 1967-06-21, 22, Gerente, 1985-05-19, null, 200000, null).
+2016-06-18 16:22:24 ERROR  : ERROR:  el valor «ENE» no es válido para «mon»
+DETAIL:  El valor dado no concuerda con ninguno de los valores permitidos para este campo.
+2016-06-18 16:24:23 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «repventas_pk»
+DETAIL:  Ya existe la llave (k_codrepre)=(104).
+2016-06-18 16:24:55 ERROR  : ERROR:  el valor null para la columna «v_valcuota» viola la restricción not null
+DETAIL:  La fila que falla contiene (110, Angela, Cepero, 1987-01-19, 22, Rep Ventas, 1999-01-13, 101, null, null).
+2016-06-18 16:26:16 ERROR  : ERROR:  el valor «DiC» no es válido para «mon»
+DETAIL:  El valor dado no concuerda con ninguno de los valores permitidos para este campo.
+2016-06-18 16:27:40 ERROR  : ERROR:  error de sintaxis en o cerca de «INSERT»
+LINE 9: INSERT INTO producto  VALUES('245E','Espuma Limpiadora',4190...
+        ^
+2016-06-18 16:27:59 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «producto_pk»
+DETAIL:  Ya existe la llave (k_codprodu)=(244L).
+2016-06-18 16:31:44 ERROR  : ERROR:  no existe la columna «sysdate»
+LINE 1: INSERT INTO pedido VALUES(110036,2107,sysdate-365,29900);
+                                              ^
+2016-06-18 17:12:11 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «cliente_pk»
+DETAIL:  Ya existe la llave (k_codcliente)=(2130).
+2016-06-18 17:16:15 ERROR  : ERROR:  inserción o actualización en la tabla «cliente» viola la llave foránea «cliente_repventas_fk»
+DETAIL:  La llave (k_codrepre)=(999) no está presente en la tabla «repventas».
+2016-06-18 17:33:27 ERROR  : ERROR:  inserción o actualización en la tabla «detalle_pedido» viola la llave foránea «detallepedido_pedido_fk»
+DETAIL:  La llave (k_codpedido)=(112969) no está presente en la tabla «pedido».
+2016-06-18 17:46:23 ERROR  : ERROR:  update o delete en «producto» viola la llave foránea «detallepedido_producto_fk» en la tabla «detalle_pedido»
+DETAIL:  La llave (k_codprodu)=(244L) todavía es referida desde la tabla «detalle_pedido».
+2016-09-13 22:39:56 ERROR  : ERROR:  no existe el rol «admin_arcadia»
+2016-09-13 22:43:23 ERROR  : ERROR:  el valor null para la columna «o_codigo» viola la restricción not null
+DETAIL:  La fila que falla contiene (0, 1024549190, Reino Arcadia, Act, historia, mision, vision, 2016-08-23, 3, null).
+2016-09-13 22:43:25 ERROR  : ERROR:  el valor null para la columna «o_codigo» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, 1024549190, Reino Arcadia, Act, historia, mision, vision, 2016-08-23, 3, null).
+2016-09-13 22:49:57 ERROR  : ERROR:  la columna «o_codigo» contiene valores nulos
+2016-09-13 23:02:39 ERROR  : ERROR:  el rol «estudiantes» ya existe
+2016-09-13 23:03:40 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «pk_avatar»
+DETAIL:  Ya existe la llave (k_avatar)=(1).
+2016-09-13 23:03:56 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «pk_estudiante»
+DETAIL:  Ya existe la llave (k_nickname)=(Julian).
+2016-09-13 23:04:22 ERROR  : ERROR:  el rol «ejulian» ya existe
+2016-10-04 01:22:22 ERROR  : ERROR:  la restricción de llave foránea «fk_actres_estudiantes_aces_es» no puede ser implementada
+DETAIL:  Las columnas llave «k_estudiante» y «k_nickname» son de tipos incompatibles: integer y character varying
+2016-10-04 01:22:32 ERROR  : ERROR:  la restricción de llave foránea «fk_actres_estudiantes_aces_es» no puede ser implementada
+DETAIL:  Las columnas llave «k_estudiante» y «k_nickname» son de tipos incompatibles: integer y character varying
+2016-10-04 01:24:46 ERROR  : ERROR:  no existe la columna «k_estudiante» en la llave
+2016-10-05 23:34:56 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-05 23:35:08 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-05 23:35:18 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-05 23:35:54 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-05 23:36:05 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-05 23:36:49 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-05 23:44:44 ERROR  : ERROR:  no hay restricción unique que coincida con las columnas dadas en la tabla referida «actividad_resuelta»
+2016-10-06 00:05:46 ERROR  : ERROR:  los ordenamientos (collation) no están soportados por el tipo integer
+2016-10-06 00:05:59 ERROR  : ERROR:  los ordenamientos (collation) no están soportados por el tipo integer
+2016-10-06 00:06:22 ERROR  : ERROR:  los ordenamientos (collation) no están soportados por el tipo integer
+2016-10-06 00:06:56 ERROR  : ERROR:  los ordenamientos (collation) no están soportados por el tipo integer
+2016-10-06 00:07:12 ERROR  : ERROR:  los ordenamientos (collation) no están soportados por el tipo numeric
+2016-10-06 00:17:10 ERROR  : ERROR:  no existe la columna «‘sec_actividad_resuelta‘»
+2016-10-06 00:20:48 ERROR  : ERROR:  no se puede eliminar tabla actividad_resuelta columna k_actividad_resuelta porque otros objetos dependen de él
+DETAIL:  restricción «fk_soporte_actres_sop_aces» en tabla soporte depende de tabla actividad_resuelta columna k_actividad_resuelta
+HINT:  Use DROP ... CASCADE para eliminar además los objetos dependientes.
+2016-10-06 00:20:57 ERROR  : ERROR:  no se puede eliminar tabla actividad_resuelta columna k_actividad_resuelta porque otros objetos dependen de él
+DETAIL:  restricción «fk_soporte_actres_sop_aces» en tabla soporte depende de tabla actividad_resuelta columna k_actividad_resuelta
+HINT:  Use DROP ... CASCADE para eliminar además los objetos dependientes.
+2016-10-06 00:21:55 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-06 00:22:02 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-06 00:22:15 ERROR  : ERROR:  no existe la restricción «pk_actividad_resuelta» en la relación «actividad_resuelta»
+2016-10-06 00:23:53 ERROR  : ERROR:  el valor null para la columna «n_observacion» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, null, null, null, null, 1).
+2016-10-06 00:26:27 ERROR  : ERROR:  la restricción de llave foránea «pk_soporte_actres_sop_aces» no puede ser implementada
+DETAIL:  Las columnas llave «k_actividad_resuelta» y «k_actividad_resuelta» son de tipos incompatibles: numeric y integer
+2016-10-06 00:30:48 ERROR  : ERROR:  el valor null para la columna «n_descripcion» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, 1, actividad 1, null, null, null, null, null, null, null).
+2016-10-06 00:31:05 ERROR  : ERROR:  desbordamiento de campo numeric
+DETAIL:  Un campo con precisión 3, escala 2 debe redondear a un valor absoluto menor que 10^1.
+2016-10-06 00:31:10 ERROR  : ERROR:  la sintaxis de entrada no es válida para tipo date: «»
+LINE 1: ...:character varying(500), '3'::integer, '10'::numeric(3,2), '
+                                                                      ^
+2016-10-06 00:31:21 ERROR  : ERROR:  la sintaxis de entrada no es válida para tipo date: «»
+LINE 1: ...::character varying(500), '3'::integer, '1'::numeric(3,2), '
+                                                                      ^
+2016-10-06 00:31:25 ERROR  : ERROR:  la sintaxis de entrada no es válida para tipo date: «»
+LINE 1: ...::character varying(500), '3'::integer, '1'::numeric(3,2), '
+                                                                      ^
+2016-10-06 00:31:53 ERROR  : ERROR:  el valor null para la columna «k_tipo_actividad» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, 1, actividad 1, actividad 1, 3, 1.00, 2016-10-10, 2016-10-10, null, null).
+2016-10-06 00:33:46 ERROR  : ERROR:  inserción o actualización en la tabla «actividad_resuelta» viola la llave foránea «fk_actres_estudiantes_aces_es»
+DETAIL:  La llave (k_nickname)=(julianb) no está presente en la tabla «estudiante».
+2016-10-06 00:34:04 ERROR  : ERROR:  inserción o actualización en la tabla «actividad_resuelta» viola la llave foránea «fk_actres_estudiantes_aces_es»
+DETAIL:  La llave (k_nickname)=(julianb) no está presente en la tabla «estudiante».
+2016-10-06 00:34:06 ERROR  : ERROR:  inserción o actualización en la tabla «actividad_resuelta» viola la llave foránea «fk_actres_estudiantes_aces_es»
+DETAIL:  La llave (k_nickname)=(julianb) no está presente en la tabla «estudiante».
+2016-10-16 20:35:36 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_estudiant_estudian»
+DETAIL:  La llave (k_nickname)=(1) no está presente en la tabla «estudiante».
+2016-10-16 20:35:38 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_estudiant_estudian»
+DETAIL:  La llave (k_nickname)=(1) no está presente en la tabla «estudiante».
+2016-10-16 20:35:43 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_estudiant_estudian»
+DETAIL:  La llave (k_nickname)=(1) no está presente en la tabla «estudiante».
+2016-10-16 20:35:48 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_estudiant_estudian»
+DETAIL:  La llave (k_nickname)=(1) no está presente en la tabla «estudiante».
+2016-10-16 20:35:56 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_nivel_cal_nivel»
+DETAIL:  La llave (k_nivel)=(0) no está presente en la tabla «nivel».
+2016-10-16 20:36:00 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_nivel_cal_nivel»
+DETAIL:  La llave (k_nivel)=(1) no está presente en la tabla «nivel».
+2016-10-16 20:36:14 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_nivel_cal_nivel»
+DETAIL:  La llave (k_nivel)=(1) no está presente en la tabla «nivel».
+2016-10-16 20:36:57 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_reino_cal_reino»
+DETAIL:  La llave (k_reino)=(1) no está presente en la tabla «reino».
+2016-10-16 20:37:07 ERROR  : ERROR:  inserción o actualización en la tabla «calificacion_en_reino» viola la llave foránea «fk_califica_reino_cal_reino»
+DETAIL:  La llave (k_reino)=(1) no está presente en la tabla «reino».
+2016-10-16 20:44:00 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «pk_calificacion_en_reino»
+DETAIL:  Ya existe la llave (k_reino, k_nickname)=(2, Julian).
+2016-11-07 18:27:54 ERROR  : ERROR:  error de sintaxis en o cerca de «)»
+LINE 22: );
+         ^
+2016-11-07 18:28:38 ERROR  : ERROR:  error de sintaxis en o cerca de «)»
+LINE 68:   );
+           ^
+2016-11-07 18:28:52 ERROR  : ERROR:  error de sintaxis en o cerca de «)»
+LINE 102:   );
+            ^
+2016-11-07 18:29:05 ERROR  : ERROR:  error de sintaxis en o cerca de «)»
+LINE 452: );
+          ^
+2016-11-07 18:29:26 ERROR  : ERROR:  error de sintaxis en o cerca de «create»
+LINE 483: create unique index TIPO_ACTIVIDAD_PK on tipo_actividad (
+          ^
+2016-11-07 18:30:51 ERROR  : ERROR:  error de sintaxis en o cerca de «create»
+LINE 483: create unique index TIPO_ACTIVIDAD_PK on tipo_actividad (
+          ^
+2016-11-07 18:31:02 ERROR  : ERROR:  error de sintaxis en o cerca de «create»
+LINE 483: create index TIPO_ACTIVIDAD_PK on tipo_actividad (
+          ^
+2016-11-07 18:32:09 ERROR  : ERROR:  error de sintaxis en o cerca de «alter»
+LINE 481: alter table ACTIVIDAD
+          ^
+2016-11-07 18:36:49 ERROR  : ERROR:  error de sintaxis en o cerca de «FOREIGN»
+LINE 494:    add fk_activida_region_ac_region FOREIGN KEY (k_region)
+                                              ^
+2016-11-07 18:45:15 ERROR  : ERROR:  error de sintaxis en o cerca de «FOREIGN»
+LINE 494:    add fk_activida_region_ac_region FOREIGN KEY (k_region)
+                                              ^
+2016-11-07 18:45:31 ERROR  : ERROR:  error de sintaxis en o cerca de «alter»
+LINE 521: alter table AVATAR_ESTUDIANTE
+          ^
+2016-11-07 18:46:11 ERROR  : ERROR:  no existe la relación «actividad_resuelta_k_actividad_resuelta_seq»
+2016-11-07 18:53:03 ERROR  : ERROR:  no existe la columna «k_anexo»
+2016-11-07 18:57:10 ERROR  : ERROR:  no existe la columna «k_actividad_resuelta» referida en la llave foránea
+2016-11-07 19:14:46 ERROR  : ERROR:  error de sintaxis en o cerca de «﻿ALTER»
+LINE 1: ﻿ALTER TABLE AVATAR ADD CONSTRAINT AVATAR_ESTADO_CK CHECK (I...
+        ^
+2016-11-07 19:18:59 ERROR  : ERROR:  error de sintaxis en o cerca de «﻿»
+LINE 1: ﻿ --Secuencia para los reinos
+        ^
+2016-11-07 19:19:20 ERROR  : ERROR:  error de sintaxis en o cerca de «﻿»
+LINE 1: ﻿--Secuencia para los reinos
+        ^
+2016-11-07 19:26:30 ERROR  : ERROR:  el rol «ejulian» ya existe
+2016-11-07 19:37:33 ERROR  : ERROR:  el rol «ppablo» ya existe
+2016-11-07 21:57:37 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 2:             VALUES (0, , 'Milicia', 0, 1),
+                               ^
+2016-11-07 22:31:26 ERROR  : ERROR:  inserción o actualización en la tabla «actividad» viola la llave foránea «fk_actividad_tipoac_ac_tipoac»
+DETAIL:  La llave (k_tipo_actividad)=(0) no está presente en la tabla «tipo_actividad».
+2016-11-07 22:31:49 ERROR  : ERROR:  no existe la columna «k_tipo_actividad» en la relación «tipo_actividad»
+LINE 1: INSERT INTO TIPO_ACTIVIDAD (K_TIPO_ACTIVIDAD, N_NOMBRE, N_DE...
+                                    ^
+2016-11-07 22:32:33 ERROR  : ERROR:  no existe la columna «k_activdad» en la relación «actividad»
+LINE 1: INSERT INTO ACTIVIDAD (k_activdad, k_region, n_nombre, n_des...
+                               ^
+2016-11-07 22:40:33 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «pk_anexo»
+DETAIL:  Ya existe la llave (k_anexo)=(0).
+2016-11-07 22:53:00 ERROR  : ERROR:  el valor null para la columna «n_observacion» viola la restricción not null
+DETAIL:  La fila que falla contiene (0, null, null, 0, Julian, 0).
+2016-12-08 21:30:56 ERROR  : ERROR:  no existe la relación «sec_regiones»
+2016-12-08 21:31:20 ERROR  : ERROR:  no existe la relación «view_actividades_reino»
+2016-12-08 21:47:02 ERROR  : ERROR:  error de sintaxis en o cerca de «﻿»
+LINE 1: ﻿--SECUENCIAS
+        ^
+2016-12-08 21:47:25 ERROR  : ERROR:  no existe la columna tact.k_tipo_activdad
+LINE 46: ...G.K_REGION=ACT.K_REGION and ACT.K_TIPO_ACTIVIDAD= TACT.K_TIP...
+                                                              ^
+HINT:  Perhaps you meant to reference the column "tact.k_tipo_actividad".
+2016-12-08 21:49:27 ERROR  : ERROR:  la relación «sec_reinos» ya existe
+2016-12-08 21:50:40 ERROR  : ERROR:  error de sintaxis en o cerca de «VALUES»
+LINE 54:             VALUES (1, 'Tipo 2', 'Cuestionario');
+                     ^
+2016-12-08 21:51:17 ERROR  : ERROR:  el rol «ejulian» ya existe
+2016-12-08 21:52:25 ERROR  : ERROR:  el rol «ejulian» ya existe
+2016-12-08 21:53:06 ERROR  : ERROR:  error de sintaxis en o cerca de «VALUES»
+LINE 3:             VALUES (1, 'Tipo 2', 'Cuestionario');
+                    ^
+2016-12-08 21:53:16 ERROR  : ERROR:  no existe la columna «k_tipo_activdad» en la relación «tipo_actividad»
+LINE 1: INSERT INTO TIPO_ACTIVIDAD (K_TIPO_ACTIVDAD, N_NOMBRE, N_DES...
+                                    ^
+2016-12-08 21:54:23 ERROR  : ERROR:  no existe la columna «n_descripcion» en la relación «tipo_actividad»
+LINE 1: ... INTO TIPO_ACTIVIDAD (k_tipo_actividad, N_NOMBRE, N_DESCRIPC...
+                                                             ^
+2016-12-08 21:55:18 ERROR  : ERROR:  no existe la columna «n_descripcion» en la relación «anexo»
+LINE 8: INSERT INTO ANEXO (k_anexo, n_nombre, n_descripcion, k_activ...
+                                              ^
+2016-12-08 21:56:03 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «pk_avatar»
+DETAIL:  Ya existe la llave (k_avatar)=(1).
+2016-12-08 21:56:07 ERROR  : ERROR:  inserción o actualización en la tabla «anexo» viola la llave foránea «fk_anexo_anexo_act_activida»
+DETAIL:  La llave (k_actividad)=(0) no está presente en la tabla «actividad».
+2016-12-12 23:41:31 ERROR  : ERROR:  error de sintaxis en o cerca de «,»
+LINE 1: ...c_actividades'),1, '1','1', 1, 1,current_date,0001-01-01,,1)
+                                                                    ^
+2016-12-12 23:42:43 ERROR  : ERROR:  la columna «f_vencimiento» es de tipo date pero la expresión es de tipo integer
+LINE 2: ...('sec_actividades'),1, '1','1', 1, 1,current_date,0001-01-01...
+                                                             ^
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+2016-12-12 23:44:01 ERROR  : ERROR:  inserción o actualización en la tabla «actividad» viola la llave foránea «fk_activida_actividad_tipo_act»
+DETAIL:  La llave (k_tipo_actividad)=(1) no está presente en la tabla «tipo_actividad».
+2016-12-13 00:14:47 ERROR  : ERROR:  currval de la secuencia «sec_actividades» no está definido en esta sesión
+2016-12-20 22:45:58 ERROR  : ERROR:  no existe la relación «sec_preguntas»
+2016-12-20 22:46:23 ERROR  : ERROR:  no existe la relación «sec_respuestas»
+2016-12-27 15:25:57 ERROR  : ERROR:  el valor null para la columna «k_actividad» viola la restricción not null
+DETAIL:  La fila que falla contiene (null, 1, 1, 1, 1, 1.00, 0001-01-01, 2016-12-12, null, 1).
+2016-12-28 15:14:17 ERROR  : ERROR:  inserción o actualización en la tabla «actividad_resuelta» viola la llave foránea «fk_activida_acti_resu_activida»
+DETAIL:  La llave (k_actividad)=(1) no está presente en la tabla «actividad».
+2016-12-28 15:14:23 ERROR  : ERROR:  inserción o actualización en la tabla «actividad_resuelta» viola la llave foránea «fk_activida_acti_resu_activida»
+DETAIL:  La llave (k_actividad)=(1) no está presente en la tabla «actividad».
+2016-12-28 15:14:37 ERROR  : ERROR:  inserción o actualización en la tabla «actividad_resuelta» viola la llave foránea «fk_activida_resuelve__estudian»
+DETAIL:  La llave (k_nickname)=(1) no está presente en la tabla «estudiante».
+2016-12-28 15:14:41 ERROR  : ERROR:  inserción o actualización en la tabla «actividad_resuelta» viola la llave foránea «fk_activida_resuelve__estudian»
+DETAIL:  La llave (k_nickname)=(1) no está presente en la tabla «estudiante».
+2016-12-29 13:27:52 ERROR  : ERROR:  no existe la columna «julian»
+LINE 1: ...ctividad_resuelta WHERE K_ACTIVIDAD=51 AND K_NICKNAME=Julian
+                                                                 ^
+2016-12-29 13:29:28 ERROR  : ERROR:  no existe la columna «Julian»
+LINE 1: ...ividad_resuelta WHERE K_ACTIVIDAD=51 AND K_NICKNAME="Julian"
+                                                               ^
+2016-12-29 13:29:45 ERROR  : ERROR:  no existe la columna «Julian»
+LINE 1: ...vidad_resuelta WHERE K_ACTIVIDAD=51 AND K_NICKNAME="Julian";
+                                                              ^
+2016-12-29 13:35:03 ERROR  : ERROR:  el valor null para la columna «o_sexo» viola la restricción not null
+DETAIL:  La fila que falla contiene (Julian2, Julian2, Barbosa, ja, 1994-01-30, null, null, null, null).
+2016-12-29 13:35:04 ERROR  : ERROR:  el valor null para la columna «o_sexo» viola la restricción not null
+DETAIL:  La fila que falla contiene (Julian2, Julian2, Barbosa, ja, 1994-01-30, null, null, null, null).
+2017-01-03 16:46:12 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(50) todavía es referida desde la tabla «soporte».
+2017-01-03 16:46:15 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(46) todavía es referida desde la tabla «soporte».
+2017-01-03 16:46:16 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(45) todavía es referida desde la tabla «soporte».
+2017-01-03 16:46:26 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(50) todavía es referida desde la tabla «soporte».
+2017-01-03 17:08:49 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(73) todavía es referida desde la tabla «soporte».
+2017-01-03 17:09:27 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(76) todavía es referida desde la tabla «soporte».
+2017-01-10 15:25:24 ERROR  : ERROR:  la sintaxis de entrada no es válida para integer: «Activa»
+LINE 1: INSERT INTO public.actividad(k_actividad) VALUES ('Activa'::...
+                                                          ^
+2017-01-10 15:25:26 ERROR  : ERROR:  la sintaxis de entrada no es válida para integer: «Activa»
+LINE 1: INSERT INTO public.actividad(k_actividad) VALUES ('Activa'::...
+                                                          ^
+2017-01-10 15:25:27 ERROR  : ERROR:  la sintaxis de entrada no es válida para integer: «Activa»
+LINE 1: INSERT INTO public.actividad(k_actividad) VALUES ('Activa'::...
+                                                          ^
+2017-01-10 19:05:52 ERROR  : ERROR:  no se puede cambiar el nombre de la columna «n_nombre_tact» de la vista a «i_estado»
+2017-01-10 19:06:24 ERROR  : ERROR:  no se puede cambiar el nombre de la columna «n_nombre_tact» de la vista a «i_estado_act»
+2017-01-10 19:06:51 ERROR  : ERROR:  no se puede cambiar el nombre de la columna «n_nombre_tact» de la vista a «i_estado_act»
+2017-01-10 20:09:37 ERROR  : ERROR:  error de sintaxis en o cerca de «I_ESTADO»
+LINE 1: GRANT UPDATE I_ESTADO ON TABLE ACTIVIDAD To GROUP estudiante...
+                     ^
+2017-01-12 20:17:37 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(85) todavía es referida desde la tabla «soporte».
+2017-01-15 12:51:36 ERROR  : ERROR:  el valor null para la columna «n_nombre» viola la restricción not null
+DETAIL:  La fila que falla contiene (52, 108, null, null).
+2017-01-15 12:51:38 ERROR  : ERROR:  el valor null para la columna «n_nombre» viola la restricción not null
+DETAIL:  La fila que falla contiene (52, 108, null, null).
+2017-01-15 20:56:12 ERROR  : ERROR:  desbordamiento de campo numeric
+DETAIL:  Un campo con precisión 3, escala 2 debe redondear a un valor absoluto menor que 10^1.
+2017-01-15 20:56:22 ERROR  : ERROR:  desbordamiento de campo numeric
+DETAIL:  Un campo con precisión 3, escala 2 debe redondear a un valor absoluto menor que 10^1.
+2017-01-15 20:56:36 ERROR  : ERROR:  desbordamiento de campo numeric
+DETAIL:  Un campo con precisión 3, escala 2 debe redondear a un valor absoluto menor que 10^1.
+2017-01-15 20:57:13 ERROR  : ERROR:  no se puede alterar el tipo de una columna usada en una regla o vista
+DETAIL:  regla «_RETURN» en vista view_actividades_reino depende de la columna «v_porcentaje»
+2017-01-15 20:57:17 ERROR  : ERROR:  no se puede alterar el tipo de una columna usada en una regla o vista
+DETAIL:  regla «_RETURN» en vista view_actividades_reino depende de la columna «v_porcentaje»
+2017-01-15 20:57:50 ERROR  : ERROR:  no se puede alterar el tipo de una columna usada en una regla o vista
+DETAIL:  regla «_RETURN» en vista view_actividades_reino depende de la columna «v_porcentaje»
+2017-01-15 21:15:43 ERROR  : ERROR:  error de sintaxis en o cerca de «GRANT»
+LINE 2: GRANT SELECT ON TABLE VIEW_ACTIVIDADES_REINO TO GROUP profes...
+        ^
+2017-01-15 21:15:53 ERROR  : ERROR:  no existe el rol «estudiant»
+2017-01-15 21:37:44 ERROR  : ERROR:  la sintaxis de entrada no es válida para el tipo numeric: «0.0.23»
+LINE 1: UPDATE public.actividad SET v_porcentaje='0.0.23'::numeric(3...
+                                                 ^
+2017-01-15 21:37:45 ERROR  : ERROR:  la sintaxis de entrada no es válida para el tipo numeric: «0.0.23»
+LINE 1: UPDATE public.actividad SET v_porcentaje='0.0.23'::numeric(3...
+                                                 ^
+2017-01-17 23:08:01 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(203) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:05 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(202) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:06 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(108) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:07 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(107) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:07 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(106) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:08 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(102) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:08 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(99) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:09 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(98) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:09 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(97) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:09 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(96) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:09 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(95) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:09 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(94) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:10 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(93) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:10 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(92) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:10 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(91) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:10 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(90) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:10 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(87) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:10 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(86) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:11 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(85) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:11 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(84) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:11 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(83) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:11 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(82) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:11 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(81) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:11 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(80) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:11 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(79) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:12 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(78) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:12 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(77) todavía es referida desde la tabla «soporte».
+2017-01-17 23:08:12 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(74) todavía es referida desde la tabla «soporte».
+2017-01-17 23:13:51 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(210) todavía es referida desde la tabla «soporte».
+2017-01-17 23:14:31 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(211) todavía es referida desde la tabla «soporte».
+2017-01-18 22:19:42 ERROR  : ERROR:  update o delete en «actividad_resuelta» viola la llave foránea «fk_soporte_soporte_a_activida» en la tabla «soporte»
+DETAIL:  La llave (k_actividad_resuelta)=(218) todavía es referida desde la tabla «soporte».
+2017-01-18 23:26:48 ERROR  : ERROR:  error de sintaxis en o cerca de «SET»
+LINE 1: UPDATE calificacion_en_reino SET v_acumulado = 2.5SET k_nive...
+                                                          ^
+2017-01-18 23:26:59 ERROR  : ERROR:  error de sintaxis en o cerca de «SET»
+LINE 1: ...PDATE calificacion_en_reino SET v_acumulado = 2.5 SET k_nive...
+                                                             ^
+2017-01-19 11:53:34 ERROR  : ERROR:  error de sintaxis en o cerca de «I_ESTADO»
+LINE 1: GRANT UPDATE I_ESTADO ON TABLE ACTIVIDAD To GROUP profesores...
+                     ^
+2017-01-19 11:53:43 ERROR  : ERROR:  error de sintaxis en o cerca de «I_ESTADO»
+LINE 1: GRANT UPDATE I_ESTADO ON TABLE ACTIVIDAD To GROUP profesores...
+                     ^
+2017-01-19 11:53:50 ERROR  : ERROR:  error de sintaxis en o cerca de «I_ESTADO»
+LINE 1: GRANT UPDATE I_ESTADO ON TABLE ACTIVIDAD To GROUP profesores
+                     ^
+2017-01-20 01:20:17 ERROR  : ERROR:  error de sintaxis en o cerca de «﻿»
+LINE 1: ﻿--SECUENCIAS
+        ^
+2017-01-20 01:20:48 ERROR  : ERROR:  no existe la columna act.i_estado
+LINE 68: ...d ACT.K_TIPO_ACTIVIDAD= TACT.K_TIPO_ACTIVIDAD and ACT.I_ESTA...
+                                                              ^
+HINT:  Perhaps you meant to reference the column "rei.i_estado" or the column "reg.i_estado".
+2017-01-20 01:26:24 ERROR  : ERROR:  error de sintaxis en o cerca de «I_ESTADO»
+LINE 12: GRANT UPDATE I_ESTADO ON TABLE ACTIVIDAD To GROUP estudiante...
+                      ^
+2017-01-20 01:26:52 ERROR  : ERROR:  el rol «estudiantes» ya existe
+2017-01-20 01:27:02 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:28:15 ERROR  : ERROR:  error de sintaxis en o cerca de «I_ESTADO»
+LINE 9: GRANT UPDATE I_ESTADO ON TABLE ACTIVIDAD To GROUP estudiante...
+                     ^
+2017-01-20 01:28:24 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:28:56 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:29:18 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:29:55 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:30:21 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:30:33 ERROR  : ERROR:  no existe la relación «sec_anexos»
+2017-01-20 01:32:22 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:34:13 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:34:28 ERROR  : ERROR:  no existe la relación «sec_actividades_resueltas»
+2017-01-20 01:34:44 ERROR  : ERROR:  no existe la relación «sec_actividades_resueltas»
+2017-01-20 01:34:46 ERROR  : ERROR:  no existe la relación «sec_actividades_resueltas»
+2017-01-20 01:34:46 ERROR  : ERROR:  no existe la relación «sec_actividades_resueltas»
+2017-01-20 01:34:53 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:37:46 ERROR  : ERROR:  error de sintaxis en o cerca de «ALTER»
+LINE 4:     ALTER TABLE public.sec_actividades
+            ^
+2017-01-20 01:41:59 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:42:37 ERROR  : ERROR:  no existe la relación «public.sec_sopotes»
+2017-01-20 01:47:36 ERROR  : ERROR:  la relación «sec_actividades» ya existe
+2017-01-20 01:48:11 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:48:48 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:48:50 ERROR  : ERROR:  no existe la relación «sec_sopotes»
+2017-01-20 01:49:13 ERROR  : ERROR:  no existe la relación «sec_actividades_resueltas»
+2017-01-20 01:50:09 ERROR  : ERROR:  no existe la relación «sec_actividades_resueltas»
+2017-01-20 01:50:55 ERROR  : ERROR:  error de sintaxis en o cerca de «i»
+LINE 1: i
+        ^
+2017-01-20 12:26:21 ERROR  : ERROR:  error de sintaxis en o cerca de «4»
+LINE 6:                    (4, 'Guerrera', 'Puede comer en clase par...
+                            ^
+2017-01-20 16:25:39 ERROR  : ERROR:  error de sintaxis en o cerca de «2»
+LINE 3:       (2,0,'Act','/Arcadia/assets/Imagenes/Rangos/cambiaform...
+               ^
+2017-01-20 16:31:07 ERROR  : ERROR:  no existe la columna «k_tipo_premio» en la relación «tipo_actividad»
+LINE 1: INSERT INTO TIPO_ACTIVIDAD (k_tipo_premio, N_NOMBRE, n_descr...
+                                    ^
+2017-01-20 16:37:44 ERROR  : ERROR:  no existe la columna «k_honor» en la relación «honor»
+LINE 1: INSERT INTO Honor (k_honor, N_NOMBRE, n_descripcion)
+                           ^
+2017-01-20 16:38:03 ERROR  : ERROR:  no existe la columna «n_descripcion» en la relación «honor»
+LINE 1: INSERT INTO Honor (k_tipo_honor, N_NOMBRE, n_descripcion)
+                                                   ^
+2017-01-20 16:58:25 ERROR  : ERROR:  la base de datos «arcadiav6» está siendo utilizada por otros usuarios
+DETAIL:  Hay 1 otra sesión usando la base de datos.
+2017-01-20 16:58:49 ERROR  : ERROR:  la base de datos «arcadiav6» está siendo utilizada por otros usuarios
+DETAIL:  Hay 1 otra sesión usando la base de datos.
+2017-01-21 01:56:25 ERROR  : ERROR:  el valor START (0) no puede ser menor que MINVALUE (1)
+2017-01-21 02:08:27 ERROR  : ERROR:  inserción o actualización en la tabla «honor_estudiante» viola la llave foránea «fk_honor_es_estudiant_estudian»
+DETAIL:  La llave (k_nickname)=(Julian) no está presente en la tabla «estudiante».
+2017-01-21 02:08:29 ERROR  : ERROR:  inserción o actualización en la tabla «honor_estudiante» viola la llave foránea «fk_honor_es_estudiant_estudian»
+DETAIL:  La llave (k_nickname)=(Julian) no está presente en la tabla «estudiante».
+2017-01-21 10:52:00 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «pk_profesor»
+DETAIL:  Ya existe la llave (k_cedula)=(1024549190).
+2017-01-21 10:54:56 ERROR  : ERROR:  el valor null para la columna «o_imagen» viola la restricción not null
+DETAIL:  La fila que falla contiene (0, null, null, null).
+2017-01-21 14:33:58 ERROR  : ERROR:  update o delete en «reino_avatar» viola la llave foránea «fk_reino_reino_ava_reino_av» en la tabla «reino»
+DETAIL:  La llave (k_imagen_reino)=(0) todavía es referida desde la tabla «reino».
+2017-01-21 14:34:10 ERROR  : ERROR:  update o delete en «reino_avatar» viola la llave foránea «fk_reino_reino_ava_reino_av» en la tabla «reino»
+DETAIL:  La llave (k_imagen_reino)=(0) todavía es referida desde la tabla «reino».
+2017-01-21 14:34:27 ERROR  : ERROR:  update o delete en «reino» viola la llave foránea «fk_califica_reino_cal_reino» en la tabla «calificacion_en_reino»
+DETAIL:  La llave (k_reino)=(3) todavía es referida desde la tabla «calificacion_en_reino».
+2017-01-21 14:35:03 ERROR  : ERROR:  update o delete en «reino» viola la llave foránea «fk_region_reino_reg_reino» en la tabla «region»
+DETAIL:  La llave (k_reino)=(3) todavía es referida desde la tabla «region».
+2017-01-21 16:12:18 ERROR  : ERROR:  inserción o actualización en la tabla «avatar_profesor» viola la llave foránea «fk_avatar_p_avatar_pr_avatar»
+DETAIL:  La llave (k_avatar)=(0) no está presente en la tabla «avatar».
+2017-01-21 16:12:29 ERROR  : ERROR:  inserción o actualización en la tabla «avatar_profesor» viola la llave foránea «fk_avatar_p_avatar_pr_avatar»
+DETAIL:  La llave (k_avatar)=(0) no está presente en la tabla «avatar».
+2017-01-21 16:38:21 ERROR  : ERROR:  update o delete en «reino» viola la llave foránea «fk_region_reino_reg_reino» en la tabla «region»
+DETAIL:  La llave (k_reino)=(6) todavía es referida desde la tabla «region».
+2017-01-23 17:59:54 ERROR  : ERROR:  el valor null para la columna «n_nombre» viola la restricción not null
+DETAIL:  La fila que falla contiene (0, 0, null, null, null, null).
+2017-01-23 18:01:43 ERROR  : ERROR:  inserción o actualización en la tabla «multimedia» viola la llave foránea «fk_multimed_multimedi_reino»
+DETAIL:  La llave (k_reino)=(0) no está presente en la tabla «reino».
+2017-01-23 18:01:52 ERROR  : ERROR:  inserción o actualización en la tabla «multimedia» viola la llave foránea «fk_multimed_multimedi_reino»
+DETAIL:  La llave (k_reino)=(1) no está presente en la tabla «reino».
+2017-01-23 18:20:05 ERROR  : ERROR:  el valor null para la columna «n_archivo» viola la restricción not null
+DETAIL:  La fila que falla contiene (2, 1, 6, Video 3, VIdeo 3, null).
+2017-01-23 19:05:35 ERROR  : ERROR:  el valor null para la columna «n_archivo» viola la restricción not null
+DETAIL:  La fila que falla contiene (7, 2, 6, Imagen, Imagen, null).
+2017-01-24 12:17:03 ERROR  : ERROR:  no existe el rol «multimedia»
+2017-01-24 12:26:06 ERROR  : ERROR:  no existe la relación «sec_multimadia»
+2017-01-24 17:59:45 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «honor_estudiante_pk»
+DETAIL:  Ya existe la llave (k_nickname, k_tipo_honor)=(JulianB, 0).
+2017-01-24 17:59:57 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «honor_estudiante_pk»
+DETAIL:  Ya existe la llave (k_nickname, k_tipo_honor)=(JulianB, 0).
+2017-01-24 18:09:19 ERROR  : ERROR:  no existe la columna «k_honor_estudiante» en la llave
+LINE 10:    constraint PK_HONOR_ESTUDIANTE primary key (K_HONOR_ESTUD...
+            ^
+2017-01-24 18:10:13 ERROR  : ERROR:  error de sintaxis en o cerca de «K_HONOR_ESTUDIANTE»
+LINE 1:    K_HONOR_ESTUDIANTE   VARCHAR(100)         not null,
+           ^
+2017-01-24 18:16:27 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «honor_estudiante_pk»
+DETAIL:  Ya existe la llave (k_nickname, k_tipo_honor)=(JulianB, 0).
+2017-01-24 18:16:27 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «honor_estudiante_pk»
+DETAIL:  Ya existe la llave (k_nickname, k_tipo_honor)=(JulianB, 0).
+2017-01-24 18:16:47 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «honor_estudiante_pk»
+DETAIL:  Ya existe la llave (k_nickname, k_tipo_honor)=(JulianB, 0).
+2017-01-24 18:19:12 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «honor_estudiante_pk»
+DETAIL:  Ya existe la llave (k_nickname, k_tipo_honor)=(JulianB, 0).
+2017-01-24 18:19:56 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «honor_estudiante_pk»
+DETAIL:  Ya existe la llave (k_nickname, k_tipo_honor)=(JulianB, 0).
+2017-01-24 18:45:40 ERROR  : ERROR:  inserción o actualización en la tabla «avatar_estudiante» viola la llave foránea «fk_avatar_e_estudiant_estudian»
+DETAIL:  La llave (k_nickname)=(Ju) no está presente en la tabla «estudiante».
+2017-01-24 18:45:42 ERROR  : ERROR:  inserción o actualización en la tabla «avatar_estudiante» viola la llave foránea «fk_avatar_e_estudiant_estudian»
+DETAIL:  La llave (k_nickname)=(Ju) no está presente en la tabla «estudiante».
+2017-01-24 18:47:39 ERROR  : ERROR:  la relación «view_perfil_estudiante» ya existe
+2017-01-24 20:34:08 ERROR  : ERROR:  error de sintaxis en o cerca de «UPDATE»
+LINE 2: UPDATE avatar_estudiante SET i_estado = 'Activo' WHERE k_nic...
+        ^
+2017-01-24 22:01:42 ERROR  : ERROR:  update o delete en «calificacion_en_reino» viola la llave foránea «fk_premio_premio_en_califica» en la tabla «premio»
+DETAIL:  La llave (k_reino, k_nickname)=(6, PabloE) todavía es referida desde la tabla «premio».
+2017-01-24 22:01:49 ERROR  : ERROR:  update o delete en «calificacion_en_reino» viola la llave foránea «fk_premio_premio_en_califica» en la tabla «premio»
+DETAIL:  La llave (k_reino, k_nickname)=(6, PabloE) todavía es referida desde la tabla «premio».
+2017-01-25 14:16:36 ERROR  : ERROR:  currval de la secuencia «sec_anexos» no está definido en esta sesión
+2017-01-25 14:17:18 ERROR  : ERROR:  currval de la secuencia «sec_actividades» no está definido en esta sesión
+2017-01-25 14:18:02 ERROR  : ERROR:  error de sintaxis en o cerca de «'sec_anexos'»
+LINE 1: SELECT last_value FROM 'sec_anexos';
+                               ^
+2017-01-25 16:50:33 ERROR  : ERROR:  no existe la columna «f_fecha_creacion» en la relación «novedad»
+LINE 1: ... INTO novedad (k_novedad, k_reino, n_descripcion, f_fecha_cr...
+                                                             ^
+2017-01-25 16:51:21 ERROR  : ERROR:  inserción o actualización en la tabla «novedad» viola la llave foránea «fk_novedad_novedad_e_reino»
+DETAIL:  La llave (k_reino)=(7) no está presente en la tabla «reino».
+2017-01-26 12:20:18 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «pk_tipo_actividad»
+DETAIL:  Ya existe la llave (k_tipo_actividad)=(1).
+2017-01-26 12:20:21 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «pk_tipo_actividad»
+DETAIL:  Ya existe la llave (k_tipo_actividad)=(1).
+2017-01-26 12:20:26 ERROR  : ERROR:  update o delete en «tipo_actividad» viola la llave foránea «fk_activida_actividad_tipo_act» en la tabla «actividad»
+DETAIL:  La llave (k_tipo_actividad)=(1) todavía es referida desde la tabla «actividad».
+2017-01-26 12:20:29 ERROR  : ERROR:  update o delete en «tipo_actividad» viola la llave foránea «fk_activida_actividad_tipo_act» en la tabla «actividad»
+DETAIL:  La llave (k_tipo_actividad)=(1) todavía es referida desde la tabla «actividad».
+2017-01-26 12:20:35 ERROR  : ERROR:  update o delete en «tipo_actividad» viola la llave foránea «fk_activida_actividad_tipo_act» en la tabla «actividad»
+DETAIL:  La llave (k_tipo_actividad)=(1) todavía es referida desde la tabla «actividad».
+2017-01-31 10:36:36 ERROR  : ERROR:  update o delete en «actividad» viola la llave foránea «fk_anexo_anexo_act_activida» en la tabla «anexo»
+DETAIL:  La llave (k_actividad)=(13) todavía es referida desde la tabla «anexo».
+2017-01-31 10:36:39 ERROR  : ERROR:  update o delete en «actividad» viola la llave foránea «fk_anexo_anexo_act_activida» en la tabla «anexo»
+DETAIL:  La llave (k_actividad)=(12) todavía es referida desde la tabla «anexo».
+2017-01-31 10:36:40 ERROR  : ERROR:  update o delete en «actividad» viola la llave foránea «fk_anexo_anexo_act_activida» en la tabla «anexo»
+DETAIL:  La llave (k_actividad)=(11) todavía es referida desde la tabla «anexo».
+2017-01-31 10:36:40 ERROR  : ERROR:  update o delete en «actividad» viola la llave foránea «fk_anexo_anexo_act_activida» en la tabla «anexo»
+DETAIL:  La llave (k_actividad)=(10) todavía es referida desde la tabla «anexo».
