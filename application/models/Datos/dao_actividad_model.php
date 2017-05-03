@@ -129,10 +129,10 @@ class Dao_actividad_model extends CI_Model {
         }
     }
 
-    function obtenerRespuesta($idActividad, $nicknameEstudiante, $tipoActividad,$sesion){
+    function obtenerRespuesta($idActividad, $nicknameEstudiante, $tipoActividad){
         $configbd = new configbd_model();
-        //$dbconn4=$configbd->abrirSesion('profesor');
-        $dbconn4=$configbd->abrirSesion($sesion);
+        $dbconn4=$configbd->abrirSesion('profesor');
+       // $dbconn4=$configbd->abrirSesion($sesion);
         $consult = "SELECT * FROM actividad_resuelta WHERE k_nickname = '".$nicknameEstudiante."' AND k_actividad = ".$idActividad;
         $resultConsult = pg_query($consult) or die('La consulta fallo: ' . pg_last_error());
         $respueta['anexo'] = "No Resuelta";
